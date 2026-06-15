@@ -75,15 +75,12 @@ function TrustBadges() {
 function FooterBrand() {
   return (
     <div className="lg:col-span-2">
-      <Link href="/" className="flex items-center gap-3 mb-5">
-        <div className="relative w-12 h-12 rounded-xl bg-white overflow-hidden ring-1 ring-white/20">
-          <Image src={LOGO_SRC} alt={LOGO_ALT} fill sizes="48px" className="object-contain p-1" />
-        </div>
-        <div className="leading-tight">
-          <p className="font-bold text-lg">{SITE.name}</p>
-          <p className="text-[10px] uppercase tracking-[0.2em] opacity-70">{SITE.tagline}</p>
+      <Link href="/" className="inline-flex items-center mb-5">
+        <div className="relative h-12 aspect-[1019/388] rounded-lg bg-white p-1.5 ring-1 ring-white/20">
+          <Image src={LOGO_SRC} alt={LOGO_ALT} fill sizes="220px" className="object-contain" />
         </div>
       </Link>
+      <p className="text-[10px] uppercase tracking-[0.2em] opacity-70 mb-4">{SITE.tagline}</p>
       <p className="text-sm opacity-70 mb-6 leading-relaxed">
         Empowering Muslims worldwide to perform Hajj and Umrah with confidence, transparency,
         and spiritual focus. Licensed by the Saudi Ministry of Hajj &amp; Umrah.

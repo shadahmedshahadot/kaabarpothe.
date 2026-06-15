@@ -103,7 +103,18 @@ function HeaderLogo({ scrolled }: { scrolled: boolean }) {
         transition={{ type: 'spring', stiffness: 320, damping: 18 }}
         className="relative"
       >
-        <Logo href={null} showText={false} size={scrolled ? 'md' : 'lg'} />
+        {scrolled ? (
+          <Logo href={null} showText={false} size="md" />
+        ) : (
+          <span className="inline-flex flex-col leading-none text-white drop-shadow-md">
+            <span className="text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent">
+              Kaabar Pothe
+            </span>
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/75 mt-1">
+              Hajj &amp; Umrah
+            </span>
+          </span>
+        )}
         <span
           className={cn(
             'pointer-events-none absolute -inset-2 rounded-3xl blur-2xl -z-10 transition-opacity duration-500',

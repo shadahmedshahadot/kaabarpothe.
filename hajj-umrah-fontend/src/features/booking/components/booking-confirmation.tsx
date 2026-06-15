@@ -1,0 +1,193 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { CheckCircle2, Download, Mail, Plane, Hotel as HotelIcon, Bus, Package as PackageIcon, ArrowRight, ShieldCheck } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { formatCurrency, formatDate } from '@/utils/format'
+import { useCartStore, type SavedBooking } from '@/store/cart'
+import { ROUTES } from '@/constants'
+
+const kindIcon = {
+  package: PackageIcon,
+  flight: Plane,
+  hotel: HotelIcon,
+  transport: Bus,
+} as const
+
+const methodLabel = {
+  bkash: 'bKash',
+  nagad: 'Nagad',
+  sslcommerz: 'SSLCommerz',
+  'bank-transfer': 'Bank transfer',
+} as const
+
+export function BookingConfirmation({ code }: { code: string }) {
+  const [hydrated, setHydrated] = useState(false)
+  const booking = useCartStore(s => s.savedBookings.find(b => b.code === code))
+
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+
+  if (!hydrated) {
+    return <div className="py-24 text-center text-muted-foreground">Loading…</div>
+  }
+
+  if (!booking) {
+    return (
+      <div className="px-4 sm:px-6 lg:px-8 py-24">
+        <div className="max-w-2xl mx-auto text-center">
+          <h1 className="text-2xl font-bold text-foreground mb-2">Booking not found</h1>
+          <p className="text-muted-foreground mb-6">
+            We couldn&apos;t find a booking with code <span className="font-mono font-bold">{code}</span> in this browser.
+          </p>
+          <Link href={ROUTES.home} className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-semibold hover:bg-primary/90">
+            Back to home <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="px-4 sm:px-6 lg:px-8 pb-24">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-10">
+          <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/10 flex items-center justify-center mb-6">
+            <CheckCircle2 className="w-8 h-8 text-emerald-600" />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">Booking confirmed</h1>
+          <p className="text-muted-foreground">
+            Reference <span className="font-mono font-bold text-foreground">{booking.code}</span> · placed {formatDate(booking.createdAt)}
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-5">
+            <Card title="Selected services">
+              <div className="space-y-3">
+                {booking.items.map(it => {
+                  const Icon = kindIcon[it.kind]
+                  return (
+                    <div key={it.id} className="flex items-center gap-4 rounded-2xl border border-border p-4">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary inline-flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <Badge variant="outline" className="capitalize">{it.kind}</Badge>
+                          <p className="text-sm font-semibold text-foreground truncate">{it.title}</p>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">{it.subtitle}</p>
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        {it.qty > 1 && <p className="text-[10px] text-muted-foreground">{it.qty} × {formatCurrency(it.unitPrice)}</p>}
+                        <p className="font-bold text-foreground">{formatCurrency(it.unitPrice * it.qty)}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+
+            <Card title="Travelers">
+              <div className="space-y-2">
+                {booking.travelers.map((t, i) => (
+                  <div key={t.id} className="rounded-xl border border-border p-3 text-sm flex flex-wrap items-center gap-x-4 gap-y-1">
+                    <span className="font-semibold text-foreground">{i + 1}. {t.fullName}</span>
+                    <span className="text-xs text-muted-foreground">Passport {t.passportNumber}</span>
+                    <span className="text-xs text-muted-foreground capitalize">{t.gender}</span>
+                    {t.dateOfBirth && <span className="text-xs text-muted-foreground">DOB {t.dateOfBirth}</span>}
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card title="Contact">
+              <div className="grid sm:grid-cols-3 gap-2 text-sm text-foreground/80">
+                <Field label="Name" value={booking.contact.name} />
+                <Field label="Email" value={booking.contact.email} />
+                <Field label="Phone" value={booking.contact.phone} />
+              </div>
+            </Card>
+          </div>
+
+          <div className="space-y-4 lg:sticky lg:top-28 lg:self-start">
+            <Card title="Payment">
+              <div className="space-y-2 text-sm">
+                <Line label="Method" value={methodLabel[booking.paymentMethod]} />
+                <Line label="Plan" value={<span className="capitalize">{booking.paymentPlan.replace('-', ' ')}</span>} />
+                <Line label="Status" value={<Badge variant="success">Paid</Badge>} />
+              </div>
+              <div className="border-t border-border mt-4 pt-4 space-y-1.5 text-sm">
+                <Line label="Subtotal" value={formatCurrency(booking.subtotal)} />
+                {booking.taxes > 0 && <Line label="Taxes" value={formatCurrency(booking.taxes)} />}
+                <Line label="Service fee" value={formatCurrency(booking.serviceFee)} />
+              </div>
+              <div className="flex items-end justify-between pt-4 mt-4 border-t border-border">
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Grand total</p>
+                  <p className="text-3xl font-bold text-foreground leading-none mt-1">{formatCurrency(booking.total)}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Paid</p>
+                  <p className="text-lg font-bold text-emerald-600">{formatCurrency(booking.paidAmount)}</p>
+                </div>
+              </div>
+            </Card>
+
+            <div className="space-y-2">
+              <button
+                onClick={() => window.print()}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-foreground text-background rounded-xl text-sm font-semibold hover:bg-primary transition-colors"
+              >
+                <Download className="w-4 h-4" /> Download invoice (PDF)
+              </button>
+              <a
+                href={`mailto:${booking.contact.email}?subject=Booking%20Confirmation%20${booking.code}`}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-xl text-sm font-semibold hover:bg-muted transition-colors"
+              >
+                <Mail className="w-4 h-4" /> Email confirmation
+              </a>
+              <Link href={ROUTES.pilgrim.bookings} className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-xl text-sm font-semibold hover:bg-muted transition-colors">
+                <ArrowRight className="w-4 h-4" /> Go to my bookings
+              </Link>
+            </div>
+
+            <p className="text-[11px] text-muted-foreground text-center inline-flex items-center gap-1.5 justify-center w-full">
+              <ShieldCheck className="w-3 h-3" /> Stored locally in this browser for demo
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Card({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="bg-card border border-border rounded-3xl p-6">
+      <h2 className="font-bold text-foreground text-lg mb-4">{title}</h2>
+      {children}
+    </div>
+  )
+}
+
+function Field({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <span className="text-muted-foreground text-xs uppercase tracking-wider block">{label}</span>
+      <span className="text-foreground font-medium">{value || '—'}</span>
+    </div>
+  )
+}
+
+function Line({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="text-muted-foreground">{label}</span>
+      <span className="text-foreground font-medium">{value}</span>
+    </div>
+  )
+}

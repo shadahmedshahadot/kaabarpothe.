@@ -28,7 +28,12 @@
       "PowerShell(Get-ChildItem *)",
       "Bash(npx tsc *)",
       "Bash(tee /tmp/tsc.log)",
-      "PowerShell(Copy-Item *)"
+      "PowerShell(Copy-Item *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(npx next *)",
+      "Bash(npm uninstall *)"
     ]
   }
 }

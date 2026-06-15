@@ -101,14 +101,14 @@ function DashboardSidebar({
   )
 }
 
-function SidebarBrand({ title, subtitle, accent }: { title: string; subtitle: string; accent: string }) {
+function SidebarBrand({ title, subtitle }: { title: string; subtitle: string; accent: string }) {
   return (
-    <Link href="/" className="flex items-center gap-3 px-6 h-16 border-b border-border">
-      <div className={`relative w-10 h-10 rounded-xl bg-gradient-to-br ${accent} overflow-hidden shadow ring-1 ring-border/40`}>
-        <Image src={LOGO_SRC} alt={LOGO_ALT} fill sizes="40px" className="object-contain p-0.5" />
+    <Link href="/" className="flex flex-col gap-1 px-6 py-3 h-auto min-h-16 border-b border-border">
+      <div className="relative h-9 aspect-[1019/388] self-start">
+        <Image src={LOGO_SRC} alt={LOGO_ALT} fill sizes="180px" className="object-contain object-left" priority />
       </div>
       <div className="leading-tight">
-        <p className="font-bold text-foreground text-sm">{title}</p>
+        <p className="font-bold text-foreground text-xs">{title}</p>
         <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{subtitle}</p>
       </div>
     </Link>

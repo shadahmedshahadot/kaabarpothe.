@@ -19,6 +19,9 @@ export const PRIMARY_NAV: NavItem[] = [
       { label: 'Umrah Packages', href: ROUTES.packages.umrah, desc: 'Budget, Economy, Premium, Luxury' },
     ],
   },
+  { label: 'Flights', href: ROUTES.flights.root },
+  { label: 'Hotels', href: ROUTES.hotels.root },
+  { label: 'Transport', href: ROUTES.transportation.root },
   { label: 'Reviews', href: ROUTES.reviews },
   {
     label: 'Learning',
@@ -39,6 +42,7 @@ export const FOOTER_SECTIONS = [
       { label: 'Umrah Packages', href: ROUTES.packages.umrah },
       { label: 'VIP Hajj', href: '/packages/hajj/vip-hajj-2026' },
       { label: 'Luxury Umrah', href: '/packages/umrah/luxury-umrah-2026' },
+      { label: 'Flights', href: ROUTES.flights.root },
       { label: 'Group Bookings', href: '/contact?type=group' },
     ],
   },

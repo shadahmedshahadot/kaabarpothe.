@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { Clock, Plane, Calendar, Star, Phone, Users } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate } from '@/utils/format'
 import { SITE } from '@/constants'
 import type { Package } from '@/data/packages'
 import { PackageStatCard } from './stat-card'
+import { BookPackageButton } from './book-package-button'
 
 export function PackageSummary({ pkg }: { pkg: Package }) {
   const discounted = pkg.price - pkg.discount
@@ -50,9 +50,7 @@ export function PackageSummary({ pkg }: { pkg: Package }) {
           </div>
           {pkg.discount > 0 && <Badge variant="danger">Save {formatCurrency(pkg.discount)}</Badge>}
         </div>
-        <Link href="#" className="block w-full text-center bg-gradient-to-r from-primary to-amber-600 text-primary-foreground py-4 rounded-xl font-bold shadow-lg shadow-primary/25 hover:scale-[1.01] transition-transform">
-          Book Now — Reserve seat
-        </Link>
+        <BookPackageButton pkg={pkg} />
         <p className="text-center text-xs text-muted-foreground mt-3">25% deposit required · Free cancellation 60+ days</p>
       </div>
 
