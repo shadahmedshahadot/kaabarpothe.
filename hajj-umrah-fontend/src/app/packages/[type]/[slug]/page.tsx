@@ -13,9 +13,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ type: string; slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const pkg = getPackage(slug)
-  if (!pkg) return { title: 'Package not found' }
+  if (!pkg) return { title: 'প্যাকেজ পাওয়া যায়নি' }
   return {
-    title: `${pkg.name} | Sakinah Travels`,
+    title: `${pkg.name} | সাকিনাহ ট্রাভেলস`,
     description: pkg.shortDescription,
     openGraph: {
       title: pkg.name,

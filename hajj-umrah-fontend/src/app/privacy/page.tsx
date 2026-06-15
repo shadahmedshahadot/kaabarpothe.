@@ -1,25 +1,25 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/common/legal-page'
 
-export const metadata: Metadata = { title: 'Privacy Policy | Sakinah Travels' }
+export const metadata: Metadata = { title: 'গোপনীয়তা নীতি | সাকিনাহ ট্রাভেলস' }
 
 export default function PrivacyPolicyPage() {
   return (
     <LegalPage
-      eyebrow="Legal"
-      title="Privacy Policy"
-      description="How we collect, use, and protect your personal information when you book your sacred journey with us."
-      effectiveDate="January 1, 2026"
+      eyebrow="আইনি"
+      title="গোপনীয়তা নীতি"
+      description="আপনি আমাদের সাথে আপনার পবিত্র যাত্রা বুকিং করার সময় আমরা কীভাবে আপনার ব্যক্তিগত তথ্য সংগ্রহ, ব্যবহার এবং সুরক্ষিত করি।"
+      effectiveDate="১ জানুয়ারি, ২০২৬"
       sections={[
-        { heading: 'Information we collect', body: ['Identity data: full name, date of birth, passport number, nationality.', 'Contact data: email, phone, mailing address.', 'Financial data: payment card details (tokenized via Stripe), bank account information.', 'Medical data: vaccination records, mobility requirements, medical conditions disclosed for safety.', 'Travel data: passport scans, visa applications, biometric registration data submitted to Saudi authorities.'] },
-        { heading: 'How we use your information', body: ['Process bookings and visa applications', 'Communicate about your journey, payments, and itinerary changes', 'Comply with Saudi Ministry of Hajj and government regulations', 'Improve our services through anonymized analytics', 'Send marketing communications (only with your consent)'] },
-        { heading: 'Who we share with', body: ['Saudi Ministry of Hajj & Umrah for visa and permit processing', 'Airlines, hotels, and ground transportation for service delivery', 'Payment processors (Stripe, PayPal) — we never store full card numbers', 'Government authorities when legally required', 'We never sell your data to third parties for advertising.'] },
-        { heading: 'Cookies', body: 'We use essential cookies for site functionality and analytics cookies (Google Analytics, Vercel Analytics) to understand site usage. Marketing cookies require explicit consent. You can manage cookies via your browser settings or our cookie banner.' },
-        { heading: 'Data retention', body: 'We retain booking data for 7 years for tax and regulatory compliance. Personal account data is retained while your account is active and 2 years after deletion. You may request deletion at any time subject to legal requirements.' },
-        { heading: 'Your rights', body: ['Access: request a copy of all data we hold about you', 'Rectification: correct inaccurate data', 'Erasure: request deletion (subject to legal retention)', 'Portability: receive your data in a structured format', 'Objection: opt out of marketing or data processing', 'Contact privacy@sakinah.travel to exercise these rights.'] },
-        { heading: 'Security', body: 'All data is encrypted in transit (TLS 1.3) and at rest (AES-256). Payment data is PCI-DSS Level 1 compliant. We perform annual security audits and penetration testing.' },
-        { heading: 'International transfers', body: 'Data may be processed in the USA, EU, and Saudi Arabia (for visa processing). All transfers use Standard Contractual Clauses or equivalent safeguards.' },
-        { heading: 'Contact', body: 'For privacy questions, email privacy@sakinah.travel or write to: Privacy Officer, Sakinah Travels, 500 Madison Ave, Floor 42, New York, NY 10022.' },
+        { heading: 'আমরা যে তথ্য সংগ্রহ করি', body: ['পরিচয় ডেটা: পূর্ণ নাম, জন্ম তারিখ, পাসপোর্ট নম্বর, জাতীয়তা।', 'যোগাযোগ ডেটা: ইমেইল, ফোন, ডাক ঠিকানা।', 'আর্থিক ডেটা: পেমেন্ট কার্ডের বিবরণ (Stripe এর মাধ্যমে টোকেনাইজড), ব্যাংক অ্যাকাউন্ট তথ্য।', 'চিকিৎসা ডেটা: টিকা রেকর্ড, চলাচল সংক্রান্ত প্রয়োজন, নিরাপত্তার জন্য প্রকাশিত চিকিৎসা অবস্থা।', 'ভ্রমণ ডেটা: পাসপোর্ট স্ক্যান, ভিসা আবেদন, সৌদি কর্তৃপক্ষের কাছে জমা দেওয়া বায়োমেট্রিক নিবন্ধন ডেটা।'] },
+        { heading: 'আমরা কীভাবে আপনার তথ্য ব্যবহার করি', body: ['বুকিং এবং ভিসা আবেদন প্রক্রিয়া করতে', 'আপনার যাত্রা, পেমেন্ট, এবং সময়সূচি পরিবর্তন সম্পর্কে যোগাযোগ করতে', 'সৌদি হজ্জ মন্ত্রণালয় এবং সরকারি নিয়ম মেনে চলতে', 'বেনামী বিশ্লেষণের মাধ্যমে আমাদের পরিষেবা উন্নত করতে', 'মার্কেটিং যোগাযোগ পাঠাতে (শুধুমাত্র আপনার সম্মতিতে)'] },
+        { heading: 'আমরা কাদের সাথে শেয়ার করি', body: ['ভিসা এবং পারমিট প্রক্রিয়াকরণের জন্য সৌদি হজ্জ ও উমরাহ মন্ত্রণালয়', 'পরিষেবা প্রদানের জন্য এয়ারলাইন, হোটেল, এবং স্থল পরিবহন', 'পেমেন্ট প্রসেসর (Stripe, PayPal) — আমরা কখনই সম্পূর্ণ কার্ড নম্বর সংরক্ষণ করি না', 'আইনগতভাবে প্রয়োজন হলে সরকারি কর্তৃপক্ষ', 'আমরা কখনই বিজ্ঞাপনের জন্য তৃতীয় পক্ষের কাছে আপনার ডেটা বিক্রি করি না।'] },
+        { heading: 'কুকিজ', body: 'আমরা সাইটের কার্যকারিতার জন্য প্রয়োজনীয় কুকিজ এবং সাইট ব্যবহার বুঝতে অ্যানালিটিক্স কুকিজ (Google Analytics, Vercel Analytics) ব্যবহার করি। মার্কেটিং কুকিজের জন্য স্পষ্ট সম্মতি প্রয়োজন। আপনি আপনার ব্রাউজার সেটিংস বা আমাদের কুকি ব্যানারের মাধ্যমে কুকিজ পরিচালনা করতে পারেন।' },
+        { heading: 'ডেটা সংরক্ষণ', body: 'আমরা কর এবং নিয়ন্ত্রক সম্মতির জন্য ৭ বছর বুকিং ডেটা সংরক্ষণ করি। ব্যক্তিগত অ্যাকাউন্ট ডেটা আপনার অ্যাকাউন্ট সক্রিয় থাকা পর্যন্ত এবং মুছে ফেলার পরে ২ বছর পর্যন্ত সংরক্ষণ করা হয়। আইনি প্রয়োজনীয়তা সাপেক্ষে আপনি যেকোনো সময় মুছে ফেলার অনুরোধ করতে পারেন।' },
+        { heading: 'আপনার অধিকার', body: ['অ্যাক্সেস: আপনার সম্পর্কে আমরা যে সমস্ত ডেটা ধারণ করি তার একটি কপির অনুরোধ', 'সংশোধন: ভুল ডেটা সংশোধন', 'মুছে ফেলা: মুছে ফেলার অনুরোধ (আইনি সংরক্ষণ সাপেক্ষে)', 'পোর্টেবিলিটি: একটি কাঠামোগত ফরম্যাটে আপনার ডেটা গ্রহণ', 'আপত্তি: মার্কেটিং বা ডেটা প্রক্রিয়াকরণ থেকে অপ্ট আউট', 'এই অধিকারগুলি ব্যবহার করতে privacy@sakinah.travel এ যোগাযোগ করুন।'] },
+        { heading: 'নিরাপত্তা', body: 'সমস্ত ডেটা ট্রান্সিটে (TLS 1.3) এবং বিশ্রামে (AES-256) এনক্রিপ্ট করা হয়। পেমেন্ট ডেটা PCI-DSS লেভেল ১ অনুসারী। আমরা বার্ষিক নিরাপত্তা অডিট এবং পেনিট্রেশন টেস্টিং করি।' },
+        { heading: 'আন্তর্জাতিক স্থানান্তর', body: 'ডেটা USA, EU, এবং সৌদি আরবে (ভিসা প্রক্রিয়াকরণের জন্য) প্রক্রিয়া করা হতে পারে। সমস্ত স্থানান্তর Standard Contractual Clauses বা সমতুল্য সুরক্ষা ব্যবহার করে।' },
+        { heading: 'যোগাযোগ', body: 'গোপনীয়তা সংক্রান্ত প্রশ্নের জন্য, privacy@sakinah.travel এ ইমেইল করুন বা লিখুন: প্রাইভেসি অফিসার, সাকিনাহ ট্রাভেলস, বাড়ি ৫০০, রোড ৪২, গুলশান, ঢাকা ১২১২।' },
       ]}
     />
   )

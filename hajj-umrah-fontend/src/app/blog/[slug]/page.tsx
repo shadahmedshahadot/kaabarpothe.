@@ -24,9 +24,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = getBlog(slug)
-  if (!post) return { title: 'Article not found' }
+  if (!post) return { title: 'নিবন্ধ পাওয়া যায়নি' }
   return {
-    title: `${post.title} | Sakinah Travels`,
+    title: `${post.title} | সাকিনাহ ট্রাভেলস`,
     description: post.excerpt,
     openGraph: { title: post.title, description: post.excerpt, type: 'article', publishedTime: post.publishedDate, authors: [post.author] },
   }
@@ -50,7 +50,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
       <article className="px-4 sm:px-6 lg:px-8 pb-24">
         <div className="max-w-3xl mx-auto">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
-            <ArrowLeft className="w-4 h-4" /> Back to all articles
+            <ArrowLeft className="w-4 h-4" /> সব নিবন্ধে ফিরে যান
           </Link>
 
           <Badge variant="default" className="mb-4">{post.category}</Badge>
@@ -69,8 +69,8 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             </div>
             <span className="text-muted-foreground hidden sm:inline">•</span>
             <div className="flex items-center gap-1.5 text-muted-foreground"><Calendar className="w-4 h-4" /> {formatDate(post.publishedDate)}</div>
-            <div className="flex items-center gap-1.5 text-muted-foreground"><Clock className="w-4 h-4" /> {post.readTime} min read</div>
-            <div className="flex items-center gap-1.5 text-muted-foreground"><Eye className="w-4 h-4" /> {formatNumber(post.views)} views</div>
+            <div className="flex items-center gap-1.5 text-muted-foreground"><Clock className="w-4 h-4" /> {post.readTime} মিনিট পড়া</div>
+            <div className="flex items-center gap-1.5 text-muted-foreground"><Eye className="w-4 h-4" /> {formatNumber(post.views)} ভিউ</div>
           </div>
 
           <div className="aspect-[16/9] rounded-3xl mb-12 relative overflow-hidden">
@@ -81,7 +81,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           <div className="prose max-w-none">{renderMarkdown(post.content)}</div>
 
           <div className="mt-12 pt-8 border-t border-border flex flex-wrap items-center gap-2">
-            <span className="text-sm text-muted-foreground mr-2">Tags:</span>
+            <span className="text-sm text-muted-foreground mr-2">ট্যাগ:</span>
             {post.tags.map(t => <Badge key={t} variant="outline">{t}</Badge>)}
           </div>
         </div>
@@ -89,7 +89,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         {/* Related */}
         {related.length > 0 && (
           <div className="max-w-7xl mx-auto mt-24">
-            <h2 className="text-2xl font-bold text-foreground mb-8">More from {post.category}</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-8">{post.category} থেকে আরও</h2>
             <div className="grid sm:grid-cols-3 gap-6">
               {related.map(r => (
                 <Link key={r.id} href={`/blog/${r.slug}`} className="group block bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-shadow">
@@ -100,7 +100,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                     <h3 className="font-bold text-foreground mb-2 leading-tight group-hover:text-primary transition-colors">{r.title}</h3>
                     <p className="text-sm text-muted-foreground line-clamp-2">{r.excerpt}</p>
                     <p className="text-xs font-semibold text-primary mt-3 inline-flex items-center gap-1">
-                      Read more <ArrowRight className="w-3.5 h-3.5" />
+                      আরও পড়ুন <ArrowRight className="w-3.5 h-3.5" />
                     </p>
                   </div>
                 </Link>

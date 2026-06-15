@@ -13,9 +13,9 @@ export function PackageSummary({ pkg }: { pkg: Package }) {
       <div className="flex items-center gap-2 mb-3 flex-wrap">
         <Badge variant="outline" className="capitalize">{pkg.tier}</Badge>
         <Badge variant={pkg.availability === 'limited' ? 'warning' : pkg.availability === 'soldout' ? 'danger' : 'success'}>
-          {pkg.availability === 'available' && '✓ Available'}
-          {pkg.availability === 'limited' && `Only ${pkg.seatsLeft} seats left`}
-          {pkg.availability === 'soldout' && 'Sold out'}
+          {pkg.availability === 'available' && '✓ উপলব্ধ'}
+          {pkg.availability === 'limited' && `মাত্র ${pkg.seatsLeft}টি সিট বাকি`}
+          {pkg.availability === 'soldout' && 'বিক্রি শেষ'}
         </Badge>
       </div>
 
@@ -26,17 +26,17 @@ export function PackageSummary({ pkg }: { pkg: Package }) {
         <div className="flex items-center gap-1">
           <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
           <span className="font-bold text-foreground">{pkg.rating}</span>
-          <span className="text-muted-foreground">({pkg.reviewsCount} reviews)</span>
+          <span className="text-muted-foreground">({pkg.reviewsCount}টি রিভিউ)</span>
         </div>
         <span className="text-muted-foreground">•</span>
-        <span className="text-muted-foreground">{pkg.bookingsCount} booked</span>
+        <span className="text-muted-foreground">{pkg.bookingsCount}টি বুক হয়েছে</span>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-6">
-        <PackageStatCard icon={Clock} label="Duration" value={`${pkg.duration} days`} />
-        <PackageStatCard icon={Calendar} label="Departure" value={formatDate(pkg.departureDate, { month: 'short', day: 'numeric' })} />
-        <PackageStatCard icon={Plane} label="Flight" value={pkg.flight.class} />
-        <PackageStatCard icon={Users} label="Group size" value={pkg.groupSize} />
+        <PackageStatCard icon={Clock} label="সময়কাল" value={`${pkg.duration} দিন`} />
+        <PackageStatCard icon={Calendar} label="প্রস্থান" value={formatDate(pkg.departureDate, { month: 'short', day: 'numeric' })} />
+        <PackageStatCard icon={Plane} label="ফ্লাইট" value={pkg.flight.class} />
+        <PackageStatCard icon={Users} label="গ্রুপের আকার" value={pkg.groupSize} />
       </div>
 
       <div className="bg-card border border-border rounded-2xl p-6 mb-4">
@@ -46,16 +46,16 @@ export function PackageSummary({ pkg }: { pkg: Package }) {
               <p className="text-sm text-muted-foreground line-through">{formatCurrency(pkg.price)}</p>
             )}
             <p className="text-4xl font-bold text-foreground leading-none">{formatCurrency(discounted)}</p>
-            <p className="text-xs text-muted-foreground mt-1">per pilgrim · all-inclusive</p>
+            <p className="text-xs text-muted-foreground mt-1">হাজী প্রতি · সব অন্তর্ভুক্ত</p>
           </div>
-          {pkg.discount > 0 && <Badge variant="danger">Save {formatCurrency(pkg.discount)}</Badge>}
+          {pkg.discount > 0 && <Badge variant="danger">সাশ্রয় {formatCurrency(pkg.discount)}</Badge>}
         </div>
         <BookPackageButton pkg={pkg} />
-        <p className="text-center text-xs text-muted-foreground mt-3">25% deposit required · Free cancellation 60+ days</p>
+        <p className="text-center text-xs text-muted-foreground mt-3">২৫% জামানত প্রয়োজন · ৬০+ দিনে ফ্রি বাতিল</p>
       </div>
 
       <a href={`tel:${SITE.contact.phoneHref}`} className="flex items-center justify-center gap-2 py-3 border border-border rounded-xl text-sm text-foreground/70 hover:text-foreground hover:border-primary transition-all">
-        <Phone className="w-4 h-4" /> Speak with our team
+        <Phone className="w-4 h-4" /> আমাদের টিমের সাথে কথা বলুন
       </a>
     </div>
   )

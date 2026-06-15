@@ -15,9 +15,9 @@ export default function ReviewsPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="What pilgrims say"
-        title="12,000+ verified reviews. 4.9 average."
-        description="Every review on this page is from a pilgrim who completed their journey with us. No filtering, no editing — just authentic stories."
+        eyebrow="হাজীরা কী বলেন"
+        title="১২,০০০+ যাচাইকৃত রিভিউ। ৪.৯ গড়।"
+        description="এই পৃষ্ঠার প্রতিটি রিভিউ এমন একজন হাজীর কাছ থেকে যিনি আমাদের সাথে তার যাত্রা সম্পন্ন করেছেন। কোন ফিল্টারিং নেই, কোন সম্পাদনা নেই — শুধু সত্যিকারের গল্প।"
       />
 
       <section className="px-4 sm:px-6 lg:px-8 mb-12">
@@ -47,7 +47,7 @@ export default function ReviewsPage() {
                 ))}
               </div>
               <p className="text-sm text-muted-foreground">
-                Based on <span className="font-semibold text-foreground"><AnimatedCounter to={12420} suffix="+" /></span> verified reviews
+                <span className="font-semibold text-foreground"><AnimatedCounter to={12420} suffix="+" /></span> যাচাইকৃত রিভিউয়ের ভিত্তিতে
               </p>
             </div>
 
@@ -101,7 +101,7 @@ export default function ReviewsPage() {
                   ))}
                   {t.verified && (
                     <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-emerald-600 font-semibold">
-                      <BadgeCheck className="w-3 h-3" /> Verified
+                      <BadgeCheck className="w-3 h-3" /> যাচাইকৃত
                     </span>
                   )}
                 </div>

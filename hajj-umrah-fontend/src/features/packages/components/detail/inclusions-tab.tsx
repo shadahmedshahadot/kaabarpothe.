@@ -5,13 +5,13 @@ export function InclusionsTab({ pkg }: { pkg: Package }) {
   return (
     <div className="grid md:grid-cols-2 gap-6">
       <InclusionList
-        title="What's included"
+        title="অন্তর্ভুক্ত যা আছে"
         icon={<CheckCircle2 className="w-6 h-6 text-emerald-500" />}
         items={pkg.included}
         bullet={<span className="w-5 h-5 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center mt-0.5 flex-shrink-0">✓</span>}
       />
       <InclusionList
-        title="Not included"
+        title="অন্তর্ভুক্ত নয়"
         icon={<XCircle className="w-6 h-6 text-rose-500" />}
         items={pkg.excluded}
         bullet={<span className="w-5 h-5 rounded-full bg-rose-500/15 text-rose-600 flex items-center justify-center mt-0.5 flex-shrink-0">×</span>}

@@ -42,8 +42,8 @@ export function FlightBooking({ flight }: { flight: Flight }) {
         <div className="w-14 h-14 mx-auto rounded-2xl bg-primary/10 text-primary inline-flex items-center justify-center mb-4">
           <Plane className="w-6 h-6" />
         </div>
-        <p className="text-lg font-bold text-foreground">Adding flight to your booking…</p>
-        <p className="text-sm text-muted-foreground mt-1">Redirecting to the centralized checkout.</p>
+        <p className="text-lg font-bold text-foreground">আপনার বুকিংয়ে ফ্লাইট যোগ করা হচ্ছে…</p>
+        <p className="text-sm text-muted-foreground mt-1">কেন্দ্রীয় চেকআউটে নিয়ে যাওয়া হচ্ছে।</p>
       </div>
     </div>
   )

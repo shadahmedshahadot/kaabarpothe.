@@ -15,9 +15,9 @@ export function RecentActivity({ items }: { items: ActivityItem[] }) {
   return (
     <div className="bg-card border border-border rounded-2xl p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-bold text-foreground">Recent activity</h3>
+        <h3 className="font-bold text-foreground">সাম্প্রতিক কার্যকলাপ</h3>
         <Link href={ROUTES.admin.inquiries} className="text-xs text-primary font-semibold hover:underline inline-flex items-center gap-1">
-          Inquiries <ArrowUpRight className="w-3 h-3" />
+          জিজ্ঞাসা <ArrowUpRight className="w-3 h-3" />
         </Link>
       </div>
       <div className="space-y-3">

@@ -9,21 +9,21 @@ import { IMG } from '@/data/images'
 
 const destinations = [
   {
-    city: 'Makkah',
+    city: 'মক্কা',
     arabic: 'مكة',
-    desc: 'Home of the Kaaba and Masjid al-Haram. The holiest city in Islam, where every pilgrimage begins.',
-    landmarks: ['Masjid al-Haram', 'Kaaba', 'Maqam Ibrahim', 'Safa & Marwa', 'Jabal al-Nour', 'Cave of Hira'],
+    desc: 'কাবা ও মসজিদুল হারামের শহর। ইসলামের সবচেয়ে পবিত্র শহর, যেখানে প্রতিটি হজ্জ শুরু হয়।',
+    landmarks: ['মসজিদুল হারাম', 'কাবা', 'মাকামে ইব্রাহিম', 'সাফা ও মারওয়া', 'জাবালে নূর', 'হেরা গুহা'],
     image: IMG.kaabaDayMinarets,
-    stat: { val: '40 prayers', sub: 'Sunnah tradition' },
+    stat: { val: '৪০ নামাজ', sub: 'সুন্নাহ ঐতিহ্য' },
     href: '/packages/hajj',
   },
   {
-    city: 'Madinah',
+    city: 'মদিনা',
     arabic: 'المدينة',
-    desc: 'City of the Prophet ﷺ. Visit Masjid an-Nabawi, the second holiest mosque, and the Rawdah Sharif.',
-    landmarks: ['Masjid an-Nabawi', 'Rawdah Sharif', 'Quba Mosque', 'Mount Uhud', 'Masjid al-Qiblatain', 'Date Farms'],
+    desc: 'নবী ﷺ এর শহর। দ্বিতীয় পবিত্রতম মসজিদ মসজিদে নববী ও রাওজা শরীফ দর্শন করুন।',
+    landmarks: ['মসজিদে নববী', 'রাওজা শরীফ', 'কুবা মসজিদ', 'উহুদ পর্বত', 'মসজিদুল কিবলাতাইন', 'খেজুর বাগান'],
     image: IMG.greenDomeMinarets,
-    stat: { val: '1,000×', sub: 'Reward multiplier' },
+    stat: { val: '১,০০০×', sub: 'প্রতিদানের গুণক' },
     href: '/packages/umrah',
   },
 ]
@@ -33,9 +33,9 @@ export function DestinationsSection() {
     <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="Two Holy Cities"
-          title="Where every package takes you."
-          description="Spend meaningful time in both Makkah and Madinah — the two cities every pilgrim dreams of visiting."
+          eyebrow="দুই পবিত্র শহর"
+          title="যেখানে প্রতিটি প্যাকেজ আপনাকে নিয়ে যাবে।"
+          description="মক্কা ও মদিনা — প্রতিটি হাজী যে দুই শহর দর্শনের স্বপ্ন দেখেন — সেখানে অর্থপূর্ণ সময় কাটান।"
           className="mb-16"
         />
 
@@ -62,7 +62,7 @@ export function DestinationsSection() {
 
                 <div className="absolute top-5 left-5 right-5 flex items-start justify-between text-white z-10">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.25em] opacity-80 mb-1">Destination 0{i + 1}</p>
+                    <p className="text-xs uppercase tracking-[0.25em] opacity-80 mb-1">গন্তব্য ০{i + 1}</p>
                     <h3 className="text-4xl font-bold leading-none drop-shadow">{d.city}</h3>
                     <p className="text-lg opacity-90 mt-1">{d.arabic}</p>
                   </div>
@@ -76,7 +76,7 @@ export function DestinationsSection() {
               <div className="p-7">
                 <p className="text-foreground/80 leading-relaxed mb-5">{d.desc}</p>
 
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3">Key landmarks</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-3">প্রধান স্থানসমূহ</p>
                 <div className="grid grid-cols-2 gap-2 mb-6">
                   {d.landmarks.map((l, j) => (
                     <motion.div
@@ -97,7 +97,7 @@ export function DestinationsSection() {
                   href={d.href}
                   className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:gap-3 transition-all"
                 >
-                  Explore packages
+                  প্যাকেজ দেখুন
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

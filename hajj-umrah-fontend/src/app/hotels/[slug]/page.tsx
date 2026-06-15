@@ -13,10 +13,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const hotel = getHotel(slug)
-  if (!hotel) return { title: 'Hotel not found' }
+  if (!hotel) return { title: 'হোটেল পাওয়া যায়নি' }
   return {
-    title: `${hotel.name} | Sakinah Travels`,
-    description: `${hotel.category}-star hotel in ${hotel.city}. ${hotel.distanceFromHaram}. From $${hotel.pricePerNight}/night.`,
+    title: `${hotel.name} | সাকিনাহ ট্রাভেলস`,
+    description: `${hotel.city}-এ ${hotel.category}-তারকা হোটেল। ${hotel.distanceFromHaram}। প্রতি রাত $${hotel.pricePerNight} থেকে।`,
   }
 }
 

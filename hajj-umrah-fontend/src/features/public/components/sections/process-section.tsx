@@ -5,10 +5,10 @@ import { Search, FileCheck, CreditCard, Plane } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/section-heading'
 
 const steps = [
-  { n: '01', Icon: Search, title: 'Choose Your Package', desc: 'Browse our curated Hajj and Umrah packages by budget, dates, and amenities. Compare side-by-side.' },
-  { n: '02', Icon: FileCheck, title: 'Reserve & Submit Docs', desc: 'Secure your spot with a 25% deposit. Upload passport and photos. Our team handles visa processing.' },
-  { n: '03', Icon: CreditCard, title: 'Pay in Installments', desc: 'Spread the remaining balance over 2-6 monthly payments. Auto-pay or manual — your choice.' },
-  { n: '04', Icon: Plane, title: 'Depart with Confidence', desc: 'Meet your group, receive your premium kit, and embark with full ground support from arrival to return.' },
+  { n: '০১', Icon: Search, title: 'প্যাকেজ বেছে নিন', desc: 'বাজেট, তারিখ ও সুবিধা অনুযায়ী আমাদের বাছাইকৃত হজ্জ ও উমরাহ প্যাকেজ ব্রাউজ করুন। পাশাপাশি তুলনা করুন।' },
+  { n: '০২', Icon: FileCheck, title: 'রিজার্ভ ও ডকুমেন্ট জমা', desc: '২৫% জমা দিয়ে আপনার জায়গা নিশ্চিত করুন। পাসপোর্ট ও ছবি আপলোড করুন। ভিসা প্রক্রিয়া আমাদের দল সামলায়।' },
+  { n: '০৩', Icon: CreditCard, title: 'কিস্তিতে পরিশোধ', desc: 'অবশিষ্ট ব্যালেন্স ২-৬ মাসিক কিস্তিতে ভাগ করুন। অটো-পে বা ম্যানুয়াল — আপনার পছন্দ।' },
+  { n: '০৪', Icon: Plane, title: 'আস্থার সাথে যাত্রা', desc: 'আপনার গ্রুপের সাথে দেখা করুন, প্রিমিয়াম কিট নিন এবং আগমন থেকে ফেরা পর্যন্ত সম্পূর্ণ সহায়তায় যাত্রা শুরু করুন।' },
 ]
 
 export function ProcessSection() {
@@ -16,9 +16,9 @@ export function ProcessSection() {
     <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-muted/30 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="How it works"
-          title="From booking to boarding in four steps."
-          description="A simple, transparent process designed to let you focus on what matters most — your spiritual preparation."
+          eyebrow="কীভাবে কাজ করে"
+          title="বুকিং থেকে বোর্ডিং পর্যন্ত চার ধাপে।"
+          description="সহজ, স্বচ্ছ প্রক্রিয়া যেন আপনি সবচেয়ে গুরুত্বপূর্ণ বিষয়ে — আপনার আধ্যাত্মিক প্রস্তুতিতে মনোনিবেশ করতে পারেন।"
           className="mb-16"
         />
 

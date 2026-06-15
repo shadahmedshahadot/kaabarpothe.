@@ -7,7 +7,7 @@ import type { Package } from '@/data/packages'
 export function ItineraryTab({ pkg }: { pkg: Package }) {
   return (
     <div className="bg-card border border-border rounded-2xl p-6 sm:p-8">
-      <h2 className="text-2xl font-bold text-foreground mb-6">Day-by-day itinerary</h2>
+      <h2 className="text-2xl font-bold text-foreground mb-6">দিনভিত্তিক ভ্রমণসূচি</h2>
       <div className="relative">
         <div className="absolute left-5 top-2 bottom-2 w-px bg-border" />
         <div className="space-y-6">

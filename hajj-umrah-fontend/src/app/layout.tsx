@@ -13,7 +13,7 @@ export const viewport = rootViewport
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} bg-background scroll-smooth`}>
+    <html lang="bn" className={`${geistSans.variable} ${geistMono.variable} bg-background scroll-smooth`}>
       <body className="font-sans antialiased text-foreground overflow-x-hidden">
         <ReduxProvider>
           <Safelist />

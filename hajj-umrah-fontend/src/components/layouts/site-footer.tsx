@@ -14,9 +14,9 @@ const socials = [
 ] as const
 
 const trust = [
-  { Icon: Shield, label: 'Saudi Ministry Licensed' },
-  { Icon: Award, label: 'Scholar-Led Groups' },
-  { Icon: Clock, label: '24/7 Pilgrim Support' },
+  { Icon: Shield, label: 'সৌদি মন্ত্রণালয় লাইসেন্সপ্রাপ্ত' },
+  { Icon: Award, label: 'আলেম পরিচালিত গ্রুপ' },
+  { Icon: Clock, label: '২৪/৭ হাজী সহায়তা' },
 ] as const
 
 export function SiteFooter() {
@@ -82,8 +82,8 @@ function FooterBrand() {
       </Link>
       <p className="text-[10px] uppercase tracking-[0.2em] opacity-70 mb-4">{SITE.tagline}</p>
       <p className="text-sm opacity-70 mb-6 leading-relaxed">
-        Empowering Muslims worldwide to perform Hajj and Umrah with confidence, transparency,
-        and spiritual focus. Licensed by the Saudi Ministry of Hajj &amp; Umrah.
+        বিশ্বব্যাপী মুসলিমদের আস্থা, স্বচ্ছতা ও আধ্যাত্মিক মনোনিবেশসহ হজ্জ ও উমরাহ পালনে ক্ষমতায়ন।
+        সৌদি হজ্জ ও উমরাহ মন্ত্রণালয় কর্তৃক লাইসেন্সপ্রাপ্ত।
       </p>
 
       <div className="space-y-3 text-sm">
@@ -121,13 +121,13 @@ function Newsletter() {
   return (
     <div className="mt-14 pt-10 border-t border-white/10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
       <div>
-        <h3 className="text-xl font-bold mb-2">Get monthly tips for your sacred journey</h3>
-        <p className="text-sm opacity-70">Pilgrimage guides, seasonal package alerts, and educational content.</p>
+        <h3 className="text-xl font-bold mb-2">আপনার পবিত্র যাত্রার জন্য মাসিক পরামর্শ পান</h3>
+        <p className="text-sm opacity-70">হজ্জ গাইড, মৌসুমি প্যাকেজ অ্যালার্ট ও শিক্ষামূলক কনটেন্ট।</p>
       </div>
       <form className="flex gap-2">
-        <input type="email" placeholder="your.email@example.com" className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/10 placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
+        <input type="email" placeholder="আপনার.ইমেইল@example.com" className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/10 placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary text-sm" />
         <button type="submit" className="px-5 py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center gap-2">
-          Subscribe <Send className="w-4 h-4" />
+          সাবস্ক্রাইব <Send className="w-4 h-4" />
         </button>
       </form>
     </div>
@@ -137,7 +137,7 @@ function Newsletter() {
 function FooterBottom({ year }: { year: number }) {
   return (
     <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <p className="text-xs opacity-60">© {year} {SITE.name} — {SITE.tagline}. All rights reserved.</p>
+      <p className="text-xs opacity-60">© {year} {SITE.name} — {SITE.tagline}। সর্বস্বত্ব সংরক্ষিত।</p>
       <div className="flex items-center gap-2">
         {socials.map(({ Icon, href, label }) => (
           <a key={label} href={href} aria-label={label} className="w-9 h-9 rounded-lg bg-white/5 hover:bg-primary text-white/70 hover:text-white flex items-center justify-center transition-all">

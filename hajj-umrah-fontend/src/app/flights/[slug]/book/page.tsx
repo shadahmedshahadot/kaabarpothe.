@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const flight = getFlight(slug)
   return {
-    title: flight ? `Book ${flight.airlineName} ${flight.flightNumber} | Sakinah Travels` : 'Book flight',
+    title: flight ? `${flight.airlineName} ${flight.flightNumber} বুক করুন | সাকিনাহ ট্রাভেলস` : 'ফ্লাইট বুক করুন',
     robots: { index: false, follow: false },
   }
 }

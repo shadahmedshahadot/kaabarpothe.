@@ -15,7 +15,7 @@ export function BookPackageButton({ pkg }: { pkg: Package }) {
       kind: 'package',
       refId: pkg.id,
       title: pkg.name,
-      subtitle: `${pkg.type === 'hajj' ? 'Hajj' : 'Umrah'} · ${pkg.tier} · ${pkg.duration} days`,
+      subtitle: `${pkg.type === 'hajj' ? 'হজ্জ' : 'উমরাহ'} · ${pkg.tier} · ${pkg.duration} দিন`,
       meta: {
         type: pkg.type,
         tier: pkg.tier,
@@ -38,7 +38,7 @@ export function BookPackageButton({ pkg }: { pkg: Package }) {
       onClick={handleClick}
       className="block w-full text-center bg-gradient-to-r from-primary to-amber-600 text-primary-foreground py-4 rounded-xl font-bold shadow-lg shadow-primary/25 hover:scale-[1.01] transition-transform"
     >
-      Book Now — Reserve seat
+      এখনই বুক করুন — সিট সংরক্ষণ করুন
     </button>
   )
 }

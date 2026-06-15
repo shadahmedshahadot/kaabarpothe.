@@ -20,8 +20,8 @@ export function LegalPage({ eyebrow, title, description, effectiveDate, sections
       <section className="px-4 sm:px-6 lg:px-8 pb-24">
         <div className="max-w-3xl mx-auto">
           <p className="text-sm text-muted-foreground mb-10 border-b border-border pb-6">
-            <strong className="text-foreground">Effective date:</strong> {effectiveDate}<br />
-            <strong className="text-foreground">Last updated:</strong> {effectiveDate}
+            <strong className="text-foreground">কার্যকর তারিখ:</strong> {effectiveDate}<br />
+            <strong className="text-foreground">সর্বশেষ আপডেট:</strong> {effectiveDate}
           </p>
 
           <div className="space-y-10">

@@ -8,7 +8,7 @@ export default function PilgrimDocumentsPage() {
   const me = getPilgrim('p-001')!
   return (
     <>
-      <PageTitle title="Documents" description="Upload, verify, and download your travel documents." action={<button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary"><Upload className="w-4 h-4" /> Upload document</button>} />
+      <PageTitle title="ডকুমেন্ট" description="আপনার ভ্রমণ ডকুমেন্ট আপলোড, যাচাই ও ডাউনলোড করুন।" action={<button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary"><Upload className="w-4 h-4" /> ডকুমেন্ট আপলোড</button>} />
 
       <div className="grid sm:grid-cols-2 gap-4">
         {me.documents.map(d => (
@@ -19,13 +19,13 @@ export default function PilgrimDocumentsPage() {
               </div>
               <div className="flex-1">
                 <p className="font-bold text-foreground">{d.type}</p>
-                <p className="text-xs text-muted-foreground">{d.uploadedDate ? `Uploaded ${formatDate(d.uploadedDate)}` : 'Not yet uploaded'}</p>
+                <p className="text-xs text-muted-foreground">{d.uploadedDate ? `আপলোড ${formatDate(d.uploadedDate)}` : 'এখনো আপলোড করা হয়নি'}</p>
               </div>
               <Badge variant={d.status === 'verified' ? 'success' : 'warning'} className="text-[10px]">{d.status}</Badge>
             </div>
             <div className="flex gap-2">
-              <button className="flex-1 border border-border py-2 rounded-lg text-xs font-semibold hover:bg-muted inline-flex items-center justify-center gap-1"><Download className="w-3.5 h-3.5" /> Download</button>
-              <button className="flex-1 border border-border py-2 rounded-lg text-xs font-semibold hover:bg-muted inline-flex items-center justify-center gap-1"><Upload className="w-3.5 h-3.5" /> Replace</button>
+              <button className="flex-1 border border-border py-2 rounded-lg text-xs font-semibold hover:bg-muted inline-flex items-center justify-center gap-1"><Download className="w-3.5 h-3.5" /> ডাউনলোড</button>
+              <button className="flex-1 border border-border py-2 rounded-lg text-xs font-semibold hover:bg-muted inline-flex items-center justify-center gap-1"><Upload className="w-3.5 h-3.5" /> প্রতিস্থাপন</button>
             </div>
           </div>
         ))}

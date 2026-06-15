@@ -31,8 +31,8 @@ export function HotelCard({ hotel, index = 0 }: { hotel: Hotel; index?: number }
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
         <div className="absolute top-4 left-4 flex gap-2 z-10">
-          {hotel.featured && <Badge variant="default">Featured</Badge>}
-          <Badge variant={hotel.city === 'Makkah' ? 'accent' : 'secondary'}>{hotel.city}</Badge>
+          {hotel.featured && <Badge variant="default">ফিচার্ড</Badge>}
+          <Badge variant={hotel.city === 'Makkah' ? 'accent' : 'secondary'}>{hotel.city === 'Makkah' ? 'মক্কা' : hotel.city === 'Madinah' ? 'মদিনা' : hotel.city}</Badge>
         </div>
 
         <div className="absolute bottom-4 left-4 right-4 text-white z-10">
@@ -55,7 +55,7 @@ export function HotelCard({ hotel, index = 0 }: { hotel: Hotel; index?: number }
 
         <div className="grid grid-cols-2 gap-3 mb-5 text-xs">
           <div className="flex items-center gap-1.5 text-foreground/70">
-            <BedDouble className="w-3.5 h-3.5 text-primary" /> {hotel.roomTypes.length} room types
+            <BedDouble className="w-3.5 h-3.5 text-primary" /> {hotel.roomTypes.length} ধরনের রুম
           </div>
           <div className="flex items-center gap-1.5 text-foreground/70">
             <Utensils className="w-3.5 h-3.5 text-accent" /> {hotel.meals.split('·')[0].trim()}
@@ -65,14 +65,14 @@ export function HotelCard({ hotel, index = 0 }: { hotel: Hotel; index?: number }
         <div className="flex items-center justify-between pt-4 border-t border-border">
           <div>
             <p className="text-2xl font-bold text-foreground">{formatCurrency(hotel.pricePerNight)}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">per night · from</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">প্রতি রাত · থেকে</p>
           </div>
           <motion.div whileHover={{ scale: 1.04, x: 2 }} whileTap={{ scale: 0.96 }}>
             <Link
               href={`/hotels/${hotel.slug}`}
               className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
-              View details <ArrowRight className="w-4 h-4" />
+              বিস্তারিত দেখুন <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

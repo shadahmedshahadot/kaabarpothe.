@@ -2,14 +2,14 @@ import { Hotel, MapPin, Star, Wifi, Utensils, Bath, Bed } from 'lucide-react'
 import { PageTitle } from '@/components/layouts/dashboard-shell'
 
 const hotels = [
-  { city: 'Makkah', name: 'Conrad Makkah', stars: 5, distance: '50m from Haram', nights: '8 nights · May 19-27', room: 'Deluxe King · Haram View', gradient: 'from-amber-400 to-orange-500' },
-  { city: 'Madinah', name: 'The Oberoi Madinah', stars: 5, distance: '120m from Masjid Nabawi', nights: '5 nights · Jun 8-13', room: 'Deluxe King · City View', gradient: 'from-emerald-400 to-teal-500' },
+  { city: 'মক্কা', name: 'কনরাড মক্কা', stars: 5, distance: 'হারাম থেকে ৫০ মিটার', nights: '৮ রাত · ১৯-২৭ মে', room: 'ডিলাক্স কিং · হারাম ভিউ', gradient: 'from-amber-400 to-orange-500' },
+  { city: 'মদিনা', name: 'দ্য ওবেরয় মদিনা', stars: 5, distance: 'মসজিদে নববী থেকে ১২০ মিটার', nights: '৫ রাত · ৮-১৩ জুন', room: 'ডিলাক্স কিং · সিটি ভিউ', gradient: 'from-emerald-400 to-teal-500' },
 ]
 
 export default function HotelDetailsPage() {
   return (
     <>
-      <PageTitle title="Hotel details" description="Your accommodation throughout your sacred journey." />
+      <PageTitle title="হোটেল বিবরণ" description="আপনার পবিত্র যাত্রায় থাকার ব্যবস্থা।" />
 
       <div className="space-y-6">
         {hotels.map((h, i) => (
@@ -33,15 +33,15 @@ export default function HotelDetailsPage() {
                 <p className="text-sm text-muted-foreground flex items-center gap-1.5 mb-4"><MapPin className="w-4 h-4" /> {h.distance}</p>
 
                 <div className="grid grid-cols-2 gap-3 mb-5">
-                  <Info Icon={Bed} label="Room" value={h.room} />
-                  <Info Icon={Hotel} label="Stay" value={h.nights} />
+                  <Info Icon={Bed} label="রুম" value={h.room} />
+                  <Info Icon={Hotel} label="অবস্থান" value={h.nights} />
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Amenity Icon={Wifi} label="Free WiFi" />
-                  <Amenity Icon={Utensils} label="Buffet meals" />
-                  <Amenity Icon={Bath} label="Premium bath" />
-                  <Amenity Icon={Hotel} label="Room service" />
+                  <Amenity Icon={Wifi} label="ফ্রি WiFi" />
+                  <Amenity Icon={Utensils} label="বুফে খাবার" />
+                  <Amenity Icon={Bath} label="প্রিমিয়াম বাথ" />
+                  <Amenity Icon={Hotel} label="রুম সার্ভিস" />
                 </div>
               </div>
             </div>

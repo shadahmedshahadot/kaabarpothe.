@@ -23,9 +23,9 @@ export function Testimonials() {
 
       <div className="max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="Words from our pilgrims"
-          title="Stories that move us forward."
-          description="Real reviews from verified pilgrims who completed their sacred journey with us."
+          eyebrow="হাজীদের কথা"
+          title="যে গল্পগুলো আমাদের এগিয়ে নিয়ে যায়।"
+          description="যাচাইকৃত হাজীদের প্রকৃত রিভিউ যারা আমাদের সাথে পবিত্র যাত্রা সম্পন্ন করেছেন।"
           className="mb-16"
         />
 

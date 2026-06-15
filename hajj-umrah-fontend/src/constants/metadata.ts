@@ -12,16 +12,16 @@ export const rootMetadata: Metadata = {
   authors: [{ name: SITE.name }],
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'bn_BD',
     url: SITE.url,
     siteName: SITE.name,
     title: `${SITE.name} — ${SITE.tagline}`,
-    description: 'Premium Hajj and Umrah packages. Trusted by 50,000+ pilgrims worldwide.',
+    description: 'প্রিমিয়াম হজ্জ ও উমরাহ প্যাকেজ। বিশ্বব্যাপী ৫০,০০০+ হাজী দ্বারা বিশ্বস্ত।',
   },
   twitter: {
     card: 'summary_large_image',
     title: `${SITE.name} — ${SITE.tagline}`,
-    description: 'Premium Hajj and Umrah packages. Scholar-led, Saudi Ministry licensed.',
+    description: 'প্রিমিয়াম হজ্জ ও উমরাহ প্যাকেজ। আলেম পরিচালিত, সৌদি মন্ত্রণালয় লাইসেন্সপ্রাপ্ত।',
   },
   robots: { index: true, follow: true },
   icons: {

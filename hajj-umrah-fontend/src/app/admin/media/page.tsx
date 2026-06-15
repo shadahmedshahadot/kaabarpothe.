@@ -2,12 +2,12 @@ import { Upload, FolderPlus, Search, Image as ImageIcon, Trash2, Download } from
 import { PageTitle } from '@/components/layouts/dashboard-shell'
 
 const folders = [
-  { name: 'Hajj 2026', count: 42, gradient: 'from-amber-400 to-orange-500' },
-  { name: 'Umrah packages', count: 86, gradient: 'from-emerald-400 to-teal-500' },
-  { name: 'Hotel photos', count: 134, gradient: 'from-blue-400 to-indigo-500' },
-  { name: 'Scholar avatars', count: 18, gradient: 'from-rose-400 to-pink-500' },
-  { name: 'Blog covers', count: 24, gradient: 'from-violet-400 to-purple-500' },
-  { name: 'Marketing', count: 67, gradient: 'from-cyan-400 to-sky-500' },
+  { name: 'হজ্জ ২০২৬', count: 42, gradient: 'from-amber-400 to-orange-500' },
+  { name: 'উমরাহ প্যাকেজ', count: 86, gradient: 'from-emerald-400 to-teal-500' },
+  { name: 'হোটেল ছবি', count: 134, gradient: 'from-blue-400 to-indigo-500' },
+  { name: 'আলেমদের অবতার', count: 18, gradient: 'from-rose-400 to-pink-500' },
+  { name: 'ব্লগ কভার', count: 24, gradient: 'from-violet-400 to-purple-500' },
+  { name: 'মার্কেটিং', count: 67, gradient: 'from-cyan-400 to-sky-500' },
 ]
 
 const media = [
@@ -21,15 +21,15 @@ export default function AdminMediaPage() {
   return (
     <>
       <PageTitle
-        title="Media library"
-        description="371 files · 4.2 GB used of 100 GB"
+        title="মিডিয়া লাইব্রেরি"
+        description="371 ফাইল · 100 GB এর মধ্যে 4.2 GB ব্যবহৃত"
         action={
           <div className="flex gap-2">
             <button className="px-3 py-2 border border-border rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-muted">
-              <FolderPlus className="w-4 h-4" /> New folder
+              <FolderPlus className="w-4 h-4" /> নতুন ফোল্ডার
             </button>
             <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary">
-              <Upload className="w-4 h-4" /> Upload
+              <Upload className="w-4 h-4" /> আপলোড
             </button>
           </div>
         }
@@ -41,14 +41,14 @@ export default function AdminMediaPage() {
           <button key={f.name} className="bg-card border border-border rounded-2xl p-5 hover:border-primary/40 hover:shadow-md transition-all text-left">
             <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${f.gradient} mb-3`} />
             <p className="font-semibold text-foreground truncate">{f.name}</p>
-            <p className="text-xs text-muted-foreground">{f.count} files</p>
+            <p className="text-xs text-muted-foreground">{f.count} ফাইল</p>
           </button>
         ))}
       </div>
 
       <div className="bg-card border border-border rounded-2xl p-5 mb-4 flex items-center gap-3">
         <Search className="w-4 h-4 text-muted-foreground" />
-        <input className="flex-1 bg-transparent focus:outline-none text-sm" placeholder="Search media…" />
+        <input className="flex-1 bg-transparent focus:outline-none text-sm" placeholder="মিডিয়া অনুসন্ধান…" />
       </div>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">

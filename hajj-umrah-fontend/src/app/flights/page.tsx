@@ -3,17 +3,17 @@ import { PageShell, PageHero } from '@/components/layouts/page-shell'
 import { FlightListing } from '@/features/flights/components/flight-listing'
 
 export const metadata: Metadata = {
-  title: 'Flights to Jeddah & Madinah | Sakinah Travels',
-  description: 'Book Hajj & Umrah flights independently from Dhaka and Chattogram with Biman, Saudia, Emirates, Qatar Airways, Turkish Airlines, and more.',
+  title: 'জেদ্দা ও মদিনার ফ্লাইট | সাকিনাহ ট্রাভেলস',
+  description: 'ঢাকা ও চট্টগ্রাম থেকে বিমান, সৌদিয়া, এমিরেটস, কাতার এয়ারওয়েজ, টার্কিশ এয়ারলাইন্স এবং আরও অনেক এয়ারলাইন্সে স্বাধীনভাবে হজ্জ ও উমরাহ ফ্লাইট বুক করুন।',
 }
 
 export default function FlightsPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="Flight bookings"
-        title="Hajj & Umrah flights, booked separately."
-        description="Dhaka and Chattogram departures to Jeddah and Madinah. Choose any flight on its own — no package required."
+        eyebrow="ফ্লাইট বুকিং"
+        title="হজ্জ ও উমরাহ ফ্লাইট, আলাদাভাবে বুক করুন।"
+        description="ঢাকা ও চট্টগ্রাম থেকে জেদ্দা ও মদিনার উদ্দেশ্যে প্রস্থান। যেকোনো ফ্লাইট আলাদাভাবে নির্বাচন করুন — কোনো প্যাকেজ প্রয়োজন নেই।"
       />
       <FlightListing />
     </PageShell>

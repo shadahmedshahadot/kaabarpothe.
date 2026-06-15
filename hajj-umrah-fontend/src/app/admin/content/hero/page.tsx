@@ -24,10 +24,10 @@ export default function HeroContentEditor() {
     setTimeout(() => setToast(null), 2500)
   }
 
-  const handleSave = () => { save(draft); flash('Hero content saved — refresh homepage to verify.') }
+  const handleSave = () => { save(draft); flash('হিরো কনটেন্ট সংরক্ষিত — যাচাই করতে হোমপেজ রিফ্রেশ করুন।') }
   const handleReset = () => {
-    if (!confirm('Reset hero to default content? Custom edits will be lost.')) return
-    reset(); flash('Hero reset to default.')
+    if (!confirm('হিরো ডিফল্ট কনটেন্টে রিসেট করবেন? কাস্টম সম্পাদনা হারিয়ে যাবে।')) return
+    reset(); flash('হিরো ডিফল্টে রিসেট হয়েছে।')
   }
 
   const setField = <K extends keyof HeroContent>(key: K, value: HeroContent[K]) =>
@@ -36,26 +36,26 @@ export default function HeroContentEditor() {
   return (
     <>
       <Link href="/admin/content" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4">
-        <ArrowLeft className="w-4 h-4" /> Back to content
+        <ArrowLeft className="w-4 h-4" /> কনটেন্টে ফিরে যান
       </Link>
 
       <PageTitle
-        title="Hero section"
-        description="Edit homepage hero — background video, headline, badges, stats. Changes persist in your browser."
+        title="হিরো সেকশন"
+        description="হোমপেজ হিরো সম্পাদনা করুন — ব্যাকগ্রাউন্ড ভিডিও, শিরোনাম, ব্যাজ, পরিসংখ্যান। পরিবর্তনগুলো আপনার ব্রাউজারে সংরক্ষিত থাকবে।"
         action={
           <div className="flex gap-2">
             <Link href="/" target="_blank" className="px-3 py-2 border border-border rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-muted transition-colors">
-              <Eye className="w-4 h-4" /> Preview
+              <Eye className="w-4 h-4" /> প্রিভিউ
             </Link>
             <button onClick={handleReset} className="px-3 py-2 border border-border rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-muted text-rose-600 transition-colors">
-              <RotateCcw className="w-4 h-4" /> Reset
+              <RotateCcw className="w-4 h-4" /> রিসেট
             </button>
             <button
               onClick={handleSave}
               disabled={!dirty}
               className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
-              <Save className="w-4 h-4" /> {dirty ? 'Save changes' : 'Saved'}
+              <Save className="w-4 h-4" /> {dirty ? 'পরিবর্তন সংরক্ষণ করুন' : 'সংরক্ষিত'}
             </button>
           </div>
         }
@@ -76,47 +76,47 @@ export default function HeroContentEditor() {
 
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          <Card title="Background video" icon={<Play className="w-4 h-4" />}>
+          <Card title="ব্যাকগ্রাউন্ড ভিডিও" icon={<Play className="w-4 h-4" />}>
             <div>
-              <Label>YouTube video ID</Label>
+              <Label>ইউটিউব ভিডিও আইডি</Label>
               <Input
                 value={draft.videoId}
                 onChange={e => setField('videoId', e.target.value)}
                 placeholder="weCvgHcbdP4"
               />
               <p className="text-xs text-muted-foreground mt-2">
-                Paste the 11-character ID from <code className="bg-muted px-1 rounded">youtube.com/watch?v=<strong className="text-foreground">XXX</strong></code> or{' '}
-                <code className="bg-muted px-1 rounded">youtu.be/<strong className="text-foreground">XXX</strong></code>
+                <code className="bg-muted px-1 rounded">youtube.com/watch?v=<strong className="text-foreground">XXX</strong></code> বা{' '}
+                <code className="bg-muted px-1 rounded">youtu.be/<strong className="text-foreground">XXX</strong></code> থেকে ১১-অক্ষরের আইডি পেস্ট করুন
               </p>
               {draft.videoId && (
                 <div className="mt-3 aspect-video rounded-xl overflow-hidden border border-border bg-black">
                   <iframe
                     src={`https://www.youtube.com/embed/${draft.videoId}?mute=1&autoplay=0&controls=1`}
                     className="w-full h-full"
-                    title="Preview"
+                    title="প্রিভিউ"
                   />
                 </div>
               )}
             </div>
           </Card>
 
-          <Card title="Headline" icon={<Sparkles className="w-4 h-4" />}>
+          <Card title="শিরোনাম" icon={<Sparkles className="w-4 h-4" />}>
             <div>
-              <Label>Eyebrow badge</Label>
+              <Label>আইব্রো ব্যাজ</Label>
               <Input value={draft.badge} onChange={e => setField('badge', e.target.value)} />
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label>Title — first part</Label>
+                <Label>শিরোনাম — প্রথম অংশ</Label>
                 <Input value={draft.titleStart} onChange={e => setField('titleStart', e.target.value)} />
               </div>
               <div>
-                <Label>Title — highlighted part</Label>
+                <Label>শিরোনাম — হাইলাইট অংশ</Label>
                 <Input value={draft.titleHighlight} onChange={e => setField('titleHighlight', e.target.value)} />
               </div>
             </div>
             <div>
-              <Label>Description</Label>
+              <Label>বিবরণ</Label>
               <Textarea
                 rows={4}
                 value={draft.description}
@@ -125,21 +125,21 @@ export default function HeroContentEditor() {
             </div>
           </Card>
 
-          <Card title="Call-to-action buttons">
+          <Card title="কল-টু-অ্যাকশন বাটন">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label>Umrah tab label</Label>
+                <Label>উমরাহ ট্যাব লেবেল</Label>
                 <Input value={draft.ctaUmrah} onChange={e => setField('ctaUmrah', e.target.value)} />
               </div>
               <div>
-                <Label>Hajj tab label</Label>
+                <Label>হজ্জ ট্যাব লেবেল</Label>
                 <Input value={draft.ctaHajj} onChange={e => setField('ctaHajj', e.target.value)} />
               </div>
             </div>
           </Card>
 
-          <Card title="Trust badges">
-            <p className="text-xs text-muted-foreground mb-2">Three short trust badges shown below the booking widget.</p>
+          <Card title="ট্রাস্ট ব্যাজ">
+            <p className="text-xs text-muted-foreground mb-2">বুকিং উইজেটের নিচে দেখানো তিনটি ছোট ট্রাস্ট ব্যাজ।</p>
             {draft.trustBadges.map((b, i) => (
               <div key={i} className="flex gap-2 items-center">
                 <Input
@@ -160,33 +160,33 @@ export default function HeroContentEditor() {
             ))}
             {draft.trustBadges.length < 5 && (
               <button
-                onClick={() => setField('trustBadges', [...draft.trustBadges, 'New badge'])}
+                onClick={() => setField('trustBadges', [...draft.trustBadges, 'নতুন ব্যাজ'])}
                 className="w-full py-2.5 border-2 border-dashed border-border rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary inline-flex items-center justify-center gap-2 transition-colors"
               >
-                <Plus className="w-4 h-4" /> Add badge
+                <Plus className="w-4 h-4" /> ব্যাজ যোগ করুন
               </button>
             )}
           </Card>
 
-          <Card title="Right-side reflection card">
+          <Card title="ডান-পাশের রিফ্লেকশন কার্ড">
             <div>
-              <Label>Eyebrow</Label>
+              <Label>আইব্রো</Label>
               <Input value={draft.reflectionEyebrow} onChange={e => setField('reflectionEyebrow', e.target.value)} />
             </div>
             <div>
-              <Label>Quote</Label>
+              <Label>উদ্ধৃতি</Label>
               <Textarea rows={3} value={draft.reflectionQuote} onChange={e => setField('reflectionQuote', e.target.value)} />
             </div>
             <div>
-              <Label>Reference / attribution</Label>
+              <Label>রেফারেন্স / অ্যাট্রিবিউশন</Label>
               <Input value={draft.reflectionRef} onChange={e => setField('reflectionRef', e.target.value)} />
             </div>
 
-            <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-4">Bottom info row</p>
+            <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-4">নিচের তথ্য সারি</p>
             {draft.reflectionItems.map((item, i) => (
               <div key={i} className="grid grid-cols-[1fr_1fr_auto] gap-2 items-center">
                 <Input
-                  placeholder="Label"
+                  placeholder="লেবেল"
                   value={item.label}
                   onChange={e => {
                     const next = [...draft.reflectionItems]
@@ -195,7 +195,7 @@ export default function HeroContentEditor() {
                   }}
                 />
                 <Input
-                  placeholder="Value"
+                  placeholder="মান"
                   value={item.value}
                   onChange={e => {
                     const next = [...draft.reflectionItems]
@@ -213,20 +213,20 @@ export default function HeroContentEditor() {
             ))}
             {draft.reflectionItems.length < 4 && (
               <button
-                onClick={() => setField('reflectionItems', [...draft.reflectionItems, { label: 'New', value: 'Value' }])}
+                onClick={() => setField('reflectionItems', [...draft.reflectionItems, { label: 'নতুন', value: 'মান' }])}
                 className="w-full py-2.5 border-2 border-dashed border-border rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary inline-flex items-center justify-center gap-2 transition-colors"
               >
-                <Plus className="w-4 h-4" /> Add item
+                <Plus className="w-4 h-4" /> আইটেম যোগ করুন
               </button>
             )}
           </Card>
 
-          <Card title="Stats bar">
-            <p className="text-xs text-muted-foreground mb-2">Four animated counters at bottom of hero.</p>
+          <Card title="পরিসংখ্যান বার">
+            <p className="text-xs text-muted-foreground mb-2">হিরোর নিচে চারটি অ্যানিমেটেড কাউন্টার।</p>
             {draft.stats.map((s, i) => (
               <div key={i} className="grid grid-cols-[1fr_80px_80px_60px_auto] gap-2 items-center">
                 <Input
-                  placeholder="Label"
+                  placeholder="লেবেল"
                   value={s.label}
                   onChange={e => {
                     const next = [...draft.stats]
@@ -236,7 +236,7 @@ export default function HeroContentEditor() {
                 />
                 <Input
                   type="number"
-                  placeholder="Value"
+                  placeholder="মান"
                   value={s.value}
                   onChange={e => {
                     const next = [...draft.stats]
@@ -245,7 +245,7 @@ export default function HeroContentEditor() {
                   }}
                 />
                 <Input
-                  placeholder="Suffix"
+                  placeholder="সাফিক্স"
                   value={s.suffix ?? ''}
                   onChange={e => {
                     const next = [...draft.stats]
@@ -255,7 +255,7 @@ export default function HeroContentEditor() {
                 />
                 <Input
                   type="number"
-                  placeholder="Dec."
+                  placeholder="দশমিক"
                   value={s.decimals ?? 0}
                   onChange={e => {
                     const next = [...draft.stats]
@@ -273,10 +273,10 @@ export default function HeroContentEditor() {
             ))}
             {draft.stats.length < 6 && (
               <button
-                onClick={() => setField('stats', [...draft.stats, { value: 0, label: 'New stat', suffix: '+' }])}
+                onClick={() => setField('stats', [...draft.stats, { value: 0, label: 'নতুন পরিসংখ্যান', suffix: '+' }])}
                 className="w-full py-2.5 border-2 border-dashed border-border rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary inline-flex items-center justify-center gap-2 transition-colors"
               >
-                <Plus className="w-4 h-4" /> Add stat
+                <Plus className="w-4 h-4" /> পরিসংখ্যান যোগ করুন
               </button>
             )}
           </Card>
@@ -285,8 +285,8 @@ export default function HeroContentEditor() {
         {/* Sidebar — live preview + tips */}
         <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
           <div className="bg-card border border-border rounded-2xl p-6">
-            <h3 className="font-bold text-foreground mb-3">Live preview</h3>
-            <p className="text-xs text-muted-foreground mb-4">A miniature of what visitors will see.</p>
+            <h3 className="font-bold text-foreground mb-3">লাইভ প্রিভিউ</h3>
+            <p className="text-xs text-muted-foreground mb-4">দর্শনার্থীরা যা দেখবেন তার একটি ক্ষুদ্র সংস্করণ।</p>
             <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-foreground/90 p-5 text-white">
               <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/80" />
               <div className="relative">
@@ -316,20 +316,20 @@ export default function HeroContentEditor() {
           </div>
 
           <div className="bg-card border border-border rounded-2xl p-6">
-            <h3 className="font-bold text-foreground mb-3 text-sm">Tips</h3>
+            <h3 className="font-bold text-foreground mb-3 text-sm">টিপস</h3>
             <ul className="text-xs text-muted-foreground space-y-2 leading-relaxed">
-              <li>• Use cinematic 1080p+ video for best background quality.</li>
-              <li>• Keep description under 200 chars for mobile.</li>
-              <li>• Highlight part gets the amber gradient — make it the strongest 2-4 words.</li>
-              <li>• Changes save to your browser's localStorage only (frontend demo).</li>
-              <li>• Use <strong>Reset</strong> to restore defaults from the shipped build.</li>
+              <li>• সেরা ব্যাকগ্রাউন্ড মানের জন্য সিনেম্যাটিক ১০৮০পি+ ভিডিও ব্যবহার করুন।</li>
+              <li>• মোবাইলের জন্য বিবরণ ২০০ অক্ষরের নিচে রাখুন।</li>
+              <li>• হাইলাইট অংশ অ্যাম্বার গ্রেডিয়েন্ট পায় — এটিকে সবচেয়ে শক্তিশালী ২-৪ শব্দ বানান।</li>
+              <li>• পরিবর্তনগুলো শুধুমাত্র আপনার ব্রাউজারের লোকালস্টোরেজে সংরক্ষিত হয় (ফ্রন্টএন্ড ডেমো)।</li>
+              <li>• শিপড বিল্ড থেকে ডিফল্ট পুনরুদ্ধার করতে <strong>রিসেট</strong> ব্যবহার করুন।</li>
             </ul>
           </div>
 
           <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5">
-            <p className="text-xs font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider mb-1">Status</p>
+            <p className="text-xs font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider mb-1">অবস্থা</p>
             <p className="text-sm text-foreground">
-              {dirty ? <span className="text-amber-700 dark:text-amber-300">Unsaved changes</span> : <span className="text-emerald-700 dark:text-emerald-300">All synced</span>}
+              {dirty ? <span className="text-amber-700 dark:text-amber-300">অসংরক্ষিত পরিবর্তন</span> : <span className="text-emerald-700 dark:text-emerald-300">সব সিঙ্ক করা</span>}
             </p>
           </div>
         </div>

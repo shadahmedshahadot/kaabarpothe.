@@ -19,14 +19,14 @@ export function BlogPreview() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
           <SectionHeading
-            eyebrow="Learning center"
-            title="Prepare your heart and your suitcase."
-            description="Scholar-reviewed guides, practical tips, and pilgrim stories."
+            eyebrow="শিক্ষা কেন্দ্র"
+            title="হৃদয় ও সুটকেস দুটোই প্রস্তুত করুন।"
+            description="আলেম পর্যালোচিত গাইড, ব্যবহারিক পরামর্শ ও হাজীদের গল্প।"
             align="left"
             className="!max-w-2xl !mx-0"
           />
           <Link href="/blog" className="inline-flex self-start items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors group">
-            All articles
+            সব আর্টিকেল
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -52,7 +52,7 @@ export function BlogPreview() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 bg-black/40 backdrop-blur text-white text-xs px-2.5 py-1 rounded-full">
-                    <Clock className="w-3 h-3" /> {post.readTime} min read
+                    <Clock className="w-3 h-3" /> {post.readTime} মিনিট পড়া
                   </div>
                 </div>
                 <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-2">{post.category}</p>

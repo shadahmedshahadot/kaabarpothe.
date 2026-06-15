@@ -12,36 +12,36 @@ export function RegisterForm() {
   return (
     <>
       <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 tracking-tight">
-        Create your account
+        অ্যাকাউন্ট তৈরি করুন
       </h2>
-      <p className="text-muted-foreground mb-8">Takes 30 seconds. No credit card needed.</p>
+      <p className="text-muted-foreground mb-8">৩০ সেকেন্ড লাগে। ক্রেডিট কার্ড লাগবে না।</p>
 
       <form className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
-          <Field label="First name" icon={<User className="w-4 h-4" />}>
-            <Input required placeholder="Ahmad" className="h-12 pl-10" />
+          <Field label="নামের প্রথম অংশ" icon={<User className="w-4 h-4" />}>
+            <Input required placeholder="আহমাদ" className="h-12 pl-10" />
           </Field>
-          <Field label="Last name" icon={<User className="w-4 h-4" />}>
-            <Input required placeholder="Hassan" className="h-12 pl-10" />
+          <Field label="নামের শেষাংশ" icon={<User className="w-4 h-4" />}>
+            <Input required placeholder="হাসান" className="h-12 pl-10" />
           </Field>
         </div>
 
-        <Field label="Email" icon={<Mail className="w-4 h-4" />}>
+        <Field label="ইমেইল" icon={<Mail className="w-4 h-4" />}>
           <Input type="email" required placeholder="you@email.com" className="h-12 pl-10" />
         </Field>
 
-        <Field label="Password" icon={<Lock className="w-4 h-4" />}>
+        <Field label="পাসওয়ার্ড" icon={<Lock className="w-4 h-4" />}>
           <Input
             type={showPwd ? 'text' : 'password'}
             required
-            placeholder="At least 8 characters"
+            placeholder="কমপক্ষে ৮ অক্ষর"
             className="h-12 pl-10 pr-10"
           />
           <button
             type="button"
             onClick={() => setShowPwd(s => !s)}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label={showPwd ? 'Hide password' : 'Show password'}
+            aria-label={showPwd ? 'পাসওয়ার্ড লুকান' : 'পাসওয়ার্ড দেখান'}
           >
             {showPwd ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
@@ -54,13 +54,13 @@ export function RegisterForm() {
             className="w-4 h-4 rounded border-border mt-0.5 accent-primary"
           />
           <span>
-            I agree to the{' '}
+            আমি সম্মত{' '}
             <Link href={ROUTES.terms} className="text-primary hover:underline">
-              Terms
+              শর্তাবলী
             </Link>{' '}
-            and{' '}
+            ও{' '}
             <Link href={ROUTES.privacy} className="text-primary hover:underline">
-              Privacy Policy
+              গোপনীয়তা নীতিতে
             </Link>
           </span>
         </label>
@@ -69,7 +69,7 @@ export function RegisterForm() {
           type="submit"
           className="group relative w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white py-3.5 rounded-xl font-semibold shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/40 hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center justify-center gap-2 transition-all"
         >
-          Create account
+          অ্যাকাউন্ট তৈরি করুন
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </button>
       </form>
@@ -77,9 +77,9 @@ export function RegisterForm() {
       <SocialAuthButtons />
 
       <p className="mt-8 text-sm text-center text-muted-foreground">
-        Already have an account?{' '}
+        ইতিমধ্যে অ্যাকাউন্ট আছে?{' '}
         <Link href={ROUTES.login} className="text-primary font-semibold hover:underline">
-          Sign in
+          সাইন ইন
         </Link>
       </p>
     </>

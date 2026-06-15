@@ -7,46 +7,46 @@ export interface FAQ {
 
 export const faqs: FAQ[] = [
   // Booking
-  { id: 'f1', category: 'Booking', question: 'How do I book a package?', answer: 'Browse our Hajj or Umrah packages, click the package that interests you, review the full itinerary, and click "Book Now". You will be guided through pilgrim details, document upload, and a 25% deposit. The remaining balance can be paid in installments.' },
-  { id: 'f2', category: 'Booking', question: 'Can I book for someone else (mahram, parents)?', answer: 'Yes. During booking, add each pilgrim\'s passport details and relationship. Sisters traveling without a mahram must be 45+ years old per current Saudi Ministry rules and travel as part of an approved group.' },
-  { id: 'f3', category: 'Booking', question: 'What is the deposit amount?', answer: 'A 25% deposit secures your booking. For VIP packages it is 30%. The deposit is fully refundable up to 60 days before departure.' },
-  { id: 'f4', category: 'Booking', question: 'Can I pay in installments?', answer: 'Yes. After the deposit, the remaining balance can be paid in 2-6 monthly installments. Auto-pay setup is available in your pilgrim dashboard.' },
-  { id: 'f5', category: 'Booking', question: 'When should I book?', answer: 'For Hajj, book 6-12 months ahead. For Ramadan Umrah, book 8-12 months ahead. For Umrah in other months, 2-4 months ahead is usually sufficient.' },
+  { id: 'f1', category: 'বুকিং', question: 'কীভাবে প্যাকেজ বুক করব?', answer: 'আমাদের হজ্জ বা উমরাহ প্যাকেজ ব্রাউজ করুন, পছন্দের প্যাকেজে ক্লিক করুন, সম্পূর্ণ ভ্রমণসূচি দেখুন এবং "এখনই বুক করুন" ক্লিক করুন। হাজী বিবরণ, ডকুমেন্ট আপলোড এবং ২৫% জমার মাধ্যমে গাইড পাবেন। অবশিষ্ট ব্যালেন্স কিস্তিতে পরিশোধ করা যায়।' },
+  { id: 'f2', category: 'বুকিং', question: 'অন্য কারো জন্য (মাহরাম, বাবা-মা) বুক করতে পারি?', answer: 'হ্যাঁ। বুকিংয়ের সময় প্রতিটি হাজীর পাসপোর্ট বিবরণ ও সম্পর্ক যোগ করুন। মাহরাম ছাড়া ভ্রমণকারী বোনদের সৌদি মন্ত্রণালয়ের বর্তমান নিয়ম অনুযায়ী ৪৫+ বছর বয়সী হতে হবে এবং অনুমোদিত গ্রুপের অংশ হিসেবে ভ্রমণ করতে হবে।' },
+  { id: 'f3', category: 'বুকিং', question: 'জমার পরিমাণ কত?', answer: '২৫% জমা আপনার বুকিং নিশ্চিত করে। ভিআইপি প্যাকেজের জন্য ৩০%। প্রস্থানের ৬০ দিন আগে পর্যন্ত জমা সম্পূর্ণ ফেরতযোগ্য।' },
+  { id: 'f4', category: 'বুকিং', question: 'কিস্তিতে পরিশোধ করা যায়?', answer: 'হ্যাঁ। জমার পর অবশিষ্ট ব্যালেন্স ২-৬ মাসিক কিস্তিতে পরিশোধ করা যায়। আপনার হাজী ড্যাশবোর্ডে অটো-পে সেটআপ পাওয়া যায়।' },
+  { id: 'f5', category: 'বুকিং', question: 'কখন বুক করা উচিত?', answer: 'হজ্জের জন্য ৬-১২ মাস আগে। রমজান উমরাহর জন্য ৮-১২ মাস আগে। অন্য মাসের উমরাহর জন্য সাধারণত ২-৪ মাস যথেষ্ট।' },
 
   // Visa & Documents
-  { id: 'f6', category: 'Visa & Documents', question: 'Is the visa included in package price?', answer: 'Yes, all our packages include the Umrah or Hajj visa fee, biometric registration, and Ministry of Hajj e-tasreeh permits.' },
-  { id: 'f7', category: 'Visa & Documents', question: 'What documents do I need?', answer: 'A valid passport with at least 6 months validity from your return date, recent passport-size photographs (white background), vaccination certificates (meningitis ACWY required, others as applicable), and a completed application form.' },
-  { id: 'f8', category: 'Visa & Documents', question: 'How long does visa processing take?', answer: 'Standard processing is 7-14 business days. Express processing (5 business days) is available for an additional fee. VIP packages include fast-track processing.' },
-  { id: 'f9', category: 'Visa & Documents', question: 'What vaccinations are required?', answer: 'Meningitis ACWY (mandatory, certificate required), seasonal flu (recommended), COVID-19 vaccines per current Saudi rules. Pilgrims from yellow fever countries require yellow fever certification.' },
+  { id: 'f6', category: 'ভিসা ও ডকুমেন্ট', question: 'প্যাকেজ মূল্যে কি ভিসা অন্তর্ভুক্ত?', answer: 'হ্যাঁ, আমাদের সব প্যাকেজে উমরাহ বা হজ্জ ভিসা ফি, বায়োমেট্রিক রেজিস্ট্রেশন এবং হজ্জ মন্ত্রণালয়ের ই-তাসরীহ অনুমতি অন্তর্ভুক্ত।' },
+  { id: 'f7', category: 'ভিসা ও ডকুমেন্ট', question: 'কী কী ডকুমেন্ট লাগবে?', answer: 'ফেরত তারিখ থেকে কমপক্ষে ৬ মাস মেয়াদী বৈধ পাসপোর্ট, সাম্প্রতিক পাসপোর্ট সাইজ ছবি (সাদা ব্যাকগ্রাউন্ড), টিকা সার্টিফিকেট (মেনিনজাইটিস ACWY বাধ্যতামূলক) এবং সম্পূর্ণ আবেদনপত্র।' },
+  { id: 'f8', category: 'ভিসা ও ডকুমেন্ট', question: 'ভিসা প্রসেসিংয়ে কত সময় লাগে?', answer: 'স্ট্যান্ডার্ড প্রসেসিং ৭-১৪ কার্যদিবস। অতিরিক্ত ফিতে এক্সপ্রেস প্রসেসিং (৫ কার্যদিবস) পাওয়া যায়। ভিআইপি প্যাকেজে ফাস্ট-ট্র্যাক প্রসেসিং অন্তর্ভুক্ত।' },
+  { id: 'f9', category: 'ভিসা ও ডকুমেন্ট', question: 'কোন টিকা প্রয়োজন?', answer: 'মেনিনজাইটিস ACWY (বাধ্যতামূলক, সার্টিফিকেট প্রয়োজন), সিজনাল ফ্লু (সুপারিশকৃত), বর্তমান সৌদি নিয়ম অনুযায়ী COVID-19 টিকা। ইয়েলো ফিভার দেশ থেকে আসা হাজীদের ইয়েলো ফিভার সার্টিফিকেট প্রয়োজন।' },
 
   // Travel & Logistics
-  { id: 'f10', category: 'Travel', question: 'Are flights included?', answer: 'Yes, all packages include round-trip flights from major US/UK/Canadian airports. Add-on departures from other cities are available with possible fare adjustments.' },
-  { id: 'f11', category: 'Travel', question: 'What airline will I fly?', answer: 'Saudi Airlines, Emirates, Qatar Airways, or Turkish Airlines depending on package and route. Premium and VIP packages prioritize direct flights and premium economy/business cabins.' },
-  { id: 'f12', category: 'Travel', question: 'Can I extend my stay or arrive early?', answer: 'Yes, with notice. Add-on nights and flight changes are possible if requested 30+ days before departure. Visa extension is subject to Saudi Ministry rules.' },
-  { id: 'f13', category: 'Travel', question: 'What if my flight is delayed or cancelled?', answer: 'Our 24/7 emergency line handles rebooking, hotel coverage, and meal vouchers. Travel insurance (included) covers most disruptions.' },
+  { id: 'f10', category: 'ভ্রমণ', question: 'ফ্লাইট কি অন্তর্ভুক্ত?', answer: 'হ্যাঁ, সব প্যাকেজে প্রধান বিমানবন্দর থেকে রাউন্ড-ট্রিপ ফ্লাইট অন্তর্ভুক্ত। অন্য শহর থেকে অ্যাড-অন প্রস্থান সম্ভাব্য ভাড়া সমন্বয়সহ পাওয়া যায়।' },
+  { id: 'f11', category: 'ভ্রমণ', question: 'কোন এয়ারলাইনে যাব?', answer: 'প্যাকেজ ও রুট অনুসারে সৌদি এয়ারলাইন্স, এমিরেটস, কাতার এয়ারওয়েজ বা টার্কিশ এয়ারলাইন্স। প্রিমিয়াম ও ভিআইপি প্যাকেজে সরাসরি ফ্লাইট ও প্রিমিয়াম ইকোনমি/বিজনেস কেবিনকে অগ্রাধিকার দেওয়া হয়।' },
+  { id: 'f12', category: 'ভ্রমণ', question: 'অবস্থান বাড়াতে বা আগে পৌঁছাতে পারি?', answer: 'হ্যাঁ, নোটিশসহ। প্রস্থানের ৩০+ দিন আগে অনুরোধ করলে অতিরিক্ত রাত ও ফ্লাইট পরিবর্তন সম্ভব। ভিসা বর্ধিতকরণ সৌদি মন্ত্রণালয়ের নিয়মের সাপেক্ষে।' },
+  { id: 'f13', category: 'ভ্রমণ', question: 'ফ্লাইট দেরি বা বাতিল হলে কী হবে?', answer: 'আমাদের ২৪/৭ জরুরি লাইন রিবুকিং, হোটেল কভারেজ ও খাবার ভাউচার পরিচালনা করে। ভ্রমণ বীমা (অন্তর্ভুক্ত) বেশিরভাগ ব্যাঘাত কভার করে।' },
 
   // Hotels & Accommodation
-  { id: 'f14', category: 'Hotels', question: 'How close are the hotels to the Haram?', answer: 'Budget: 700-900m walk. Economy: 400-500m. Premium: 100-200m. VIP: directly adjacent or Haram-view. All hotels offer shuttle service to the Haram.' },
-  { id: 'f15', category: 'Hotels', question: 'Can I get a single room?', answer: 'Yes, single room supplement is available on all packages except Budget. VIP packages include single occupancy by default.' },
-  { id: 'f16', category: 'Hotels', question: 'Are family rooms available?', answer: 'Yes, family rooms accommodating 2 adults + 2 children are available on Economy, Premium, and Luxury Umrah packages, and Standard, Premium, VIP Hajj packages.' },
+  { id: 'f14', category: 'হোটেল', question: 'হোটেল হারাম থেকে কত কাছে?', answer: 'বাজেট: ৭০০-৯০০ মিটার হাঁটা। ইকোনমি: ৪০০-৫০০ মিটার। প্রিমিয়াম: ১০০-২০০ মিটার। ভিআইপি: সরাসরি সংলগ্ন বা হারাম-ভিউ। সব হোটেলে হারামে শাটল সার্ভিস আছে।' },
+  { id: 'f15', category: 'হোটেল', question: 'একক রুম পেতে পারি?', answer: 'হ্যাঁ, বাজেট ছাড়া সব প্যাকেজে একক রুম সাপ্লিমেন্ট পাওয়া যায়। ভিআইপি প্যাকেজে ডিফল্টভাবে একক অকুপেন্সি অন্তর্ভুক্ত।' },
+  { id: 'f16', category: 'হোটেল', question: 'ফ্যামিলি রুম পাওয়া যায়?', answer: 'হ্যাঁ, ২ প্রাপ্তবয়স্ক + ২ শিশু সম্বলিত ফ্যামিলি রুম ইকোনমি, প্রিমিয়াম ও লাক্সারি উমরাহ এবং স্ট্যান্ডার্ড, প্রিমিয়াম, ভিআইপি হজ্জ প্যাকেজে পাওয়া যায়।' },
 
   // Payments & Refunds
-  { id: 'f17', category: 'Payments', question: 'What payment methods do you accept?', answer: 'Credit/debit cards (Visa, Mastercard, Amex), bank transfer, ACH/Direct Debit, and Apple/Google Pay. We also accept installment financing via Affirm and Klarna where available.' },
-  { id: 'f18', category: 'Payments', question: 'Is my payment secure?', answer: 'Yes. All payments are processed through PCI-DSS Level 1 compliant gateways with end-to-end TLS encryption. We never store full card numbers.' },
-  { id: 'f19', category: 'Payments', question: 'What is your refund policy?', answer: 'Full refund 60+ days before departure. 75% refund 30-59 days. 50% refund 15-29 days. No refund within 14 days, except for documented medical emergencies. See our Refund Policy page for details.' },
-  { id: 'f20', category: 'Payments', question: 'Can I get a refund if my visa is denied?', answer: 'Yes. If visa is denied through no fault of the pilgrim, we refund 100% of the package cost minus actual administrative fees (typically $150).' },
+  { id: 'f17', category: 'পেমেন্ট', question: 'কী কী পেমেন্ট পদ্ধতি গ্রহণ করেন?', answer: 'ক্রেডিট/ডেবিট কার্ড (ভিসা, মাস্টারকার্ড, আমেক্স), ব্যাংক ট্রান্সফার, ACH/ডাইরেক্ট ডেবিট এবং অ্যাপল/গুগল পে। আমরা bKash, Nagad এবং Rocket-এও কিস্তি ফাইন্যান্সিং গ্রহণ করি।' },
+  { id: 'f18', category: 'পেমেন্ট', question: 'আমার পেমেন্ট কি সুরক্ষিত?', answer: 'হ্যাঁ। সব পেমেন্ট PCI-DSS Level 1 কমপ্লায়েন্ট গেটওয়ের মাধ্যমে এন্ড-টু-এন্ড TLS এনক্রিপশনে প্রক্রিয়াকৃত। আমরা কখনও সম্পূর্ণ কার্ড নম্বর সংরক্ষণ করি না।' },
+  { id: 'f19', category: 'পেমেন্ট', question: 'আপনাদের ফেরত নীতি কী?', answer: 'প্রস্থানের ৬০+ দিন আগে সম্পূর্ণ ফেরত। ৩০-৫৯ দিনে ৭৫% ফেরত। ১৫-২৯ দিনে ৫০% ফেরত। ১৪ দিনের মধ্যে কোনো ফেরত নেই, ডকুমেন্টেড মেডিকেল জরুরি ব্যতীত। বিস্তারিত জানতে ফেরত নীতি পেজ দেখুন।' },
+  { id: 'f20', category: 'পেমেন্ট', question: 'ভিসা প্রত্যাখ্যাত হলে ফেরত পাব?', answer: 'হ্যাঁ। হাজীর ভুল ছাড়া ভিসা প্রত্যাখ্যাত হলে, আমরা প্রকৃত প্রশাসনিক ফি বাদে (সাধারণত ১২,০০০ টাকা) সম্পূর্ণ প্যাকেজ মূল্য ফেরত দেই।' },
 
   // During the Journey
-  { id: 'f21', category: 'During Journey', question: 'Will there be a group leader?', answer: 'Yes, every group has an experienced scholar or trained group leader who handles logistics, leads worship, and is available 24/7 during your stay.' },
-  { id: 'f22', category: 'During Journey', question: 'What if I have a medical emergency?', answer: 'Immediate medical care is available at hotel medical desks, and major hospitals serve the Makkah and Madinah areas with 24/7 emergency rooms. Travel insurance covers expenses. Our ground team coordinates with families.' },
-  { id: 'f23', category: 'During Journey', question: 'Is Wi-Fi available at hotels?', answer: 'Yes, all hotels offer free Wi-Fi in lobbies and rooms. Premium and VIP packages include international roaming SIMs.' },
-  { id: 'f24', category: 'During Journey', question: 'Can I use my regular phone?', answer: 'Yes. Saudi telecoms STC, Mobily, and Zain offer tourist SIMs at the airport for $15-30 with data. Most US/UK plans offer international roaming.' },
+  { id: 'f21', category: 'ভ্রমণকালীন', question: 'গ্রুপ লিডার থাকবেন?', answer: 'হ্যাঁ, প্রতিটি গ্রুপে অভিজ্ঞ আলেম বা প্রশিক্ষিত গ্রুপ লিডার থাকেন যিনি লজিস্টিকস পরিচালনা করেন, ইবাদত পরিচালনা করেন এবং থাকাকালীন ২৪/৭ পাওয়া যান।' },
+  { id: 'f22', category: 'ভ্রমণকালীন', question: 'মেডিকেল জরুরি অবস্থায় কী হবে?', answer: 'হোটেল মেডিকেল ডেস্কে তাৎক্ষণিক চিকিৎসা পাওয়া যায়, এবং মক্কা ও মদিনায় ২৪/৭ জরুরি বিভাগসহ প্রধান হাসপাতাল রয়েছে। ভ্রমণ বীমা খরচ কভার করে।' },
+  { id: 'f23', category: 'ভ্রমণকালীন', question: 'হোটেলে ওয়াই-ফাই পাওয়া যায়?', answer: 'হ্যাঁ, সব হোটেলের লবি ও রুমে ফ্রি ওয়াই-ফাই। প্রিমিয়াম ও ভিআইপি প্যাকেজে আন্তর্জাতিক রোমিং সিম অন্তর্ভুক্ত।' },
+  { id: 'f24', category: 'ভ্রমণকালীন', question: 'নিজের ফোন ব্যবহার করতে পারি?', answer: 'হ্যাঁ। সৌদি টেলিকম STC, Mobily ও Zain বিমানবন্দরে ডেটাসহ ১,৫০০-৩,০০০ টাকায় ট্যুরিস্ট সিম দেয়। বেশিরভাগ অপারেটর আন্তর্জাতিক রোমিং দেয়।' },
 
   // Special Cases
-  { id: 'f25', category: 'Special Cases', question: 'Can elderly pilgrims with mobility issues go?', answer: 'Yes. We offer wheelchair-accessible packages with closer hotels, medical escort options, and Maryam Suleiman specializes in senior pilgrims. Contact us for tailored arrangements.' },
-  { id: 'f26', category: 'Special Cases', question: 'Are children allowed?', answer: 'Yes. Family packages accommodate children. Children under 12 receive 25% discount, under 5 receive 50% discount (excluding flights and visa fees).' },
-  { id: 'f27', category: 'Special Cases', question: 'Do you offer women-only groups?', answer: 'Yes. Fatima Zahra Malik specializes in women-only Umrah groups with female group leaders. Available on Economy and Premium Umrah packages.' },
-  { id: 'f28', category: 'Special Cases', question: 'Can I combine Umrah with a tour of Turkey, Egypt, or Jordan?', answer: 'Yes. Multi-city itineraries with stops in Istanbul, Cairo, Amman, or Kuala Lumpur can be arranged. Contact our team for custom routing.' },
+  { id: 'f25', category: 'বিশেষ ক্ষেত্র', question: 'চলাচলে সমস্যাযুক্ত বয়স্ক হাজীরা যেতে পারেন?', answer: 'হ্যাঁ। হুইলচেয়ার-অ্যাক্সেসিবল প্যাকেজ, কাছের হোটেল ও মেডিকেল এসকর্ট অপশন আছে। মরিয়ম সুলাইমান বয়স্ক হাজীদের বিশেষজ্ঞ। কাস্টমাইজড ব্যবস্থার জন্য যোগাযোগ করুন।' },
+  { id: 'f26', category: 'বিশেষ ক্ষেত্র', question: 'বাচ্চাদের অনুমতি আছে?', answer: 'হ্যাঁ। ফ্যামিলি প্যাকেজে বাচ্চাদের জন্য জায়গা আছে। ১২-এর নিচে বাচ্চারা ২৫% ছাড়, ৫-এর নিচে ৫০% ছাড় পায় (ফ্লাইট ও ভিসা ফি ছাড়া)।' },
+  { id: 'f27', category: 'বিশেষ ক্ষেত্র', question: 'শুধু-নারী গ্রুপ আছে?', answer: 'হ্যাঁ। ফাতিমা জাহরা মালিক নারী গ্রুপ লিডারদের সাথে শুধু-নারী উমরাহ গ্রুপের বিশেষজ্ঞ। ইকোনমি ও প্রিমিয়াম উমরাহ প্যাকেজে পাওয়া যায়।' },
+  { id: 'f28', category: 'বিশেষ ক্ষেত্র', question: 'উমরাহর সাথে তুরস্ক, মিশর বা জর্ডান সফর যুক্ত করা যায়?', answer: 'হ্যাঁ। ইস্তাম্বুল, কায়রো, আম্মান বা কুয়ালালামপুরে স্টপসহ মাল্টি-সিটি ভ্রমণসূচি ব্যবস্থা করা যায়। কাস্টম রুটিংয়ের জন্য আমাদের দলের সাথে যোগাযোগ করুন।' },
 ]
 
-export const faqCategories = ['Booking', 'Visa & Documents', 'Travel', 'Hotels', 'Payments', 'During Journey', 'Special Cases']
+export const faqCategories = ['বুকিং', 'ভিসা ও ডকুমেন্ট', 'ভ্রমণ', 'হোটেল', 'পেমেন্ট', 'ভ্রমণকালীন', 'বিশেষ ক্ষেত্র']

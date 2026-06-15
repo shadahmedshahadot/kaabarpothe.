@@ -4,16 +4,16 @@ import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate } from '@/utils/format'
 
 const invoices = [
-  { id: 'INV-2026-0001', booking: 'HJ-2026-1001', amount: 6750, date: '2025-11-20', desc: 'Premium Hajj 2026 — Installment 1' },
-  { id: 'INV-2026-0024', booking: 'HJ-2026-1001', amount: 6750, date: '2025-12-20', desc: 'Premium Hajj 2026 — Installment 2' },
-  { id: 'INV-2026-0089', booking: 'HJ-2026-1001', amount: 6750, date: '2026-01-20', desc: 'Premium Hajj 2026 — Installment 3' },
-  { id: 'INV-2026-0142', booking: 'HJ-2026-1001', amount: 6748, date: '2026-02-20', desc: 'Premium Hajj 2026 — Installment 4 (final)' },
+  { id: 'INV-2026-0001', booking: 'HJ-2026-1001', amount: 6750, date: '2025-11-20', desc: 'প্রিমিয়াম হজ্জ ২০২৬ — কিস্তি ১' },
+  { id: 'INV-2026-0024', booking: 'HJ-2026-1001', amount: 6750, date: '2025-12-20', desc: 'প্রিমিয়াম হজ্জ ২০২৬ — কিস্তি ২' },
+  { id: 'INV-2026-0089', booking: 'HJ-2026-1001', amount: 6750, date: '2026-01-20', desc: 'প্রিমিয়াম হজ্জ ২০২৬ — কিস্তি ৩' },
+  { id: 'INV-2026-0142', booking: 'HJ-2026-1001', amount: 6748, date: '2026-02-20', desc: 'প্রিমিয়াম হজ্জ ২০২৬ — কিস্তি ৪ (চূড়ান্ত)' },
 ]
 
 export default function InvoicesPage() {
   return (
     <>
-      <PageTitle title="Invoices" description="Download invoices and receipts for your records." />
+      <PageTitle title="ইনভয়েস" description="আপনার রেকর্ডের জন্য ইনভয়েস ও রিসিপ্ট ডাউনলোড করুন।" />
 
       <div className="bg-card border border-border rounded-2xl divide-y divide-border">
         {invoices.map(i => (
@@ -28,7 +28,7 @@ export default function InvoicesPage() {
             </div>
             <div className="text-right">
               <p className="font-bold text-foreground">{formatCurrency(i.amount)}</p>
-              <Badge variant="success" className="text-[10px]">Paid</Badge>
+              <Badge variant="success" className="text-[10px]">পরিশোধিত</Badge>
             </div>
             <button className="px-3 py-2 bg-foreground text-background rounded-lg text-xs font-semibold hover:bg-primary inline-flex items-center gap-1.5"><Download className="w-3.5 h-3.5" /> PDF</button>
           </div>

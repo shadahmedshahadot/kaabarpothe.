@@ -4,7 +4,7 @@ export function SocialAuthButtons() {
       <div className="my-6 flex items-center gap-3">
         <div className="flex-1 h-px bg-border" />
         <span className="text-xs text-muted-foreground uppercase tracking-wider">
-          Or continue with
+          অথবা চালিয়ে যান
         </span>
         <div className="flex-1 h-px bg-border" />
       </div>

@@ -3,8 +3,8 @@ import { PageShell } from '@/components/layouts/page-shell'
 import { BookingWizard } from '@/features/booking/components/booking-wizard'
 
 export const metadata: Metadata = {
-  title: 'Complete your booking | Sakinah Travels',
-  description: 'Centralized booking flow for Hajj/Umrah packages, flights, hotels, and transportation.',
+  title: 'আপনার বুকিং সম্পন্ন করুন | সাকিনাহ ট্রাভেলস',
+  description: 'হজ্জ/উমরাহ প্যাকেজ, ফ্লাইট, হোটেল এবং পরিবহনের জন্য কেন্দ্রীয় বুকিং প্রক্রিয়া।',
   robots: { index: false, follow: false },
 }
 

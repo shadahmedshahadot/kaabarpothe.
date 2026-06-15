@@ -11,14 +11,14 @@ export default function AdminInquiriesPage() {
   return (
     <>
       <PageTitle
-        title="Inquiries"
-        description={`${inquiries.filter(i => i.status === 'new').length} new · ${inquiries.filter(i => i.status === 'in-progress').length} in progress`}
+        title="অনুসন্ধান"
+        description={`${inquiries.filter(i => i.status === 'new').length} নতুন · ${inquiries.filter(i => i.status === 'in-progress').length} চলমান`}
       />
 
       <div className="grid lg:grid-cols-3 gap-4 mb-6">
-        <Stat label="New" value={inquiries.filter(i => i.status === 'new').length} color="text-sky-600" Icon={Mail} />
-        <Stat label="In progress" value={inquiries.filter(i => i.status === 'in-progress').length} color="text-amber-600" Icon={MessageCircle} />
-        <Stat label="High priority" value={inquiries.filter(i => i.priority === 'high').length} color="text-rose-600" Icon={AlertCircle} />
+        <Stat label="নতুন" value={inquiries.filter(i => i.status === 'new').length} color="text-sky-600" Icon={Mail} />
+        <Stat label="চলমান" value={inquiries.filter(i => i.status === 'in-progress').length} color="text-amber-600" Icon={MessageCircle} />
+        <Stat label="উচ্চ অগ্রাধিকার" value={inquiries.filter(i => i.priority === 'high').length} color="text-rose-600" Icon={AlertCircle} />
       </div>
 
       <div className="space-y-3">
@@ -45,8 +45,8 @@ export default function AdminInquiriesPage() {
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">{formatRelativeDate(i.createdDate)}</span>
                   <div className="flex gap-2">
-                    <button className="px-3 py-1.5 bg-muted hover:bg-muted/70 rounded-lg font-semibold text-foreground">Reply</button>
-                    <button className="px-3 py-1.5 bg-foreground text-background hover:bg-primary rounded-lg font-semibold">Assign</button>
+                    <button className="px-3 py-1.5 bg-muted hover:bg-muted/70 rounded-lg font-semibold text-foreground">উত্তর দিন</button>
+                    <button className="px-3 py-1.5 bg-foreground text-background hover:bg-primary rounded-lg font-semibold">বরাদ্দ করুন</button>
                   </div>
                 </div>
               </div>

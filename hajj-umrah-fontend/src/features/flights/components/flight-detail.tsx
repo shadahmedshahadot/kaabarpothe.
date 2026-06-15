@@ -41,9 +41,9 @@ export function FlightDetail({ flight }: { flight: Flight }) {
     <div className="px-4 sm:px-6 lg:px-8 pb-24">
       <div className="max-w-7xl mx-auto">
         <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-          <Link href={ROUTES.home} className="hover:text-foreground">Home</Link>
+          <Link href={ROUTES.home} className="hover:text-foreground">হোম</Link>
           <span>/</span>
-          <Link href={ROUTES.flights.root} className="hover:text-foreground">Flights</Link>
+          <Link href={ROUTES.flights.root} className="hover:text-foreground">ফ্লাইট</Link>
           <span>/</span>
           <span className="text-foreground font-medium">{flight.flightNumber}</span>
         </nav>
@@ -63,12 +63,12 @@ export function FlightDetail({ flight }: { flight: Flight }) {
                   </div>
                   <div>
                     <h1 className="text-2xl font-bold text-foreground">{flight.airlineName}</h1>
-                    <p className="text-sm text-muted-foreground">Flight {flight.flightNumber} · <span className="capitalize">{flight.cabinClass.replace('-', ' ')}</span></p>
+                    <p className="text-sm text-muted-foreground">ফ্লাইট {flight.flightNumber} · <span className="capitalize">{flight.cabinClass.replace('-', ' ')}</span></p>
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-2">
-                  {flight.featured && <Badge variant="default">Featured</Badge>}
-                  <Badge variant={nonStop ? 'success' : 'outline'}>{nonStop ? 'Non-stop' : `${flight.transits.length} stop`}</Badge>
+                  {flight.featured && <Badge variant="default">বৈশিষ্ট্যযুক্ত</Badge>}
+                  <Badge variant={nonStop ? 'success' : 'outline'}>{nonStop ? 'সরাসরি' : `${flight.transits.length}টি স্টপ`}</Badge>
                 </div>
               </div>
 
@@ -99,7 +99,7 @@ export function FlightDetail({ flight }: { flight: Flight }) {
               {flight.transits.length > 0 && (
                 <div className="rounded-2xl border border-border bg-muted/30 p-5">
                   <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-primary" /> Layovers
+                    <MapPin className="w-4 h-4 text-primary" /> লেওভার
                   </h3>
                   <div className="space-y-2">
                     {flight.transits.map((t, i) => (
@@ -108,7 +108,7 @@ export function FlightDetail({ flight }: { flight: Flight }) {
                           <p className="font-semibold text-foreground">{t.city}</p>
                           <p className="text-xs text-muted-foreground">{t.airport}</p>
                         </div>
-                        <Badge variant="outline">{t.duration} layover</Badge>
+                        <Badge variant="outline">{t.duration} লেওভার</Badge>
                       </div>
                     ))}
                   </div>
@@ -116,26 +116,26 @@ export function FlightDetail({ flight }: { flight: Flight }) {
               )}
             </motion.div>
 
-            <Section title="What's included" icon={CheckCircle2}>
+            <Section title="অন্তর্ভুক্ত যা আছে" icon={CheckCircle2}>
               <div className="grid sm:grid-cols-2 gap-3">
-                <Item icon={Briefcase} label="Baggage allowance" value={flight.baggageAllowance} />
-                <Item icon={Utensils} label="Meals on board" value={flight.mealInfo} />
-                <Item icon={Users} label="Cabin class" value={<span className="capitalize">{flight.cabinClass.replace('-', ' ')}</span>} />
-                <Item icon={Calendar} label="Booking status" value={<span className="capitalize">{flight.bookingStatus}</span>} />
+                <Item icon={Briefcase} label="ব্যাগেজ অ্যালাউন্স" value={flight.baggageAllowance} />
+                <Item icon={Utensils} label="বোর্ডে খাবার" value={flight.mealInfo} />
+                <Item icon={Users} label="কেবিন ক্লাস" value={<span className="capitalize">{flight.cabinClass.replace('-', ' ')}</span>} />
+                <Item icon={Calendar} label="বুকিং স্ট্যাটাস" value={<span className="capitalize">{flight.bookingStatus}</span>} />
               </div>
             </Section>
 
-            <Section title="Schedule details" icon={Calendar}>
+            <Section title="শিডিউল বিস্তারিত" icon={Calendar}>
               <div className="grid sm:grid-cols-2 gap-3 text-sm">
-                <Row label="Departure airport" value={flight.departureAirport} />
-                <Row label="Arrival airport" value={flight.arrivalAirport} />
-                <Row label="Total journey" value={flight.totalDuration} />
-                <Row label="Transit info" value={flight.transitDuration} />
+                <Row label="প্রস্থানের বিমানবন্দর" value={flight.departureAirport} />
+                <Row label="আগমনের বিমানবন্দর" value={flight.arrivalAirport} />
+                <Row label="মোট যাত্রা" value={flight.totalDuration} />
+                <Row label="ট্রানজিট তথ্য" value={flight.transitDuration} />
               </div>
             </Section>
 
             {flight.notes && (
-              <Section title="Notes" icon={Info}>
+              <Section title="নোট" icon={Info}>
                 <p className="text-sm text-foreground/80 leading-relaxed">{flight.notes}</p>
               </Section>
             )}
@@ -149,20 +149,20 @@ export function FlightDetail({ flight }: { flight: Flight }) {
                     <p className="text-sm text-muted-foreground line-through">{formatCurrency(flight.price + flight.taxes)}</p>
                   )}
                   <p className="text-4xl font-bold text-foreground leading-none">{formatCurrency(total)}</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Per passenger</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">জন প্রতি</p>
                 </div>
-                {flight.discount > 0 && <Badge variant="danger">Save {formatCurrency(flight.discount)}</Badge>}
+                {flight.discount > 0 && <Badge variant="danger">সাশ্রয় {formatCurrency(flight.discount)}</Badge>}
               </div>
 
               <div className="text-xs text-muted-foreground space-y-1 mb-5 pt-4 border-t border-border">
-                <div className="flex justify-between"><span>Base fare</span><span>{formatCurrency(flight.price)}</span></div>
-                <div className="flex justify-between"><span>Taxes & fees</span><span>{formatCurrency(flight.taxes)}</span></div>
-                {flight.discount > 0 && <div className="flex justify-between text-emerald-700"><span>Discount</span><span>−{formatCurrency(flight.discount)}</span></div>}
+                <div className="flex justify-between"><span>মূল ভাড়া</span><span>{formatCurrency(flight.price)}</span></div>
+                <div className="flex justify-between"><span>কর ও ফি</span><span>{formatCurrency(flight.taxes)}</span></div>
+                {flight.discount > 0 && <div className="flex justify-between text-emerald-700"><span>ছাড়</span><span>−{formatCurrency(flight.discount)}</span></div>}
               </div>
 
               <div className="rounded-xl bg-muted/40 p-3 mb-5">
                 <div className="flex items-center justify-between text-xs mb-1.5">
-                  <span className="text-muted-foreground">Seats remaining</span>
+                  <span className="text-muted-foreground">অবশিষ্ট সিট</span>
                   <span className="font-semibold text-foreground">{flight.seatsAvailable} / {flight.seatsTotal}</span>
                 </div>
                 <div className="h-1.5 rounded-full bg-border overflow-hidden">
@@ -172,32 +172,32 @@ export function FlightDetail({ flight }: { flight: Flight }) {
 
               {flight.bookingStatus === 'soldout' ? (
                 <button disabled className="w-full bg-muted text-muted-foreground py-3 rounded-xl font-semibold text-sm cursor-not-allowed">
-                  Sold out — join waitlist
+                  বিক্রি শেষ — ওয়েটলিস্টে যুক্ত হোন
                 </button>
               ) : (
                 <button
                   onClick={handleAdd}
                   className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
                 >
-                  Add to booking <ArrowRight className="w-4 h-4" />
+                  বুকিংয়ে যুক্ত করুন <ArrowRight className="w-4 h-4" />
                 </button>
               )}
 
               <p className="text-[11px] text-muted-foreground text-center mt-3">
-                Independent flight or combine with hotel & transport.
+                আলাদা ফ্লাইট অথবা হোটেল ও পরিবহনের সাথে একত্রিত করুন।
               </p>
             </div>
 
             <div className="bg-card border border-border rounded-3xl p-6">
-              <h3 className="font-bold text-foreground mb-3 text-sm">Trusted by pilgrims</h3>
+              <h3 className="font-bold text-foreground mb-3 text-sm">হাজীদের বিশ্বস্ত</h3>
               <div className="flex items-center justify-between text-sm">
                 <div>
                   <p className="text-2xl font-bold text-foreground">{flight.rating}</p>
-                  <p className="text-xs text-muted-foreground">{flight.reviewsCount} reviews</p>
+                  <p className="text-xs text-muted-foreground">{flight.reviewsCount}টি রিভিউ</p>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold text-foreground">{flight.bookingsCount.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">past bookings</p>
+                  <p className="text-xs text-muted-foreground">পূর্ববর্তী বুকিং</p>
                 </div>
               </div>
             </div>

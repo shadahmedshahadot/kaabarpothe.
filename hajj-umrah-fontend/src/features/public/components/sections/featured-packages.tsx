@@ -17,9 +17,9 @@ export function FeaturedPackages() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
           <SectionHeading
-            eyebrow="Curated departures"
-            title="Packages chosen by pilgrims like you."
-            description="From budget Umrah to VIP Hajj — each package vetted by our scholar review board."
+            eyebrow="বাছাইকৃত প্রস্থান"
+            title="আপনার মতো হাজীদের পছন্দের প্যাকেজ।"
+            description="বাজেট উমরাহ থেকে ভিআইপি হজ্জ — প্রতিটি প্যাকেজ আমাদের আলেম পর্যালোচনা বোর্ড দ্বারা যাচাইকৃত।"
             align="left"
             className="!max-w-2xl !mx-0"
           />
@@ -34,7 +34,7 @@ export function FeaturedPackages() {
                 {tab === t && (
                   <motion.span layoutId="featured-tab" className="absolute inset-0 bg-muted rounded-lg" transition={{ type: 'spring', bounce: 0.2 }} />
                 )}
-                <span className="relative z-10">{t === 'all' ? 'All' : t === 'umrah' ? 'Umrah' : 'Hajj'}</span>
+                <span className="relative z-10">{t === 'all' ? 'সব' : t === 'umrah' ? 'উমরাহ' : 'হজ্জ'}</span>
               </button>
             ))}
           </div>
@@ -51,7 +51,7 @@ export function FeaturedPackages() {
             href="/packages/umrah"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-foreground text-background rounded-xl font-semibold hover:bg-primary transition-colors group"
           >
-            Browse all packages
+            সব প্যাকেজ দেখুন
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>

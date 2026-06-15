@@ -26,7 +26,7 @@ export function TransportCard({ transport, index = 0 }: { transport: Transport; 
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
         <div className="absolute top-4 left-4 flex gap-2">
-          {transport.featured && <Badge variant="default">Featured</Badge>}
+          {transport.featured && <Badge variant="default">ফিচার্ড</Badge>}
           <Badge variant="outline" className="bg-card/90">{typeLabel(transport.type)}</Badge>
         </div>
       </div>
@@ -41,7 +41,7 @@ export function TransportCard({ transport, index = 0 }: { transport: Transport; 
           </div>
           <div className="flex items-center gap-4">
             <span className="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-accent" /> {transport.travelDuration}</span>
-            <span className="inline-flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-secondary" /> up to {transport.capacity}</span>
+            <span className="inline-flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-secondary" /> {transport.capacity} পর্যন্ত</span>
             <span className="inline-flex items-center gap-1.5 capitalize"><Bus className="w-3.5 h-3.5 text-muted-foreground" /> {transport.vehicleType.replace('-', ' ')}</span>
           </div>
         </div>
@@ -56,7 +56,7 @@ export function TransportCard({ transport, index = 0 }: { transport: Transport; 
               href={`/transportation/${transport.slug}`}
               className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
-              View details <ArrowRight className="w-4 h-4" />
+              বিস্তারিত দেখুন <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

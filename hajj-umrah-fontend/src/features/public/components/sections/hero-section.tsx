@@ -80,16 +80,16 @@ export function Hero() {
               </div>
               <div className="grid grid-cols-3 gap-1 p-1">
                 <div className="px-4 py-2.5 rounded-xl bg-white/10">
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/70 mb-1"><Calendar className="w-3 h-3" /> Departure</div>
-                  <p className="text-sm font-semibold text-white truncate">Any month</p>
+                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/70 mb-1"><Calendar className="w-3 h-3" /> প্রস্থান</div>
+                  <p className="text-sm font-semibold text-white truncate">যেকোনো মাস</p>
                 </div>
                 <div className="px-4 py-2.5 rounded-xl bg-white/10">
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/70 mb-1"><Users2 className="w-3 h-3" /> Pilgrims</div>
-                  <p className="text-sm font-semibold text-white truncate">1-4 adults</p>
+                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/70 mb-1"><Users2 className="w-3 h-3" /> হাজী</div>
+                  <p className="text-sm font-semibold text-white truncate">১-৪ জন</p>
                 </div>
                 <div className="px-4 py-2.5 rounded-xl bg-white/10">
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/70 mb-1"><MapPin className="w-3 h-3" /> Tier</div>
-                  <p className="text-sm font-semibold text-white truncate">All</p>
+                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/70 mb-1"><MapPin className="w-3 h-3" /> ক্যাটাগরি</div>
+                  <p className="text-sm font-semibold text-white truncate">সব</p>
                 </div>
               </div>
               <Link
@@ -97,7 +97,7 @@ export function Hero() {
                 className="mt-2 inline-flex w-full items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-600 text-foreground py-3.5 rounded-xl font-bold shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-[1.01] transition-all group"
               >
                 <Search className="w-4 h-4" />
-                Explore {type === 'umrah' ? 'Umrah' : 'Hajj'} Packages
+                {type === 'umrah' ? 'উমরাহ' : 'হজ্জ'} প্যাকেজ দেখুন
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>

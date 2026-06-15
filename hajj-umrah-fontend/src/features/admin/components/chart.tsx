@@ -90,7 +90,7 @@ export function DonutChart({ data }: { data: Series[] }) {
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <p className="text-2xl font-bold text-foreground">{total.toLocaleString()}</p>
-        <p className="text-xs text-muted-foreground">Total</p>
+        <p className="text-xs text-muted-foreground">মোট</p>
       </div>
     </div>
   )

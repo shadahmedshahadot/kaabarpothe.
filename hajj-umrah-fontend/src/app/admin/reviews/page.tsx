@@ -7,13 +7,13 @@ import { testimonials } from '@/data/testimonials'
 export default function AdminReviewsPage() {
   return (
     <>
-      <PageTitle title="Reviews" description="Approve, reject, or feature pilgrim reviews before they appear publicly." />
+      <PageTitle title="রিভিউ" description="হাজীদের রিভিউ প্রকাশ্যে আসার আগে অনুমোদন, প্রত্যাখ্যান বা ফিচার করুন।" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <Stat label="Total reviews" value={testimonials.length} color="text-foreground" />
-        <Stat label="Pending" value={4} color="text-amber-600" />
-        <Stat label="Featured" value={testimonials.filter(t => t.featured).length} color="text-primary" />
-        <Stat label="Avg. rating" value="4.9" color="text-emerald-600" />
+        <Stat label="মোট রিভিউ" value={testimonials.length} color="text-foreground" />
+        <Stat label="অপেক্ষমাণ" value={4} color="text-amber-600" />
+        <Stat label="ফিচার্ড" value={testimonials.filter(t => t.featured).length} color="text-primary" />
+        <Stat label="গড় রেটিং" value="4.9" color="text-emerald-600" />
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4">
@@ -39,11 +39,11 @@ export default function AdminReviewsPage() {
             <p className="text-sm text-foreground/80 mb-4 line-clamp-3">{t.content}</p>
 
             <div className="flex items-center justify-between">
-              <Badge variant="success">Approved</Badge>
+              <Badge variant="success">অনুমোদিত</Badge>
               <div className="flex gap-1">
-                {t.featured && <button className="p-1.5 bg-primary/10 text-primary rounded-lg" title="Featured"><Award className="w-3.5 h-3.5" /></button>}
-                <button className="p-1.5 hover:bg-muted rounded-lg" title="Approve"><Check className="w-3.5 h-3.5 text-emerald-600" /></button>
-                <button className="p-1.5 hover:bg-muted rounded-lg" title="Reject"><X className="w-3.5 h-3.5 text-rose-600" /></button>
+                {t.featured && <button className="p-1.5 bg-primary/10 text-primary rounded-lg" title="ফিচার্ড"><Award className="w-3.5 h-3.5" /></button>}
+                <button className="p-1.5 hover:bg-muted rounded-lg" title="অনুমোদন"><Check className="w-3.5 h-3.5 text-emerald-600" /></button>
+                <button className="p-1.5 hover:bg-muted rounded-lg" title="প্রত্যাখ্যান"><X className="w-3.5 h-3.5 text-rose-600" /></button>
               </div>
             </div>
           </div>

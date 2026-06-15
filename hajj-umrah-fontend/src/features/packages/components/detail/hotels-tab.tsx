@@ -6,8 +6,8 @@ type Hotel = Package['hotelMakkah']
 
 export function HotelsTab({ pkg }: { pkg: Package }) {
   const hotels: { city: string; hotel: Hotel }[] = [
-    { city: 'Makkah', hotel: pkg.hotelMakkah },
-    { city: 'Madinah', hotel: pkg.hotelMadinah },
+    { city: 'মক্কা', hotel: pkg.hotelMakkah },
+    { city: 'মদিনা', hotel: pkg.hotelMadinah },
   ]
   return (
     <div className="grid md:grid-cols-2 gap-6">

@@ -15,18 +15,18 @@ export default function InstallmentsPage() {
   const paid = plan.filter(p => p.status === 'paid').reduce((s, p) => s + p.amount, 0)
   return (
     <>
-      <PageTitle title="Installment plan" description="Your scheduled payments for HJ-2026-1001." />
+      <PageTitle title="কিস্তি পরিকল্পনা" description="HJ-2026-1001 এর জন্য আপনার নির্ধারিত পেমেন্ট।" />
 
       {/* Progress */}
       <div className="bg-card border border-border rounded-2xl p-6 mb-6">
         <div className="flex items-center justify-between mb-3">
-          <p className="text-sm font-semibold text-foreground">Total progress</p>
+          <p className="text-sm font-semibold text-foreground">সামগ্রিক অগ্রগতি</p>
           <p className="text-sm text-muted-foreground">{formatCurrency(paid)} / {formatCurrency(total)}</p>
         </div>
         <div className="h-3 bg-muted rounded-full overflow-hidden">
           <div className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600" style={{ width: `${(paid / total) * 100}%` }} />
         </div>
-        <p className="text-xs text-emerald-700 mt-2 font-semibold">100% paid — Hajj Mubarak in advance! 🌙</p>
+        <p className="text-xs text-emerald-700 mt-2 font-semibold">১০০% পরিশোধিত — অগ্রিম হজ্জ মোবারক! 🌙</p>
       </div>
 
       <div className="space-y-3">
@@ -36,8 +36,8 @@ export default function InstallmentsPage() {
               {p.status === 'paid' ? <CheckCircle2 className="w-6 h-6" /> : <Clock className="w-6 h-6" />}
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-foreground">Installment {p.num} of {plan.length}</p>
-              <p className="text-xs text-muted-foreground">Due {p.date}</p>
+              <p className="font-semibold text-foreground">কিস্তি {p.num} / {plan.length}</p>
+              <p className="text-xs text-muted-foreground">নির্ধারিত তারিখ {p.date}</p>
             </div>
             <div className="text-right">
               <p className="font-bold text-foreground text-lg">{formatCurrency(p.amount)}</p>

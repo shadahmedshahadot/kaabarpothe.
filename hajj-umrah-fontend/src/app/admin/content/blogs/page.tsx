@@ -12,21 +12,21 @@ export default function AdminBlogsPage() {
   return (
     <>
       <PageTitle
-        title="Blog articles"
-        description={`${blogs.length} articles · ${blogs.filter(b => b.featured).length} featured`}
+        title="ব্লগ নিবন্ধ"
+        description={`${blogs.length} নিবন্ধ · ${blogs.filter(b => b.featured).length} ফিচার্ড`}
         action={
           <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary transition-colors">
-            <Plus className="w-4 h-4" /> New article
+            <Plus className="w-4 h-4" /> নতুন নিবন্ধ
           </button>
         }
       />
       <DataTable
         data={blogs}
-        searchPlaceholder="Search articles…"
+        searchPlaceholder="নিবন্ধ অনুসন্ধান…"
         columns={[
           {
             key: 'post',
-            label: 'Article',
+            label: 'নিবন্ধ',
             render: b => (
               <div className="flex items-center gap-3 min-w-0">
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${b.cover} flex-shrink-0`} />
@@ -37,12 +37,12 @@ export default function AdminBlogsPage() {
               </div>
             ),
           },
-          { key: 'cat', label: 'Category', render: b => <Badge variant="outline">{b.category}</Badge> },
-          { key: 'author', label: 'Author', render: b => <span className="text-sm text-foreground/80">{b.author}</span> },
-          { key: 'read', label: 'Read time', render: b => <span className="text-sm text-muted-foreground inline-flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {b.readTime}m</span> },
-          { key: 'views', label: 'Views', render: b => <span className="font-medium text-foreground">{formatNumber(b.views)}</span> },
-          { key: 'date', label: 'Published', render: b => <span className="text-sm text-muted-foreground">{formatDate(b.publishedDate)}</span> },
-          { key: 'status', label: 'Status', render: b => <Badge variant={b.featured ? 'default' : 'success'}>{b.featured ? 'Featured' : 'Published'}</Badge> },
+          { key: 'cat', label: 'ক্যাটাগরি', render: b => <Badge variant="outline">{b.category}</Badge> },
+          { key: 'author', label: 'লেখক', render: b => <span className="text-sm text-foreground/80">{b.author}</span> },
+          { key: 'read', label: 'পঠনের সময়', render: b => <span className="text-sm text-muted-foreground inline-flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {b.readTime}মি</span> },
+          { key: 'views', label: 'ভিউ', render: b => <span className="font-medium text-foreground">{formatNumber(b.views)}</span> },
+          { key: 'date', label: 'প্রকাশিত', render: b => <span className="text-sm text-muted-foreground">{formatDate(b.publishedDate)}</span> },
+          { key: 'status', label: 'অবস্থা', render: b => <Badge variant={b.featured ? 'default' : 'success'}>{b.featured ? 'ফিচার্ড' : 'প্রকাশিত'}</Badge> },
           {
             key: 'actions',
             label: '',

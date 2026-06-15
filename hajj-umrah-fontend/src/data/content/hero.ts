@@ -26,33 +26,33 @@ export interface HeroContent {
 
 export const DEFAULT_HERO_CONTENT: HeroContent = {
   videoId: 'weCvgHcbdP4',
-  badge: 'Sacred journeys, perfected since 2015',
-  titleStart: 'Your sacred journey,',
-  titleHighlight: 'designed for grace.',
+  badge: '২০১৫ সাল থেকে পবিত্র যাত্রায় পরিপূর্ণতা',
+  titleStart: 'আপনার পবিত্র যাত্রা,',
+  titleHighlight: 'মর্যাদার সাথে সাজানো।',
   description:
-    'Curated Hajj & Umrah packages led by qualified scholars, with transparent pricing, 5-star partners, and 24/7 ground support. Trusted by 50,000+ pilgrims worldwide.',
-  ctaUmrah: 'Find Umrah',
-  ctaHajj: 'Find Hajj',
+    'যোগ্য আলেমদের পরিচালনায় বাছাইকৃত হজ্জ ও উমরাহ প্যাকেজ। স্বচ্ছ মূল্য, ৫-তারকা অংশীদার এবং ২৪/৭ সরাসরি সহায়তা। বিশ্বব্যাপী ৫০,০০০+ হাজী দ্বারা বিশ্বস্ত।',
+  ctaUmrah: 'উমরাহ খুঁজুন',
+  ctaHajj: 'হজ্জ খুঁজুন',
   trustBadges: [
-    'Saudi Ministry Licensed',
-    '4.9/5 (12K+ reviews)',
-    'Free cancellation 60+ days',
+    'সৌদি মন্ত্রণালয় লাইসেন্সপ্রাপ্ত',
+    '৪.৯/৫ (১২ হাজার+ রিভিউ)',
+    '৬০+ দিন আগে বাতিল বিনামূল্যে',
   ],
-  reflectionEyebrow: "Today's reflection",
+  reflectionEyebrow: 'আজকের প্রতিফলন',
   reflectionQuote:
-    '"And proclaim to mankind the Hajj. They will come to thee on foot and on every lean camel, from every deep ravine."',
-  reflectionRef: "— Qur'an 22:27",
+    '"আর তুমি মানুষের প্রতি হজ্জের ঘোষণা দাও, তারা তোমার কাছে আসবে পায়ে হেঁটে এবং প্রতিটি ক্ষীণকায় উটের পিঠে চড়ে, দূর-দূরান্তের পথ পেরিয়ে।"',
+  reflectionRef: '— আল-কুরআন ২২:২৭',
   reflectionItems: [
-    { label: 'Hajj 2026', value: 'May 19' },
-    { label: 'Umrah', value: 'Year-round' },
-    { label: 'Visa SLA', value: '7-14 days' },
+    { label: 'হজ্জ ২০২৬', value: '১৯ মে' },
+    { label: 'উমরাহ', value: 'সারা বছর' },
+    { label: 'ভিসা সময়', value: '৭-১৪ দিন' },
   ],
   stats: [
-    { value: 50000, suffix: '+', label: 'Pilgrims Served' },
-    { value: 1000, suffix: '+', label: 'Departures / Year' },
-    { value: 4.9, decimals: 1, suffix: '/5', label: 'Avg. Rating' },
-    { value: 100, suffix: '%', label: 'Saudi Licensed' },
+    { value: 50000, suffix: '+', label: 'হাজী সেবা প্রদান' },
+    { value: 1000, suffix: '+', label: 'প্রতি বছর প্রস্থান' },
+    { value: 4.9, decimals: 1, suffix: '/5', label: 'গড় রেটিং' },
+    { value: 100, suffix: '%', label: 'সৌদি লাইসেন্সপ্রাপ্ত' },
   ],
 }
 
-export const HERO_STORAGE_KEY = 'sakinah:hero-content:v1'
+export const HERO_STORAGE_KEY = 'sakinah:hero-content:v2-bn'

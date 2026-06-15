@@ -14,35 +14,35 @@ export default function AdminPaymentsPage() {
 
   return (
     <>
-      <PageTitle title="Payments" description="All transactions across bookings, refunds, and installments." />
+      <PageTitle title="পেমেন্ট" description="বুকিং, রিফান্ড এবং কিস্তির সমস্ত লেনদেন।" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <PayStat label="Total received" value={formatCurrency(total)} color="text-emerald-600" Icon={Wallet} />
-        <PayStat label="Pending" value={formatCurrency(pending)} color="text-amber-600" Icon={RefreshCw} />
-        <PayStat label="Refunded" value={formatCurrency(0)} color="text-sky-600" Icon={RefreshCw} />
-        <PayStat label="Failed" value={failed.toString()} color="text-rose-600" Icon={AlertTriangle} />
+        <PayStat label="মোট প্রাপ্ত" value={formatCurrency(total)} color="text-emerald-600" Icon={Wallet} />
+        <PayStat label="অপেক্ষমাণ" value={formatCurrency(pending)} color="text-amber-600" Icon={RefreshCw} />
+        <PayStat label="ফেরত দেওয়া" value={formatCurrency(0)} color="text-sky-600" Icon={RefreshCw} />
+        <PayStat label="ব্যর্থ" value={failed.toString()} color="text-rose-600" Icon={AlertTriangle} />
       </div>
 
       <DataTable
         data={payments}
-        searchPlaceholder="Search transactions…"
+        searchPlaceholder="লেনদেন অনুসন্ধান…"
         columns={[
-          { key: 'tx', label: 'Transaction', render: p => (
+          { key: 'tx', label: 'লেনদেন', render: p => (
             <div>
               <p className="font-mono text-xs font-semibold text-foreground">{p.transactionId}</p>
               <p className="text-xs text-muted-foreground">{formatDate(p.date)} {new Date(p.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
             </div>
           )},
-          { key: 'pilgrim', label: 'Pilgrim', render: p => <span className="font-medium text-foreground">{p.pilgrimName}</span> },
-          { key: 'booking', label: 'Booking', render: p => <span className="text-xs font-mono text-muted-foreground">{p.bookingCode}</span> },
-          { key: 'method', label: 'Method', render: p => (
+          { key: 'pilgrim', label: 'হাজী', render: p => <span className="font-medium text-foreground">{p.pilgrimName}</span> },
+          { key: 'booking', label: 'বুকিং', render: p => <span className="text-xs font-mono text-muted-foreground">{p.bookingCode}</span> },
+          { key: 'method', label: 'পদ্ধতি', render: p => (
             <Badge variant="outline" className="capitalize">
               <CreditCard className="w-3 h-3" /> {p.method.replace('-', ' ')}
             </Badge>
           )},
-          { key: 'installment', label: 'Installment', render: p => p.installmentNumber ? <span className="text-sm text-foreground">{p.installmentNumber}/{p.installmentsTotal}</span> : <span className="text-muted-foreground text-xs">Full</span> },
-          { key: 'amount', label: 'Amount', render: p => <span className="font-bold text-foreground">{formatCurrency(p.amount)}</span> },
-          { key: 'status', label: 'Status', render: p => (
+          { key: 'installment', label: 'কিস্তি', render: p => p.installmentNumber ? <span className="text-sm text-foreground">{p.installmentNumber}/{p.installmentsTotal}</span> : <span className="text-muted-foreground text-xs">পূর্ণ</span> },
+          { key: 'amount', label: 'পরিমাণ', render: p => <span className="font-bold text-foreground">{formatCurrency(p.amount)}</span> },
+          { key: 'status', label: 'অবস্থা', render: p => (
             <Badge variant={p.status === 'completed' ? 'success' : p.status === 'pending' ? 'warning' : p.status === 'failed' ? 'danger' : 'info'}>{p.status}</Badge>
           )},
         ]}

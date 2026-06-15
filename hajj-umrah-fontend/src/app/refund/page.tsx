@@ -1,26 +1,26 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/common/legal-page'
 
-export const metadata: Metadata = { title: 'Refund Policy | Sakinah Travels' }
+export const metadata: Metadata = { title: 'রিফান্ড নীতি | সাকিনাহ ট্রাভেলস' }
 
 export default function RefundPolicyPage() {
   return (
     <LegalPage
-      eyebrow="Legal"
-      title="Refund Policy"
-      description="Clear, predictable refund terms based on how far out you cancel. We want you to book with confidence."
-      effectiveDate="January 1, 2026"
+      eyebrow="আইনি"
+      title="রিফান্ড নীতি"
+      description="আপনি কত দিন আগে বাতিল করেন তার উপর ভিত্তি করে স্পষ্ট, পূর্বানুমেয় রিফান্ড শর্তাবলী। আমরা চাই আপনি আত্মবিশ্বাসের সাথে বুকিং করুন।"
+      effectiveDate="১ জানুয়ারি, ২০২৬"
       sections={[
-        { heading: 'Cancellation schedule', body: ['60+ days before departure: 100% refund (minus $50 processing fee)', '30-59 days before departure: 75% refund', '15-29 days before departure: 50% refund', '8-14 days before departure: 25% refund', '0-7 days before departure: No refund'] },
-        { heading: 'Visa denial', body: 'If your visa is denied through no fault of yours (incorrect submission etc.), we refund 100% of the package cost minus actual administrative fees (typically $150). This applies only to legitimate visa denials documented by Saudi authorities.' },
-        { heading: 'Medical emergencies', body: ['Documented life-threatening medical emergencies (you or immediate family) qualify for 75% refund regardless of timing', 'Requires a physician\'s letter and hospital documentation', 'Travel insurance (mandatory and included) covers the remaining 25% in most cases', 'Submit documentation within 14 days of the event'] },
-        { heading: 'Death of a pilgrim', body: 'In the event of the pilgrim\'s death before departure, we provide a 90% refund to the estate. Documentation required: death certificate and proof of relationship.' },
-        { heading: 'Sakinah-initiated cancellations', body: 'If we cancel your booking due to insufficient group size, package modifications, or operational issues, you receive 100% refund or the option to transfer to another departure of equivalent value at no extra cost.' },
-        { heading: 'Force majeure', body: 'For cancellations due to events beyond our control (pandemic, war, natural disaster, government restrictions), we provide credit toward a future booking valid for 24 months, OR a refund minus non-recoverable third-party costs (already-paid hotel deposits, non-refundable flights).' },
-        { heading: 'How to request a refund', body: ['Log into your pilgrim dashboard at sakinah.travel/pilgrim', 'Click "Cancel Booking" on the relevant booking', 'Choose cancellation reason and upload supporting documents', 'Refund is processed within 5-10 business days to your original payment method', 'For complex cases, email refunds@sakinah.travel'] },
-        { heading: 'Processing time', body: 'Credit card refunds: 5-10 business days. Bank transfer refunds: 7-14 business days. PayPal refunds: 1-3 business days.' },
-        { heading: 'Non-refundable items', body: ['Visa fees once submitted and approved', 'Travel insurance premium', '$50 administrative processing fee on any cancellation', 'Optional add-ons consumed (premium kits, etc.)'] },
-        { heading: 'Disputes', body: 'If you disagree with a refund decision, you may escalate to our resolution team at disputes@sakinah.travel. Disputes unresolved within 30 days may be referred to AAA arbitration per our Terms.' },
+        { heading: 'বাতিলকরণ সময়সূচি', body: ['যাত্রার ৬০+ দিন আগে: ১০০% রিফান্ড ($৫০ প্রক্রিয়াকরণ ফি বাদে)', 'যাত্রার ৩০-৫৯ দিন আগে: ৭৫% রিফান্ড', 'যাত্রার ১৫-২৯ দিন আগে: ৫০% রিফান্ড', 'যাত্রার ৮-১৪ দিন আগে: ২৫% রিফান্ড', 'যাত্রার ০-৭ দিন আগে: কোনো রিফান্ড নেই'] },
+        { heading: 'ভিসা প্রত্যাখ্যান', body: 'যদি আপনার ভিসা আপনার কোনো দোষ ছাড়াই প্রত্যাখ্যাত হয় (ভুল জমাদান ইত্যাদি), আমরা প্যাকেজ খরচের ১০০% রিফান্ড করি প্রকৃত প্রশাসনিক ফি বাদে (সাধারণত $১৫০)। এটি শুধুমাত্র সৌদি কর্তৃপক্ষ দ্বারা ডকুমেন্টেড বৈধ ভিসা প্রত্যাখ্যানের ক্ষেত্রে প্রযোজ্য।' },
+        { heading: 'চিকিৎসা জরুরি অবস্থা', body: ['ডকুমেন্টেড জীবন-হুমকিস্বরূপ চিকিৎসা জরুরি অবস্থা (আপনি বা নিকটাত্মীয়) সময় নির্বিশেষে ৭৫% রিফান্ডের জন্য যোগ্য', 'চিকিৎসকের চিঠি এবং হাসপাতালের ডকুমেন্টেশন প্রয়োজন', 'ভ্রমণ বীমা (বাধ্যতামূলক এবং অন্তর্ভুক্ত) বেশিরভাগ ক্ষেত্রে অবশিষ্ট ২৫% কভার করে', 'ঘটনার ১৪ দিনের মধ্যে ডকুমেন্টেশন জমা দিন'] },
+        { heading: 'হাজীর মৃত্যু', body: 'যাত্রার আগে হাজীর মৃত্যুর ঘটনায়, আমরা এস্টেটকে ৯০% রিফান্ড প্রদান করি। প্রয়োজনীয় ডকুমেন্টেশন: মৃত্যু সনদপত্র এবং সম্পর্কের প্রমাণ।' },
+        { heading: 'সাকিনাহ-উদ্যোগী বাতিলকরণ', body: 'যদি অপর্যাপ্ত গ্রুপ আকার, প্যাকেজ পরিবর্তন, বা পরিচালনাগত সমস্যার কারণে আমরা আপনার বুকিং বাতিল করি, আপনি ১০০% রিফান্ড বা অতিরিক্ত খরচ ছাড়াই সমতুল্য মূল্যের অন্য একটি যাত্রায় স্থানান্তরের বিকল্প পান।' },
+        { heading: 'অপ্রতিরোধ্য ঘটনা', body: 'আমাদের নিয়ন্ত্রণের বাইরের ঘটনার কারণে বাতিলকরণের জন্য (মহামারী, যুদ্ধ, প্রাকৃতিক দুর্যোগ, সরকারি বিধিনিষেধ), আমরা ২৪ মাসের জন্য বৈধ ভবিষ্যৎ বুকিংয়ের জন্য ক্রেডিট প্রদান করি, অথবা অপুনরুদ্ধারযোগ্য তৃতীয় পক্ষের খরচ বাদে রিফান্ড (ইতোমধ্যে পরিশোধিত হোটেল ডিপোজিট, অ-ফেরতযোগ্য ফ্লাইট)।' },
+        { heading: 'কীভাবে রিফান্ডের অনুরোধ করবেন', body: ['sakinah.travel/pilgrim এ আপনার হাজী ড্যাশবোর্ডে লগ ইন করুন', 'সংশ্লিষ্ট বুকিংয়ে "বুকিং বাতিল করুন" এ ক্লিক করুন', 'বাতিলকরণের কারণ নির্বাচন করুন এবং সহায়ক ডকুমেন্ট আপলোড করুন', 'রিফান্ড আপনার মূল পেমেন্ট পদ্ধতিতে ৫-১০ কার্যদিবসের মধ্যে প্রক্রিয়া করা হয়', 'জটিল ক্ষেত্রের জন্য, refunds@sakinah.travel এ ইমেইল করুন'] },
+        { heading: 'প্রক্রিয়াকরণ সময়', body: 'ক্রেডিট কার্ড রিফান্ড: ৫-১০ কার্যদিবস। ব্যাংক ট্রান্সফার রিফান্ড: ৭-১৪ কার্যদিবস। PayPal রিফান্ড: ১-৩ কার্যদিবস।' },
+        { heading: 'অ-ফেরতযোগ্য আইটেম', body: ['ভিসা ফি জমা দেওয়া এবং অনুমোদনের পরে', 'ভ্রমণ বীমা প্রিমিয়াম', 'যেকোনো বাতিলকরণে $৫০ প্রশাসনিক প্রক্রিয়াকরণ ফি', 'ব্যবহৃত ঐচ্ছিক অ্যাড-অন (প্রিমিয়াম কিট, ইত্যাদি)'] },
+        { heading: 'বিরোধ', body: 'যদি আপনি রিফান্ড সিদ্ধান্তের সাথে অসম্মত হন, আপনি disputes@sakinah.travel এ আমাদের সমাধান দলের কাছে এসকেলেট করতে পারেন। ৩০ দিনের মধ্যে অসমাধানকৃত বিরোধ আমাদের শর্তাবলী অনুযায়ী AAA সালিশের কাছে রেফার করা হতে পারে।' },
       ]}
     />
   )

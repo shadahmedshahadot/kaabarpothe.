@@ -3,19 +3,19 @@ import { PageTitle } from '@/components/layouts/dashboard-shell'
 import { Input, Label, Textarea, Select } from '@/components/ui/input'
 
 const tabs = [
-  { Icon: Building, label: 'Company' },
-  { Icon: Globe, label: 'SEO' },
-  { Icon: Mail, label: 'Email' },
-  { Icon: Bell, label: 'Notifications' },
-  { Icon: CreditCard, label: 'Payments' },
-  { Icon: Code, label: 'Integrations' },
-  { Icon: Shield, label: 'Security' },
+  { Icon: Building, label: 'কোম্পানি' },
+  { Icon: Globe, label: 'এসইও' },
+  { Icon: Mail, label: 'ইমেইল' },
+  { Icon: Bell, label: 'নোটিফিকেশন' },
+  { Icon: CreditCard, label: 'পেমেন্ট' },
+  { Icon: Code, label: 'ইন্টিগ্রেশন' },
+  { Icon: Shield, label: 'নিরাপত্তা' },
 ]
 
 export default function AdminSettingsPage() {
   return (
     <>
-      <PageTitle title="Settings" description="Configure your platform's core behavior, branding, and integrations." />
+      <PageTitle title="সেটিংস" description="আপনার প্ল্যাটফর্মের মূল আচরণ, ব্র্যান্ডিং এবং ইন্টিগ্রেশন কনফিগার করুন।" />
 
       <div className="grid lg:grid-cols-4 gap-6">
         <div className="lg:col-span-1">
@@ -30,32 +30,32 @@ export default function AdminSettingsPage() {
 
         <div className="lg:col-span-3 space-y-6">
           <div className="bg-card border border-border rounded-2xl p-8">
-            <h3 className="font-bold text-foreground mb-1">Company information</h3>
-            <p className="text-sm text-muted-foreground mb-6">Displayed on invoices, footer, and legal pages.</p>
+            <h3 className="font-bold text-foreground mb-1">কোম্পানির তথ্য</h3>
+            <p className="text-sm text-muted-foreground mb-6">ইনভয়েস, ফুটার এবং আইনি পেজে প্রদর্শিত।</p>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label>Company name</Label>
-                <Input defaultValue="Sakinah Travels" />
+                <Label>কোম্পানির নাম</Label>
+                <Input defaultValue="সাকিনাহ ট্রাভেলস" />
               </div>
               <div>
-                <Label>Tagline</Label>
-                <Input defaultValue="Hajj & Umrah Platform" />
+                <Label>ট্যাগলাইন</Label>
+                <Input defaultValue="হজ্জ ও উমরাহ প্ল্যাটফর্ম" />
               </div>
               <div>
-                <Label>Email</Label>
+                <Label>ইমেইল</Label>
                 <Input defaultValue="hello@sakinah.travel" />
               </div>
               <div>
-                <Label>Phone</Label>
+                <Label>ফোন</Label>
                 <Input defaultValue="+1 (800) 555-1234" />
               </div>
               <div className="sm:col-span-2">
-                <Label>Address</Label>
+                <Label>ঠিকানা</Label>
                 <Textarea rows={2} defaultValue="500 Madison Ave, Floor 42, New York, NY 10022, USA" />
               </div>
               <div>
-                <Label>Currency</Label>
+                <Label>মুদ্রা</Label>
                 <Select defaultValue="USD">
                   <option value="USD">USD ($)</option>
                   <option value="GBP">GBP (£)</option>
@@ -63,7 +63,7 @@ export default function AdminSettingsPage() {
                 </Select>
               </div>
               <div>
-                <Label>Time zone</Label>
+                <Label>সময় অঞ্চল</Label>
                 <Select defaultValue="America/New_York">
                   <option>America/New_York</option>
                   <option>Europe/London</option>
@@ -73,25 +73,25 @@ export default function AdminSettingsPage() {
             </div>
 
             <div className="mt-6 flex justify-end gap-2">
-              <button className="px-4 py-2 border border-border rounded-xl text-sm font-semibold hover:bg-muted">Cancel</button>
-              <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold hover:bg-primary">Save changes</button>
+              <button className="px-4 py-2 border border-border rounded-xl text-sm font-semibold hover:bg-muted">বাতিল</button>
+              <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold hover:bg-primary">পরিবর্তন সংরক্ষণ করুন</button>
             </div>
           </div>
 
           <div className="bg-card border border-border rounded-2xl p-8">
-            <h3 className="font-bold text-foreground mb-1">SEO defaults</h3>
-            <p className="text-sm text-muted-foreground mb-6">Used on pages without specific metadata.</p>
+            <h3 className="font-bold text-foreground mb-1">এসইও ডিফল্ট</h3>
+            <p className="text-sm text-muted-foreground mb-6">নির্দিষ্ট মেটাডেটা ছাড়া পেজগুলিতে ব্যবহৃত।</p>
             <div className="space-y-4">
               <div>
-                <Label>Default page title</Label>
-                <Input defaultValue="Sakinah Travels — Hajj & Umrah Platform" />
+                <Label>ডিফল্ট পেজ শিরোনাম</Label>
+                <Input defaultValue="সাকিনাহ ট্রাভেলস — হজ্জ ও উমরাহ প্ল্যাটফর্ম" />
               </div>
               <div>
-                <Label>Default meta description</Label>
-                <Textarea rows={2} defaultValue="Premium Hajj and Umrah packages. Trusted by 50,000+ pilgrims worldwide." />
+                <Label>ডিফল্ট মেটা বিবরণ</Label>
+                <Textarea rows={2} defaultValue="প্রিমিয়াম হজ্জ ও উমরাহ প্যাকেজ। বিশ্বব্যাপী ৫০,০০০+ হাজী দ্বারা বিশ্বস্ত।" />
               </div>
               <div>
-                <Label>Open Graph image URL</Label>
+                <Label>ওপেন গ্রাফ ছবির URL</Label>
                 <Input defaultValue="/og-default.png" />
               </div>
             </div>

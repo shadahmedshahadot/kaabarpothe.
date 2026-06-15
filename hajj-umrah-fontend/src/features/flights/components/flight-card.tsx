@@ -33,9 +33,9 @@ export function FlightCard({ flight, index = 0 }: { flight: Flight; index?: numb
             </div>
           </div>
           <div className="flex flex-col items-end gap-1.5">
-            {flight.featured && <Badge variant="default">Featured</Badge>}
+            {flight.featured && <Badge variant="default">বৈশিষ্ট্যযুক্ত</Badge>}
             <Badge variant={nonStop ? 'success' : 'outline'} className="capitalize">
-              {nonStop ? 'Non-stop' : `${flight.transits.length} stop`}
+              {nonStop ? 'সরাসরি' : `${flight.transits.length}টি স্টপ`}
             </Badge>
           </div>
         </div>
@@ -64,7 +64,7 @@ export function FlightCard({ flight, index = 0 }: { flight: Flight; index?: numb
 
         <div className="flex flex-wrap gap-3 text-xs text-foreground/70 mb-5 pb-5 border-b border-border">
           <span className="inline-flex items-center gap-1.5"><Briefcase className="w-3.5 h-3.5 text-primary" /> {flight.baggageAllowance.split('+')[0].trim()}</span>
-          <span className="inline-flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-accent" /> {flight.seatsAvailable} seats</span>
+          <span className="inline-flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-accent" /> {flight.seatsAvailable}টি সিট</span>
           <span className="capitalize inline-flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-secondary" /> {flight.cabinClass.replace('-', ' ')}
           </span>
@@ -74,14 +74,14 @@ export function FlightCard({ flight, index = 0 }: { flight: Flight; index?: numb
           <div>
             {flight.discount > 0 && <p className="text-xs text-muted-foreground line-through">{formatCurrency(flight.price + flight.taxes)}</p>}
             <p className="text-2xl font-bold text-foreground">{formatCurrency(total)}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Per passenger</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">জন প্রতি</p>
           </div>
           <motion.div whileHover={{ scale: 1.04, x: 2 }} whileTap={{ scale: 0.96 }}>
             <Link
               href={ROUTES.flights.detail(flight.slug)}
               className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
-              Select flight
+              ফ্লাইট নির্বাচন করুন
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>

@@ -7,7 +7,7 @@ export default function PilgrimBookingsPage() {
   const my = bookings.filter(b => b.pilgrimId === 'p-001')
   return (
     <>
-      <PageTitle title="My bookings" description="All your past and upcoming pilgrimages." />
+      <PageTitle title="আমার বুকিং" description="আপনার পূর্বের ও আসন্ন সকল হজ্জ-উমরাহ।" />
 
       <div className="space-y-4">
         {my.map(b => (
@@ -26,16 +26,16 @@ export default function PilgrimBookingsPage() {
               </div>
 
               <div className="md:col-span-2 p-6 grid sm:grid-cols-3 gap-4">
-                <Info label="Status" value={<Badge variant={b.status === 'confirmed' ? 'success' : b.status === 'completed' ? 'info' : 'warning'}>{b.status}</Badge>} />
-                <Info label="Visa" value={<Badge variant={b.visaStatus === 'approved' ? 'success' : 'warning'}>{b.visaStatus}</Badge>} />
-                <Info label="Payment" value={<Badge variant={b.paymentStatus === 'paid' ? 'success' : 'warning'}>{b.paymentStatus}</Badge>} />
-                <Info label="Total" value={<span className="font-bold text-foreground text-lg">{formatCurrency(b.totalAmount)}</span>} />
-                <Info label="Paid" value={<span className="font-bold text-emerald-600 text-lg">{formatCurrency(b.paidAmount)}</span>} />
-                <Info label="Pilgrims" value={<span className="font-semibold text-foreground">{b.pilgrimsCount}</span>} />
+                <Info label="অবস্থা" value={<Badge variant={b.status === 'confirmed' ? 'success' : b.status === 'completed' ? 'info' : 'warning'}>{b.status}</Badge>} />
+                <Info label="ভিসা" value={<Badge variant={b.visaStatus === 'approved' ? 'success' : 'warning'}>{b.visaStatus}</Badge>} />
+                <Info label="পেমেন্ট" value={<Badge variant={b.paymentStatus === 'paid' ? 'success' : 'warning'}>{b.paymentStatus}</Badge>} />
+                <Info label="মোট" value={<span className="font-bold text-foreground text-lg">{formatCurrency(b.totalAmount)}</span>} />
+                <Info label="পরিশোধিত" value={<span className="font-bold text-emerald-600 text-lg">{formatCurrency(b.paidAmount)}</span>} />
+                <Info label="হাজী সংখ্যা" value={<span className="font-semibold text-foreground">{b.pilgrimsCount}</span>} />
                 <div className="sm:col-span-3 flex flex-wrap gap-2 mt-2 pt-4 border-t border-border">
-                  <button className="text-sm bg-foreground text-background px-4 py-2 rounded-xl font-semibold hover:bg-primary">View details</button>
-                  <button className="text-sm border border-border px-4 py-2 rounded-xl font-semibold hover:bg-muted">Download invoice</button>
-                  <button className="text-sm border border-border px-4 py-2 rounded-xl font-semibold hover:bg-muted">View itinerary</button>
+                  <button className="text-sm bg-foreground text-background px-4 py-2 rounded-xl font-semibold hover:bg-primary">বিস্তারিত দেখুন</button>
+                  <button className="text-sm border border-border px-4 py-2 rounded-xl font-semibold hover:bg-muted">ইনভয়েস ডাউনলোড</button>
+                  <button className="text-sm border border-border px-4 py-2 rounded-xl font-semibold hover:bg-muted">ভ্রমণসূচি দেখুন</button>
                 </div>
               </div>
             </div>

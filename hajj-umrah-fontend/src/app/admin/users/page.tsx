@@ -3,34 +3,34 @@ import { PageTitle } from '@/components/layouts/dashboard-shell'
 import { Badge } from '@/components/ui/badge'
 
 const users = [
-  { id: 'u1', name: 'Imam Yusuf Khalil', email: 'yusuf@sakinah.travel', role: 'Super Admin', avatar: 'from-amber-400 to-orange-500', lastActive: 'Now' },
-  { id: 'u2', name: 'Sister Amina Khalil', email: 'amina@sakinah.travel', role: 'Admin', avatar: 'from-rose-400 to-pink-500', lastActive: '5 min ago' },
-  { id: 'u3', name: 'Brother Hamza Khalil', email: 'hamza@sakinah.travel', role: 'Admin', avatar: 'from-emerald-400 to-teal-500', lastActive: '1 hour ago' },
-  { id: 'u4', name: 'Aisha Bint Mansur', email: 'aisha@sakinah.travel', role: 'Content Manager', avatar: 'from-violet-400 to-purple-500', lastActive: '2 hours ago' },
-  { id: 'u5', name: 'Khalid Al-Rashid', email: 'khalid@sakinah.travel', role: 'Finance Manager', avatar: 'from-blue-400 to-indigo-500', lastActive: 'Yesterday' },
-  { id: 'u6', name: 'Maryam Tariq', email: 'maryam@sakinah.travel', role: 'Operations Manager', avatar: 'from-cyan-400 to-sky-500', lastActive: '3 days ago' },
+  { id: 'u1', name: 'ইমাম ইউসুফ খলিল', email: 'yusuf@sakinah.travel', role: 'সুপার অ্যাডমিন', avatar: 'from-amber-400 to-orange-500', lastActive: 'এখন' },
+  { id: 'u2', name: 'সিস্টার আমিনা খলিল', email: 'amina@sakinah.travel', role: 'অ্যাডমিন', avatar: 'from-rose-400 to-pink-500', lastActive: '৫ মিনিট আগে' },
+  { id: 'u3', name: 'ব্রাদার হামজা খলিল', email: 'hamza@sakinah.travel', role: 'অ্যাডমিন', avatar: 'from-emerald-400 to-teal-500', lastActive: '১ ঘণ্টা আগে' },
+  { id: 'u4', name: 'আয়িশা বিনতে মনসুর', email: 'aisha@sakinah.travel', role: 'কনটেন্ট ম্যানেজার', avatar: 'from-violet-400 to-purple-500', lastActive: '২ ঘণ্টা আগে' },
+  { id: 'u5', name: 'খালিদ আল-রাশিদ', email: 'khalid@sakinah.travel', role: 'ফিন্যান্স ম্যানেজার', avatar: 'from-blue-400 to-indigo-500', lastActive: 'গতকাল' },
+  { id: 'u6', name: 'মরিয়ম তারিক', email: 'maryam@sakinah.travel', role: 'অপারেশনস ম্যানেজার', avatar: 'from-cyan-400 to-sky-500', lastActive: '৩ দিন আগে' },
 ]
 
 const roles = [
-  { name: 'Super Admin', count: 1, permissions: 'Full system access · Cannot be deleted', color: 'rose' },
-  { name: 'Admin', count: 2, permissions: 'All except billing and role management', color: 'amber' },
-  { name: 'Content Manager', count: 1, permissions: 'Packages, blogs, FAQs, media library', color: 'violet' },
-  { name: 'Finance Manager', count: 1, permissions: 'Payments, refunds, financial reports', color: 'blue' },
-  { name: 'Operations Manager', count: 1, permissions: 'Bookings, pilgrims, group leaders, logistics', color: 'cyan' },
+  { name: 'সুপার অ্যাডমিন', count: 1, permissions: 'সম্পূর্ণ সিস্টেম অ্যাক্সেস · মুছে ফেলা যাবে না', color: 'rose' },
+  { name: 'অ্যাডমিন', count: 2, permissions: 'বিলিং ও রোল ব্যবস্থাপনা ছাড়া সবকিছু', color: 'amber' },
+  { name: 'কনটেন্ট ম্যানেজার', count: 1, permissions: 'প্যাকেজ, ব্লগ, প্রশ্নোত্তর, মিডিয়া লাইব্রেরি', color: 'violet' },
+  { name: 'ফিন্যান্স ম্যানেজার', count: 1, permissions: 'পেমেন্ট, রিফান্ড, আর্থিক রিপোর্ট', color: 'blue' },
+  { name: 'অপারেশনস ম্যানেজার', count: 1, permissions: 'বুকিং, হাজী, গ্রুপ লিডার, লজিস্টিকস', color: 'cyan' },
 ]
 
 export default function AdminUsersPage() {
   return (
     <>
       <PageTitle
-        title="Users & roles"
-        description="Manage admin users and their permission levels."
+        title="ব্যবহারকারী ও ভূমিকা"
+        description="অ্যাডমিন ব্যবহারকারী এবং তাদের অনুমতি স্তর পরিচালনা করুন।"
         action={
-          <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary"><Plus className="w-4 h-4" /> Invite user</button>
+          <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary"><Plus className="w-4 h-4" /> ব্যবহারকারী আমন্ত্রণ</button>
         }
       />
 
-      <h2 className="text-lg font-bold text-foreground mb-3">Roles</h2>
+      <h2 className="text-lg font-bold text-foreground mb-3">ভূমিকা</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
         {roles.map(r => (
           <div key={r.name} className="bg-card border border-border rounded-2xl p-5">
@@ -38,13 +38,13 @@ export default function AdminUsersPage() {
               <Shield className="w-5 h-5" />
             </div>
             <p className="font-bold text-foreground">{r.name}</p>
-            <p className="text-xs text-muted-foreground mt-0.5">{r.count} user{r.count !== 1 ? 's' : ''}</p>
+            <p className="text-xs text-muted-foreground mt-0.5">{r.count} জন ব্যবহারকারী</p>
             <p className="text-xs text-muted-foreground/80 mt-2 leading-relaxed">{r.permissions}</p>
           </div>
         ))}
       </div>
 
-      <h2 className="text-lg font-bold text-foreground mb-3">Active users</h2>
+      <h2 className="text-lg font-bold text-foreground mb-3">সক্রিয় ব্যবহারকারী</h2>
       <div className="bg-card border border-border rounded-2xl divide-y divide-border">
         {users.map(u => (
           <div key={u.id} className="flex items-center gap-4 p-5 hover:bg-muted/30 transition-colors">
@@ -57,7 +57,7 @@ export default function AdminUsersPage() {
             </div>
             <Badge variant="secondary">{u.role}</Badge>
             <span className="text-xs text-muted-foreground hidden sm:inline">{u.lastActive}</span>
-            <button className="text-xs font-semibold text-muted-foreground hover:text-foreground">Manage</button>
+            <button className="text-xs font-semibold text-muted-foreground hover:text-foreground">পরিচালনা</button>
           </div>
         ))}
       </div>

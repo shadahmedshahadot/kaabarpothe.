@@ -75,19 +75,19 @@ function TopBar({ scrolled }: { scrolled: boolean }) {
             <Mail className="w-3 h-3" /> {SITE.contact.email}
           </a>
           <span className="inline-flex items-center gap-1.5 text-white/65">
-            <MapPin className="w-3 h-3" /> 24/7 dedicated pilgrim support
+            <MapPin className="w-3 h-3" /> ২৪/৭ নিবেদিত হাজী সহায়তা
           </span>
         </div>
         <div className="flex items-center gap-4 text-white/85">
           <Link href={ROUTES.login} className="hover:text-amber-300 transition-colors">
-            Sign In
+            সাইন ইন
           </Link>
           <span className="text-white/25">|</span>
           <Link href={ROUTES.admin.root} className="hover:text-amber-300 transition-colors">
-            Admin
+            অ্যাডমিন
           </Link>
           <Link href={ROUTES.pilgrim.root} className="hover:text-amber-300 transition-colors">
-            Pilgrim Portal
+            হাজী পোর্টাল
           </Link>
         </div>
       </div>
@@ -108,10 +108,10 @@ function HeaderLogo({ scrolled }: { scrolled: boolean }) {
         ) : (
           <span className="inline-flex flex-col leading-none text-white drop-shadow-md">
             <span className="text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent">
-              Kaabar Pothe
+              কাবার পথে
             </span>
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/75 mt-1">
-              Hajj &amp; Umrah
+              হজ্জ ও উমরাহ
             </span>
           </span>
         )}
@@ -228,14 +228,14 @@ function HeaderActions({
             : 'text-white/90 hover:text-white hover:bg-white/10',
         )}
       >
-        Sign in
+        সাইন ইন
       </Link>
       <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
         <Link
           href={ROUTES.packages.hajj}
           className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-br from-primary via-amber-500 to-orange-500 text-primary-foreground rounded-full text-sm font-semibold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all"
         >
-          Book Now
+          এখনই বুক করুন
         </Link>
       </motion.div>
       <button
@@ -295,13 +295,13 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                 href={ROUTES.login}
                 className="text-center text-sm px-3 py-2.5 rounded-xl border border-border hover:bg-muted font-medium"
               >
-                Sign In
+                সাইন ইন
               </Link>
               <Link
                 href={ROUTES.register}
                 className="text-center text-sm px-3 py-2.5 rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-semibold shadow-md shadow-primary/20"
               >
-                Register
+                নিবন্ধন
               </Link>
             </div>
           </div>

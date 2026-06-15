@@ -28,7 +28,7 @@ export function PackageGallery({ pkg }: { pkg: Package }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
         <div className="absolute top-5 left-5 flex gap-2 z-10">
-          {pkg.featured && <Badge>Featured</Badge>}
+          {pkg.featured && <Badge>বৈশিষ্ট্যযুক্ত</Badge>}
           <Badge variant={pkg.type === 'hajj' ? 'accent' : 'secondary'}>{pkg.type.toUpperCase()}</Badge>
         </div>
         <div className="absolute bottom-5 right-5 flex gap-2 z-10">

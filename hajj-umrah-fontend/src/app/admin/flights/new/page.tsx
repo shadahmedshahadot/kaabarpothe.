@@ -8,17 +8,17 @@ export default function NewFlightPage() {
   return (
     <>
       <Link href={ROUTES.admin.flights} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4">
-        <ArrowLeft className="w-4 h-4" /> Back to flights
+        <ArrowLeft className="w-4 h-4" /> ফ্লাইটে ফিরে যান
       </Link>
 
       <PageTitle
-        title="Create new flight"
-        description="Add an airline schedule with cabin, baggage, and seat inventory for independent flight bookings."
+        title="নতুন ফ্লাইট তৈরি করুন"
+        description="স্বতন্ত্র ফ্লাইট বুকিংয়ের জন্য কেবিন, ব্যাগেজ এবং আসন ইনভেন্টরিসহ একটি এয়ারলাইন সময়সূচি যোগ করুন।"
         action={
           <div className="flex gap-2">
-            <button className="px-4 py-2 border border-border rounded-xl text-sm font-semibold hover:bg-muted">Save draft</button>
+            <button className="px-4 py-2 border border-border rounded-xl text-sm font-semibold hover:bg-muted">খসড়া সংরক্ষণ</button>
             <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary">
-              <Save className="w-4 h-4" /> Publish
+              <Save className="w-4 h-4" /> প্রকাশ করুন
             </button>
           </div>
         }
@@ -26,19 +26,19 @@ export default function NewFlightPage() {
 
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          <Card title="Airline">
+          <Card title="এয়ারলাইন">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label>Airline name</Label>
-                <Input placeholder="Biman Bangladesh Airlines" />
+                <Label>এয়ারলাইনের নাম</Label>
+                <Input placeholder="বিমান বাংলাদেশ এয়ারলাইন্স" />
               </div>
               <div>
-                <Label>Flight number</Label>
+                <Label>ফ্লাইট নম্বর</Label>
                 <Input placeholder="BG 1041" />
               </div>
             </div>
             <div>
-              <Label>Airline logo / IATA code</Label>
+              <Label>এয়ারলাইন লোগো / IATA কোড</Label>
               <div className="flex items-center gap-3">
                 <Input placeholder="BG" className="w-32" />
                 <div className="aspect-square w-12 rounded-xl border-2 border-dashed border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary cursor-pointer">
@@ -48,24 +48,24 @@ export default function NewFlightPage() {
             </div>
           </Card>
 
-          <Card title="Route">
+          <Card title="রুট">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label>Departure airport</Label>
-                <Input placeholder="Hazrat Shahjalal International (DAC)" />
+                <Label>প্রস্থানের বিমানবন্দর</Label>
+                <Input placeholder="হযরত শাহজালাল আন্তর্জাতিক (DAC)" />
               </div>
               <div>
-                <Label>Arrival airport</Label>
-                <Input placeholder="King Abdulaziz International (JED)" />
+                <Label>আগমনের বিমানবন্দর</Label>
+                <Input placeholder="কিং আব্দুলআজিজ আন্তর্জাতিক (JED)" />
               </div>
               <div>
-                <Label>Departure city</Label>
+                <Label>প্রস্থানের শহর</Label>
                 <Select defaultValue="Dhaka">
                   <option>Dhaka</option><option>Chattogram</option><option>Jeddah</option><option>Madinah</option>
                 </Select>
               </div>
               <div>
-                <Label>Arrival city</Label>
+                <Label>আগমনের শহর</Label>
                 <Select defaultValue="Jeddah">
                   <option>Jeddah</option><option>Madinah</option><option>Dhaka</option><option>Chattogram</option>
                 </Select>
@@ -73,140 +73,140 @@ export default function NewFlightPage() {
             </div>
           </Card>
 
-          <Card title="Schedule">
+          <Card title="সময়সূচি">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label>Departure date</Label>
+                <Label>প্রস্থানের তারিখ</Label>
                 <Input type="date" />
               </div>
               <div>
-                <Label>Departure time</Label>
+                <Label>প্রস্থানের সময়</Label>
                 <Input type="time" />
               </div>
               <div>
-                <Label>Arrival date</Label>
+                <Label>আগমনের তারিখ</Label>
                 <Input type="date" />
               </div>
               <div>
-                <Label>Arrival time</Label>
+                <Label>আগমনের সময়</Label>
                 <Input type="time" />
               </div>
               <div>
-                <Label>Total journey duration</Label>
+                <Label>মোট ভ্রমণ সময়কাল</Label>
                 <Input placeholder="8h 15m" />
               </div>
               <div>
-                <Label>Transit duration</Label>
-                <Input placeholder="Non-stop or e.g. 2h 10m" />
+                <Label>ট্রানজিট সময়কাল</Label>
+                <Input placeholder="নন-স্টপ বা যেমন 2h 10m" />
               </div>
             </div>
           </Card>
 
-          <Card title="Transits">
-            <p className="text-xs text-muted-foreground mb-4">Add layover airports if not a non-stop flight.</p>
+          <Card title="ট্রানজিট">
+            <p className="text-xs text-muted-foreground mb-4">যদি নন-স্টপ ফ্লাইট না হয় তবে লেওভার বিমানবন্দর যোগ করুন।</p>
             <div className="space-y-3">
               {[1].map(i => (
                 <div key={i} className="border border-border rounded-xl p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <Plane className="w-4 h-4 text-muted-foreground" />
-                    <Input placeholder="Transit airport (e.g. Dubai International)" className="flex-1" />
+                    <Input placeholder="ট্রানজিট বিমানবন্দর (যেমন দুবাই আন্তর্জাতিক)" className="flex-1" />
                     <button className="p-2 text-muted-foreground hover:text-rose-500"><X className="w-4 h-4" /></button>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-3">
-                    <Input placeholder="Transit city" />
-                    <Input placeholder="Layover duration (e.g. 2h 10m)" />
+                    <Input placeholder="ট্রানজিট শহর" />
+                    <Input placeholder="লেওভার সময়কাল (যেমন 2h 10m)" />
                   </div>
                 </div>
               ))}
               <button className="w-full py-3 border-2 border-dashed border-border rounded-xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors inline-flex items-center justify-center gap-2">
-                <Plus className="w-4 h-4" /> Add transit
+                <Plus className="w-4 h-4" /> ট্রানজিট যোগ করুন
               </button>
             </div>
           </Card>
 
-          <Card title="Cabin & service">
+          <Card title="কেবিন ও সেবা">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label>Cabin class</Label>
+                <Label>কেবিন ক্লাস</Label>
                 <Select defaultValue="economy">
-                  <option value="economy">Economy</option>
-                  <option value="economy-plus">Economy Plus</option>
-                  <option value="business">Business</option>
-                  <option value="first">First</option>
+                  <option value="economy">ইকোনমি</option>
+                  <option value="economy-plus">ইকোনমি প্লাস</option>
+                  <option value="business">বিজনেস</option>
+                  <option value="first">ফার্স্ট</option>
                 </Select>
               </div>
               <div>
-                <Label>Baggage allowance</Label>
-                <Input placeholder="30 kg checked + 7 kg cabin" />
+                <Label>ব্যাগেজ ভাতা</Label>
+                <Input placeholder="30 kg চেকড + 7 kg কেবিন" />
               </div>
               <div className="sm:col-span-2">
-                <Label>Meal information</Label>
-                <Input placeholder="Halal hot meal + beverages" />
+                <Label>খাবারের তথ্য</Label>
+                <Input placeholder="হালাল গরম খাবার + পানীয়" />
               </div>
             </div>
           </Card>
 
-          <Card title="Seat inventory & pricing">
+          <Card title="আসন ইনভেন্টরি ও মূল্য">
             <div className="grid sm:grid-cols-3 gap-4">
               <div>
-                <Label>Total seats</Label>
+                <Label>মোট আসন</Label>
                 <Input type="number" placeholder="290" />
               </div>
               <div>
-                <Label>Available seats</Label>
+                <Label>উপলব্ধ আসন</Label>
                 <Input type="number" placeholder="290" />
               </div>
               <div>
-                <Label>Booking status</Label>
+                <Label>বুকিং অবস্থা</Label>
                 <Select defaultValue="open">
-                  <option value="open">Open</option>
-                  <option value="waitlist">Waitlist</option>
-                  <option value="soldout">Sold out</option>
-                  <option value="closed">Closed</option>
+                  <option value="open">খোলা</option>
+                  <option value="waitlist">ওয়েটলিস্ট</option>
+                  <option value="soldout">বিক্রি হয়ে গেছে</option>
+                  <option value="closed">বন্ধ</option>
                 </Select>
               </div>
               <div>
-                <Label>Base fare (USD)</Label>
+                <Label>মৌলিক ভাড়া (USD)</Label>
                 <Input type="number" placeholder="745" />
               </div>
               <div>
-                <Label>Taxes & fees (USD)</Label>
+                <Label>কর ও ফি (USD)</Label>
                 <Input type="number" placeholder="95" />
               </div>
               <div>
-                <Label>Discount (USD)</Label>
+                <Label>ছাড় (USD)</Label>
                 <Input type="number" placeholder="0" />
               </div>
             </div>
           </Card>
 
-          <Card title="Notes">
-            <Textarea rows={4} placeholder="Operational notes, group discounts, special handling…" />
+          <Card title="নোট">
+            <Textarea rows={4} placeholder="অপারেশনাল নোট, গ্রুপ ডিসকাউন্ট, বিশেষ পরিচালনা…" />
           </Card>
         </div>
 
         <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-          <Card title="Status">
+          <Card title="অবস্থা">
             <Select defaultValue="active">
-              <option value="active">Active (published)</option>
-              <option value="inactive">Inactive (draft)</option>
+              <option value="active">সক্রিয় (প্রকাশিত)</option>
+              <option value="inactive">নিষ্ক্রিয় (খসড়া)</option>
             </Select>
             <label className="flex items-center gap-2 mt-4 text-sm">
-              <input type="checkbox" className="rounded border-border" /> Mark as featured
+              <input type="checkbox" className="rounded border-border" /> ফিচার্ড হিসেবে চিহ্নিত করুন
             </label>
           </Card>
 
-          <Card title="Independent booking">
-            <p className="text-xs text-muted-foreground mb-3">Allow pilgrims to book this flight without purchasing a full package.</p>
+          <Card title="স্বতন্ত্র বুকিং">
+            <p className="text-xs text-muted-foreground mb-3">হাজীদেরকে পূর্ণ প্যাকেজ ক্রয় ছাড়াই এই ফ্লাইট বুক করার অনুমতি দিন।</p>
             <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" className="rounded border-border" defaultChecked /> Allow flight-only booking
+              <input type="checkbox" className="rounded border-border" defaultChecked /> ফ্লাইট-শুধু বুকিং অনুমোদন করুন
             </label>
           </Card>
 
-          <Card title="Visibility">
+          <Card title="দৃশ্যমানতা">
             <Select defaultValue="public">
-              <option value="public">Public listing</option>
-              <option value="package-only">Bundled with packages only</option>
+              <option value="public">সর্বজনীন তালিকা</option>
+              <option value="package-only">শুধু প্যাকেজের সাথে বান্ডিল</option>
             </Select>
           </Card>
         </div>

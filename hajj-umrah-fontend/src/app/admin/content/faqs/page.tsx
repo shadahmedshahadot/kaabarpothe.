@@ -7,11 +7,11 @@ export default function AdminFAQsPage() {
   return (
     <>
       <PageTitle
-        title="FAQs"
-        description={`${faqs.length} questions across ${faqCategories.length} categories`}
+        title="প্রশ্নোত্তর"
+        description={`${faqCategories.length} ক্যাটাগরিতে ${faqs.length} প্রশ্ন`}
         action={
           <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary transition-colors">
-            <Plus className="w-4 h-4" /> Add FAQ
+            <Plus className="w-4 h-4" /> প্রশ্নোত্তর যোগ করুন
           </button>
         }
       />
@@ -25,7 +25,7 @@ export default function AdminFAQsPage() {
                 <h2 className="text-lg font-bold text-foreground inline-flex items-center gap-2">
                   {cat} <Badge variant="outline">{items.length}</Badge>
                 </h2>
-                <button className="text-xs text-primary font-semibold hover:underline">+ Add to {cat}</button>
+                <button className="text-xs text-primary font-semibold hover:underline">+ {cat} এ যোগ করুন</button>
               </div>
               <div className="bg-card border border-border rounded-2xl divide-y divide-border">
                 {items.map(f => (

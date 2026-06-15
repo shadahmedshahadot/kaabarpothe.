@@ -12,8 +12,8 @@ const blogImage = (idx: number) =>
   idx % 2 === 0 ? KAABA_IMAGES[idx % KAABA_IMAGES.length] : MADINAH_IMAGES[idx % MADINAH_IMAGES.length]
 
 export const metadata: Metadata = {
-  title: 'Learning Center & Blog | Sakinah Travels',
-  description: 'Scholar-reviewed guides, packing checklists, and pilgrim stories. Prepare your heart and your suitcase for Hajj or Umrah.',
+  title: 'শিক্ষা কেন্দ্র ও ব্লগ | সাকিনাহ ট্রাভেলস',
+  description: 'আলেম-পর্যালোচিত গাইড, প্যাকিং চেকলিস্ট, এবং হাজীদের গল্প। হজ্জ বা উমরাহর জন্য আপনার অন্তর ও স্যুটকেস প্রস্তুত করুন।',
 }
 
 export default function BlogPage() {
@@ -24,15 +24,15 @@ export default function BlogPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="Learning center"
-        title="Pilgrimage knowledge, scholar-reviewed."
-        description="Articles, guides, and stories to help you prepare physically, financially, and spiritually for your sacred journey."
+        eyebrow="শিক্ষা কেন্দ্র"
+        title="হজ্জ-উমরাহ জ্ঞান, আলেম-পর্যালোচিত।"
+        description="আপনার পবিত্র যাত্রার জন্য শারীরিক, আর্থিক এবং আধ্যাত্মিকভাবে প্রস্তুত হতে সাহায্য করার জন্য নিবন্ধ, গাইড এবং গল্প।"
       />
 
       <section className="px-4 sm:px-6 lg:px-8 pb-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-wrap gap-2 mb-10">
-            <Badge variant="default">All</Badge>
+            <Badge variant="default">সব</Badge>
             {categories.map(c => <Badge key={c} variant="outline">{c}</Badge>)}
           </div>
 
@@ -44,7 +44,7 @@ export default function BlogPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
               <div className="p-8 lg:p-12">
-                <Badge variant="default" className="mb-4">Featured · {featured.category}</Badge>
+                <Badge variant="default" className="mb-4">ফিচার্ড · {featured.category}</Badge>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight group-hover:text-primary transition-colors">
                   {featured.title}
                 </h2>
@@ -56,11 +56,11 @@ export default function BlogPage() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-foreground">{featured.author}</p>
-                      <p className="text-xs text-muted-foreground">{formatDate(featured.publishedDate)} · {featured.readTime} min</p>
+                      <p className="text-xs text-muted-foreground">{formatDate(featured.publishedDate)} · {featured.readTime} মিনিট</p>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                    Read article <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    নিবন্ধ পড়ুন <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function BlogPage() {
                   <Image src={blogImage(i + 1)} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 bg-black/40 backdrop-blur text-white text-xs px-2.5 py-1 rounded-full">
-                    <Clock className="w-3 h-3" /> {post.readTime} min
+                    <Clock className="w-3 h-3" /> {post.readTime} মিনিট
                   </div>
                 </div>
                 <div className="p-6">

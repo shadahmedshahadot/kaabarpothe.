@@ -6,14 +6,14 @@ import { StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { SectionHeading } from '@/components/ui/section-heading'
 
 const features = [
-  { Icon: ShieldCheck, title: 'Saudi Ministry Licensed', desc: 'Officially authorized by the Saudi Ministry of Hajj & Umrah. Full visa processing and permits.', color: 'from-emerald-400 to-teal-500' },
-  { Icon: Award, title: 'Scholar-Led Groups', desc: 'Every group accompanied by a graduate scholar from Al-Azhar, Madinah University, or equivalent.', color: 'from-amber-400 to-orange-500' },
-  { Icon: HandCoins, title: 'Transparent Pricing', desc: 'No hidden fees. Visa, flights, hotels, meals, ziyarat — fully disclosed up front.', color: 'from-sky-400 to-blue-500' },
-  { Icon: Clock, title: '24/7 Ground Support', desc: 'Local team in Makkah and Madinah available around the clock for any emergency.', color: 'from-rose-400 to-pink-500' },
-  { Icon: Compass, title: 'Curated Itineraries', desc: 'Carefully planned daily schedules balancing worship, rest, and educational ziyarat tours.', color: 'from-violet-400 to-purple-500' },
-  { Icon: Users, title: 'Multilingual Support', desc: 'Our 24/7 team speaks English, Arabic, Urdu, Bengali, French, Indonesian, and more.', color: 'from-cyan-400 to-blue-500' },
-  { Icon: Heart, title: 'Spiritual Preparation', desc: 'Pre-departure courses covering rituals, etiquette, and inner preparation for the journey.', color: 'from-fuchsia-400 to-pink-500' },
-  { Icon: Sparkles, title: 'Lifetime Memory', desc: 'Premium ihram kits, group photo books, and ongoing alumni community for life.', color: 'from-yellow-400 to-amber-500' },
+  { Icon: ShieldCheck, title: 'সৌদি মন্ত্রণালয় লাইসেন্সপ্রাপ্ত', desc: 'সৌদি হজ্জ ও উমরাহ মন্ত্রণালয় কর্তৃক আনুষ্ঠানিকভাবে অনুমোদিত। সম্পূর্ণ ভিসা প্রক্রিয়াকরণ ও অনুমতিপত্র।', color: 'from-emerald-400 to-teal-500' },
+  { Icon: Award, title: 'আলেম পরিচালিত গ্রুপ', desc: 'প্রতিটি গ্রুপের সঙ্গী আল-আজহার, মদিনা বিশ্ববিদ্যালয় বা সমমানের গ্র্যাজুয়েট আলেম।', color: 'from-amber-400 to-orange-500' },
+  { Icon: HandCoins, title: 'স্বচ্ছ মূল্য', desc: 'কোনো গোপন ফি নেই। ভিসা, ফ্লাইট, হোটেল, খাবার, যিয়ারত — সব আগে থেকে উন্মুক্ত।', color: 'from-sky-400 to-blue-500' },
+  { Icon: Clock, title: '২৪/৭ সরাসরি সহায়তা', desc: 'মক্কা ও মদিনায় স্থানীয় দল যেকোনো জরুরি অবস্থায় ২৪ ঘণ্টা উপলব্ধ।', color: 'from-rose-400 to-pink-500' },
+  { Icon: Compass, title: 'বাছাইকৃত ভ্রমণসূচি', desc: 'ইবাদত, বিশ্রাম ও শিক্ষামূলক যিয়ারত ভারসাম্য বজায় রেখে যত্নসহকারে পরিকল্পিত দৈনিক সময়সূচি।', color: 'from-violet-400 to-purple-500' },
+  { Icon: Users, title: 'বহুভাষিক সহায়তা', desc: 'আমাদের ২৪/৭ দল বাংলা, ইংরেজি, আরবি, উর্দু, ফরাসি, ইন্দোনেশিয়ান ও আরও ভাষায় কথা বলে।', color: 'from-cyan-400 to-blue-500' },
+  { Icon: Heart, title: 'আধ্যাত্মিক প্রস্তুতি', desc: 'যাত্রার জন্য আচার, শিষ্টাচার ও অভ্যন্তরীণ প্রস্তুতি বিষয়ে প্রাক-প্রস্থান কোর্স।', color: 'from-fuchsia-400 to-pink-500' },
+  { Icon: Sparkles, title: 'আজীবন স্মৃতি', desc: 'প্রিমিয়াম ইহরাম কিট, গ্রুপ ফটো বই এবং আজীবন চলমান প্রাক্তন সদস্য কমিউনিটি।', color: 'from-yellow-400 to-amber-500' },
 ]
 
 export function TrustSection() {
@@ -34,9 +34,9 @@ export function TrustSection() {
 
       <div className="max-w-7xl mx-auto">
         <SectionHeading
-          eyebrow="Why pilgrims choose us"
-          title="The most trusted Hajj & Umrah platform."
-          description="Eight pillars of service that set us apart from agencies who treat your sacred journey as just another booking."
+          eyebrow="কেন হাজীরা আমাদের বেছে নেন"
+          title="সবচেয়ে বিশ্বস্ত হজ্জ ও উমরাহ প্ল্যাটফর্ম।"
+          description="সেবার আটটি স্তম্ভ যা আমাদের আলাদা করে সেই এজেন্সিগুলো থেকে যারা আপনার পবিত্র যাত্রাকে শুধু আরেকটি বুকিং হিসেবে দেখে।"
           className="mb-16"
         />
 

@@ -4,16 +4,16 @@ import { PageTitle } from '@/components/layouts/dashboard-shell'
 export default function FlightDetailsPage() {
   return (
     <>
-      <PageTitle title="Flight details" description="Your full flight itinerary for the Premium Hajj 2026 package." action={<button className="border border-border px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-muted"><Download className="w-4 h-4" /> Download e-tickets</button>} />
+      <PageTitle title="ফ্লাইট বিবরণ" description="প্রিমিয়াম হজ্জ ২০২৬ প্যাকেজের সম্পূর্ণ ফ্লাইট ভ্রমণসূচি।" action={<button className="border border-border px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-muted"><Download className="w-4 h-4" /> ই-টিকেট ডাউনলোড</button>} />
 
       <div className="space-y-4">
         {[
-          { from: 'New York (JFK)', to: 'Jeddah (JED)', date: '2026-05-19', dep: '21:30', arr: '17:00 +1', flight: 'EK 204 → EK 825', airline: 'Emirates', class: 'Premium Economy', duration: '15h 30m' },
-          { from: 'Madinah (MED)', to: 'New York (JFK)', date: '2026-06-13', dep: '14:50', arr: '21:20', flight: 'EK 832 → EK 203', airline: 'Emirates', class: 'Premium Economy', duration: '17h 30m' },
+          { from: 'নিউ ইয়র্ক (JFK)', to: 'জেদ্দা (JED)', date: '2026-05-19', dep: '21:30', arr: '17:00 +1', flight: 'EK 204 → EK 825', airline: 'এমিরেটস', class: 'প্রিমিয়াম ইকোনমি', duration: '15h 30m' },
+          { from: 'মদিনা (MED)', to: 'নিউ ইয়র্ক (JFK)', date: '2026-06-13', dep: '14:50', arr: '21:20', flight: 'EK 832 → EK 203', airline: 'এমিরেটস', class: 'প্রিমিয়াম ইকোনমি', duration: '17h 30m' },
         ].map((f, i) => (
           <div key={i} className="bg-card border border-border rounded-2xl p-6">
             <div className="flex items-center justify-between mb-5">
-              <span className="text-xs uppercase tracking-wider text-primary font-semibold">{i === 0 ? 'Outbound' : 'Return'}</span>
+              <span className="text-xs uppercase tracking-wider text-primary font-semibold">{i === 0 ? 'যাত্রা' : 'প্রত্যাবর্তন'}</span>
               <span className="text-sm text-muted-foreground">{f.date}</span>
             </div>
 
@@ -36,10 +36,10 @@ export default function FlightDetailsPage() {
             </div>
 
             <div className="grid sm:grid-cols-4 gap-4 mt-6 pt-5 border-t border-border">
-              <Spec Icon={Plane} label="Airline" value={f.airline} />
-              <Spec Icon={MapPin} label="Class" value={f.class} />
-              <Spec Icon={Briefcase} label="Baggage" value="30kg + 7kg" />
-              <Spec Icon={Utensils} label="Meals" value="Halal" />
+              <Spec Icon={Plane} label="এয়ারলাইন" value={f.airline} />
+              <Spec Icon={MapPin} label="ক্লাস" value={f.class} />
+              <Spec Icon={Briefcase} label="ব্যাগেজ" value="30kg + 7kg" />
+              <Spec Icon={Utensils} label="খাবার" value="হালাল" />
             </div>
           </div>
         ))}

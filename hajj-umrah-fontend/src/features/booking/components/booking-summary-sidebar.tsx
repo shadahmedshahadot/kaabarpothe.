@@ -22,10 +22,10 @@ export function BookingSummarySidebar({ editable = true, cta }: { editable?: boo
   return (
     <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
       <div className="bg-card border border-border rounded-3xl p-6 shadow-sm">
-        <h3 className="font-bold text-foreground mb-4 text-base">Booking summary</h3>
+        <h3 className="font-bold text-foreground mb-4 text-base">বুকিং সারাংশ</h3>
 
         {items.length === 0 ? (
-          <p className="text-sm text-muted-foreground py-6 text-center">Your cart is empty. Add flights, hotels, transport, or a package to begin.</p>
+          <p className="text-sm text-muted-foreground py-6 text-center">আপনার কার্ট খালি। শুরু করতে ফ্লাইট, হোটেল, পরিবহন বা একটি প্যাকেজ যুক্ত করুন।</p>
         ) : (
           <div className="space-y-3 mb-4">
             {items.map(item => <Line key={item.id} item={item} editable={editable} onRemove={removeItem} />)}
@@ -35,17 +35,17 @@ export function BookingSummarySidebar({ editable = true, cta }: { editable?: boo
         {items.length > 0 && (
           <>
             <div className="space-y-1.5 text-sm pt-4 border-t border-border">
-              <Row label="Subtotal" value={formatCurrency(totals.subtotal)} />
-              {totals.taxes > 0 && <Row label="Taxes" value={formatCurrency(totals.taxes)} />}
-              <Row label="Service fee" value={formatCurrency(totals.serviceFee)} />
+              <Row label="উপ-মোট" value={formatCurrency(totals.subtotal)} />
+              {totals.taxes > 0 && <Row label="কর" value={formatCurrency(totals.taxes)} />}
+              <Row label="সার্ভিস ফি" value={formatCurrency(totals.serviceFee)} />
             </div>
 
             <div className="flex items-end justify-between pt-4 mt-4 border-t border-border">
               <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Grand total</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">সর্বমোট</p>
                 <p className="text-3xl font-bold text-foreground leading-none mt-1">{formatCurrency(totals.total)}</p>
               </div>
-              <Badge variant="success">{items.length} item{items.length > 1 ? 's' : ''}</Badge>
+              <Badge variant="success">{items.length}টি আইটেম</Badge>
             </div>
           </>
         )}
@@ -53,7 +53,7 @@ export function BookingSummarySidebar({ editable = true, cta }: { editable?: boo
         {cta && <div className="mt-5">{cta}</div>}
 
         <p className="text-[11px] text-muted-foreground text-center mt-3 inline-flex items-center gap-1.5 justify-center w-full">
-          <ShieldCheck className="w-3 h-3" /> Secure checkout · You won&apos;t be charged in this demo
+          <ShieldCheck className="w-3 h-3" /> নিরাপদ চেকআউট · এই ডেমোতে আপনার কাছ থেকে চার্জ নেওয়া হবে না
         </p>
       </div>
     </aside>
@@ -86,7 +86,7 @@ function Line({ item, editable, onRemove }: { item: CartItem; editable: boolean;
         </div>
       </div>
       {editable && (
-        <button onClick={() => onRemove(item.id)} className="p-1 text-muted-foreground hover:text-rose-500 -mr-1" title="Remove">
+        <button onClick={() => onRemove(item.id)} className="p-1 text-muted-foreground hover:text-rose-500 -mr-1" title="সরান">
           <X className="w-3.5 h-3.5" />
         </button>
       )}

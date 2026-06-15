@@ -19,7 +19,7 @@ interface Props<T> {
   actions?: React.ReactNode
 }
 
-export function DataTable<T extends { id: string }>({ data, columns, searchPlaceholder = 'Search…', emptyText = 'No data', filters, actions }: Props<T>) {
+export function DataTable<T extends { id: string }>({ data, columns, searchPlaceholder = 'অনুসন্ধান…', emptyText = 'কোনো ডেটা নেই', filters, actions }: Props<T>) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -37,10 +37,10 @@ export function DataTable<T extends { id: string }>({ data, columns, searchPlace
           {actions ?? (
             <>
               <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="px-3 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted inline-flex items-center gap-2">
-                <Filter className="w-4 h-4" /> Filters
+                <Filter className="w-4 h-4" /> ফিল্টার
               </motion.button>
               <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="px-3 py-2 border border-border rounded-lg text-sm font-medium hover:bg-muted inline-flex items-center gap-2">
-                <Download className="w-4 h-4" /> Export
+                <Download className="w-4 h-4" /> এক্সপোর্ট
               </motion.button>
             </>
           )}
@@ -81,10 +81,10 @@ export function DataTable<T extends { id: string }>({ data, columns, searchPlace
       </div>
 
       <div className="p-4 flex items-center justify-between border-t border-border text-xs text-muted-foreground">
-        <span>Showing {data.length} of {data.length}</span>
+        <span>দেখানো হচ্ছে {data.length} এর {data.length}</span>
         <div className="flex gap-2">
-          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="px-3 py-1 rounded border border-border hover:bg-muted">Previous</motion.button>
-          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="px-3 py-1 rounded border border-border hover:bg-muted">Next</motion.button>
+          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="px-3 py-1 rounded border border-border hover:bg-muted">পূর্ববর্তী</motion.button>
+          <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="px-3 py-1 rounded border border-border hover:bg-muted">পরবর্তী</motion.button>
         </div>
       </div>
     </motion.div>

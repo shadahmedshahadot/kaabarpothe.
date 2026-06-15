@@ -22,7 +22,7 @@ export function AuthLayout({
             href="/"
             className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> Home
+            <ArrowLeft className="w-3.5 h-3.5" /> হোম
           </Link>
         </div>
 
@@ -32,7 +32,7 @@ export function AuthLayout({
               href="/"
               className="hidden lg:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-10 group"
             >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" /> Back to site
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" /> সাইটে ফিরে যান
             </Link>
             {children}
           </div>

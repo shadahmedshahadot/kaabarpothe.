@@ -12,16 +12,16 @@ import { Footer } from '@/components/layouts/site-footer'
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'TravelAgency',
-  name: 'Sakinah Travels',
+  name: 'সাকিনাহ ট্রাভেলস',
   url: 'https://sakinah.travel',
-  description: 'Premium Hajj and Umrah packages.',
+  description: 'প্রিমিয়াম হজ্জ ও উমরাহ প্যাকেজ।',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '500 Madison Ave, Floor 42',
-    addressLocality: 'New York',
-    addressRegion: 'NY',
-    postalCode: '10022',
-    addressCountry: 'US',
+    streetAddress: 'বাড়ি ৫০০, রোড ৪২',
+    addressLocality: 'ঢাকা',
+    addressRegion: 'ঢাকা',
+    postalCode: '1212',
+    addressCountry: 'BD',
   },
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -29,7 +29,7 @@ const jsonLd = {
     reviewCount: 12420,
     bestRating: 5,
   },
-  telephone: '+1-800-555-1234',
+  telephone: '+880-1700-000000',
 }
 
 export default function Home() {

@@ -6,8 +6,8 @@ import { ADMIN_NAV_GROUPS, ADMIN_USER } from '@/features/admin/constants/navigat
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <DashboardShell
-      title="Sakinah Admin"
-      subtitle="Control Center"
+      title="সাকিনাহ অ্যাডমিন"
+      subtitle="নিয়ন্ত্রণ কেন্দ্র"
       accent="from-rose-500 to-orange-500"
       navGroups={ADMIN_NAV_GROUPS}
       userName={ADMIN_USER.name}

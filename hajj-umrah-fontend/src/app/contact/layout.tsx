@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Sakinah Travels',
-  description: '24/7 pilgrim support. Talk to our scholar team about Hajj or Umrah packages, group bookings, or visa questions.',
+  title: 'যোগাযোগ করুন | সাকিনাহ ট্রাভেলস',
+  description: '২৪/৭ হাজী সহায়তা। হজ্জ বা উমরাহ প্যাকেজ, গ্রুপ বুকিং, বা ভিসা সংক্রান্ত প্রশ্নের জন্য আমাদের আলেম টিমের সাথে কথা বলুন।',
 }
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

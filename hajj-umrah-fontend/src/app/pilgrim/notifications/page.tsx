@@ -2,17 +2,17 @@ import { Bell, FileCheck, Plane, CreditCard, Calendar } from 'lucide-react'
 import { PageTitle } from '@/components/layouts/dashboard-shell'
 
 const items = [
-  { Icon: FileCheck, color: 'emerald', title: 'Your visa is ready', desc: 'Download your Hajj 2026 visa from the documents section.', time: '2 hours ago', unread: true },
-  { Icon: Calendar, color: 'amber', title: 'Pre-departure orientation', desc: 'Zoom session on May 10 at 7pm EST. Calendar invite sent.', time: '1 day ago', unread: true },
-  { Icon: Plane, color: 'sky', title: 'Flight check-in opens soon', desc: 'Online check-in opens 48h before your flight on Emirates.', time: '3 days ago', unread: true },
-  { Icon: CreditCard, color: 'violet', title: 'Final payment received', desc: 'Your installment of $6,748 has been processed successfully.', time: '1 week ago', unread: false },
-  { Icon: Bell, color: 'rose', title: 'Group leader assigned', desc: 'Sheikh Ahmad bin Khalil will be your group leader.', time: '2 weeks ago', unread: false },
+  { Icon: FileCheck, color: 'emerald', title: 'আপনার ভিসা প্রস্তুত', desc: 'ডকুমেন্ট সেকশন থেকে আপনার হজ্জ ২০২৬ ভিসা ডাউনলোড করুন।', time: '২ ঘণ্টা আগে', unread: true },
+  { Icon: Calendar, color: 'amber', title: 'যাত্রার পূর্ব ওরিয়েন্টেশন', desc: '১০ মে সন্ধ্যা ৭টায় (EST) জুম সেশন। ক্যালেন্ডার আমন্ত্রণ পাঠানো হয়েছে।', time: '১ দিন আগে', unread: true },
+  { Icon: Plane, color: 'sky', title: 'ফ্লাইট চেক-ইন শীঘ্রই খুলবে', desc: 'এমিরেটসে আপনার ফ্লাইটের ৪৮ ঘণ্টা আগে অনলাইন চেক-ইন চালু হবে।', time: '৩ দিন আগে', unread: true },
+  { Icon: CreditCard, color: 'violet', title: 'চূড়ান্ত পেমেন্ট গৃহীত', desc: 'আপনার $৬,৭৪৮ কিস্তি সফলভাবে প্রক্রিয়াকৃত হয়েছে।', time: '১ সপ্তাহ আগে', unread: false },
+  { Icon: Bell, color: 'rose', title: 'গ্রুপ লিডার নির্ধারিত', desc: 'শায়খ আহমদ বিন খলিল আপনার গ্রুপ লিডার হবেন।', time: '২ সপ্তাহ আগে', unread: false },
 ]
 
 export default function PilgrimNotificationsPage() {
   return (
     <>
-      <PageTitle title="Notifications" description="Updates about your bookings, payments, and journey." action={<button className="text-sm font-semibold text-primary hover:underline">Mark all read</button>} />
+      <PageTitle title="বিজ্ঞপ্তি" description="আপনার বুকিং, পেমেন্ট ও যাত্রা সংক্রান্ত আপডেট।" action={<button className="text-sm font-semibold text-primary hover:underline">সব পঠিত হিসেবে চিহ্নিত করুন</button>} />
 
       <div className="bg-card border border-border rounded-2xl divide-y divide-border">
         {items.map((n, i) => (

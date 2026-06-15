@@ -6,8 +6,8 @@ import { PILGRIM_NAV_GROUPS, PILGRIM_USER } from '@/features/pilgrim/constants/n
 export default function PilgrimLayout({ children }: { children: React.ReactNode }) {
   return (
     <DashboardShell
-      title="My Journey"
-      subtitle="Pilgrim Portal"
+      title="আমার যাত্রা"
+      subtitle="হাজী পোর্টাল"
       accent="from-amber-400 to-orange-500"
       navGroups={PILGRIM_NAV_GROUPS}
       userName={PILGRIM_USER.name}

@@ -13,10 +13,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const flight = getFlight(slug)
-  if (!flight) return { title: 'Flight not found' }
+  if (!flight) return { title: 'ফ্লাইট পাওয়া যায়নি' }
   return {
-    title: `${flight.airlineName} ${flight.flightNumber} — ${flight.departureCity} → ${flight.arrivalCity} | Sakinah Travels`,
-    description: `Book ${flight.airlineName} ${flight.flightNumber} from ${flight.departureCity} to ${flight.arrivalCity}. ${flight.totalDuration} · ${flight.cabinClass}.`,
+    title: `${flight.airlineName} ${flight.flightNumber} — ${flight.departureCity} → ${flight.arrivalCity} | সাকিনাহ ট্রাভেলস`,
+    description: `${flight.departureCity} থেকে ${flight.arrivalCity} পর্যন্ত ${flight.airlineName} ${flight.flightNumber} বুক করুন। ${flight.totalDuration} · ${flight.cabinClass}।`,
   }
 }
 

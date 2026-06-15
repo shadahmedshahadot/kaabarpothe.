@@ -12,8 +12,8 @@ const MONTHLY_DATA = [
 export function MonthlyBookingsChart() {
   return (
     <div className="lg:col-span-2 bg-card border border-border rounded-2xl p-6">
-      <h3 className="font-bold text-foreground mb-1">Monthly bookings</h3>
-      <p className="text-xs text-muted-foreground mb-5">Last 6 months</p>
+      <h3 className="font-bold text-foreground mb-1">মাসিক বুকিং</h3>
+      <p className="text-xs text-muted-foreground mb-5">গত ৬ মাস</p>
       <BarChart data={MONTHLY_DATA} />
     </div>
   )

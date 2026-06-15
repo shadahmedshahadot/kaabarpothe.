@@ -12,20 +12,20 @@ export default function ContactPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="Get in touch"
-        title="We're here to help, 24/7."
-        description="Whether you're starting your first inquiry, finalizing a booking, or need help during your journey — our team responds within 2 hours."
+        eyebrow="যোগাযোগ করুন"
+        title="আমরা ২৪/৭ আপনার পাশে আছি।"
+        description="আপনি প্রথম জিজ্ঞাসা শুরু করুন, বুকিং চূড়ান্ত করুন, অথবা আপনার যাত্রার সময় সাহায্য প্রয়োজন হোক — আমাদের টিম ২ ঘণ্টার মধ্যে উত্তর দেয়।"
       />
 
       <section className="px-4 sm:px-6 lg:px-8 pb-24">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
           {/* Contact info */}
           <div className="space-y-4">
-            <ContactCard Icon={Phone} title="Call us" lines={['+1 (800) 555-1234', '24/7 pilgrim support line']} />
-            <ContactCard Icon={Mail} title="Email" lines={['hello@sakinah.travel', 'support@sakinah.travel']} />
-            <ContactCard Icon={MessagesSquare} title="Live chat" lines={['Available 7am - 11pm EST', 'Avg. response < 5 min']} />
-            <ContactCard Icon={Building} title="Office" lines={['500 Madison Ave, Floor 42', 'New York, NY 10022, USA']} />
-            <ContactCard Icon={Clock} title="Hours" lines={['Mon-Fri: 7am - 11pm EST', 'Sat-Sun: 9am - 8pm EST']} />
+            <ContactCard Icon={Phone} title="কল করুন" lines={['+৮৮০ ১৭০০-০০০০০০', '২৪/৭ হাজী সহায়তা লাইন']} />
+            <ContactCard Icon={Mail} title="ইমেইল" lines={['hello@sakinah.travel', 'support@sakinah.travel']} />
+            <ContactCard Icon={MessagesSquare} title="লাইভ চ্যাট" lines={['সকাল ৭টা - রাত ১১টা পর্যন্ত উপলব্ধ', 'গড় উত্তর < ৫ মিনিট']} />
+            <ContactCard Icon={Building} title="অফিস" lines={['বাড়ি ৫০০, রোড ৪২', 'গুলশান, ঢাকা ১২১২, বাংলাদেশ']} />
+            <ContactCard Icon={Clock} title="সময়সূচি" lines={['সোম-শুক্র: সকাল ৭টা - রাত ১১টা', 'শনি-রবি: সকাল ৯টা - রাত ৮টা']} />
           </div>
 
           {/* Form */}
@@ -36,63 +36,63 @@ export default function ContactPage() {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/15 text-emerald-600 mx-auto mb-4 flex items-center justify-center">
                     <Send className="w-7 h-7" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Message sent!</h3>
-                  <p className="text-muted-foreground">We'll respond within 2 hours.</p>
-                  <button onClick={() => setSent(false)} className="mt-6 inline-flex items-center gap-2 bg-foreground text-background px-5 py-2.5 rounded-xl font-semibold">Send another</button>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">বার্তা পাঠানো হয়েছে!</h3>
+                  <p className="text-muted-foreground">আমরা ২ ঘণ্টার মধ্যে উত্তর দেব।</p>
+                  <button onClick={() => setSent(false)} className="mt-6 inline-flex items-center gap-2 bg-foreground text-background px-5 py-2.5 rounded-xl font-semibold">আরেকটি পাঠান</button>
                 </div>
               ) : (
                 <form onSubmit={(e) => { e.preventDefault(); setSent(true) }} className="space-y-5">
-                  <h2 className="text-2xl font-bold text-foreground mb-1">Send us a message</h2>
-                  <p className="text-sm text-muted-foreground mb-6">Fill out the form and our team will get back to you.</p>
+                  <h2 className="text-2xl font-bold text-foreground mb-1">আমাদের একটি বার্তা পাঠান</h2>
+                  <p className="text-sm text-muted-foreground mb-6">ফর্মটি পূরণ করুন এবং আমাদের টিম আপনার সাথে যোগাযোগ করবে।</p>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <Label>First name</Label>
-                      <Input required placeholder="Ahmad" />
+                      <Label>প্রথম নাম</Label>
+                      <Input required placeholder="আহমাদ" />
                     </div>
                     <div>
-                      <Label>Last name</Label>
-                      <Input required placeholder="Hassan" />
+                      <Label>শেষ নাম</Label>
+                      <Input required placeholder="হাসান" />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <Label>Email</Label>
+                      <Label>ইমেইল</Label>
                       <Input type="email" required placeholder="you@email.com" />
                     </div>
                     <div>
-                      <Label>Phone</Label>
-                      <Input type="tel" placeholder="+1 (555) 123-4567" />
+                      <Label>ফোন</Label>
+                      <Input type="tel" placeholder="+৮৮০ ১৭০০-০০০০০০" />
                     </div>
                   </div>
 
                   <div>
-                    <Label>What's this about?</Label>
+                    <Label>কী বিষয়ে জানতে চান?</Label>
                     <Select required defaultValue="">
-                      <option value="" disabled>Select inquiry type</option>
-                      <option value="package">Package question</option>
-                      <option value="consultation">Free 15-min consultation</option>
-                      <option value="booking">Existing booking</option>
-                      <option value="group">Group booking (10+)</option>
-                      <option value="other">Something else</option>
+                      <option value="" disabled>জিজ্ঞাসার ধরন নির্বাচন করুন</option>
+                      <option value="package">প্যাকেজ সংক্রান্ত প্রশ্ন</option>
+                      <option value="consultation">বিনামূল্যে ১৫ মিনিটের পরামর্শ</option>
+                      <option value="booking">বিদ্যমান বুকিং</option>
+                      <option value="group">গ্রুপ বুকিং (১০+)</option>
+                      <option value="other">অন্য কিছু</option>
                     </Select>
                   </div>
 
                   <div>
-                    <Label>Subject</Label>
-                    <Input required placeholder="Premium Hajj 2026 — group of 5" />
+                    <Label>বিষয়</Label>
+                    <Input required placeholder="প্রিমিয়াম হজ্জ ২০২৬ — ৫ জনের গ্রুপ" />
                   </div>
 
                   <div>
-                    <Label>Your message</Label>
-                    <Textarea rows={5} required placeholder="Tell us about your journey..." />
+                    <Label>আপনার বার্তা</Label>
+                    <Textarea rows={5} required placeholder="আপনার যাত্রা সম্পর্কে আমাদের জানান..." />
                   </div>
 
                   <button type="submit" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-amber-600 text-primary-foreground px-6 py-3.5 rounded-xl font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all">
-                    Send message <Send className="w-4 h-4" />
+                    বার্তা পাঠান <Send className="w-4 h-4" />
                   </button>
-                  <p className="text-xs text-muted-foreground">By submitting, you agree to our Privacy Policy and Terms.</p>
+                  <p className="text-xs text-muted-foreground">জমা দেওয়ার মাধ্যমে আপনি আমাদের গোপনীয়তা নীতি ও শর্তাবলী মেনে নিচ্ছেন।</p>
                 </form>
               )}
             </div>

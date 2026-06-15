@@ -13,17 +13,17 @@ import { BookingSummarySidebar } from './booking-summary-sidebar'
 import { ROUTES } from '@/constants'
 
 const STEPS = [
-  { id: 1, label: 'Select services' },
-  { id: 2, label: 'Travelers' },
-  { id: 3, label: 'Review' },
-  { id: 4, label: 'Payment' },
+  { id: 1, label: 'সেবা নির্বাচন করুন' },
+  { id: 2, label: 'ভ্রমণকারী' },
+  { id: 3, label: 'রিভিউ' },
+  { id: 4, label: 'পেমেন্ট' },
 ]
 
 const PAYMENT_METHODS: { value: PaymentMethod; label: string; description: string }[] = [
-  { value: 'bkash', label: 'bKash', description: 'Mobile wallet · instant confirmation' },
-  { value: 'nagad', label: 'Nagad', description: 'Mobile wallet · instant confirmation' },
-  { value: 'sslcommerz', label: 'SSLCommerz', description: 'Cards, internet banking' },
-  { value: 'bank-transfer', label: 'Bank transfer', description: 'Manual verification · 24h' },
+  { value: 'bkash', label: 'বিকাশ', description: 'মোবাইল ওয়ালেট · তাৎক্ষণিক কনফার্মেশন' },
+  { value: 'nagad', label: 'নগদ', description: 'মোবাইল ওয়ালেট · তাৎক্ষণিক কনফার্মেশন' },
+  { value: 'sslcommerz', label: 'SSLCommerz', description: 'কার্ড, ইন্টারনেট ব্যাংকিং' },
+  { value: 'bank-transfer', label: 'ব্যাংক ট্রান্সফার', description: 'ম্যানুয়াল যাচাই · ২৪ ঘণ্টা' },
 ]
 
 export function BookingWizard() {
@@ -55,7 +55,7 @@ export function BookingWizard() {
   if (!hydrated) {
     return (
       <div className="px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="max-w-7xl mx-auto py-24 text-center text-muted-foreground">Loading your booking…</div>
+        <div className="max-w-7xl mx-auto py-24 text-center text-muted-foreground">আপনার বুকিং লোড হচ্ছে…</div>
       </div>
     )
   }
@@ -92,12 +92,12 @@ export function BookingWizard() {
     <div className="px-4 sm:px-6 lg:px-8 pb-24">
       <div className="max-w-7xl mx-auto">
         <Link href={ROUTES.home} className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4">
-          <ArrowLeft className="w-4 h-4" /> Continue browsing
+          <ArrowLeft className="w-4 h-4" /> ব্রাউজিং চালিয়ে যান
         </Link>
 
         <div className="mb-6">
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">Complete your booking</h1>
-          <p className="text-muted-foreground">One unified flow for packages, flights, hotels, and transport.</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">আপনার বুকিং সম্পন্ন করুন</h1>
+          <p className="text-muted-foreground">প্যাকেজ, ফ্লাইট, হোটেল ও পরিবহনের জন্য একটি ইউনিফাইড প্রবাহ।</p>
         </div>
 
         <Stepper current={step} />
@@ -129,7 +129,7 @@ export function BookingWizard() {
             <div className="flex items-center justify-between gap-3 pt-2">
               {step > 1 ? (
                 <button onClick={goPrev} className="px-5 py-2.5 border border-border rounded-xl text-sm font-semibold hover:bg-muted inline-flex items-center gap-2">
-                  <ArrowLeft className="w-4 h-4" /> Back
+                  <ArrowLeft className="w-4 h-4" /> ফিরে যান
                 </button>
               ) : <span />}
 
@@ -139,7 +139,7 @@ export function BookingWizard() {
                   disabled={!canNext}
                   className="px-6 py-3 bg-primary text-primary-foreground rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {step === 3 ? 'Proceed to payment' : 'Continue'} <ArrowRight className="w-4 h-4" />
+                  {step === 3 ? 'পেমেন্টে এগিয়ে যান' : 'চালিয়ে যান'} <ArrowRight className="w-4 h-4" />
                 </button>
               ) : (
                 <button
@@ -147,7 +147,7 @@ export function BookingWizard() {
                   disabled={items.length === 0}
                   className="px-6 py-3 bg-primary text-primary-foreground rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary/90 disabled:opacity-50"
                 >
-                  <ShieldCheck className="w-4 h-4" /> Confirm booking · {formatCurrency(totals.total)}
+                  <ShieldCheck className="w-4 h-4" /> বুকিং নিশ্চিত করুন · {formatCurrency(totals.total)}
                 </button>
               )}
             </div>
@@ -190,28 +190,28 @@ function StepServices() {
   const items = useCartStore(s => s.items)
   if (items.length === 0) {
     return (
-      <Card title="Select services" subtitle="Add anything you want to book. Combine freely.">
+      <Card title="সেবা নির্বাচন করুন" subtitle="আপনি যা বুক করতে চান যোগ করুন। মুক্তভাবে একত্রিত করুন।">
         <div className="rounded-2xl border-2 border-dashed border-border p-10 text-center">
           <ShoppingCart className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
-          <p className="text-sm text-muted-foreground mb-4">Your booking is empty. Pick services to get started.</p>
+          <p className="text-sm text-muted-foreground mb-4">আপনার বুকিং খালি। শুরু করতে সেবা বেছে নিন।</p>
           <div className="grid sm:grid-cols-2 gap-3 max-w-md mx-auto">
-            <QuickLink href={ROUTES.packages.umrah} icon={PackageIcon} label="Browse packages" />
-            <QuickLink href={ROUTES.flights.root} icon={Plane} label="Browse flights" />
-            <QuickLink href={ROUTES.hotels.root} icon={HotelIcon} label="Browse hotels" />
-            <QuickLink href={ROUTES.transportation.root} icon={Bus} label="Browse transport" />
+            <QuickLink href={ROUTES.packages.umrah} icon={PackageIcon} label="প্যাকেজ ব্রাউজ করুন" />
+            <QuickLink href={ROUTES.flights.root} icon={Plane} label="ফ্লাইট ব্রাউজ করুন" />
+            <QuickLink href={ROUTES.hotels.root} icon={HotelIcon} label="হোটেল ব্রাউজ করুন" />
+            <QuickLink href={ROUTES.transportation.root} icon={Bus} label="পরিবহন ব্রাউজ করুন" />
           </div>
         </div>
       </Card>
     )
   }
   return (
-    <Card title="Your selection" subtitle="Add more services or remove what you don't need.">
+    <Card title="আপনার নির্বাচন" subtitle="আরও সেবা যোগ করুন বা প্রয়োজন নেই যা সরিয়ে ফেলুন।">
       <CartItems />
       <div className="grid sm:grid-cols-4 gap-2 pt-2">
-        <QuickLink href={ROUTES.packages.umrah} icon={PackageIcon} label="Add package" compact />
-        <QuickLink href={ROUTES.flights.root} icon={Plane} label="Add flight" compact />
-        <QuickLink href={ROUTES.hotels.root} icon={HotelIcon} label="Add hotel" compact />
-        <QuickLink href={ROUTES.transportation.root} icon={Bus} label="Add transport" compact />
+        <QuickLink href={ROUTES.packages.umrah} icon={PackageIcon} label="প্যাকেজ যোগ করুন" compact />
+        <QuickLink href={ROUTES.flights.root} icon={Plane} label="ফ্লাইট যোগ করুন" compact />
+        <QuickLink href={ROUTES.hotels.root} icon={HotelIcon} label="হোটেল যোগ করুন" compact />
+        <QuickLink href={ROUTES.transportation.root} icon={Bus} label="পরিবহন যোগ করুন" compact />
       </div>
     </Card>
   )
@@ -244,7 +244,7 @@ function CartItems() {
               onChange={e => updateItem(it.id, { qty: Math.max(1, Number(e.target.value || 1)) })}
               className="w-14 h-9 rounded-lg border border-border bg-background text-center text-sm"
             />
-            <button onClick={() => removeItem(it.id)} className="p-2 text-muted-foreground hover:text-rose-500" title="Remove">
+            <button onClick={() => removeItem(it.id)} className="p-2 text-muted-foreground hover:text-rose-500" title="সরান">
               <Trash2 className="w-4 h-4" />
             </button>
           </div>
@@ -294,72 +294,72 @@ function StepTravelers({
 
   return (
     <>
-      <Card title="Lead contact" subtitle="We'll send confirmation and updates here.">
+      <Card title="প্রধান যোগাযোগ" subtitle="আমরা এখানে কনফার্মেশন ও আপডেট পাঠাব।">
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <Label>Lead contact name</Label>
-            <Input value={contact.name} onChange={e => onChangeContact({ ...contact, name: e.target.value })} placeholder="Mohammad Abdullah" />
+            <Label>প্রধান যোগাযোগের নাম</Label>
+            <Input value={contact.name} onChange={e => onChangeContact({ ...contact, name: e.target.value })} placeholder="মোহাম্মদ আবদুল্লাহ" />
           </div>
           <div>
-            <Label>Phone number</Label>
+            <Label>ফোন নম্বর</Label>
             <Input value={contact.phone} onChange={e => onChangeContact({ ...contact, phone: e.target.value })} placeholder="+880 1XXX-XXXXXX" />
           </div>
           <div className="sm:col-span-2">
-            <Label>Email address</Label>
+            <Label>ইমেইল ঠিকানা</Label>
             <Input type="email" value={contact.email} onChange={e => onChangeContact({ ...contact, email: e.target.value })} placeholder="you@example.com" />
           </div>
         </div>
       </Card>
 
-      <Card title="Traveler information" subtitle="Add details for every pilgrim. Must match passports.">
+      <Card title="ভ্রমণকারীর তথ্য" subtitle="প্রতিটি হাজীর জন্য বিস্তারিত যোগ করুন। পাসপোর্টের সাথে মিলতে হবে।">
         <div className="space-y-5">
           {travelers.map((t, i) => (
             <div key={t.id} className="border border-border rounded-2xl p-5">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Pilgrim {i + 1}</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">হাজী {i + 1}</p>
                 {travelers.length > 1 && (
-                  <button onClick={() => removeTraveler(t.id)} className="text-xs text-rose-500 hover:underline">Remove</button>
+                  <button onClick={() => removeTraveler(t.id)} className="text-xs text-rose-500 hover:underline">সরান</button>
                 )}
               </div>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="sm:col-span-2">
-                  <Label>Full name (as on passport)</Label>
-                  <Input value={t.fullName} onChange={e => setTraveler(t.id, { fullName: e.target.value })} placeholder="Mohammad Abdullah" />
+                  <Label>পুরো নাম (পাসপোর্ট অনুযায়ী)</Label>
+                  <Input value={t.fullName} onChange={e => setTraveler(t.id, { fullName: e.target.value })} placeholder="মোহাম্মদ আবদুল্লাহ" />
                 </div>
                 <div>
-                  <Label>Gender</Label>
+                  <Label>লিঙ্গ</Label>
                   <Select value={t.gender} onChange={e => setTraveler(t.id, { gender: e.target.value as 'male' | 'female' })}>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="male">পুরুষ</option>
+                    <option value="female">মহিলা</option>
                   </Select>
                 </div>
                 <div>
-                  <Label>Date of birth</Label>
+                  <Label>জন্ম তারিখ</Label>
                   <Input type="date" value={t.dateOfBirth} onChange={e => setTraveler(t.id, { dateOfBirth: e.target.value })} />
                 </div>
                 <div>
-                  <Label>Passport number</Label>
+                  <Label>পাসপোর্ট নম্বর</Label>
                   <Input value={t.passportNumber} onChange={e => setTraveler(t.id, { passportNumber: e.target.value })} placeholder="A12345678" />
                 </div>
                 <div>
-                  <Label>Passport expiry</Label>
+                  <Label>পাসপোর্টের মেয়াদ</Label>
                   <Input type="date" value={t.passportExpiry} onChange={e => setTraveler(t.id, { passportExpiry: e.target.value })} />
                 </div>
                 <div>
-                  <Label>Nationality</Label>
+                  <Label>জাতীয়তা</Label>
                   <Input value={t.nationality} onChange={e => setTraveler(t.id, { nationality: e.target.value })} />
                 </div>
                 <div>
-                  <Label>Mobile number</Label>
+                  <Label>মোবাইল নম্বর</Label>
                   <Input value={t.mobile} onChange={e => setTraveler(t.id, { mobile: e.target.value })} placeholder="+880 1XXX-XXXXXX" />
                 </div>
                 <div className="sm:col-span-2">
-                  <Label>Email address</Label>
+                  <Label>ইমেইল ঠিকানা</Label>
                   <Input type="email" value={t.email} onChange={e => setTraveler(t.id, { email: e.target.value })} placeholder="pilgrim@example.com" />
                 </div>
                 <div className="sm:col-span-2">
-                  <Label>Emergency contact</Label>
-                  <Input value={t.emergencyContact} onChange={e => setTraveler(t.id, { emergencyContact: e.target.value })} placeholder="Name + phone number" />
+                  <Label>জরুরি যোগাযোগ</Label>
+                  <Input value={t.emergencyContact} onChange={e => setTraveler(t.id, { emergencyContact: e.target.value })} placeholder="নাম + ফোন নম্বর" />
                 </div>
               </div>
             </div>
@@ -369,13 +369,13 @@ function StepTravelers({
             onClick={addTraveler}
             className="w-full py-3 border-2 border-dashed border-border rounded-2xl text-sm text-muted-foreground hover:border-primary hover:text-primary transition-colors inline-flex items-center justify-center gap-2"
           >
-            <Plus className="w-4 h-4" /> Add another traveler
+            <Plus className="w-4 h-4" /> আরেকজন ভ্রমণকারী যোগ করুন
           </button>
         </div>
       </Card>
 
-      <Card title="Special requests (optional)">
-        <Input value={notes} onChange={e => onChangeNotes(e.target.value)} placeholder="Wheelchair access, adjacent rooms, dietary needs…" />
+      <Card title="বিশেষ অনুরোধ (ঐচ্ছিক)">
+        <Input value={notes} onChange={e => onChangeNotes(e.target.value)} placeholder="হুইলচেয়ার সুবিধা, পাশাপাশি রুম, খাদ্যাভ্যাস…" />
       </Card>
     </>
   )
@@ -388,35 +388,35 @@ function StepReview({ travelers, contact, notes }: {
 }) {
   return (
     <>
-      <Card title="Selected services">
+      <Card title="নির্বাচিত সেবাসমূহ">
         <CartItems />
       </Card>
-      <Card title="Travelers">
+      <Card title="ভ্রমণকারী">
         <div className="space-y-3">
           {travelers.map((t, i) => (
             <div key={t.id} className="rounded-2xl border border-border p-4 text-sm">
-              <p className="font-semibold text-foreground">{i + 1}. {t.fullName || <span className="text-rose-500">Name missing</span>}</p>
+              <p className="font-semibold text-foreground">{i + 1}. {t.fullName || <span className="text-rose-500">নাম নেই</span>}</p>
               <div className="grid sm:grid-cols-3 gap-1 mt-2 text-xs text-muted-foreground">
-                <span>Passport: {t.passportNumber || '—'}</span>
-                <span className="capitalize">Gender: {t.gender}</span>
-                <span>DOB: {t.dateOfBirth || '—'}</span>
-                <span>Nationality: {t.nationality || '—'}</span>
-                <span>Mobile: {t.mobile || '—'}</span>
-                <span>Email: {t.email || '—'}</span>
+                <span>পাসপোর্ট: {t.passportNumber || '—'}</span>
+                <span className="capitalize">লিঙ্গ: {t.gender}</span>
+                <span>জন্ম তারিখ: {t.dateOfBirth || '—'}</span>
+                <span>জাতীয়তা: {t.nationality || '—'}</span>
+                <span>মোবাইল: {t.mobile || '—'}</span>
+                <span>ইমেইল: {t.email || '—'}</span>
               </div>
             </div>
           ))}
         </div>
       </Card>
-      <Card title="Lead contact">
+      <Card title="প্রধান যোগাযোগ">
         <div className="grid sm:grid-cols-3 gap-2 text-sm text-foreground/80">
-          <div><span className="text-muted-foreground text-xs uppercase tracking-wider block">Name</span>{contact.name || '—'}</div>
-          <div><span className="text-muted-foreground text-xs uppercase tracking-wider block">Email</span>{contact.email || '—'}</div>
-          <div><span className="text-muted-foreground text-xs uppercase tracking-wider block">Phone</span>{contact.phone || '—'}</div>
+          <div><span className="text-muted-foreground text-xs uppercase tracking-wider block">নাম</span>{contact.name || '—'}</div>
+          <div><span className="text-muted-foreground text-xs uppercase tracking-wider block">ইমেইল</span>{contact.email || '—'}</div>
+          <div><span className="text-muted-foreground text-xs uppercase tracking-wider block">ফোন</span>{contact.phone || '—'}</div>
         </div>
       </Card>
       {notes && (
-        <Card title="Special requests">
+        <Card title="বিশেষ অনুরোধ">
           <p className="text-sm text-foreground/80">{notes}</p>
         </Card>
       )}
@@ -439,15 +439,15 @@ function StepPayment({
 }) {
   return (
     <>
-      <Card title="Payment plan">
+      <Card title="পেমেন্ট পরিকল্পনা">
         <div className="grid sm:grid-cols-3 gap-3">
-          <PlanOption value="full" current={paymentPlan} onChange={onChangePlan} title="Pay in full" subtitle={formatCurrency(total)} />
-          <PlanOption value="partial" current={paymentPlan} onChange={onChangePlan} title="25% deposit" subtitle={`${formatCurrency(Math.round(total * 0.25))} now`} />
-          <PlanOption value="installment" current={paymentPlan} onChange={onChangePlan} title="4 installments" subtitle={`${formatCurrency(Math.round(total / 4))}/month`} />
+          <PlanOption value="full" current={paymentPlan} onChange={onChangePlan} title="পুরো পরিশোধ" subtitle={formatCurrency(total)} />
+          <PlanOption value="partial" current={paymentPlan} onChange={onChangePlan} title="২৫% জামানত" subtitle={`${formatCurrency(Math.round(total * 0.25))} এখন`} />
+          <PlanOption value="installment" current={paymentPlan} onChange={onChangePlan} title="৪টি কিস্তি" subtitle={`${formatCurrency(Math.round(total / 4))}/মাস`} />
         </div>
       </Card>
 
-      <Card title="Payment method">
+      <Card title="পেমেন্ট পদ্ধতি">
         <div className="grid sm:grid-cols-2 gap-3">
           {PAYMENT_METHODS.map(m => (
             <label
@@ -469,13 +469,13 @@ function StepPayment({
         </div>
       </Card>
 
-      <Card title="Confirm">
+      <Card title="নিশ্চিত করুন">
         <label className="flex items-start gap-3 text-sm text-foreground/80">
           <input type="checkbox" defaultChecked className="rounded border-border mt-0.5" />
           <span>
-            I confirm all details are correct and accept the{' '}
-            <Link href={ROUTES.terms} className="text-primary hover:underline">Terms</Link> and{' '}
-            <Link href={ROUTES.refund} className="text-primary hover:underline">Refund Policy</Link>.
+            আমি নিশ্চিত করছি সব তথ্য সঠিক এবং আমি{' '}
+            <Link href={ROUTES.terms} className="text-primary hover:underline">শর্তাবলি</Link> ও{' '}
+            <Link href={ROUTES.refund} className="text-primary hover:underline">রিফান্ড নীতি</Link> মেনে নিচ্ছি।
           </span>
         </label>
       </Card>

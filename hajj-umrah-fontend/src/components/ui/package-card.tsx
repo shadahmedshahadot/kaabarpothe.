@@ -37,7 +37,7 @@ export function PackageCard({ pkg, index = 0 }: { pkg: Package; index?: number }
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
 
         <div className="absolute top-4 left-4 flex gap-2 z-10">
-          {pkg.featured && <Badge variant="default">Featured</Badge>}
+          {pkg.featured && <Badge variant="default">বৈশিষ্ট্যযুক্ত</Badge>}
           <Badge variant={pkg.type === 'hajj' ? 'accent' : 'secondary'}>{pkg.type.toUpperCase()}</Badge>
         </div>
         {pkg.discount > 0 && (
@@ -48,12 +48,12 @@ export function PackageCard({ pkg, index = 0 }: { pkg: Package; index?: number }
             transition={{ delay: index * 0.06 + 0.3, type: 'spring', stiffness: 200 }}
             className="absolute top-4 right-4 bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10"
           >
-            Save {formatCurrency(pkg.discount)}
+            সাশ্রয় {formatCurrency(pkg.discount)}
           </motion.div>
         )}
         <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white z-10">
           <div>
-            <p className="text-xs opacity-90 mb-0.5">{pkg.duration} days</p>
+            <p className="text-xs opacity-90 mb-0.5">{pkg.duration} দিন</p>
             <h3 className="text-xl font-bold leading-tight drop-shadow">{pkg.name}</h3>
           </div>
           <div className="flex items-center gap-1 bg-black/40 backdrop-blur rounded-full px-2.5 py-1">
@@ -67,7 +67,7 @@ export function PackageCard({ pkg, index = 0 }: { pkg: Package; index?: number }
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2 min-h-[40px]">{pkg.shortDescription}</p>
 
         <div className="grid grid-cols-2 gap-3 mb-4 text-xs">
-          <div className="flex items-center gap-2 text-foreground/70"><Clock className="w-4 h-4 text-primary" /> {pkg.duration} Days</div>
+          <div className="flex items-center gap-2 text-foreground/70"><Clock className="w-4 h-4 text-primary" /> {pkg.duration} দিন</div>
           <div className="flex items-center gap-2 text-foreground/70"><Users className="w-4 h-4 text-accent" /> {pkg.groupSize}</div>
           <div className="flex items-center gap-2 text-foreground/70 col-span-2"><MapPin className="w-4 h-4 text-secondary" /> {pkg.hotelMakkah.distance}</div>
         </div>
@@ -76,14 +76,14 @@ export function PackageCard({ pkg, index = 0 }: { pkg: Package; index?: number }
           <div>
             {pkg.discount > 0 && <p className="text-xs text-muted-foreground line-through">{formatCurrency(pkg.price)}</p>}
             <p className="text-2xl font-bold text-foreground">{formatCurrency(discountedPrice)}</p>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Per person</p>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wider">জন প্রতি</p>
           </div>
           <motion.div whileHover={{ scale: 1.04, x: 2 }} whileTap={{ scale: 0.96 }}>
             <Link
               href={`/packages/${pkg.type}/${pkg.slug}`}
               className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary/90 transition-colors group/btn"
             >
-              View Details
+              বিস্তারিত দেখুন
               <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
             </Link>
           </motion.div>

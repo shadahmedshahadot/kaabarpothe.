@@ -24,20 +24,20 @@ export function TransportListing({ transports }: { transports: Transport[] }) {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-6 mb-8 items-start lg:items-center justify-between">
           <p className="text-sm text-muted-foreground">
-            <span className="font-bold text-foreground">{filtered.length}</span> services available
+            <span className="font-bold text-foreground">{filtered.length}</span> টি পরিষেবা উপলব্ধ
           </p>
           <div className="flex flex-wrap gap-3 items-center w-full lg:w-auto">
             <div className="flex items-center gap-2 text-sm text-foreground/70">
-              <SlidersHorizontal className="w-4 h-4" /> Filters:
+              <SlidersHorizontal className="w-4 h-4" /> ফিল্টার:
             </div>
             <Select value={type} onChange={e => setType(e.target.value)} className="w-auto min-w-[160px]">
-              <option value="all">All types</option>
+              <option value="all">সকল ধরন</option>
               {TRANSPORT_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
             </Select>
             <Select value={sort} onChange={e => setSort(e.target.value as typeof sort)} className="w-auto min-w-[160px]">
-              <option value="recommended">Recommended</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
+              <option value="recommended">প্রস্তাবিত</option>
+              <option value="price-asc">দাম: কম থেকে বেশি</option>
+              <option value="price-desc">দাম: বেশি থেকে কম</option>
             </Select>
           </div>
         </div>
@@ -49,7 +49,7 @@ export function TransportListing({ transports }: { transports: Transport[] }) {
         {filtered.length === 0 && (
           <div className="text-center py-20 text-muted-foreground">
             <Filter className="w-12 h-12 mx-auto mb-4 opacity-40" />
-            <p>No transportation services match your filters.</p>
+            <p>আপনার ফিল্টারের সাথে কোনো পরিবহন পরিষেবা মেলেনি।</p>
           </div>
         )}
       </div>

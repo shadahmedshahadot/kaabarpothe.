@@ -36,7 +36,7 @@ export function AuthVisual({ title, description, gradient, pattern = 'diamond', 
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="inline-flex items-center gap-1.5 px-3 py-1 mb-5 rounded-full bg-white/15 backdrop-blur-md text-[11px] uppercase tracking-[0.18em] ring-1 ring-white/20">
-            <Sparkles className="w-3 h-3" /> Trusted by 50,000+ pilgrims
+            <Sparkles className="w-3 h-3" /> ৫০,০০০+ হাজীর বিশ্বস্ত
           </span>
           <h1 className="text-4xl xl:text-5xl font-bold leading-[1.1] mb-4">{title}</h1>
           <p className="opacity-85 mb-8 leading-relaxed text-base">{description}</p>
@@ -104,7 +104,7 @@ export function AuthVisual({ title, description, gradient, pattern = 'diamond', 
               <Star key={i} className="w-3 h-3 fill-amber-300 text-amber-300" />
             ))}
           </div>
-          <span>4.9 rating from 12,500+ reviews</span>
+          <span>১২,৫০০+ রিভিউ থেকে ৪.৯ রেটিং</span>
         </motion.div>
       </div>
     </div>

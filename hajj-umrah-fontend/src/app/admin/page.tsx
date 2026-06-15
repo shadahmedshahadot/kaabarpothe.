@@ -22,30 +22,30 @@ export default function AdminDashboardPage() {
   const activePackages = packages.filter(p => p.status === 'published').length
 
   const quickStats = [
-    { label: 'Pending revenue', value: formatCurrency(pendingRevenue), color: 'amber' },
-    { label: 'Active packages', value: activePackages.toString(), color: 'emerald' },
-    { label: 'Open inquiries', value: inquiries.filter(i => i.status === 'new').length.toString(), color: 'sky' },
-    { label: 'Pending visas', value: bookings.filter(b => b.visaStatus === 'pending' || b.visaStatus === 'submitted').length.toString(), color: 'rose' },
+    { label: 'অপেক্ষমাণ রাজস্ব', value: formatCurrency(pendingRevenue), color: 'amber' },
+    { label: 'সক্রিয় প্যাকেজ', value: activePackages.toString(), color: 'emerald' },
+    { label: 'খোলা অনুসন্ধান', value: inquiries.filter(i => i.status === 'new').length.toString(), color: 'sky' },
+    { label: 'অপেক্ষমাণ ভিসা', value: bookings.filter(b => b.visaStatus === 'pending' || b.visaStatus === 'submitted').length.toString(), color: 'rose' },
   ]
 
   const activity: ActivityItem[] = [
-    { Icon: CheckCircle2, color: 'emerald', text: `${pilgrims[0].fullName} completed payment`, time: '2026-06-12T11:00:00' },
-    { Icon: MessageSquare, color: 'sky', text: `New inquiry from ${inquiries[0].name}`, time: '2026-06-12T08:30:00' },
-    { Icon: Calendar, color: 'amber', text: `New booking ${bookings[0].bookingCode}`, time: '2026-06-11T14:20:00' },
-    { Icon: TrendingUp, color: 'violet', text: `Premium Hajj 2026 reached 90% capacity`, time: '2026-06-11T10:00:00' },
-    { Icon: Clock, color: 'rose', text: `Visa pending for ${bookings.find(b => b.visaStatus === 'pending')?.pilgrimName ?? 'pilgrim'}`, time: '2026-06-10T16:00:00' },
+    { Icon: CheckCircle2, color: 'emerald', text: `${pilgrims[0].fullName} পেমেন্ট সম্পন্ন করেছেন`, time: '2026-06-12T11:00:00' },
+    { Icon: MessageSquare, color: 'sky', text: `${inquiries[0].name} থেকে নতুন অনুসন্ধান`, time: '2026-06-12T08:30:00' },
+    { Icon: Calendar, color: 'amber', text: `নতুন বুকিং ${bookings[0].bookingCode}`, time: '2026-06-11T14:20:00' },
+    { Icon: TrendingUp, color: 'violet', text: `প্রিমিয়াম হজ্জ ২০২৬ ৯০% ক্ষমতায় পৌঁছেছে`, time: '2026-06-11T10:00:00' },
+    { Icon: Clock, color: 'rose', text: `${bookings.find(b => b.visaStatus === 'pending')?.pilgrimName ?? 'হাজী'} এর জন্য ভিসা অপেক্ষমাণ`, time: '2026-06-10T16:00:00' },
   ]
 
   return (
     <>
       <PageTitle
-        title="Welcome back, Imam Yusuf"
-        description="Here's what's happening at Sakinah today."
+        title="স্বাগতম, ইমাম ইউসুফ"
+        description="আজ সাকিনাহ ট্রাভেলসে যা ঘটছে তা এখানে দেখুন।"
         action={
           <div className="flex gap-2">
-            <button className="px-4 py-2 border border-border rounded-xl text-sm font-semibold hover:bg-muted transition-colors">Export</button>
+            <button className="px-4 py-2 border border-border rounded-xl text-sm font-semibold hover:bg-muted transition-colors">এক্সপোর্ট</button>
             <Link href={`${ROUTES.admin.packages}/new`} className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary transition-colors">
-              <PackageIcon className="w-4 h-4" /> New Package
+              <PackageIcon className="w-4 h-4" /> নতুন প্যাকেজ
             </Link>
           </div>
         }

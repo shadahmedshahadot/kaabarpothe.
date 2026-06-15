@@ -43,9 +43,9 @@ export function TransportDetail({ transport }: { transport: Transport }) {
     <div className="px-4 sm:px-6 lg:px-8 pb-24">
       <div className="max-w-7xl mx-auto">
         <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-          <Link href={ROUTES.home} className="hover:text-foreground">Home</Link>
+          <Link href={ROUTES.home} className="hover:text-foreground">হোম</Link>
           <span>/</span>
-          <Link href={ROUTES.transportation.root} className="hover:text-foreground">Transportation</Link>
+          <Link href={ROUTES.transportation.root} className="hover:text-foreground">পরিবহন</Link>
           <span>/</span>
           <span className="text-foreground font-medium line-clamp-1">{transport.name}</span>
         </nav>
@@ -60,7 +60,7 @@ export function TransportDetail({ transport }: { transport: Transport }) {
             >
               <Image src={transport.cover} alt={transport.name} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover" priority />
               <div className="absolute top-4 left-4 flex gap-2">
-                {transport.featured && <Badge variant="default">Featured</Badge>}
+                {transport.featured && <Badge variant="default">ফিচার্ড</Badge>}
                 <Badge variant="outline" className="bg-card/90">{label}</Badge>
               </div>
             </motion.div>
@@ -69,35 +69,35 @@ export function TransportDetail({ transport }: { transport: Transport }) {
               <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-balance">{transport.name}</h1>
               <div className="flex flex-wrap gap-4 text-sm text-foreground/70 mb-4">
                 <span className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4 text-primary" /> {transport.travelDuration}</span>
-                <span className="inline-flex items-center gap-1.5"><Users className="w-4 h-4 text-accent" /> up to {transport.capacity} passengers</span>
+                <span className="inline-flex items-center gap-1.5"><Users className="w-4 h-4 text-accent" /> {transport.capacity} জন যাত্রী পর্যন্ত</span>
                 <span className="inline-flex items-center gap-1.5 capitalize"><Bus className="w-4 h-4 text-secondary" /> {transport.vehicleType.replace('-', ' ')}</span>
               </div>
               <p className="text-base text-foreground/80 leading-relaxed">{transport.routeDetails}</p>
             </div>
 
-            <Section title="Route" icon={MapPin}>
+            <Section title="রুট" icon={MapPin}>
               <div className="space-y-3">
-                <Row label="Pickup" value={transport.pickupLocation} />
-                <Row label="Drop-off" value={transport.dropoffLocation} />
-                <Row label="Duration" value={transport.travelDuration} />
+                <Row label="পিকআপ" value={transport.pickupLocation} />
+                <Row label="নামানো" value={transport.dropoffLocation} />
+                <Row label="সময়কাল" value={transport.travelDuration} />
               </div>
             </Section>
 
-            <Section title="Service coverage" icon={MapPin}>
+            <Section title="পরিষেবার আওতা" icon={MapPin}>
               <div className="flex flex-wrap gap-2">
                 {transport.serviceCoverage.map(c => <Badge key={c} variant="outline">{c}</Badge>)}
               </div>
             </Section>
 
-            <Section title="Driver & contact" icon={Phone}>
+            <Section title="চালক ও যোগাযোগ" icon={Phone}>
               <div className="grid sm:grid-cols-2 gap-3 text-sm">
-                <Row label="Driver" value={transport.driverName} />
-                <Row label="Contact" value={transport.driverContact} />
+                <Row label="চালক" value={transport.driverName} />
+                <Row label="যোগাযোগ" value={transport.driverContact} />
               </div>
             </Section>
 
             {transport.notes && (
-              <Section title="Notes" icon={ShieldCheck}>
+              <Section title="নোট" icon={ShieldCheck}>
                 <p className="text-sm text-foreground/80 leading-relaxed">{transport.notes}</p>
               </Section>
             )}
@@ -106,7 +106,7 @@ export function TransportDetail({ transport }: { transport: Transport }) {
           <div className="lg:sticky lg:top-28 lg:self-start space-y-4">
             <div className="bg-card border border-border rounded-3xl p-6 shadow-sm">
               <div className="mb-4">
-                <p className="text-sm text-muted-foreground">From</p>
+                <p className="text-sm text-muted-foreground">থেকে</p>
                 <p className="text-4xl font-bold text-foreground leading-none mt-1">{formatCurrency(transport.price)}</p>
                 <p className="text-xs text-muted-foreground mt-1 capitalize">{transport.pricingUnit.replace('-', ' ')}</p>
               </div>
@@ -114,8 +114,8 @@ export function TransportDetail({ transport }: { transport: Transport }) {
               {transport.pricingUnit === 'per-person' && (
                 <div className="flex items-center justify-between rounded-xl border border-border p-3 mb-4">
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Passengers</p>
-                    <p className="text-xs text-muted-foreground">Max {transport.capacity}</p>
+                    <p className="text-sm font-semibold text-foreground">যাত্রী</p>
+                    <p className="text-xs text-muted-foreground">সর্বোচ্চ {transport.capacity}</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button
@@ -138,37 +138,37 @@ export function TransportDetail({ transport }: { transport: Transport }) {
               )}
 
               <div className="text-xs text-muted-foreground space-y-1 mb-5 pt-4 border-t border-border">
-                <div className="flex justify-between"><span>Total</span><span className="font-bold text-foreground text-base">{formatCurrency(total)}</span></div>
+                <div className="flex justify-between"><span>মোট</span><span className="font-bold text-foreground text-base">{formatCurrency(total)}</span></div>
               </div>
 
               {transport.availability === 'soldout' ? (
                 <button disabled className="w-full bg-muted text-muted-foreground py-3 rounded-xl font-semibold text-sm cursor-not-allowed">
-                  Currently unavailable
+                  বর্তমানে অনুপলব্ধ
                 </button>
               ) : (
                 <button
                   onClick={handleAdd}
                   className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
                 >
-                  Add to booking <ArrowRight className="w-4 h-4" />
+                  বুকিং-এ যোগ করুন <ArrowRight className="w-4 h-4" />
                 </button>
               )}
 
               <p className="text-[11px] text-muted-foreground text-center mt-3 inline-flex items-center gap-1.5 justify-center w-full">
-                <ShieldCheck className="w-3 h-3" /> Bookable on its own or with flights / hotels
+                <ShieldCheck className="w-3 h-3" /> এককভাবে অথবা ফ্লাইট / হোটেলের সাথে বুক করুন
               </p>
             </div>
 
             <div className="bg-card border border-border rounded-3xl p-5">
-              <h3 className="font-bold text-foreground mb-3 text-sm">Trusted by pilgrims</h3>
+              <h3 className="font-bold text-foreground mb-3 text-sm">হাজীদের বিশ্বস্ত</h3>
               <div className="flex items-center justify-between text-sm">
                 <div>
                   <p className="text-2xl font-bold text-foreground">{transport.rating}</p>
-                  <p className="text-xs text-muted-foreground">{transport.reviewsCount.toLocaleString()} reviews</p>
+                  <p className="text-xs text-muted-foreground">{transport.reviewsCount.toLocaleString()} রিভিউ</p>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold text-foreground">{transport.bookingsCount.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">past trips</p>
+                  <p className="text-xs text-muted-foreground">পূর্ববর্তী ট্রিপ</p>
                 </div>
               </div>
             </div>

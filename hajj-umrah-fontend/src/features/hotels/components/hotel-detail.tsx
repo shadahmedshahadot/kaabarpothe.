@@ -44,9 +44,9 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
     <div className="px-4 sm:px-6 lg:px-8 pb-24">
       <div className="max-w-7xl mx-auto">
         <nav className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-          <Link href={ROUTES.home} className="hover:text-foreground">Home</Link>
+          <Link href={ROUTES.home} className="hover:text-foreground">হোম</Link>
           <span>/</span>
-          <Link href={ROUTES.hotels.root} className="hover:text-foreground">Hotels</Link>
+          <Link href={ROUTES.hotels.root} className="hover:text-foreground">হোটেল</Link>
           <span>/</span>
           <span className="text-foreground font-medium">{hotel.name}</span>
         </nav>
@@ -62,8 +62,8 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
               <div className="relative aspect-[16/10] rounded-3xl overflow-hidden border border-border">
                 <Image src={activeImg} alt={hotel.name} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover" priority />
                 <div className="absolute top-4 left-4 flex gap-2">
-                  {hotel.featured && <Badge variant="default">Featured</Badge>}
-                  <Badge variant={hotel.city === 'Makkah' ? 'accent' : 'secondary'}>{hotel.city}</Badge>
+                  {hotel.featured && <Badge variant="default">ফিচার্ড</Badge>}
+                  <Badge variant={hotel.city === 'Makkah' ? 'accent' : 'secondary'}>{hotel.city === 'Makkah' ? 'মক্কা' : hotel.city === 'Madinah' ? 'মদিনা' : hotel.city}</Badge>
                 </div>
               </div>
               <div className="grid grid-cols-4 gap-3">
@@ -86,7 +86,7 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <span className="text-xs text-muted-foreground">{hotel.category}-Star Hotel</span>
+                <span className="text-xs text-muted-foreground">{hotel.category}-স্টার হোটেল</span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-3 text-balance">{hotel.name}</h1>
               <p className="text-sm text-muted-foreground inline-flex items-center gap-1.5 mb-4">
@@ -95,7 +95,7 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
               <p className="text-base text-foreground/80 leading-relaxed">{hotel.description}</p>
             </div>
 
-            <Section title="Room types" icon={BedDouble}>
+            <Section title="রুমের ধরন" icon={BedDouble}>
               <div className="space-y-3">
                 {hotel.roomTypes.map(rt => (
                   <label
@@ -113,11 +113,11 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
                     <div className="flex-1 grid sm:grid-cols-[1fr_auto] gap-3">
                       <div>
                         <p className="font-semibold text-foreground">{rt.name}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5">Up to {rt.capacity} guests · {rt.available} available · {rt.board.replace('-', ' ')}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{rt.capacity} জন পর্যন্ত · {rt.available} টি উপলব্ধ · {rt.board.replace('-', ' ')}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-xl font-bold text-foreground">{formatCurrency(rt.pricePerNight)}</p>
-                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">per night</p>
+                        <p className="text-[10px] text-muted-foreground uppercase tracking-wider">প্রতি রাত</p>
                       </div>
                     </div>
                   </label>
@@ -125,7 +125,7 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
               </div>
             </Section>
 
-            <Section title="Facilities" icon={Wifi}>
+            <Section title="সুবিধা" icon={Wifi}>
               <div className="grid sm:grid-cols-2 gap-2 text-sm">
                 {hotel.facilities.map(f => (
                   <div key={f} className="flex items-center gap-2 text-foreground/80">
@@ -136,16 +136,16 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
               </div>
             </Section>
 
-            <Section title="Meal information" icon={Utensils}>
+            <Section title="খাবারের তথ্য" icon={Utensils}>
               <p className="text-sm text-foreground/80">{hotel.meals}</p>
             </Section>
 
-            <Section title="Availability" icon={Calendar}>
+            <Section title="উপলব্ধতা" icon={Calendar}>
               <div className="grid sm:grid-cols-2 gap-3 text-sm">
-                <Row label="Check-in" value={formatDate(hotel.checkInDate)} />
-                <Row label="Check-out" value={formatDate(hotel.checkOutDate)} />
-                <Row label="Total nights" value={`${nights} nights`} />
-                <Row label="Total rooms" value={hotel.totalRooms.toLocaleString()} />
+                <Row label="চেক-ইন" value={formatDate(hotel.checkInDate)} />
+                <Row label="চেক-আউট" value={formatDate(hotel.checkOutDate)} />
+                <Row label="মোট রাত" value={`${nights} রাত`} />
+                <Row label="মোট রুম" value={hotel.totalRooms.toLocaleString()} />
               </div>
             </Section>
           </div>
@@ -156,37 +156,37 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
                 <div>
                   <p className="text-sm text-muted-foreground">{room.name}</p>
                   <p className="text-4xl font-bold text-foreground leading-none mt-1">{formatCurrency(room.pricePerNight)}</p>
-                  <p className="text-xs text-muted-foreground mt-1">per night · {room.board.replace('-', ' ')}</p>
+                  <p className="text-xs text-muted-foreground mt-1">প্রতি রাত · {room.board.replace('-', ' ')}</p>
                 </div>
-                <Badge variant="success">{room.available} left</Badge>
+                <Badge variant="success">{room.available} টি বাকি</Badge>
               </div>
 
               <div className="text-xs text-muted-foreground space-y-1 mb-5 pt-4 border-t border-border">
-                <div className="flex justify-between"><span>{nights} nights × {formatCurrency(room.pricePerNight)}</span><span className="font-medium text-foreground">{formatCurrency(room.pricePerNight * nights)}</span></div>
+                <div className="flex justify-between"><span>{nights} রাত × {formatCurrency(room.pricePerNight)}</span><span className="font-medium text-foreground">{formatCurrency(room.pricePerNight * nights)}</span></div>
               </div>
 
               <button
                 onClick={handleAdd}
                 className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
               >
-                Add to booking <ArrowRight className="w-4 h-4" />
+                বুকিং-এ যোগ করুন <ArrowRight className="w-4 h-4" />
               </button>
 
               <p className="text-[11px] text-muted-foreground text-center mt-3 inline-flex items-center gap-1.5 justify-center w-full">
-                <ShieldCheck className="w-3 h-3" /> Book independently or combine with flights & transport
+                <ShieldCheck className="w-3 h-3" /> আলাদাভাবে বুক করুন অথবা ফ্লাইট ও পরিবহনের সাথে একত্রে নিন
               </p>
             </div>
 
             <div className="bg-card border border-border rounded-3xl p-5">
-              <h3 className="font-bold text-foreground mb-3 text-sm">Trusted by pilgrims</h3>
+              <h3 className="font-bold text-foreground mb-3 text-sm">হাজীদের বিশ্বস্ত</h3>
               <div className="flex items-center justify-between text-sm">
                 <div>
                   <p className="text-2xl font-bold text-foreground">{hotel.rating}</p>
-                  <p className="text-xs text-muted-foreground">{hotel.reviewsCount.toLocaleString()} reviews</p>
+                  <p className="text-xs text-muted-foreground">{hotel.reviewsCount.toLocaleString()} রিভিউ</p>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold text-foreground">{hotel.bookingsCount.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">past stays</p>
+                  <p className="text-xs text-muted-foreground">পূর্ববর্তী স্টে</p>
                 </div>
               </div>
             </div>

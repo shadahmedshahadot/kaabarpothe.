@@ -9,9 +9,9 @@ export function RecentBookings({ bookings }: { bookings: Booking[] }) {
   return (
     <div className="bg-card border border-border rounded-2xl p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-bold text-foreground">Recent bookings</h3>
+        <h3 className="font-bold text-foreground">সাম্প্রতিক বুকিং</h3>
         <Link href={ROUTES.admin.bookings} className="text-xs text-primary font-semibold hover:underline inline-flex items-center gap-1">
-          View all <ArrowUpRight className="w-3 h-3" />
+          সব দেখুন <ArrowUpRight className="w-3 h-3" />
         </Link>
       </div>
       <div className="space-y-3">

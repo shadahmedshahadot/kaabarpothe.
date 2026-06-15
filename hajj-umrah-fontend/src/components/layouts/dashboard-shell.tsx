@@ -163,7 +163,7 @@ function SidebarUser({ userName, userRole, userAvatar }: { userName: string; use
         </div>
       </div>
       <Link href="/" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors">
-        <LogOut className="w-3.5 h-3.5" /> Sign out
+        <LogOut className="w-3.5 h-3.5" /> সাইন আউট
       </Link>
     </div>
   )
@@ -191,7 +191,7 @@ function DashboardTopbar({
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <input
           type="search"
-          placeholder="Search bookings, pilgrims, packages…"
+          placeholder="বুকিং, হাজী, প্যাকেজ অনুসন্ধান…"
           className="w-full h-9 pl-10 pr-3 rounded-lg bg-muted/60 border border-transparent focus:border-primary focus:bg-card focus:outline-none text-sm"
         />
       </div>

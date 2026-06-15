@@ -13,10 +13,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const transport = getTransport(slug)
-  if (!transport) return { title: 'Service not found' }
+  if (!transport) return { title: 'সেবা পাওয়া যায়নি' }
   return {
-    title: `${transport.name} | Sakinah Travels`,
-    description: `${transport.routeDetails} From $${transport.price} ${transport.pricingUnit}.`,
+    title: `${transport.name} | সাকিনাহ ট্রাভেলস`,
+    description: `${transport.routeDetails} $${transport.price} ${transport.pricingUnit} থেকে।`,
   }
 }
 

@@ -1,27 +1,27 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/common/legal-page'
 
-export const metadata: Metadata = { title: 'Terms & Conditions | Sakinah Travels' }
+export const metadata: Metadata = { title: 'শর্তাবলী | সাকিনাহ ট্রাভেলস' }
 
 export default function TermsPage() {
   return (
     <LegalPage
-      eyebrow="Legal"
-      title="Terms & Conditions"
-      description="The terms governing your use of our website, services, and bookings. Please read carefully before completing a transaction."
-      effectiveDate="January 1, 2026"
+      eyebrow="আইনি"
+      title="শর্তাবলী"
+      description="আমাদের ওয়েবসাইট, পরিষেবা, এবং বুকিং ব্যবহারের শর্তাবলী। কোন লেনদেন সম্পন্ন করার আগে দয়া করে মনোযোগ সহকারে পড়ুন।"
+      effectiveDate="১ জানুয়ারি, ২০২৬"
       sections={[
-        { heading: 'Acceptance of terms', body: 'By accessing or using our website, mobile app, or services, you agree to be bound by these Terms & Conditions. If you do not agree, please do not use our services.' },
-        { heading: 'Eligibility', body: ['Be 18 years or older (or have parental consent)', 'Be a Muslim wishing to perform Hajj or Umrah', 'Provide accurate identity and travel documents', 'Meet Saudi Ministry of Hajj eligibility rules'] },
-        { heading: 'Booking and payment', body: ['25% deposit required to confirm booking (30% for VIP)', 'Remaining balance payable in installments per agreed schedule', 'All prices in USD unless stated otherwise', 'Prices may change due to exchange rates, fuel surcharges, or government fees beyond our control', 'Prices guaranteed once 50% has been paid'] },
-        { heading: 'Cancellation and refunds', body: 'See our Refund Policy page for the complete cancellation schedule. Briefly: full refund 60+ days out, 75% refund 30-59 days, 50% refund 15-29 days, no refund within 14 days except for documented medical emergencies.' },
-        { heading: 'Visa and travel documents', body: ['Provide a valid passport (6+ months validity from return date)', 'Submit accurate visa application data', 'Complete biometric registration when required', 'Visa approval is at the sole discretion of the Saudi government', 'We are not liable for visa denials. See Refund Policy for visa denial refunds.'] },
-        { heading: 'Code of conduct', body: 'Pilgrims must respect Islamic etiquette, group leader instructions, Saudi laws, and fellow pilgrims. Behavior that endangers others or violates Saudi law may result in immediate removal from the group at the pilgrim\'s expense, with no refund.' },
-        { heading: 'Force majeure', body: 'We are not liable for cancellations, delays, or service disruptions caused by events beyond our control: natural disasters, pandemics, government restrictions, airline strikes, war, or terrorism. We will work in good faith to provide alternatives or partial refunds where possible.' },
-        { heading: 'Liability', body: 'Our maximum liability is limited to the amount paid for the affected service. We are not liable for indirect, consequential, or punitive damages. We strongly recommend comprehensive travel insurance.' },
-        { heading: 'Intellectual property', body: 'All content on our website (text, images, logos, code) is owned by Sakinah Travels or licensors. You may not reproduce, distribute, or create derivative works without written permission.' },
-        { heading: 'Dispute resolution', body: 'These Terms are governed by the laws of New York, USA. Disputes will be resolved through binding arbitration administered by AAA, except where prohibited by law. You waive the right to class action.' },
-        { heading: 'Amendments', body: 'We may update these Terms at any time. Material changes will be notified via email. Continued use after notification constitutes acceptance.' },
+        { heading: 'শর্তাবলী গ্রহণ', body: 'আমাদের ওয়েবসাইট, মোবাইল অ্যাপ, বা পরিষেবা অ্যাক্সেস বা ব্যবহার করে, আপনি এই শর্তাবলী মেনে চলতে সম্মত হন। যদি আপনি সম্মত না হন, দয়া করে আমাদের পরিষেবা ব্যবহার করবেন না।' },
+        { heading: 'যোগ্যতা', body: ['১৮ বছর বা তার বেশি বয়সী হতে হবে (বা পিতামাতার সম্মতি থাকতে হবে)', 'হজ্জ বা উমরাহ পালনে ইচ্ছুক মুসলিম হতে হবে', 'সঠিক পরিচয় এবং ভ্রমণ ডকুমেন্ট প্রদান করতে হবে', 'সৌদি হজ্জ মন্ত্রণালয়ের যোগ্যতার নিয়ম পূরণ করতে হবে'] },
+        { heading: 'বুকিং এবং পেমেন্ট', body: ['বুকিং নিশ্চিত করতে ২৫% ডিপোজিট প্রয়োজন (VIP এর জন্য ৩০%)', 'অবশিষ্ট ব্যালেন্স সম্মত সময়সূচি অনুযায়ী কিস্তিতে প্রদেয়', 'অন্যথায় উল্লেখ না থাকলে সমস্ত মূল্য USD এ', 'বিনিময় হার, জ্বালানি সারচার্জ, বা সরকারি ফিসের কারণে আমাদের নিয়ন্ত্রণের বাইরে মূল্য পরিবর্তন হতে পারে', '৫০% পরিশোধ হওয়ার পরে মূল্য নিশ্চিত'] },
+        { heading: 'বাতিলকরণ এবং রিফান্ড', body: 'সম্পূর্ণ বাতিলকরণ সময়সূচির জন্য আমাদের রিফান্ড নীতি পৃষ্ঠা দেখুন। সংক্ষেপে: ৬০+ দিন আগে সম্পূর্ণ রিফান্ড, ৩০-৫৯ দিনে ৭৫% রিফান্ড, ১৫-২৯ দিনে ৫০% রিফান্ড, ১৪ দিনের মধ্যে কোনো রিফান্ড নেই, ডকুমেন্টেড চিকিৎসা জরুরি অবস্থা ছাড়া।' },
+        { heading: 'ভিসা এবং ভ্রমণ ডকুমেন্ট', body: ['একটি বৈধ পাসপোর্ট প্রদান করুন (ফেরত তারিখ থেকে ৬+ মাসের বৈধতা)', 'সঠিক ভিসা আবেদন ডেটা জমা দিন', 'প্রয়োজন হলে বায়োমেট্রিক নিবন্ধন সম্পন্ন করুন', 'ভিসা অনুমোদন সৌদি সরকারের একমাত্র এখতিয়ারে', 'আমরা ভিসা প্রত্যাখ্যানের জন্য দায়ী নই। ভিসা প্রত্যাখ্যান রিফান্ডের জন্য রিফান্ড নীতি দেখুন।'] },
+        { heading: 'আচরণবিধি', body: 'হাজীদের অবশ্যই ইসলামী শিষ্টাচার, গ্রুপ লিডারের নির্দেশনা, সৌদি আইন, এবং সহকর্মী হাজীদের সম্মান করতে হবে। অন্যদের বিপদে ফেলে বা সৌদি আইন লঙ্ঘন করে এমন আচরণ হাজীর নিজস্ব খরচে গ্রুপ থেকে অবিলম্বে অপসারণের কারণ হতে পারে, কোনো রিফান্ড ছাড়াই।' },
+        { heading: 'অপ্রতিরোধ্য ঘটনা', body: 'আমাদের নিয়ন্ত্রণের বাইরের ঘটনার কারণে সৃষ্ট বাতিলকরণ, বিলম্ব, বা পরিষেবা বিঘ্নের জন্য আমরা দায়ী নই: প্রাকৃতিক দুর্যোগ, মহামারী, সরকারি বিধিনিষেধ, এয়ারলাইন ধর্মঘট, যুদ্ধ, বা সন্ত্রাসবাদ। আমরা সদ্ভাবে বিকল্প বা যেখানে সম্ভব আংশিক রিফান্ড প্রদানের চেষ্টা করব।' },
+        { heading: 'দায়বদ্ধতা', body: 'আমাদের সর্বোচ্চ দায়বদ্ধতা প্রভাবিত পরিষেবার জন্য প্রদত্ত পরিমাণের মধ্যে সীমাবদ্ধ। আমরা পরোক্ষ, পরিণতিগত, বা শাস্তিমূলক ক্ষতির জন্য দায়ী নই। আমরা ব্যাপক ভ্রমণ বীমা গ্রহণের জন্য দৃঢ়ভাবে সুপারিশ করি।' },
+        { heading: 'বুদ্ধিবৃত্তিক সম্পত্তি', body: 'আমাদের ওয়েবসাইটের সমস্ত সামগ্রী (টেক্সট, ছবি, লোগো, কোড) সাকিনাহ ট্রাভেলস বা লাইসেন্সদাতাদের মালিকানাধীন। লিখিত অনুমতি ছাড়া আপনি পুনরুৎপাদন, বিতরণ, বা ডেরিভেটিভ কাজ তৈরি করতে পারবেন না।' },
+        { heading: 'বিরোধ নিষ্পত্তি', body: 'এই শর্তাবলী বাংলাদেশের আইন দ্বারা পরিচালিত। আইন দ্বারা নিষিদ্ধ না হলে বিরোধ AAA দ্বারা পরিচালিত বাধ্যতামূলক সালিশের মাধ্যমে সমাধান করা হবে। আপনি ক্লাস অ্যাকশনের অধিকার মওকুফ করছেন।' },
+        { heading: 'সংশোধনী', body: 'আমরা যেকোনো সময় এই শর্তাবলী আপডেট করতে পারি। গুরুত্বপূর্ণ পরিবর্তনগুলি ইমেইলের মাধ্যমে জানানো হবে। বিজ্ঞপ্তির পর ব্যবহার চালিয়ে যাওয়া গ্রহণযোগ্যতা গঠন করে।' },
       ]}
     />
   )
