@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { CheckCircle2, Download, Mail, Plane, Hotel as HotelIcon, Bus, Package as PackageIcon, ArrowRight, ShieldCheck } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate } from '@/utils/format'
-import { useCartStore, type SavedBooking } from '@/store/cart'
+import { useCartStore, type SavedBooking } from '@/redux/cart'
 import { ROUTES } from '@/constants'
 
 const kindIcon = {

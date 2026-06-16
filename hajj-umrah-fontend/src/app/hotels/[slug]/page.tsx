@@ -1,28 +1,47 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { use, useMemo } from 'react'
 import { notFound } from 'next/navigation'
+import { Loader2 } from 'lucide-react'
+
 import { PageShell } from '@/components/layouts/page-shell'
 import { HotelDetail } from '@/features/hotels/components/hotel-detail'
-import { hotels, getHotel } from '@/data/hotels'
+import { useGetHotelQuery } from '@/redux/fetchres/hotel/hotelApi'
+import { adaptHotel } from '@/redux/fetchres/hotel/adapter'
 
-export const dynamicParams = false
+export default function HotelPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = use(params)
+  const { data, isLoading, isError, error } = useGetHotelQuery(slug)
 
-export async function generateStaticParams() {
-  return hotels.map(h => ({ slug: h.slug }))
-}
+  const hotel = useMemo(() => (data?.data ? adaptHotel(data.data) : null), [data])
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  const hotel = getHotel(slug)
-  if (!hotel) return { title: 'হোটেল পাওয়া যায়নি' }
-  return {
-    title: `${hotel.name} | সাকিনাহ ট্রাভেলস`,
-    description: `${hotel.city}-এ ${hotel.category}-তারকা হোটেল। ${hotel.distanceFromHaram}। প্রতি রাত $${hotel.pricePerNight} থেকে।`,
+  if (isLoading) {
+    return (
+      <PageShell>
+        <div className="flex justify-center py-40">
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+        </div>
+      </PageShell>
+    )
   }
-}
 
-export default async function HotelPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const hotel = getHotel(slug)
+  const status = (error as { status?: number })?.status
+  if (isError && status === 404) notFound()
+
+  if (isError) {
+    return (
+      <PageShell>
+        <div className="text-center py-40 text-rose-500">
+          হোটেল লোড করতে ব্যর্থ হয়েছে। সার্ভার চালু আছে কি?
+        </div>
+      </PageShell>
+    )
+  }
+
   if (!hotel || hotel.status !== 'active') notFound()
 
   const jsonLd = {
@@ -30,8 +49,17 @@ export default async function HotelPage({ params }: { params: Promise<{ slug: st
     '@type': 'Hotel',
     name: hotel.name,
     starRating: { '@type': 'Rating', ratingValue: hotel.category },
-    address: { '@type': 'PostalAddress', addressLocality: hotel.city, addressCountry: hotel.country, streetAddress: hotel.address },
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: hotel.rating, reviewCount: hotel.reviewsCount },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: hotel.city,
+      addressCountry: hotel.country,
+      streetAddress: hotel.address,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: hotel.rating,
+      reviewCount: hotel.reviewsCount,
+    },
     priceRange: `$${hotel.pricePerNight} per night`,
   }
 

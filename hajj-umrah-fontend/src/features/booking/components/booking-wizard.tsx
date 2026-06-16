@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight, Check, ShoppingCart, Plane, Hotel as HotelIcon, 
 import { Input, Select, Label } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/utils/format'
-import { useCartStore, cartTotals, blankTraveler, newBookingCode, type PaymentMethod, type PaymentPlan } from '@/store/cart'
+import { useCartStore, cartTotals, blankTraveler, newBookingCode, type PaymentMethod, type PaymentPlan } from '@/redux/cart'
 import { BookingSummarySidebar } from './booking-summary-sidebar'
 import { ROUTES } from '@/constants'
 

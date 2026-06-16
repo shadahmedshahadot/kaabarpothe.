@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, Package, Calendar, Users, FileText, Star, ImageIcon, MessageSquare,
-  CreditCard, BarChart3, Shield, Settings, Plane,
+  CreditCard, BarChart3, Shield, Settings, Plane, Hotel as HotelIcon,
 } from 'lucide-react'
 import type { NavGroup } from '@/components/layouts/dashboard-shell'
 import { ROUTES } from '@/constants'
@@ -14,6 +14,7 @@ export const ADMIN_NAV_GROUPS: NavGroup[] = [
     label: 'Manage',
     items: [
       { label: 'Packages', href: ROUTES.admin.packages, Icon: Package },
+      { label: 'Hotels', href: ROUTES.admin.hotels, Icon: HotelIcon },
       { label: 'Flights', href: ROUTES.admin.flights, Icon: Plane },
       { label: 'Bookings', href: ROUTES.admin.bookings, Icon: Calendar, badge: 12 },
       { label: 'Pilgrims', href: ROUTES.admin.pilgrims, Icon: Users },

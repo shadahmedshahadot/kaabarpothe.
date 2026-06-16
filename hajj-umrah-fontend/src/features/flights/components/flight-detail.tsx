@@ -7,7 +7,7 @@ import { Plane, Clock, Briefcase, Utensils, Users, Calendar, MapPin, CheckCircle
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/utils/format'
 import { type Flight, flightTotal } from '@/data/flights'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/redux/cart'
 import { ROUTES } from '@/constants'
 
 export function FlightDetail({ flight }: { flight: Flight }) {

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plane } from 'lucide-react'
 import { type Flight, flightTotal } from '@/data/flights'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/redux/cart'
 import { ROUTES } from '@/constants'
 
 export function FlightBooking({ flight }: { flight: Flight }) {

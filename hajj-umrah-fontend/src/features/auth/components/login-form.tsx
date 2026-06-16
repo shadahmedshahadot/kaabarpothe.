@@ -1,14 +1,51 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { ArrowRight, Eye, EyeOff, Lock, Mail } from 'lucide-react'
+import { ArrowRight, Eye, EyeOff, Loader2, Lock, Mail } from 'lucide-react'
+import { toast } from 'sonner'
+
 import { Input, Label } from '@/components/ui/input'
 import { SocialAuthButtons } from './social-buttons'
 import { ROUTES } from '@/constants'
+import { useLoginMutation } from '@/redux/fetchres/auth/authApi'
+import { setUser } from '@/redux/fetchres/auth/authSlice'
+import { useAppDispatch } from '@/redux/hooks'
+import { decodeJwt } from '@/lib/jwtDecoder'
 
 export function LoginForm() {
   const [showPwd, setShowPwd] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [login, { isLoading }] = useLoginMutation()
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email || !password) {
+      toast.error('ইমেইল ও পাসওয়ার্ড প্রয়োজন')
+      return
+    }
+    try {
+      const res = await login({ email, password }).unwrap()
+      const token = res?.data?.access_token as string | undefined
+      if (!token) throw new Error('No token returned')
+      const user = decodeJwt(token)
+      dispatch(setUser({ user, token }))
+      toast.success('সাইন ইন সফল হয়েছে')
+      if (user?.role === 'ADMIN') {
+        router.push(ROUTES.admin.root)
+      } else {
+        router.push(ROUTES.pilgrim.root)
+      }
+    } catch (err: any) {
+      const msg = err?.data?.message || err?.message || 'সাইন ইন ব্যর্থ হয়েছে'
+      toast.error(msg)
+    }
+  }
+
   return (
     <>
       <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 tracking-tight">
@@ -16,9 +53,16 @@ export function LoginForm() {
       </h2>
       <p className="text-muted-foreground mb-8">আপনার পবিত্র যাত্রা চালিয়ে যেতে সাইন ইন করুন।</p>
 
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit}>
         <Field label="ইমেইল" icon={<Mail className="w-4 h-4" />}>
-          <Input type="email" placeholder="you@email.com" required className="h-12 pl-10" />
+          <Input
+            type="email"
+            placeholder="you@email.com"
+            required
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className="h-12 pl-10"
+          />
         </Field>
 
         <Field label="পাসওয়ার্ড" icon={<Lock className="w-4 h-4" />}>
@@ -26,6 +70,8 @@ export function LoginForm() {
             type={showPwd ? 'text' : 'password'}
             placeholder="••••••••"
             required
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             className="h-12 pl-10 pr-10"
           />
           <button
@@ -49,10 +95,20 @@ export function LoginForm() {
 
         <button
           type="submit"
-          className="group relative w-full bg-gradient-to-r from-primary via-amber-500 to-orange-500 text-primary-foreground py-3.5 rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center justify-center gap-2 transition-all"
+          disabled={isLoading}
+          className="group relative w-full bg-gradient-to-r from-primary via-amber-500 to-orange-500 text-primary-foreground py-3.5 rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center justify-center gap-2 transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
         >
-          সাইন ইন
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          {isLoading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              সাইন ইন হচ্ছে…
+            </>
+          ) : (
+            <>
+              সাইন ইন
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </>
+          )}
         </button>
       </form>
 

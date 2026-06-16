@@ -9,7 +9,7 @@ import { MapPin, Clock, Users, Bus, Phone, ShieldCheck, ArrowRight, Minus, Plus 
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/utils/format'
 import { type Transport, TRANSPORT_TYPES } from '@/data/transports'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/redux/cart'
 import { ROUTES } from '@/constants'
 
 export function TransportDetail({ transport }: { transport: Transport }) {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/redux/cart'
 import { ROUTES } from '@/constants'
 import type { Package } from '@/data/packages'
 

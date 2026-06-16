@@ -1,34 +1,49 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { use, useMemo } from 'react'
 import { notFound } from 'next/navigation'
+import { Loader2 } from 'lucide-react'
+
 import { PageShell } from '@/components/layouts/page-shell'
 import { PackageDetail } from '@/features/packages/components/package-detail'
-import { getPackage, packages } from '@/data/packages'
+import { useGetPackageQuery } from '@/redux/fetchres/package/packageApi'
+import { adaptPackage } from '@/redux/fetchres/package/adapter'
 
-export const dynamicParams = false
+export default function PackagePage({
+  params,
+}: {
+  params: Promise<{ type: string; slug: string }>
+}) {
+  const { type, slug } = use(params)
+  const { data, isLoading, isError, error } = useGetPackageQuery(slug)
 
-export async function generateStaticParams() {
-  return packages.map(p => ({ type: p.type, slug: p.slug }))
-}
+  const pkg = useMemo(() => (data?.data ? adaptPackage(data.data) : null), [data])
 
-export async function generateMetadata({ params }: { params: Promise<{ type: string; slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  const pkg = getPackage(slug)
-  if (!pkg) return { title: 'প্যাকেজ পাওয়া যায়নি' }
-  return {
-    title: `${pkg.name} | সাকিনাহ ট্রাভেলস`,
-    description: pkg.shortDescription,
-    openGraph: {
-      title: pkg.name,
-      description: pkg.shortDescription,
-      type: 'website',
-    },
+  if (isLoading) {
+    return (
+      <PageShell>
+        <div className="flex justify-center py-40">
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+        </div>
+      </PageShell>
+    )
   }
-}
 
-export default async function PackagePage({ params }: { params: Promise<{ type: string; slug: string }> }) {
-  const { type, slug } = await params
-  const pkg = getPackage(slug)
-  if (!pkg || pkg.type !== type) notFound()
+  const status = (error as { status?: number })?.status
+  if (isError && status === 404) notFound()
+
+  if (isError) {
+    return (
+      <PageShell>
+        <div className="text-center py-40 text-rose-500">
+          প্যাকেজ লোড করতে ব্যর্থ হয়েছে। সার্ভার চালু আছে কি?
+        </div>
+      </PageShell>
+    )
+  }
+
+  if (!pkg) notFound()
+  if (pkg.type !== type) notFound()
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -39,7 +54,10 @@ export default async function PackagePage({ params }: { params: Promise<{ type: 
       '@type': 'Offer',
       price: pkg.price - pkg.discount,
       priceCurrency: 'USD',
-      availability: pkg.availability === 'soldout' ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
+      availability:
+        pkg.availability === 'soldout'
+          ? 'https://schema.org/SoldOut'
+          : 'https://schema.org/InStock',
     },
     aggregateRating: {
       '@type': 'AggregateRating',

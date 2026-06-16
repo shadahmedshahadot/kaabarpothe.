@@ -1,0 +1,702 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =================================================================
+//  ENUMS
+// =================================================================
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum DocumentStatus {
+  PENDING
+  UPLOADED
+  VERIFIED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatusBooking {
+  UNPAID
+  PARTIAL
+  PAID
+  REFUNDED
+}
+
+enum VisaStatus {
+  PENDING
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
+enum DocumentsBundleStatus {
+  INCOMPLETE
+  COMPLETE
+}
+
+enum PaymentStatus {
+  COMPLETED
+  PENDING
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CARD
+  BANK_TRANSFER
+  PAYPAL
+  APPLE_PAY
+  KLARNA
+  AFFIRM
+  BKASH
+  NAGAD
+  SSLCOMMERZ
+}
+
+enum PackageType {
+  HAJJ
+  UMRAH
+}
+
+enum PackageTier {
+  BUDGET
+  ECONOMY
+  STANDARD
+  PREMIUM
+  VIP
+  LUXURY
+}
+
+enum PackageStatus {
+  PUBLISHED
+  DRAFT
+}
+
+enum Availability {
+  AVAILABLE
+  LIMITED
+  SOLDOUT
+}
+
+enum HotelCity {
+  MAKKAH
+  MADINAH
+}
+
+enum EntityStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum RoomBoard {
+  ROOM_ONLY
+  BREAKFAST
+  HALF_BOARD
+  FULL_BOARD
+}
+
+enum CabinClass {
+  ECONOMY
+  ECONOMY_PLUS
+  BUSINESS
+  FIRST
+}
+
+enum FlightBookingStatus {
+  OPEN
+  CLOSED
+  WAITLIST
+  SOLDOUT
+}
+
+enum TransportType {
+  AIRPORT_TRANSFER
+  INTERCITY
+  ZIYARAH_TOUR
+  HARAM_SHUTTLE
+  PRIVATE_HIRE
+}
+
+enum VehicleType {
+  SEDAN
+  SUV
+  MINIVAN
+  COACH
+  LUXURY_COACH
+  MERCEDES_V_CLASS
+}
+
+enum PricingUnit {
+  PER_PERSON
+  PER_VEHICLE
+}
+
+enum InquiryType {
+  GENERAL
+  PACKAGE
+  CONSULTATION
+}
+
+enum InquiryStatus {
+  NEW
+  IN_PROGRESS
+  RESPONDED
+  CLOSED
+}
+
+enum InquiryPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+// =================================================================
+//  USER (Pilgrim merged)
+// =================================================================
+
+model User {
+  id                           String    @id @default(uuid())
+  full_name                    String
+  email                        String    @unique
+  password                     String
+  role                         UserRole  @default(USER)
+  phone                        String?
+  dateOfBirth                  DateTime?
+  gender                       Gender?
+  nationality                  String?
+  address                      String?
+  city                         String?
+  country                      String?
+  avatar                       String?
+  passportNumber               String?   @unique
+  passportIssueDate            DateTime?
+  passportExpiryDate           DateTime?
+  passportCountry              String?
+  emergencyContactName         String?
+  emergencyContactRelationship String?
+  emergencyContactPhone        String?
+  bookingsCount                Int       @default(0)
+  totalSpent                   Float     @default(0)
+  joinedDate                   DateTime  @default(now())
+  isDeleted                    Boolean   @default(false)
+  createdAt                    DateTime  @default(now())
+  updatedAt                    DateTime  @updatedAt
+
+  documents UserDocument[]
+  bookings  Booking[]
+  inquiries Inquiry[]
+
+  @@index([email])
+  @@index([passportNumber])
+  @@map("users")
+}
+
+model UserDocument {
+  id           String         @id @default(uuid())
+  userId       String
+  type         String
+  status       DocumentStatus @default(PENDING)
+  uploadedDate DateTime?
+  fileUrl      String?
+  createdAt    DateTime       @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("user_documents")
+}
+
+// =================================================================
+//  PACKAGE + children
+// =================================================================
+
+model Package {
+  id               String        @id @default(uuid())
+  slug             String        @unique
+  name             String
+  type             PackageType
+  tier             PackageTier
+  shortDescription String
+  description      String
+  duration         Int
+  departureDate    DateTime
+  returnDate       DateTime
+  price            Float
+  discount         Float         @default(0)
+  status           PackageStatus @default(DRAFT)
+  availability     Availability  @default(AVAILABLE)
+  seatsLeft        Int           @default(0)
+  rating           Float         @default(0)
+  reviewsCount     Int           @default(0)
+  bookingsCount    Int           @default(0)
+  featured         Boolean       @default(false)
+
+  hotelMakkahName      String
+  hotelMakkahStars     Int
+  hotelMakkahDistance  String
+  hotelMakkahImage     String
+  hotelMadinahName     String
+  hotelMadinahStars    Int
+  hotelMadinahDistance String
+  hotelMadinahImage    String
+  flightAirline        String
+  flightDeparture      String
+  flightArrival        String
+  flightClass          String
+
+  meals      String
+  transport  String
+  ziyarah    String[]
+  visa       String
+  included   String[]
+  excluded   String[]
+  highlights String[]
+  groupSize  String
+  gallery    String[]
+  cover      String
+
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  itinerary PackageItineraryDay[]
+  faqs      PackageFAQ[]
+  bookings  Booking[]
+  inquiries Inquiry[]
+
+  @@index([type, status])
+  @@index([featured])
+  @@map("packages")
+}
+
+model PackageItineraryDay {
+  id          String   @id @default(uuid())
+  packageId   String
+  day         Int
+  title       String
+  description String
+  activities  String[]
+
+  package Package @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@unique([packageId, day])
+  @@map("package_itinerary_days")
+}
+
+model PackageFAQ {
+  id        String @id @default(uuid())
+  packageId String
+  question  String
+  answer    String
+
+  package Package @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@index([packageId])
+  @@map("package_faqs")
+}
+
+// =================================================================
+//  HOTEL + Room
+// =================================================================
+
+model Hotel {
+  id                String       @id @default(uuid())
+  slug              String       @unique
+  name              String
+  category          Int
+  city              HotelCity
+  country           String       @default("Saudi Arabia")
+  address           String
+  distanceFromHaram String
+  images            String[]
+  cover             String
+  description       String
+  facilities        String[]
+  meals             String
+  checkInDate       DateTime
+  checkOutDate      DateTime
+  totalRooms        Int
+  pricePerNight     Float
+  rating            Float        @default(0)
+  reviewsCount      Int          @default(0)
+  bookingsCount     Int          @default(0)
+  status            EntityStatus @default(ACTIVE)
+  featured          Boolean      @default(false)
+  notes             String?
+  isDeleted         Boolean      @default(false)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  roomTypes HotelRoomType[]
+
+  @@index([city, status])
+  @@map("hotels")
+}
+
+model HotelRoomType {
+  id            String    @id @default(uuid())
+  hotelId       String
+  name          String
+  capacity      Int
+  pricePerNight Float
+  available     Int
+  board         RoomBoard
+
+  hotel Hotel @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+
+  @@index([hotelId])
+  @@map("hotel_room_types")
+}
+
+// =================================================================
+//  FLIGHT + Transit
+// =================================================================
+
+model Flight {
+  id               String              @id @default(uuid())
+  slug             String              @unique
+  airlineName      String
+  airlineLogo      String
+  flightNumber     String
+  departureAirport String
+  arrivalAirport   String
+  departureCity    String
+  arrivalCity      String
+  departureDate    DateTime
+  departureTime    String
+  arrivalDate      DateTime
+  arrivalTime      String
+  transitDuration  String
+  totalDuration    String
+  cabinClass       CabinClass
+  baggageAllowance String
+  mealInfo         String
+  seatsTotal       Int
+  seatsAvailable   Int
+  bookingStatus    FlightBookingStatus @default(OPEN)
+  price            Float
+  taxes            Float               @default(0)
+  discount         Float               @default(0)
+  notes            String?
+  status           EntityStatus        @default(ACTIVE)
+  featured         Boolean             @default(false)
+  rating           Float               @default(0)
+  reviewsCount     Int                 @default(0)
+  bookingsCount    Int                 @default(0)
+  publishedAt      DateTime            @default(now())
+  isDeleted        Boolean             @default(false)
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  transits FlightTransit[]
+
+  @@index([departureCity, arrivalCity])
+  @@index([flightNumber])
+  @@map("flights")
+}
+
+model FlightTransit {
+  id       String @id @default(uuid())
+  flightId String
+  airport  String
+  city     String
+  duration String
+  position Int
+
+  flight Flight @relation(fields: [flightId], references: [id], onDelete: Cascade)
+
+  @@unique([flightId, position])
+  @@map("flight_transits")
+}
+
+// =================================================================
+//  TRANSPORT
+// =================================================================
+
+model Transport {
+  id              String        @id @default(uuid())
+  slug            String        @unique
+  name            String
+  type            TransportType
+  vehicleType     VehicleType
+  capacity        Int
+  images          String[]
+  cover           String
+  pickupLocation  String
+  dropoffLocation String
+  routeDetails    String
+  serviceCoverage String[]
+  driverName      String
+  driverContact   String
+  travelDuration  String
+  price           Float
+  pricingUnit     PricingUnit
+  availability    Availability  @default(AVAILABLE)
+  status          EntityStatus  @default(ACTIVE)
+  featured        Boolean       @default(false)
+  rating          Float         @default(0)
+  reviewsCount    Int           @default(0)
+  bookingsCount   Int           @default(0)
+  notes           String?
+  isDeleted       Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([type, status])
+  @@map("transports")
+}
+
+// =================================================================
+//  BOOKING + Traveler + Payment
+// =================================================================
+
+model Booking {
+  id                String                @id @default(uuid())
+  bookingCode       String                @unique
+  packageId         String
+  packageName       String
+  packageType       PackageType
+  userId            String?
+  pilgrimName       String
+  pilgrimEmail      String
+  pilgrimPhone      String
+  status            BookingStatus         @default(PENDING)
+  paymentStatus     PaymentStatusBooking  @default(UNPAID)
+  totalAmount       Float
+  paidAmount        Float                 @default(0)
+  installmentsCount Int                   @default(1)
+  installmentsPaid  Int                   @default(0)
+  departureDate     DateTime
+  returnDate        DateTime
+  pilgrimsCount     Int                   @default(1)
+  bookedDate        DateTime              @default(now())
+  notes             String?
+  visaStatus        VisaStatus            @default(PENDING)
+  documentsStatus   DocumentsBundleStatus @default(INCOMPLETE)
+  isDeleted         Boolean               @default(false)
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  package   Package           @relation(fields: [packageId], references: [id], onDelete: Restrict)
+  user      User?             @relation(fields: [userId], references: [id], onDelete: Restrict)
+  travelers BookingTraveler[]
+  payments  Payment[]
+
+  @@index([userId])
+  @@index([packageId])
+  @@index([bookingCode])
+  @@index([status])
+  @@map("bookings")
+}
+
+model BookingTraveler {
+  id               String   @id @default(uuid())
+  bookingId        String
+  fullName         String
+  gender           Gender
+  dateOfBirth      DateTime
+  passportNumber   String
+  passportExpiry   DateTime
+  nationality      String
+  mobile           String
+  email            String
+  emergencyContact String?
+  createdAt        DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@map("booking_travelers")
+}
+
+model Payment {
+  id                String        @id @default(uuid())
+  transactionId     String        @unique
+  bookingId         String
+  bookingCode       String
+  pilgrimName       String
+  amount            Float
+  method            PaymentMethod
+  status            PaymentStatus @default(PENDING)
+  date              DateTime      @default(now())
+  installmentNumber Int?
+  installmentsTotal Int?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@index([transactionId])
+  @@index([status])
+  @@map("payments")
+}
+
+// =================================================================
+//  INQUIRY
+// =================================================================
+
+model Inquiry {
+  id          String          @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  type        InquiryType
+  subject     String
+  message     String
+  packageId   String?
+  userId      String?
+  status      InquiryStatus   @default(NEW)
+  priority    InquiryPriority @default(MEDIUM)
+  createdDate DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  package Package? @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  user    User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([priority])
+  @@index([packageId])
+  @@map("inquiries")
+}
+
+// =================================================================
+//  BLOG
+// =================================================================
+
+model Blog {
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  title         String
+  excerpt       String
+  content       String
+  author        String
+  authorRole    String
+  authorAvatar  String
+  category      String
+  tags          String[]
+  cover         String
+  readTime      Int
+  publishedDate DateTime
+  views         Int      @default(0)
+  featured      Boolean  @default(false)
+  isDeleted     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([category])
+  @@index([featured])
+  @@map("blogs")
+}
+
+// =================================================================
+//  FAQ
+// =================================================================
+
+model Faq {
+  id        String   @id @default(uuid())
+  category  String
+  question  String
+  answer    String
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@map("faqs")
+}
+
+// =================================================================
+//  TESTIMONIAL
+// =================================================================
+
+model Testimonial {
+  id          String   @id @default(uuid())
+  name        String
+  location    String
+  packageName String
+  rating      Int
+  date        DateTime
+  content     String
+  avatar      String
+  verified    Boolean  @default(false)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([featured])
+  @@map("testimonials")
+}
+
+// =================================================================
+//  SITE CONTENT (Hero singleton)
+// =================================================================
+
+model SiteContent {
+  key               String   @id @default("hero")
+  videoId           String
+  badge             String
+  titleStart        String
+  titleHighlight    String
+  description       String
+  ctaUmrah          String
+  ctaHajj           String
+  trustBadges       String[]
+  reflectionEyebrow String
+  reflectionQuote   String
+  reflectionRef     String
+  updatedAt         DateTime @updatedAt
+
+  stats           HeroStat[]
+  reflectionItems HeroReflectionItem[]
+
+  @@map("site_content")
+}
+
+model HeroStat {
+  id             String  @id @default(uuid())
+  siteContentKey String
+  value          Float
+  suffix         String?
+  decimals       Int?
+  label          String
+  position       Int
+
+  siteContent SiteContent @relation(fields: [siteContentKey], references: [key], onDelete: Cascade)
+
+  @@unique([siteContentKey, position])
+  @@map("hero_stats")
+}
+
+model HeroReflectionItem {
+  id             String @id @default(uuid())
+  siteContentKey String
+  label          String
+  value          String
+  position       Int
+
+  siteContent SiteContent @relation(fields: [siteContentKey], references: [key], onDelete: Cascade)
+
+  @@unique([siteContentKey, position])
+  @@map("hero_reflection_items")
+}

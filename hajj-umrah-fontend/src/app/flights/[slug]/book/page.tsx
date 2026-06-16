@@ -1,28 +1,40 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { use, useMemo } from 'react'
 import { notFound } from 'next/navigation'
+import { Loader2 } from 'lucide-react'
+
 import { PageShell } from '@/components/layouts/page-shell'
 import { FlightBooking } from '@/features/flights/components/flight-booking'
-import { flights, getFlight } from '@/data/flights'
+import { useGetFlightQuery } from '@/redux/fetchres/flight/flightApi'
+import { adaptFlight } from '@/redux/fetchres/flight/adapter'
 
-export const dynamicParams = false
+export default function FlightBookingPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = use(params)
+  const { data, isLoading, isError, error } = useGetFlightQuery(slug)
 
-export async function generateStaticParams() {
-  return flights.filter(f => f.status === 'active' && f.bookingStatus !== 'soldout').map(f => ({ slug: f.slug }))
-}
+  const flight = useMemo(() => (data?.data ? adaptFlight(data.data) : null), [data])
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  const flight = getFlight(slug)
-  return {
-    title: flight ? `${flight.airlineName} ${flight.flightNumber} বুক করুন | সাকিনাহ ট্রাভেলস` : 'ফ্লাইট বুক করুন',
-    robots: { index: false, follow: false },
+  if (isLoading) {
+    return (
+      <PageShell>
+        <div className="flex justify-center py-40">
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+        </div>
+      </PageShell>
+    )
   }
-}
 
-export default async function BookFlightPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const flight = getFlight(slug)
-  if (!flight || flight.status !== 'active' || flight.bookingStatus === 'soldout') notFound()
+  const status = (error as { status?: number })?.status
+  if (isError && status === 404) notFound()
+
+  if (isError || !flight) notFound()
+  if (flight.status !== 'active' || flight.bookingStatus === 'soldout') notFound()
+
   return (
     <PageShell>
       <FlightBooking flight={flight} />

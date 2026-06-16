@@ -33,7 +33,11 @@
       "Bash(npm run *)",
       "Bash(npm install *)",
       "Bash(npx next *)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(grep -oE \">[A-Z][^<]{5,}<\")",
+      "Bash(xargs grep -l \"Home\\\\|About\\\\|Contact\\\\|Packages\\\\|Book\\\\|Login\\\\|Register\")",
+      "Bash(echo \"exit=$?\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mdrub\\\\Desktop\\\\hajj-umrah\\\\hajj-umrah-backend\" -Recurse -Name)"
     ]
   }
 }

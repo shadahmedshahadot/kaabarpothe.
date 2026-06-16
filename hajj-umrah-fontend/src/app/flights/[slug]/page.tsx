@@ -1,51 +1,51 @@
-import type { Metadata } from 'next'
+'use client'
+
+import { use, useMemo } from 'react'
 import { notFound } from 'next/navigation'
+import { Loader2 } from 'lucide-react'
+
 import { PageShell } from '@/components/layouts/page-shell'
 import { FlightDetail } from '@/features/flights/components/flight-detail'
-import { flights, getFlight, flightTotal } from '@/data/flights'
+import { useGetFlightQuery } from '@/redux/fetchres/flight/flightApi'
+import { adaptFlight } from '@/redux/fetchres/flight/adapter'
 
-export const dynamicParams = false
+export default function FlightDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = use(params)
+  const { data, isLoading, isError, error } = useGetFlightQuery(slug)
 
-export async function generateStaticParams() {
-  return flights.map(f => ({ slug: f.slug }))
-}
+  const flight = useMemo(() => (data?.data ? adaptFlight(data.data) : null), [data])
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  const flight = getFlight(slug)
-  if (!flight) return { title: 'ফ্লাইট পাওয়া যায়নি' }
-  return {
-    title: `${flight.airlineName} ${flight.flightNumber} — ${flight.departureCity} → ${flight.arrivalCity} | সাকিনাহ ট্রাভেলস`,
-    description: `${flight.departureCity} থেকে ${flight.arrivalCity} পর্যন্ত ${flight.airlineName} ${flight.flightNumber} বুক করুন। ${flight.totalDuration} · ${flight.cabinClass}।`,
+  if (isLoading) {
+    return (
+      <PageShell>
+        <div className="flex justify-center py-40">
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+        </div>
+      </PageShell>
+    )
   }
-}
 
-export default async function FlightPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const flight = getFlight(slug)
-  if (!flight || flight.status !== 'active') notFound()
+  const status = (error as { status?: number })?.status
+  if (isError && status === 404) notFound()
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Flight',
-    flightNumber: flight.flightNumber,
-    airline: { '@type': 'Airline', name: flight.airlineName, iataCode: flight.airlineLogo },
-    departureAirport: { '@type': 'Airport', name: flight.departureAirport },
-    arrivalAirport: { '@type': 'Airport', name: flight.arrivalAirport },
-    departureTime: `${flight.departureDate}T${flight.departureTime}:00`,
-    arrivalTime: `${flight.arrivalDate}T${flight.arrivalTime}:00`,
-    offers: {
-      '@type': 'Offer',
-      price: flightTotal(flight),
-      priceCurrency: 'USD',
-      availability:
-        flight.bookingStatus === 'soldout' ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
-    },
+  if (isError) {
+    return (
+      <PageShell>
+        <div className="text-center py-40 text-rose-500">
+          ফ্লাইট লোড করতে ব্যর্থ হয়েছে। সার্ভার চালু আছে কি?
+        </div>
+      </PageShell>
+    )
   }
+
+  if (!flight) notFound()
 
   return (
     <PageShell>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <FlightDetail flight={flight} />
     </PageShell>
   )

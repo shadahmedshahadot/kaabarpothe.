@@ -4,8 +4,8 @@ import { Plane, Hotel, Bus, Package as PackageIcon, X, ShieldCheck } from 'lucid
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/utils/format'
-import { useCartStore, cartTotals } from '@/store/cart'
-import type { CartItem } from '@/store/cart'
+import { useCartStore, cartTotals } from '@/redux/cart'
+import type { CartItem } from '@/redux/cart'
 
 const kindIcon = {
   package: PackageIcon,

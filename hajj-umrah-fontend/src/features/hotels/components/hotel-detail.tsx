@@ -9,7 +9,7 @@ import { Star, MapPin, BedDouble, Utensils, Wifi, ShieldCheck, ArrowRight, Calen
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate } from '@/utils/format'
 import { type Hotel, hotelNights } from '@/data/hotels'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/redux/cart'
 import { ROUTES } from '@/constants'
 
 export function HotelDetail({ hotel }: { hotel: Hotel }) {

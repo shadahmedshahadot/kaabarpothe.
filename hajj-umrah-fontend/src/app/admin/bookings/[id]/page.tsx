@@ -1,25 +1,93 @@
-import { notFound } from 'next/navigation'
+'use client'
+
+import { use, useState } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Mail, Phone, Plane, Calendar, Users, DollarSign, FileText, MessageSquare, CheckCircle2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle2,
+  DollarSign,
+  Loader2,
+  Mail,
+  Phone,
+  Plane,
+  Users,
+} from 'lucide-react'
+import { toast } from 'sonner'
+
 import { PageTitle } from '@/components/layouts/dashboard-shell'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate } from '@/utils/format'
-import { bookings, getBooking } from '@/data/bookings'
-import { payments } from '@/data/payments'
+import {
+  useGetBookingQuery,
+  useUpdateBookingMutation,
+  useDeleteBookingMutation,
+  type BookingDto,
+} from '@/redux/fetchres/booking/bookingApi'
 
-export function generateStaticParams() {
-  return bookings.map(b => ({ id: b.id }))
-}
+export default function AdminBookingDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = use(params)
+  const router = useRouter()
+  const { data, isLoading, isError } = useGetBookingQuery(id)
+  const [updateBooking, { isLoading: isUpdating }] = useUpdateBookingMutation()
+  const [deleteBooking] = useDeleteBookingMutation()
+  const [deleting, setDeleting] = useState(false)
 
-export default async function AdminBookingDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const booking = getBooking(id)
-  if (!booking) notFound()
-  const bookingPayments = payments.filter(p => p.bookingId === booking.id)
+  if (isLoading) {
+    return (
+      <div className="flex justify-center py-40">
+        <Loader2 className="w-10 h-10 animate-spin text-primary" />
+      </div>
+    )
+  }
+
+  if (isError || !data?.data) {
+    return (
+      <div className="text-center py-40 text-rose-500">
+        বুকিং পাওয়া যায়নি।{' '}
+        <Link href="/admin/bookings" className="underline">
+          ফিরে যান
+        </Link>
+      </div>
+    )
+  }
+
+  const booking = data.data
+  const bookingPayments = booking.payments ?? []
+
+  const setStatus = async (status: BookingDto['status']) => {
+    try {
+      await updateBooking({ id: booking.id, body: { status } }).unwrap()
+      toast.success(`অবস্থা আপডেট: ${status.toLowerCase()}`)
+    } catch (err: any) {
+      toast.error(err?.data?.message || 'আপডেট ব্যর্থ হয়েছে')
+    }
+  }
+
+  const onDelete = async () => {
+    if (!confirm(`"${booking.bookingCode}" মুছবেন?`)) return
+    setDeleting(true)
+    try {
+      await deleteBooking(booking.id).unwrap()
+      toast.success('বুকিং মুছে ফেলা হয়েছে')
+      router.push('/admin/bookings')
+    } catch (err: any) {
+      toast.error(err?.data?.message || 'মুছতে ব্যর্থ হয়েছে')
+      setDeleting(false)
+    }
+  }
 
   return (
     <>
-      <Link href="/admin/bookings" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4">
+      <Link
+        href="/admin/bookings"
+        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4"
+      >
         <ArrowLeft className="w-4 h-4" /> বুকিং তালিকায় ফিরে যান
       </Link>
 
@@ -28,8 +96,13 @@ export default async function AdminBookingDetailPage({ params }: { params: Promi
         description={`${booking.packageName} · ${booking.pilgrimsCount} জন হাজী`}
         action={
           <div className="flex gap-2 flex-wrap">
-            <button className="px-3 py-2 border border-border rounded-xl text-sm font-semibold hover:bg-muted">ইনভয়েস ডাউনলোড</button>
-            <button className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold hover:bg-primary transition-colors">অবস্থা আপডেট</button>
+            <button
+              onClick={onDelete}
+              disabled={deleting}
+              className="px-3 py-2 border border-rose-500/30 text-rose-600 rounded-xl text-sm font-semibold hover:bg-rose-500/10 disabled:opacity-60"
+            >
+              {deleting ? <Loader2 className="w-4 h-4 animate-spin inline" /> : 'মুছুন'}
+            </button>
           </div>
         }
       />
@@ -39,10 +112,16 @@ export default async function AdminBookingDetailPage({ params }: { params: Promi
           <div className="bg-card border border-border rounded-2xl p-6">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-bold text-foreground">বুকিং সারসংক্ষেপ</h3>
-              <div className="flex gap-1.5">
-                <Badge variant={booking.status === 'confirmed' ? 'success' : 'warning'}>{booking.status}</Badge>
-                <Badge variant={booking.paymentStatus === 'paid' ? 'success' : 'warning'}>{booking.paymentStatus}</Badge>
-                <Badge variant={booking.visaStatus === 'approved' ? 'success' : 'warning'}>ভিসা {booking.visaStatus}</Badge>
+              <div className="flex gap-1.5 flex-wrap">
+                <Badge variant={booking.status === 'CONFIRMED' ? 'success' : 'warning'}>
+                  {booking.status.toLowerCase()}
+                </Badge>
+                <Badge variant={booking.paymentStatus === 'PAID' ? 'success' : 'warning'}>
+                  {booking.paymentStatus.toLowerCase()}
+                </Badge>
+                <Badge variant={booking.visaStatus === 'APPROVED' ? 'success' : 'warning'}>
+                  ভিসা {booking.visaStatus.toLowerCase()}
+                </Badge>
               </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
@@ -61,73 +140,126 @@ export default async function AdminBookingDetailPage({ params }: { params: Promi
             )}
           </div>
 
-          {/* Installments */}
           <div className="bg-card border border-border rounded-2xl p-6">
             <h3 className="font-bold text-foreground mb-4">পেমেন্ট ইতিহাস</h3>
-            <div className="space-y-2">
-              {bookingPayments.map(p => (
-                <div key={p.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-xl">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${p.status === 'completed' ? 'bg-emerald-500/15 text-emerald-600' : 'bg-amber-500/15 text-amber-600'}`}>
-                      {p.status === 'completed' ? <CheckCircle2 className="w-4 h-4" /> : <DollarSign className="w-4 h-4" />}
+            {bookingPayments.length === 0 ? (
+              <p className="text-sm text-muted-foreground">কোনো পেমেন্ট রেকর্ড নেই।</p>
+            ) : (
+              <div className="space-y-2">
+                {bookingPayments.map(p => (
+                  <div key={p.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-xl">
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`w-9 h-9 rounded-lg flex items-center justify-center ${
+                          p.status === 'COMPLETED'
+                            ? 'bg-emerald-500/15 text-emerald-600'
+                            : 'bg-amber-500/15 text-amber-600'
+                        }`}
+                      >
+                        {p.status === 'COMPLETED' ? (
+                          <CheckCircle2 className="w-4 h-4" />
+                        ) : (
+                          <DollarSign className="w-4 h-4" />
+                        )}
+                      </div>
+                      <div>
+                        {p.installmentNumber && (
+                          <p className="text-sm font-semibold text-foreground">
+                            কিস্তি {p.installmentNumber}/{p.installmentsTotal}
+                          </p>
+                        )}
+                        <p className="text-xs text-muted-foreground">
+                          {formatDate(p.date)} · {p.method.toLowerCase()}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">কিস্তি {p.installmentNumber}/{p.installmentsTotal}</p>
-                      <p className="text-xs text-muted-foreground">{formatDate(p.date)} · {p.method}</p>
+                    <div className="text-right">
+                      <p className="font-bold text-foreground">{formatCurrency(p.amount)}</p>
+                      <Badge
+                        variant={p.status === 'COMPLETED' ? 'success' : 'warning'}
+                        className="text-[10px]"
+                      >
+                        {p.status.toLowerCase()}
+                      </Badge>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-bold text-foreground">{formatCurrency(p.amount)}</p>
-                    <Badge variant={p.status === 'completed' ? 'success' : 'warning'} className="text-[10px]">{p.status}</Badge>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="bg-card border border-border rounded-2xl p-6">
-            <h3 className="font-bold text-foreground mb-4">কার্যক্রম টাইমলাইন</h3>
-            <div className="space-y-4">
-              {[
-                { Icon: CheckCircle2, title: 'পেমেন্ট গৃহীত', desc: `${formatCurrency(booking.paidAmount)} পরিশোধিত`, time: '২ দিন আগে', color: 'emerald' },
-                { Icon: FileText, title: 'ডকুমেন্ট যাচাইকৃত', desc: 'সকল পাসপোর্ট স্ক্যান অনুমোদিত', time: '১ সপ্তাহ আগে', color: 'sky' },
-                { Icon: MessageSquare, title: 'নোট যোগ করা হয়েছে', desc: booking.notes, time: '২ সপ্তাহ আগে', color: 'amber' },
-                { Icon: Calendar, title: 'বুকিং নিশ্চিত', desc: `ডিপোজিট গৃহীত`, time: '৩ সপ্তাহ আগে', color: 'violet' },
-              ].map((a, i) => (
-                <div key={i} className="flex gap-3">
-                  <div className={`w-9 h-9 rounded-lg bg-${a.color}-500/15 text-${a.color}-600 flex items-center justify-center flex-shrink-0`}>
-                    <a.Icon className="w-4 h-4" />
+          {booking.travelers && booking.travelers.length > 0 && (
+            <div className="bg-card border border-border rounded-2xl p-6">
+              <h3 className="font-bold text-foreground mb-4">ভ্রমণকারী</h3>
+              <div className="space-y-2">
+                {booking.travelers.map((t, i) => (
+                  <div key={t.id ?? i} className="p-3 bg-muted/30 rounded-xl text-sm">
+                    <p className="font-semibold">{t.fullName}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {t.nationality} · পাসপোর্ট {t.passportNumber} · {t.gender.toLowerCase()}
+                    </p>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-foreground">{a.title}</p>
-                    <p className="text-xs text-muted-foreground">{a.desc}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">{a.time}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
-        {/* Sidebar */}
         <div className="space-y-4">
           <div className="bg-card border border-border rounded-2xl p-6">
             <h3 className="font-bold text-foreground mb-4">হাজী</h3>
             <div className="space-y-2">
               <p className="font-semibold text-foreground">{booking.pilgrimName}</p>
-              <a href={`mailto:${booking.pilgrimEmail}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><Mail className="w-4 h-4" /> {booking.pilgrimEmail}</a>
-              <a href={`tel:${booking.pilgrimPhone}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><Phone className="w-4 h-4" /> {booking.pilgrimPhone}</a>
+              <a
+                href={`mailto:${booking.pilgrimEmail}`}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                <Mail className="w-4 h-4" /> {booking.pilgrimEmail}
+              </a>
+              <a
+                href={`tel:${booking.pilgrimPhone}`}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                <Phone className="w-4 h-4" /> {booking.pilgrimPhone}
+              </a>
             </div>
-            <Link href={`/admin/pilgrims/${booking.pilgrimId}`} className="block mt-4 text-center bg-muted hover:bg-muted/70 py-2 rounded-xl text-sm font-semibold">হাজীর প্রোফাইল দেখুন</Link>
+            {booking.userId && (
+              <Link
+                href={`/admin/pilgrims/${booking.userId}`}
+                className="block mt-4 text-center bg-muted hover:bg-muted/70 py-2 rounded-xl text-sm font-semibold"
+              >
+                হাজীর প্রোফাইল দেখুন
+              </Link>
+            )}
           </div>
 
           <div className="bg-card border border-border rounded-2xl p-6">
             <h3 className="font-bold text-foreground mb-4">অবস্থা আপডেট</h3>
             <div className="space-y-2 text-sm">
-              <button className="w-full text-left px-3 py-2 bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/15 rounded-xl">নিশ্চিত হিসেবে চিহ্নিত করুন</button>
-              <button className="w-full text-left px-3 py-2 bg-sky-500/10 text-sky-700 hover:bg-sky-500/15 rounded-xl">চলমান হিসেবে সেট করুন</button>
-              <button className="w-full text-left px-3 py-2 bg-violet-500/10 text-violet-700 hover:bg-violet-500/15 rounded-xl">সম্পন্ন হিসেবে চিহ্নিত করুন</button>
-              <button className="w-full text-left px-3 py-2 bg-rose-500/10 text-rose-700 hover:bg-rose-500/15 rounded-xl">বুকিং বাতিল করুন</button>
+              <StatusButton
+                onClick={() => setStatus('CONFIRMED')}
+                disabled={isUpdating}
+                className="bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/15"
+                label="নিশ্চিত হিসেবে চিহ্নিত করুন"
+              />
+              <StatusButton
+                onClick={() => setStatus('IN_PROGRESS')}
+                disabled={isUpdating}
+                className="bg-sky-500/10 text-sky-700 hover:bg-sky-500/15"
+                label="চলমান হিসেবে সেট করুন"
+              />
+              <StatusButton
+                onClick={() => setStatus('COMPLETED')}
+                disabled={isUpdating}
+                className="bg-violet-500/10 text-violet-700 hover:bg-violet-500/15"
+                label="সম্পন্ন হিসেবে চিহ্নিত করুন"
+              />
+              <StatusButton
+                onClick={() => setStatus('CANCELLED')}
+                disabled={isUpdating}
+                className="bg-rose-500/10 text-rose-700 hover:bg-rose-500/15"
+                label="বুকিং বাতিল করুন"
+              />
             </div>
           </div>
         </div>
@@ -136,7 +268,37 @@ export default async function AdminBookingDetailPage({ params }: { params: Promi
   )
 }
 
-function InfoRow({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
+function StatusButton({
+  onClick,
+  disabled,
+  className,
+  label,
+}: {
+  onClick: () => void
+  disabled?: boolean
+  className: string
+  label: string
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`w-full text-left px-3 py-2 rounded-xl disabled:opacity-50 ${className}`}
+    >
+      {label}
+    </button>
+  )
+}
+
+function InfoRow({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ComponentType<{ className?: string }>
+  label: string
+  value: string
+}) {
   return (
     <div>
       <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground mb-1">
