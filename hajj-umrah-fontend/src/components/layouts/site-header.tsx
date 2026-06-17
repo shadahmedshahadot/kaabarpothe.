@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Menu, X, ChevronDown, Phone, Mail, MapPin } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { Logo } from '@/components/common/logo'
 import { PRIMARY_NAV, ROUTES, SITE } from '@/constants'
 
 export function SiteHeader() {
@@ -103,18 +102,26 @@ function HeaderLogo({ scrolled }: { scrolled: boolean }) {
         transition={{ type: 'spring', stiffness: 320, damping: 18 }}
         className="relative"
       >
-        {scrolled ? (
-          <Logo href={null} showText={false} size="md" />
-        ) : (
-          <span className="inline-flex flex-col leading-none text-white drop-shadow-md">
-            <span className="text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r from-amber-200 via-white to-amber-200 bg-clip-text text-transparent">
-              কাবার পথে
-            </span>
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/75 mt-1">
-              হজ্জ ও উমরাহ
-            </span>
+        <span className="inline-flex flex-col leading-none drop-shadow-md">
+          <span
+            className={cn(
+              'text-2xl sm:text-3xl font-bold tracking-tight bg-clip-text text-transparent',
+              scrolled
+                ? 'bg-gradient-to-r from-primary via-amber-600 to-orange-600'
+                : 'bg-gradient-to-r from-amber-200 via-white to-amber-200',
+            )}
+          >
+            কাবার পথে
           </span>
-        )}
+          <span
+            className={cn(
+              'text-[10px] sm:text-xs uppercase tracking-[0.3em] mt-1',
+              scrolled ? 'text-foreground/60' : 'text-white/75',
+            )}
+          >
+            হজ্জ ও উমরাহ
+          </span>
+        </span>
         <span
           className={cn(
             'pointer-events-none absolute -inset-2 rounded-3xl blur-2xl -z-10 transition-opacity duration-500',

@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import prisma from '../../utils/prisma';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import AuthUtils from './auth.utils';
 import config from '../../config';
 import { JwtPayload } from 'jsonwebtoken';

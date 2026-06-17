@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Prisma } from '@prisma/client';
 import { JwtPayload } from 'jsonwebtoken';
 import AppError from '../../errors/AppError';

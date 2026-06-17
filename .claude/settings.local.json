@@ -37,7 +37,15 @@
       "Bash(grep -oE \">[A-Z][^<]{5,}<\")",
       "Bash(xargs grep -l \"Home\\\\|About\\\\|Contact\\\\|Packages\\\\|Book\\\\|Login\\\\|Register\")",
       "Bash(echo \"exit=$?\")",
-      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mdrub\\\\Desktop\\\\hajj-umrah\\\\hajj-umrah-backend\" -Recurse -Name)"
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mdrub\\\\Desktop\\\\hajj-umrah\\\\hajj-umrah-backend\" -Recurse -Name)",
+      "Bash(Select-String -Pattern \"\\\\.env\")",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(pnpm rebuild *)",
+      "Bash(pnpm approve-builds *)",
+      "Bash(pnpm *)"
     ]
   }
 }

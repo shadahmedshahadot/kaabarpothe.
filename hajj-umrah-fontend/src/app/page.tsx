@@ -13,7 +13,7 @@ import { Footer } from '@/components/layouts/site-footer'
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'TravelAgency',
-  name: 'সাকিনাহ ট্রাভেলস',
+  name: 'কাবার পথে',
   url: 'https://sakinah.travel',
   description: 'প্রিমিয়াম হজ্জ ও উমরাহ প্যাকেজ।',
   address: {
