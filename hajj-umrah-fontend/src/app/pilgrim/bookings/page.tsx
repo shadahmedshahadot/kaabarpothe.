@@ -1,11 +1,13 @@
 'use client'
 
-import { Loader2 } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, Loader2 } from 'lucide-react'
 
 import { PageTitle } from '@/components/layouts/dashboard-shell'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate } from '@/utils/format'
-import { useGetBookingsQuery } from '@/redux/fetchres/booking/bookingApi'
+import { useGetBookingsQuery, STATUS_LABEL, STATUS_TONE } from '@/redux/fetchres/booking/bookingApi'
+import { ROUTES } from '@/constants'
 
 export default function PilgrimBookingsPage() {
   const { data, isLoading, isError } = useGetBookingsQuery({ limit: 100 })
@@ -68,17 +70,9 @@ export default function PilgrimBookingsPage() {
                 <Info
                   label="অবস্থা"
                   value={
-                    <Badge
-                      variant={
-                        b.status === 'CONFIRMED'
-                          ? 'success'
-                          : b.status === 'COMPLETED'
-                            ? 'info'
-                            : 'warning'
-                      }
-                    >
-                      {b.status.toLowerCase()}
-                    </Badge>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${STATUS_TONE[b.status]}`}>
+                      {STATUS_LABEL[b.status]}
+                    </span>
                   }
                 />
                 <Info
@@ -118,6 +112,14 @@ export default function PilgrimBookingsPage() {
                   value={<span className="font-semibold text-foreground">{b.pilgrimsCount}</span>}
                 />
               </div>
+            </div>
+            <div className="border-t border-border px-6 py-3 flex items-center justify-end">
+              <Link
+                href={ROUTES.pilgrim.bookingDetail(b.bookingCode)}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+              >
+                বিস্তারিত দেখুন <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         ))}

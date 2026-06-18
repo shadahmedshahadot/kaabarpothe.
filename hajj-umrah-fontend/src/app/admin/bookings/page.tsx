@@ -12,11 +12,10 @@ import { formatCurrency, formatDate } from '@/utils/format'
 import {
   useGetBookingsQuery,
   useDeleteBookingMutation,
+  STATUS_LABEL,
+  STATUS_TONE,
   type BookingDto,
 } from '@/redux/fetchres/booking/bookingApi'
-
-const statusVariant = (s: BookingDto['status']) =>
-  s === 'CONFIRMED' ? 'success' : s === 'PENDING' ? 'warning' : s === 'CANCELLED' ? 'danger' : 'info'
 
 const paymentVariant = (s: BookingDto['paymentStatus']) =>
   s === 'PAID' ? 'success' : s === 'PARTIAL' ? 'warning' : s === 'REFUNDED' ? 'info' : 'danger'
@@ -27,7 +26,7 @@ export default function AdminBookingsPage() {
   const [pendingId, setPendingId] = useState<string | null>(null)
 
   const bookings = data?.data ?? []
-  const pendingCount = bookings.filter(b => b.status === 'PENDING').length
+  const pendingCount = bookings.filter(b => b.status === 'PENDING_REVIEW' || b.status === 'PENDING').length
 
   const onDelete = async (booking: BookingDto) => {
     if (!confirm(`"${booking.bookingCode}" মুছবেন?`)) return
@@ -109,7 +108,9 @@ export default function AdminBookingsPage() {
               label: 'অবস্থা',
               render: b => (
                 <div className="flex flex-col gap-1 items-start">
-                  <Badge variant={statusVariant(b.status) as any}>{b.status.toLowerCase()}</Badge>
+                  <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border ${STATUS_TONE[b.status]}`}>
+                    {STATUS_LABEL[b.status]}
+                  </span>
                   <Badge variant={paymentVariant(b.paymentStatus) as any} className="text-[10px]">
                     {b.paymentStatus.toLowerCase()}
                   </Badge>

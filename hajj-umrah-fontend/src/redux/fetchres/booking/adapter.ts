@@ -3,10 +3,20 @@ import type { BookingDto } from './bookingApi'
 
 const statusMap: Record<BookingDto['status'], BookingStatus> = {
   PENDING: 'pending',
+  PENDING_REVIEW: 'pending',
+  DOCUMENTS_REQUIRED: 'in-progress',
+  UNDER_VERIFICATION: 'in-progress',
+  WAITING_FOR_PAYMENT: 'in-progress',
+  PAYMENT_RECEIVED: 'in-progress',
+  VISA_PROCESSING: 'in-progress',
+  FLIGHT_RESERVED: 'in-progress',
+  HOTEL_RESERVED: 'in-progress',
+  TRANSPORTATION_CONFIRMED: 'in-progress',
   CONFIRMED: 'confirmed',
   IN_PROGRESS: 'in-progress',
   COMPLETED: 'completed',
   CANCELLED: 'cancelled',
+  REJECTED: 'cancelled',
 }
 
 const paymentMap: Record<BookingDto['paymentStatus'], PaymentStatus> = {

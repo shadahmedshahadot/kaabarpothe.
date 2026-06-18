@@ -4,11 +4,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { ComponentType } from 'react'
-import { Menu, X, Bell, Search, ChevronDown, LogOut } from 'lucide-react'
+import { Menu, X, Search, ChevronDown, LogOut } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { LOGO_ALT, LOGO_SRC } from '@/constants'
+import { NotificationBell } from '@/features/notifications/components/notification-bell'
 
 export interface NavGroup {
   label: string
@@ -196,10 +197,7 @@ function DashboardTopbar({
         />
       </div>
 
-      <button className="relative p-2 hover:bg-muted rounded-lg">
-        <Bell className="w-5 h-5" />
-        <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full" />
-      </button>
+      <NotificationBell />
       <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 hover:bg-muted rounded-lg cursor-pointer">
         <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${userAvatar} text-white font-bold text-xs flex items-center justify-center`}>
           {initials}

@@ -31,6 +31,7 @@ export const ROUTES = {
   booking: {
     root: '/booking',
     confirmation: (code: string) => `/booking/${code}`,
+    success: (code: string) => `/booking/success/${code}`,
   },
   admin: {
     root: '/admin',
@@ -43,6 +44,7 @@ export const ROUTES = {
     hotelEdit: (id: string) => `/admin/hotels/${id}/edit`,
     pilgrims: '/admin/pilgrims',
     bookings: '/admin/bookings',
+    bookingDetail: (id: string) => `/admin/bookings/${id}`,
     payments: '/admin/payments',
     reviews: '/admin/reviews',
     inquiries: '/admin/inquiries',
@@ -60,6 +62,7 @@ export const ROUTES = {
   pilgrim: {
     root: '/pilgrim',
     bookings: '/pilgrim/bookings',
+    bookingDetail: (code: string) => `/pilgrim/bookings/${code}`,
     flight: '/pilgrim/flight',
     hotel: '/pilgrim/hotel',
     payments: '/pilgrim/payments',

@@ -29,10 +29,55 @@ enum DocumentStatus {
 
 enum BookingStatus {
   PENDING
+  PENDING_REVIEW
+  DOCUMENTS_REQUIRED
+  UNDER_VERIFICATION
+  WAITING_FOR_PAYMENT
+  PAYMENT_RECEIVED
+  VISA_PROCESSING
+  FLIGHT_RESERVED
+  HOTEL_RESERVED
+  TRANSPORTATION_CONFIRMED
   CONFIRMED
   IN_PROGRESS
   COMPLETED
   CANCELLED
+  REJECTED
+}
+
+enum BookingDocumentStatus {
+  REQUESTED
+  UPLOADED
+  VERIFIED
+  REJECTED
+}
+
+enum NotificationType {
+  BOOKING_RECEIVED
+  STATUS_UPDATED
+  DOCUMENTS_REQUESTED
+  DOCUMENTS_UPLOADED
+  PAYMENT_APPROVED
+  VISA_UPDATE
+  FLIGHT_ASSIGNED
+  HOTEL_ASSIGNED
+  TRANSPORTATION_ASSIGNED
+  BOOKING_CONFIRMED
+  BOOKING_COMPLETED
+  BOOKING_CANCELLED
+  MESSAGE_RECEIVED
+  GENERIC
+}
+
+enum MessageSenderRole {
+  ADMIN
+  USER
+  SYSTEM
+}
+
+enum AssignmentRole {
+  CONSULTANT
+  STAFF
 }
 
 enum PaymentStatusBooking {
@@ -205,6 +250,16 @@ model User {
   documents UserDocument[]
   bookings  Booking[]
   inquiries Inquiry[]
+
+  consultantBookings    Booking[]              @relation("BookingConsultant")
+  statusChanges         BookingStatusHistory[] @relation("BookingStatusChanger")
+  timelineEvents        BookingTimelineEvent[] @relation("BookingTimelinePerformer")
+  sentMessages          BookingMessage[]       @relation("BookingMessageSender")
+  uploadedDocuments     BookingDocument[]      @relation("BookingDocumentUploader")
+  adminActivities       AdminActivityLog[]     @relation("AdminActivityActor")
+  staffAssignments      BookingAssignment[]    @relation("BookingAssignmentStaff")
+  givenAssignments      BookingAssignment[]    @relation("BookingAssignmentAssigner")
+  notifications         Notification[]
 
   @@index([email])
   @@index([passportNumber])
@@ -471,42 +526,200 @@ model Transport {
 // =================================================================
 
 model Booking {
-  id                String                @id @default(uuid())
-  bookingCode       String                @unique
-  packageId         String
-  packageName       String
-  packageType       PackageType
-  userId            String?
-  pilgrimName       String
-  pilgrimEmail      String
-  pilgrimPhone      String
-  status            BookingStatus         @default(PENDING)
-  paymentStatus     PaymentStatusBooking  @default(UNPAID)
-  totalAmount       Float
-  paidAmount        Float                 @default(0)
-  installmentsCount Int                   @default(1)
-  installmentsPaid  Int                   @default(0)
-  departureDate     DateTime
-  returnDate        DateTime
-  pilgrimsCount     Int                   @default(1)
-  bookedDate        DateTime              @default(now())
-  notes             String?
-  visaStatus        VisaStatus            @default(PENDING)
-  documentsStatus   DocumentsBundleStatus @default(INCOMPLETE)
-  isDeleted         Boolean               @default(false)
-  createdAt         DateTime              @default(now())
-  updatedAt         DateTime              @updatedAt
+  id                   String                @id @default(uuid())
+  bookingCode          String                @unique
+  packageId            String
+  packageName          String
+  packageType          PackageType
+  userId               String?
+  pilgrimName          String
+  pilgrimEmail         String
+  pilgrimPhone         String
+  pilgrimNationality   String?
+  pilgrimPassportNo    String?
+  pilgrimPassportExp   DateTime?
+  flightId             String?
+  hotelId              String?
+  transportId          String?
+  assignedConsultantId String?
+  status               BookingStatus         @default(PENDING_REVIEW)
+  paymentStatus        PaymentStatusBooking  @default(UNPAID)
+  totalAmount          Float
+  paidAmount           Float                 @default(0)
+  installmentsCount    Int                   @default(1)
+  installmentsPaid     Int                   @default(0)
+  departureDate        DateTime
+  returnDate           DateTime
+  pilgrimsCount        Int                   @default(1)
+  bookedDate           DateTime              @default(now())
+  notes                String?
+  specialRequests      String?
+  adminNotes           String?
+  visaStatus           VisaStatus            @default(PENDING)
+  documentsStatus      DocumentsBundleStatus @default(INCOMPLETE)
+  isDeleted            Boolean               @default(false)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
 
-  package   Package           @relation(fields: [packageId], references: [id], onDelete: Restrict)
-  user      User?             @relation(fields: [userId], references: [id], onDelete: Restrict)
-  travelers BookingTraveler[]
-  payments  Payment[]
+  package             Package                 @relation(fields: [packageId], references: [id], onDelete: Restrict)
+  user                User?                   @relation(fields: [userId], references: [id], onDelete: Restrict)
+  assignedConsultant  User?                   @relation("BookingConsultant", fields: [assignedConsultantId], references: [id], onDelete: SetNull)
+  travelers           BookingTraveler[]
+  payments            Payment[]
+  statusHistory       BookingStatusHistory[]
+  timelineEvents      BookingTimelineEvent[]
+  messages            BookingMessage[]
+  documents           BookingDocument[]
+  activityLogs        AdminActivityLog[]
+  assignments         BookingAssignment[]
+  notifications       Notification[]
 
   @@index([userId])
   @@index([packageId])
   @@index([bookingCode])
   @@index([status])
+  @@index([assignedConsultantId])
   @@map("bookings")
+}
+
+// =================================================================
+//  MANUAL BOOKING WORKFLOW (status history, timeline, messages, documents, activity log, notifications, assignments)
+// =================================================================
+
+model BookingStatusHistory {
+  id          String        @id @default(uuid())
+  bookingId   String
+  fromStatus  BookingStatus?
+  toStatus    BookingStatus
+  changedById String?
+  changedByName String?
+  note        String?
+  createdAt   DateTime      @default(now())
+
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  changedBy User?   @relation("BookingStatusChanger", fields: [changedById], references: [id], onDelete: SetNull)
+
+  @@index([bookingId])
+  @@map("booking_status_history")
+}
+
+model BookingTimelineEvent {
+  id           String   @id @default(uuid())
+  bookingId    String
+  eventType    String
+  title        String
+  description  String?
+  performedById String?
+  performedByName String?
+  visibleToUser Boolean @default(true)
+  metadata     Json?
+  createdAt    DateTime @default(now())
+
+  booking     Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  performedBy User?   @relation("BookingTimelinePerformer", fields: [performedById], references: [id], onDelete: SetNull)
+
+  @@index([bookingId])
+  @@map("booking_timeline_events")
+}
+
+model BookingMessage {
+  id          String            @id @default(uuid())
+  bookingId   String
+  senderId    String?
+  senderName  String
+  senderRole  MessageSenderRole
+  content     String
+  attachments String[]
+  readAt      DateTime?
+  createdAt   DateTime          @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  sender  User?   @relation("BookingMessageSender", fields: [senderId], references: [id], onDelete: SetNull)
+
+  @@index([bookingId])
+  @@index([senderId])
+  @@map("booking_messages")
+}
+
+model BookingDocument {
+  id           String                @id @default(uuid())
+  bookingId    String
+  type         String
+  name         String
+  description  String?
+  fileUrl      String?
+  fileName     String?
+  uploadedById String?
+  uploadedByRole MessageSenderRole?
+  status       BookingDocumentStatus @default(REQUESTED)
+  requestedAt  DateTime              @default(now())
+  uploadedAt   DateTime?
+  verifiedAt   DateTime?
+  rejectionReason String?
+
+  booking    Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  uploadedBy User?   @relation("BookingDocumentUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+
+  @@index([bookingId])
+  @@map("booking_documents")
+}
+
+model AdminActivityLog {
+  id          String   @id @default(uuid())
+  adminId     String?
+  adminName   String?
+  bookingId   String?
+  action      String
+  details     Json?
+  note        String?
+  createdAt   DateTime @default(now())
+
+  admin   User?    @relation("AdminActivityActor", fields: [adminId], references: [id], onDelete: SetNull)
+  booking Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  @@index([adminId])
+  @@index([bookingId])
+  @@index([createdAt])
+  @@map("admin_activity_logs")
+}
+
+model BookingAssignment {
+  id           String         @id @default(uuid())
+  bookingId    String
+  staffId      String
+  role         AssignmentRole @default(CONSULTANT)
+  assignedById String?
+  assignedAt   DateTime       @default(now())
+
+  booking    Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  staff      User    @relation("BookingAssignmentStaff", fields: [staffId], references: [id], onDelete: Cascade)
+  assignedBy User?   @relation("BookingAssignmentAssigner", fields: [assignedById], references: [id], onDelete: SetNull)
+
+  @@index([bookingId])
+  @@index([staffId])
+  @@map("booking_assignments")
+}
+
+model Notification {
+  id         String           @id @default(uuid())
+  userId     String
+  type       NotificationType
+  title      String
+  message    String
+  link       String?
+  bookingId  String?
+  read       Boolean          @default(false)
+  readAt     DateTime?
+  metadata   Json?
+  createdAt  DateTime         @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  booking Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  @@index([userId, read])
+  @@index([bookingId])
+  @@index([createdAt])
+  @@map("notifications")
 }
 
 model BookingTraveler {

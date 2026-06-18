@@ -4,13 +4,16 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight, Check, ShoppingCart, Plane, Hotel as HotelIcon, Bus, Package as PackageIcon, Plus, ShieldCheck, Trash2 } from 'lucide-react'
+import { toast } from 'sonner'
+import { ArrowLeft, ArrowRight, Check, ShoppingCart, Plane, Hotel as HotelIcon, Bus, Package as PackageIcon, Plus, ShieldCheck, Trash2, Loader2 } from 'lucide-react'
 import { Input, Select, Label } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/utils/format'
-import { useCartStore, cartTotals, blankTraveler, newBookingCode, type PaymentMethod, type PaymentPlan } from '@/redux/cart'
+import { useCartStore, cartTotals, blankTraveler, type PaymentMethod, type PaymentPlan } from '@/redux/cart'
 import { BookingSummarySidebar } from './booking-summary-sidebar'
 import { ROUTES } from '@/constants'
+import { useCreateBookingMutation } from '@/redux/fetchres/booking/bookingApi'
+import { useAuthUser } from '@/redux/fetchres/auth/authSlice'
 
 const STEPS = [
   { id: 1, label: 'সেবা নির্বাচন করুন' },
@@ -28,8 +31,10 @@ const PAYMENT_METHODS: { value: PaymentMethod; label: string; description: strin
 
 export function BookingWizard() {
   const router = useRouter()
+  const authUser = useAuthUser()
   const [step, setStep] = useState(1)
   const [hydrated, setHydrated] = useState(false)
+  const [createBooking, { isLoading: isSubmitting }] = useCreateBookingMutation()
 
   const items = useCartStore(s => s.items)
   const travelers = useCartStore(s => s.travelers)
@@ -42,7 +47,6 @@ export function BookingWizard() {
   const setPaymentMethod = useCartStore(s => s.setPaymentMethod)
   const setPaymentPlan = useCartStore(s => s.setPaymentPlan)
   const setNotes = useCartStore(s => s.setNotes)
-  const saveBooking = useCartStore(s => s.saveBooking)
   const clearCart = useCartStore(s => s.clearCart)
 
   useEffect(() => {
@@ -63,29 +67,73 @@ export function BookingWizard() {
   const goNext = () => setStep(s => Math.min(4, s + 1))
   const goPrev = () => setStep(s => Math.max(1, s - 1))
 
-  const handleConfirm = () => {
-    const code = newBookingCode()
-    const paidAmount = paymentPlan === 'partial' ? Math.round(totals.total * 0.25) : paymentPlan === 'installment' ? Math.round(totals.total / 4) : totals.total
+  const handleConfirm = async () => {
+    if (!authUser) {
+      toast.error('লগইন করুন বুকিং জমা দিতে।')
+      router.push(`${ROUTES.login}?next=${encodeURIComponent(ROUTES.booking.root)}`)
+      return
+    }
 
-    saveBooking({
-      code,
-      items: [...items],
-      travelers: [...travelers],
-      contact: { ...contact },
-      paymentMethod,
-      paymentPlan,
-      subtotal: totals.subtotal,
-      taxes: totals.taxes,
-      serviceFee: totals.serviceFee,
-      discount: 0,
-      total: totals.total,
+    const pkgItem = items.find(i => i.kind === 'package')
+    if (!pkgItem) {
+      toast.error('অন্তত একটি প্যাকেজ নির্বাচন করুন।')
+      return
+    }
+    const flightItem = items.find(i => i.kind === 'flight')
+    const hotelItem = items.find(i => i.kind === 'hotel')
+    const transportItem = items.find(i => i.kind === 'transport')
+
+    const today = new Date()
+    const fallbackDeparture = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000)
+    const fallbackReturn = new Date(today.getTime() + 45 * 24 * 60 * 60 * 1000)
+    const departureDate = (pkgItem.meta?.departureDate as string) ?? fallbackDeparture.toISOString()
+    const returnDate = (pkgItem.meta?.returnDate as string) ?? fallbackReturn.toISOString()
+
+    const primary = travelers[0]
+    const paidAmount = paymentPlan === 'partial' ? Math.round(totals.total * 0.25) : paymentPlan === 'installment' ? Math.round(totals.total / 4) : 0
+
+    const payload = {
+      packageId: pkgItem.refId,
+      flightId: flightItem?.refId ?? null,
+      hotelId: hotelItem?.refId ?? null,
+      transportId: transportItem?.refId ?? null,
+      pilgrimName: contact.name || primary?.fullName || '',
+      pilgrimEmail: contact.email,
+      pilgrimPhone: contact.phone,
+      pilgrimNationality: primary?.nationality ?? null,
+      pilgrimPassportNo: primary?.passportNumber ?? null,
+      pilgrimPassportExp: primary?.passportExpiry ? new Date(primary.passportExpiry).toISOString() : null,
+      pilgrimsCount: travelers.length || 1,
+      departureDate,
+      returnDate,
+      totalAmount: totals.total,
       paidAmount,
-      status: 'confirmed',
+      installmentsCount: paymentPlan === 'installment' ? 4 : 1,
       notes,
-    })
+      specialRequests: notes,
+      travelers: travelers.map(t => ({
+        fullName: t.fullName,
+        gender: (t.gender === 'female' ? 'FEMALE' : 'MALE') as 'MALE' | 'FEMALE',
+        dateOfBirth: new Date(t.dateOfBirth || today).toISOString(),
+        passportNumber: t.passportNumber,
+        passportExpiry: new Date(t.passportExpiry || fallbackReturn).toISOString(),
+        nationality: t.nationality || 'Bangladeshi',
+        mobile: t.mobile,
+        email: t.email,
+        emergencyContact: t.emergencyContact || null,
+      })),
+    }
 
-    clearCart()
-    router.push(ROUTES.booking.confirmation(code))
+    try {
+      const res = await createBooking(payload).unwrap()
+      const code = res.data.bookingCode
+      toast.success('বুকিং অনুরোধ জমা হয়েছে! আমাদের টিম শীঘ্রই যোগাযোগ করবে।')
+      clearCart()
+      router.push(ROUTES.booking.success(code))
+    } catch (err) {
+      const message = (err as { data?: { message?: string } })?.data?.message ?? 'বুকিং জমা দিতে সমস্যা হয়েছে।'
+      toast.error(message)
+    }
   }
 
   return (
@@ -144,10 +192,11 @@ export function BookingWizard() {
               ) : (
                 <button
                   onClick={handleConfirm}
-                  disabled={items.length === 0}
+                  disabled={items.length === 0 || isSubmitting}
                   className="px-6 py-3 bg-primary text-primary-foreground rounded-xl text-sm font-semibold inline-flex items-center gap-2 hover:bg-primary/90 disabled:opacity-50"
                 >
-                  <ShieldCheck className="w-4 h-4" /> বুকিং নিশ্চিত করুন · {formatCurrency(totals.total)}
+                  {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
+                  বুকিং অনুরোধ জমা দিন · {formatCurrency(totals.total)}
                 </button>
               )}
             </div>

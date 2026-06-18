@@ -13,6 +13,11 @@ export const tagTypesList = [
   'testimonial',
   'siteContent',
   'document',
+  'notification',
+  'bookingMessage',
+  'bookingTimeline',
+  'bookingDocument',
+  'bookingActivity',
 ] as const
 
 export type TagType = (typeof tagTypesList)[number]

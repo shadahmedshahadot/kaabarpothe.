@@ -45,7 +45,12 @@
       "Bash(git push *)",
       "Bash(pnpm rebuild *)",
       "Bash(pnpm approve-builds *)",
-      "Bash(pnpm *)"
+      "Bash(pnpm *)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")",
+      "Bash(grep -E \"^src/app/[^/]+$\")",
+      "Bash(xargs grep -l \"dashboard\\\\|admin\")",
+      "Bash(xargs grep -l \"toast\\\\|Toaster\\\\|notification\")",
+      "Bash(npx prisma *)"
     ]
   }
 }
