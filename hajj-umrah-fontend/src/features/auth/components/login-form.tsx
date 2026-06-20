@@ -121,18 +121,6 @@ export function LoginForm() {
         </Link>
       </p>
 
-      <div className="mt-10 pt-6 border-t border-border text-center text-xs text-muted-foreground">
-        <p className="mb-2 uppercase tracking-[0.18em] text-[10px]">দ্রুত প্রবেশ</p>
-        <div className="flex gap-3 justify-center">
-          <Link href={ROUTES.pilgrim.root} className="hover:text-foreground">
-            হাজী পোর্টাল
-          </Link>
-          <span>·</span>
-          <Link href={ROUTES.admin.root} className="hover:text-foreground">
-            অ্যাডমিন
-          </Link>
-        </div>
-      </div>
     </>
   )
 }

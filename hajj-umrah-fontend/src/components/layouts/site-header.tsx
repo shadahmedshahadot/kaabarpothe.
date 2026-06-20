@@ -2,15 +2,38 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronDown, Phone, Mail, MapPin } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Menu, X, ChevronDown, Phone, Mail, MapPin, LogOut } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { PRIMARY_NAV, ROUTES, SITE } from '@/constants'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { logout as logoutAction } from '@/redux/fetchres/auth/authSlice'
+import { useLogoutFromDbMutation } from '@/redux/fetchres/auth/authApi'
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+
+  const router = useRouter()
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(state => state.auth.user)
+  const token = useAppSelector(state => state.auth.token)
+  const isAuthed = Boolean(user && token)
+  const [logoutFromDb, { isLoading: loggingOut }] = useLogoutFromDbMutation()
+
+  const handleLogout = async () => {
+    try {
+      await logoutFromDb({}).unwrap()
+    } catch {
+      // ignore — clear client state regardless
+    }
+    dispatch(logoutAction())
+    toast.success('লগআউট সম্পন্ন')
+    router.push(ROUTES.home)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -30,7 +53,7 @@ export function SiteHeader() {
         scrolled ? 'shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)]' : 'shadow-none',
       )}
     >
-      <TopBar scrolled={scrolled} />
+      <TopBar scrolled={scrolled} isAuthed={isAuthed} onLogout={handleLogout} loggingOut={loggingOut} />
 
       <nav
         className={cn(
@@ -40,15 +63,37 @@ export function SiteHeader() {
       >
         <HeaderLogo />
         <DesktopNav activeDropdown={activeDropdown} setActiveDropdown={setActiveDropdown} />
-        <HeaderActions open={open} onToggle={() => setOpen(o => !o)} />
+        <HeaderActions
+          open={open}
+          onToggle={() => setOpen(o => !o)}
+          isAuthed={isAuthed}
+          onLogout={handleLogout}
+          loggingOut={loggingOut}
+        />
       </nav>
 
-      <MobileMenu open={open} onClose={() => setOpen(false)} />
+      <MobileMenu
+        open={open}
+        onClose={() => setOpen(false)}
+        isAuthed={isAuthed}
+        onLogout={handleLogout}
+        loggingOut={loggingOut}
+      />
     </motion.header>
   )
 }
 
-function TopBar({ scrolled }: { scrolled: boolean }) {
+function TopBar({
+  scrolled,
+  isAuthed,
+  onLogout,
+  loggingOut,
+}: {
+  scrolled: boolean
+  isAuthed: boolean
+  onLogout: () => void
+  loggingOut: boolean
+}) {
   return (
     <div
       className={cn(
@@ -75,16 +120,27 @@ function TopBar({ scrolled }: { scrolled: boolean }) {
           </span>
         </div>
         <div className="flex items-center gap-4 text-white/80">
-          <Link href={ROUTES.login} className="hover:text-amber-300 transition-colors">
-            সাইন ইন
-          </Link>
-          <span className="text-white/25">|</span>
-          <Link href={ROUTES.admin.root} className="hover:text-amber-300 transition-colors">
-            অ্যাডমিন
-          </Link>
-          <Link href={ROUTES.pilgrim.root} className="hover:text-amber-300 transition-colors">
-            হাজী পোর্টাল
-          </Link>
+          {isAuthed ? (
+            <button
+              type="button"
+              onClick={onLogout}
+              disabled={loggingOut}
+              className="inline-flex items-center gap-1.5 hover:text-amber-300 transition-colors disabled:opacity-60"
+            >
+              <LogOut className="w-3 h-3" />
+              {loggingOut ? 'লগআউট হচ্ছে…' : 'লগআউট'}
+            </button>
+          ) : (
+            <>
+              <Link href={ROUTES.login} className="hover:text-amber-300 transition-colors">
+                সাইন ইন
+              </Link>
+              <span className="text-white/25">|</span>
+              <Link href={ROUTES.register} className="hover:text-amber-300 transition-colors">
+                নিবন্ধন
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -185,18 +241,36 @@ function DesktopNav({
 function HeaderActions({
   open,
   onToggle,
+  isAuthed,
+  onLogout,
+  loggingOut,
 }: {
   open: boolean
   onToggle: () => void
+  isAuthed: boolean
+  onLogout: () => void
+  loggingOut: boolean
 }) {
   return (
     <div className="flex items-center gap-2 sm:gap-3">
-      <Link
-        href={ROUTES.login}
-        className="hidden sm:inline-flex px-4 py-2 text-sm font-medium rounded-full transition-colors text-white/85 hover:text-white hover:bg-white/10"
-      >
-        সাইন ইন
-      </Link>
+      {isAuthed ? (
+        <button
+          type="button"
+          onClick={onLogout}
+          disabled={loggingOut}
+          className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full transition-colors text-white/85 hover:text-white hover:bg-white/10 disabled:opacity-60"
+        >
+          <LogOut className="w-4 h-4" />
+          {loggingOut ? 'লগআউট হচ্ছে…' : 'লগআউট'}
+        </button>
+      ) : (
+        <Link
+          href={ROUTES.login}
+          className="hidden sm:inline-flex px-4 py-2 text-sm font-medium rounded-full transition-colors text-white/85 hover:text-white hover:bg-white/10"
+        >
+          সাইন ইন
+        </Link>
+      )}
       <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
         <Link
           href={ROUTES.packages.hajj}
@@ -223,7 +297,19 @@ interface FlatNavItem {
   desc?: string
 }
 
-function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+function MobileMenu({
+  open,
+  onClose,
+  isAuthed,
+  onLogout,
+  loggingOut,
+}: {
+  open: boolean
+  onClose: () => void
+  isAuthed: boolean
+  onLogout: () => void
+  loggingOut: boolean
+}) {
   const flat: FlatNavItem[] = PRIMARY_NAV.flatMap(item =>
     item.children
       ? item.children.map(c => ({ label: c.label, href: c.href, desc: c.desc, parent: item.label }))
@@ -254,19 +340,38 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                 )}
               </Link>
             ))}
-            <div className="border-t border-white/10 my-2 pt-3 grid grid-cols-2 gap-2">
-              <Link
-                href={ROUTES.login}
-                className="text-center text-sm px-3 py-2.5 rounded-xl border border-white/15 text-white hover:bg-white/5 font-medium"
-              >
-                সাইন ইন
-              </Link>
-              <Link
-                href={ROUTES.register}
-                className="text-center text-sm px-3 py-2.5 rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-semibold shadow-md shadow-amber-500/30"
-              >
-                নিবন্ধন
-              </Link>
+            <div className="border-t border-white/10 my-2 pt-3">
+              {isAuthed ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose()
+                    onLogout()
+                  }}
+                  disabled={loggingOut}
+                  className="w-full inline-flex items-center justify-center gap-2 text-sm px-3 py-2.5 rounded-xl border border-white/15 text-white hover:bg-white/5 font-medium disabled:opacity-60"
+                >
+                  <LogOut className="w-4 h-4" />
+                  {loggingOut ? 'লগআউট হচ্ছে…' : 'লগআউট'}
+                </button>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href={ROUTES.login}
+                    onClick={onClose}
+                    className="text-center text-sm px-3 py-2.5 rounded-xl border border-white/15 text-white hover:bg-white/5 font-medium"
+                  >
+                    সাইন ইন
+                  </Link>
+                  <Link
+                    href={ROUTES.register}
+                    onClick={onClose}
+                    className="text-center text-sm px-3 py-2.5 rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-semibold shadow-md shadow-amber-500/30"
+                  >
+                    নিবন্ধন
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
