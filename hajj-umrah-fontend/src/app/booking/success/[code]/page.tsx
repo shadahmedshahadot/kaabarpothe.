@@ -5,7 +5,7 @@ import { BookingSuccess } from '@/features/booking/components/booking-success'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'বুকিং অনুরোধ গৃহীত | সাকিনাহ ট্রাভেলস',
+  title: 'বুকিং অনুরোধ গৃহীত',
   robots: { index: false, follow: false },
 }
 

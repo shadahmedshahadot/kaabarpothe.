@@ -4,8 +4,15 @@ import { TransportListing } from '@/features/transports/components/transport-lis
 import { transports } from '@/data/transports'
 
 export const metadata: Metadata = {
-  title: 'পরিবহন সেবা | সাকিনাহ ট্রাভেলস',
-  description: 'মক্কা ও মদিনায় বিমানবন্দর ট্রান্সফার, আন্তঃনগর কোচ, যিয়ারত ট্যুর এবং হারাম শাটল সেবা। স্বাধীনভাবে অথবা একসাথে বুক করুন।',
+  title: 'পরিবহন সেবা',
+  description: 'মক্কা ও মদিনায় বিমানবন্দর ট্রান্সফার, আন্তঃনগর কোচ, যিয়ারত ট্যুর এবং হারাম শাটল সেবা। স্বাধীনভাবে অথবা প্যাকেজের সাথে বুক করুন।',
+  keywords: ['মক্কা পরিবহন', 'মদিনা পরিবহন', 'যিয়ারত ট্যুর', 'হারাম শাটল', 'Hajj transport'],
+  alternates: { canonical: '/transportation' },
+  openGraph: {
+    title: 'পরিবহন সেবা | কাবার পথে',
+    description: 'মক্কা ও মদিনায় বিমানবন্দর ট্রান্সফার, যিয়ারত ট্যুর, হারাম শাটল।',
+    url: '/transportation',
+  },
 }
 
 export default function TransportationPage() {

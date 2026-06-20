@@ -10,9 +10,9 @@ export function AuthLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen grid lg:grid-cols-[1.05fr_1fr] bg-background">
+    <div className="min-h-screen grid lg:grid-cols-[1.05fr_1fr] bg-page-canvas">
       {visual}
-      <div className="relative flex flex-col bg-background">
+      <div className="relative flex flex-col bg-page-canvas">
         <span className="pointer-events-none absolute top-0 right-0 w-[420px] h-[420px] rounded-full bg-primary/5 blur-3xl -z-0 hidden lg:block" />
         <span className="pointer-events-none absolute bottom-0 left-0 w-[360px] h-[360px] rounded-full bg-amber-400/5 blur-3xl -z-0 hidden lg:block" />
 

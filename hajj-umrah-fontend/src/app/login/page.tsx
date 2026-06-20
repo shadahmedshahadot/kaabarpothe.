@@ -3,7 +3,12 @@ import { AuthLayout } from '@/features/auth/components/auth-layout'
 import { AuthVisual } from '@/features/auth/components/auth-visual'
 import { LoginForm } from '@/features/auth/components/login-form'
 
-export const metadata: Metadata = { title: 'সাইন ইন' }
+export const metadata: Metadata = {
+  title: 'সাইন ইন',
+  description: 'কাবার পথে অ্যাকাউন্টে সাইন ইন করুন — বুকিং, পেমেন্ট ও ভিসা ট্র্যাক করুন।',
+  alternates: { canonical: '/login' },
+  robots: { index: false, follow: true },
+}
 
 const LOGIN_STATS = [
   { value: '৫০ হাজার+', label: 'হাজী' },

@@ -12,8 +12,15 @@ const blogImage = (idx: number) =>
   idx % 2 === 0 ? KAABA_IMAGES[idx % KAABA_IMAGES.length] : MADINAH_IMAGES[idx % MADINAH_IMAGES.length]
 
 export const metadata: Metadata = {
-  title: 'শিক্ষা কেন্দ্র ও ব্লগ | সাকিনাহ ট্রাভেলস',
+  title: 'শিক্ষা কেন্দ্র ও ব্লগ',
   description: 'আলেম-পর্যালোচিত গাইড, প্যাকিং চেকলিস্ট, এবং হাজীদের গল্প। হজ্জ বা উমরাহর জন্য আপনার অন্তর ও স্যুটকেস প্রস্তুত করুন।',
+  keywords: ['হজ্জ ব্লগ', 'উমরাহ গাইড', 'হজ্জ চেকলিস্ট', 'ইসলামিক ভ্রমণ ব্লগ'],
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'শিক্ষা কেন্দ্র ও ব্লগ | কাবার পথে',
+    description: 'আলেম-পর্যালোচিত হজ্জ ও উমরাহ গাইড।',
+    url: '/blog',
+  },
 }
 
 export default function BlogPage() {

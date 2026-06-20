@@ -4,8 +4,15 @@ import { PackageListing } from '@/features/packages/components/package-listing'
 import { getPackagesByType } from '@/data/packages'
 
 export const metadata: Metadata = {
-  title: 'হজ্জ প্যাকেজ ২০২৬ | সাকিনাহ ট্রাভেলস',
+  title: 'হজ্জ প্যাকেজ ২০২৬',
   description: '২০২৬ সালের জন্য ইকোনমি, স্ট্যান্ডার্ড, প্রিমিয়াম এবং ভিআইপি হজ্জ প্যাকেজ ব্রাউজ করুন। আলেম পরিচালিত গ্রুপ, ৫-তারকা হোটেল, সৌদি মন্ত্রণালয় অনুমোদিত।',
+  keywords: ['হজ্জ প্যাকেজ ২০২৬', 'হজ্জ এজেন্সি বাংলাদেশ', 'Hajj package Bangladesh', 'হজ্জ মূল্য', 'হজ্জ ভিআইপি প্যাকেজ'],
+  alternates: { canonical: '/packages/hajj' },
+  openGraph: {
+    title: 'হজ্জ প্যাকেজ ২০২৬ | কাবার পথে',
+    description: 'ইকোনমি থেকে ভিআইপি — সৌদি মন্ত্রণালয় অনুমোদিত হজ্জ প্যাকেজ।',
+    url: '/packages/hajj',
+  },
 }
 
 export default function HajjPackagesPage() {

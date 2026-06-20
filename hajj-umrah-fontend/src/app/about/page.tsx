@@ -9,8 +9,14 @@ import { StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { IMG } from '@/data/images'
 
 export const metadata: Metadata = {
-  title: 'আমাদের সম্পর্কে | সাকিনাহ ট্রাভেলস',
-  description: 'আমাদের লক্ষ্য বিশ্বব্যাপী প্রতিটি মুসলিমের জন্য হজ্জ ও উমরাহকে সুলভ, স্বচ্ছ ও আধ্যাত্মিকভাবে অর্থপূর্ণ করা।',
+  title: 'আমাদের সম্পর্কে',
+  description: 'কাবার পথে — আলেম পরিচালিত হজ্জ ও উমরাহ এজেন্সি। আমাদের লক্ষ্য প্রতিটি মুসলিমের জন্য হজ্জ ও উমরাহকে সুলভ, স্বচ্ছ ও আধ্যাত্মিকভাবে অর্থপূর্ণ করা।',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'আমাদের সম্পর্কে | কাবার পথে',
+    description: 'আলেম পরিচালিত, সৌদি মন্ত্রণালয় লাইসেন্সপ্রাপ্ত হজ্জ ও উমরাহ এজেন্সি।',
+    url: '/about',
+  },
 }
 
 const milestones = [

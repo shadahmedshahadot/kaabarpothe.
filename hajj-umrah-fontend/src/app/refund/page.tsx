@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/common/legal-page'
 
-export const metadata: Metadata = { title: 'রিফান্ড নীতি | সাকিনাহ ট্রাভেলস' }
+export const metadata: Metadata = {
+  title: 'রিফান্ড নীতি',
+  description: 'কাবার পথে রিফান্ড ও বাতিলকরণ নীতি — স্বচ্ছ, লিখিত, কোনো গোপন শর্ত নেই।',
+  alternates: { canonical: '/refund' },
+  robots: { index: true, follow: true },
+}
 
 export default function RefundPolicyPage() {
   return (

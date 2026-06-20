@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/common/legal-page'
 
-export const metadata: Metadata = { title: 'গোপনীয়তা নীতি | সাকিনাহ ট্রাভেলস' }
+export const metadata: Metadata = {
+  title: 'গোপনীয়তা নীতি',
+  description: 'কাবার পথে আপনার তথ্য কীভাবে সংগ্রহ, ব্যবহার ও সুরক্ষা করে — গোপনীয়তা নীতি।',
+  alternates: { canonical: '/privacy' },
+  robots: { index: true, follow: true },
+}
 
 export default function PrivacyPolicyPage() {
   return (

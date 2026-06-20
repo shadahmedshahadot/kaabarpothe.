@@ -170,3 +170,65 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .bg-home-canvas {
+    position: relative;
+    background-color: oklch(0.985 0.008 70);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, oklch(0.95 0.07 70 / 0.55), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 30%, oklch(0.92 0.08 150 / 0.35), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 0% 80%, oklch(0.9 0.08 210 / 0.28), transparent 65%);
+    background-attachment: fixed;
+  }
+  .bg-home-canvas::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(oklch(0.62 0.16 70 / 0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 30%, transparent 80%);
+  }
+  .dark .bg-home-canvas {
+    background-color: oklch(0.14 0.02 250);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, oklch(0.3 0.08 70 / 0.5), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 30%, oklch(0.28 0.08 150 / 0.35), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 0% 80%, oklch(0.26 0.08 210 / 0.35), transparent 65%);
+  }
+
+  .bg-page-canvas {
+    position: relative;
+    background-color: oklch(0.975 0.012 80);
+    background-image:
+      linear-gradient(180deg, oklch(0.97 0.015 75) 0%, oklch(0.99 0.006 70) 40%, oklch(0.97 0.012 150 / 0.55) 100%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, oklch(0.95 0.06 70 / 0.35), transparent 70%);
+    background-attachment: fixed;
+  }
+  .bg-page-canvas::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(oklch(0.62 0.16 70 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.62 0.16 70 / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+  }
+  .dark .bg-page-canvas {
+    background-color: oklch(0.16 0.02 250);
+    background-image:
+      linear-gradient(180deg, oklch(0.18 0.02 250) 0%, oklch(0.15 0.02 250) 50%, oklch(0.16 0.03 210) 100%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, oklch(0.28 0.08 70 / 0.35), transparent 70%);
+  }
+  .dark .bg-page-canvas::before {
+    background-image:
+      linear-gradient(oklch(0.68 0.14 70 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.68 0.14 70 / 0.05) 1px, transparent 1px);
+  }
+}

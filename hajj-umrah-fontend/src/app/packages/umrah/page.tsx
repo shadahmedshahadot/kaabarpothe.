@@ -4,8 +4,15 @@ import { PackageListing } from '@/features/packages/components/package-listing'
 import { getPackagesByType } from '@/data/packages'
 
 export const metadata: Metadata = {
-  title: 'উমরাহ প্যাকেজ | সাকিনাহ ট্রাভেলস',
+  title: 'উমরাহ প্যাকেজ ২০২৬',
   description: 'সারা বছরব্যাপী বাজেট, ইকোনমি, প্রিমিয়াম এবং লাক্সারি উমরাহ প্যাকেজ। আলেম পরিচালিত গ্রুপ, হারামের কাছের হোটেল, সৌদি মন্ত্রণালয় অনুমোদিত।',
+  keywords: ['উমরাহ প্যাকেজ', 'উমরাহ ২০২৬', 'Umrah package Bangladesh', 'উমরাহ এজেন্সি ঢাকা', 'রমজান উমরাহ'],
+  alternates: { canonical: '/packages/umrah' },
+  openGraph: {
+    title: 'উমরাহ প্যাকেজ ২০২৬ | কাবার পথে',
+    description: 'বাজেট থেকে লাক্সারি — সারা বছরব্যাপী উমরাহ প্যাকেজ।',
+    url: '/packages/umrah',
+  },
 }
 
 export default function UmrahPackagesPage() {

@@ -6,7 +6,7 @@ import { Footer } from './site-footer'
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className="bg-page-canvas min-h-screen">
       <Header />
       <motion.main
         initial={{ opacity: 0, y: 8 }}
@@ -17,7 +17,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         {children}
       </motion.main>
       <Footer />
-    </>
+    </div>
   )
 }
 

@@ -3,7 +3,12 @@ import { AuthLayout } from '@/features/auth/components/auth-layout'
 import { AuthVisual } from '@/features/auth/components/auth-visual'
 import { RegisterForm } from '@/features/auth/components/register-form'
 
-export const metadata: Metadata = { title: 'অ্যাকাউন্ট তৈরি' }
+export const metadata: Metadata = {
+  title: 'অ্যাকাউন্ট তৈরি',
+  description: 'কাবার পথে নতুন অ্যাকাউন্ট খুলুন — প্যাকেজ সংরক্ষণ, বুকিং ও আলেম সহায়তা।',
+  alternates: { canonical: '/register' },
+  robots: { index: false, follow: true },
+}
 
 const REGISTER_BULLETS = [
   'পরে তুলনার জন্য প্যাকেজ সংরক্ষণ করুন',

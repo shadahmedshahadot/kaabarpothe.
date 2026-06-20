@@ -15,8 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const transport = getTransport(slug)
   if (!transport) return { title: 'সেবা পাওয়া যায়নি' }
   return {
-    title: `${transport.name} | সাকিনাহ ট্রাভেলস`,
+    title: transport.name,
     description: `${transport.routeDetails} $${transport.price} ${transport.pricingUnit} থেকে।`,
+    alternates: { canonical: `/transportation/${transport.slug}` },
+    openGraph: {
+      title: `${transport.name} | কাবার পথে`,
+      description: transport.routeDetails,
+      url: `/transportation/${transport.slug}`,
+    },
   }
 }
 

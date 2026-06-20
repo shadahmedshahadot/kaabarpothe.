@@ -8,22 +8,62 @@ export const rootMetadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
+  applicationName: SITE.name,
   keywords: [...SITE.keywords],
-  authors: [{ name: SITE.name }],
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  category: 'travel',
+  classification: 'Hajj & Umrah Travel Agency',
+  referrer: 'origin-when-cross-origin',
+  alternates: {
+    canonical: '/',
+    languages: {
+      'bn-BD': '/',
+      'x-default': '/',
+    },
+  },
   openGraph: {
     type: 'website',
-    locale: 'bn_BD',
+    locale: SITE.locale,
     url: SITE.url,
     siteName: SITE.name,
     title: `${SITE.name} — ${SITE.tagline}`,
-    description: 'প্রিমিয়াম হজ্জ ও উমরাহ প্যাকেজ। বিশ্বব্যাপী ৫০,০০০+ হাজী দ্বারা বিশ্বস্ত।',
+    description: SITE.description,
+    images: [
+      {
+        url: SITE.ogImage,
+        width: 1200,
+        height: 630,
+        alt: SITE.ogImageAlt,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    site: SITE.twitterHandle,
+    creator: SITE.twitterHandle,
     title: `${SITE.name} — ${SITE.tagline}`,
-    description: 'প্রিমিয়াম হজ্জ ও উমরাহ প্যাকেজ। আলেম পরিচালিত, সৌদি মন্ত্রণালয় লাইসেন্সপ্রাপ্ত।',
+    description: SITE.shortDescription,
+    images: [SITE.ogImage],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
@@ -31,6 +71,21 @@ export const rootMetadata: Metadata = {
       { url: '/icon.svg', type: 'image/svg+xml' },
     ],
     apple: '/apple-icon.png',
+    shortcut: '/icon-light-32x32.png',
+  },
+  manifest: '/manifest.webmanifest',
+  verification: {
+    google: '',
+    yandex: '',
+    other: {
+      'facebook-domain-verification': '',
+    },
+  },
+  other: {
+    'geo.region': 'BD-13',
+    'geo.placename': 'Dhaka',
+    'geo.position': '23.7461;90.3742',
+    ICBM: '23.7461, 90.3742',
   },
 }
 

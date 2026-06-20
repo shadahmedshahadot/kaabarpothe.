@@ -26,9 +26,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getBlog(slug)
   if (!post) return { title: 'নিবন্ধ পাওয়া যায়নি' }
   return {
-    title: `${post.title} | সাকিনাহ ট্রাভেলস`,
+    title: post.title,
     description: post.excerpt,
-    openGraph: { title: post.title, description: post.excerpt, type: 'article', publishedTime: post.publishedDate, authors: [post.author] },
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      url: `/blog/${post.slug}`,
+      publishedTime: post.publishedDate,
+      authors: [post.author],
+    },
+    twitter: { card: 'summary_large_image', title: post.title, description: post.excerpt },
   }
 }
 

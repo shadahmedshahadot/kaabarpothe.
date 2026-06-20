@@ -5,7 +5,7 @@ import { BookingConfirmation } from '@/features/booking/components/booking-confi
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'বুকিং নিশ্চিতকরণ | সাকিনাহ ট্রাভেলস',
+  title: 'বুকিং নিশ্চিতকরণ',
   robots: { index: false, follow: false },
 }
 

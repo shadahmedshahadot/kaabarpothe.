@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
 import { LegalPage } from '@/components/common/legal-page'
 
-export const metadata: Metadata = { title: 'শর্তাবলী | সাকিনাহ ট্রাভেলস' }
+export const metadata: Metadata = {
+  title: 'শর্তাবলী',
+  description: 'কাবার পথে সেবা ব্যবহারের শর্তাবলী — বুকিং, পেমেন্ট, বাতিলকরণ ও দায়িত্ব।',
+  alternates: { canonical: '/terms' },
+  robots: { index: true, follow: true },
+}
 
 export default function TermsPage() {
   return (
