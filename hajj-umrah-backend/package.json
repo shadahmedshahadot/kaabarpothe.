@@ -12,7 +12,9 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier . --write",
     "db:seed": "prisma db seed",
-    "db:migrate": "prisma migrate dev"
+    "db:migrate": "prisma migrate dev",
+    "vercel-build": "prisma generate && tsc",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "ts-node --transpile-only prisma/seed.ts"

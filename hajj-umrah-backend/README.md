@@ -90,10 +90,77 @@
 
 ---
 
-This version is **clean, readable, and professional** for GitHub — no raw JSON is included, only clear descriptions and examples.  
+This version is **clean, readable, and professional** for GitHub — no raw JSON is included, only clear descriptions and examples.
 
 ---
 
-I can also make an **even cleaner GitHub version with collapsible sections for each resource** so it looks like official documentation.  
+## Deploy to Vercel
 
-Do you want me to do that next?
+This backend is an Express + Prisma app. Vercel runs it as a single Node serverless function via `api/index.ts`.
+
+### 1. Files added for Vercel
+
+- `vercel.json` — routes all traffic to `api/index.ts`.
+- `api/index.ts` — exports the Express `app` (no `app.listen` on Vercel; the platform handles the HTTP layer).
+- `package.json` scripts:
+  - `vercel-build`: `prisma generate && tsc`
+  - `postinstall`: `prisma generate` (ensures the Prisma client exists before the build runs)
+
+### 2. Environment variables
+
+Set these in **Vercel → Project → Settings → Environment Variables** (Production + Preview + Development):
+
+| Key | Notes |
+|-----|-------|
+| `NODE_ENV` | `production` |
+| `DATABASE_URL` | Use the **pooled** Neon URL (`...-pooler...`). Serverless functions cannot hold persistent DB connections. |
+| `BCRYPT_SALT_ROUNDS` | e.g. `10` |
+| `JWT_ACCESS_TOKEN_SECRET` | rotate before deploy |
+| `JWT_REFRESH_TOKEN_SECRET` | rotate before deploy |
+| `JWT_ACCESS_TOKEN_EXPIRES_IN` | e.g. `7d` |
+| `JWT_REFRESH_TOKEN_EXPIRES_IN` | e.g. `90d` |
+| `STRIPE_SECRET_KEY` | rotate before deploy |
+| `PUBLISH_KEY` | Stripe publishable key |
+| `CLOUDINARY_CLOUD_NAME` | required for image upload |
+| `CLOUDINARY_API_KEY` | required for image upload |
+| `CLOUDINARY_API_SECRET` | required for image upload |
+| `CORS_EXTRA_ORIGINS` | comma-separated extra frontend origins (optional) |
+
+### 3. Project settings (Vercel dashboard)
+
+- **Root Directory**: `hajj-umrah-backend` (this folder).
+- **Framework Preset**: Other.
+- **Build Command**: `pnpm vercel-build` (or leave blank — `vercel-build` script is auto-detected).
+- **Install Command**: `pnpm install` (matches the existing `pnpm-lock.yaml`).
+- **Output Directory**: leave blank.
+- **Node.js Version**: 20.x or 22.x.
+
+### 4. Deploy
+
+```bash
+# from repo root
+cd hajj-umrah-backend
+vercel            # link / first deploy
+vercel --prod     # production deploy
+```
+
+Or push to the connected Git branch — Vercel auto-deploys.
+
+### 5. Post-deploy
+
+- Add the Vercel URL (e.g. `https://your-app.vercel.app`) to the frontend's `NEXT_PUBLIC_API_URL`.
+- Add the frontend origin (e.g. `https://kaabarpothe.com`) to the CORS list in `src/app.ts` or via `CORS_EXTRA_ORIGINS`.
+- Run migrations from your local machine against the production DB:
+  ```bash
+  DATABASE_URL="<prod-url>" pnpm prisma migrate deploy
+  ```
+
+### 6. Known limits / gotchas
+
+- **No `app.listen` on Vercel.** Local dev still uses `src/server.ts` (`pnpm dev`); Vercel uses `api/index.ts`.
+- **No local filesystem writes.** Multer must use Cloudinary storage (already configured). `/tmp` is the only writable path and is ephemeral.
+- **Cold starts.** First request after idle is slow; pooled Neon URL is mandatory.
+- **Request timeout.** Hobby plan = 10s, Pro = 60s. Long Stripe webhooks or migrations will time out.
+- **Body size.** Vercel caps request body at 4.5 MB on Node functions, regardless of the `50mb` Express limit.
+- **Stateless.** No in-memory sessions, caches, or rate-limiters. Use the DB or an external store.
+
