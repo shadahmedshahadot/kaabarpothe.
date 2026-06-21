@@ -1,31 +1,53 @@
 import type { MetadataRoute } from 'next'
-import { packages } from '@/data/packages'
-import { blogs } from '@/data/blogs'
 import { SITE } from '@/constants/site'
+import { packages } from '@/data/packages'
+import { hotels } from '@/data/hotels'
+import { transports } from '@/data/transports'
+import { blogs } from '@/data/blogs'
 
-const BASE = SITE.url
+const BASE = SITE.url.replace(/\/$/, '')
+
+type Entry = MetadataRoute.Sitemap[number]
+type Freq = Entry['changeFrequency']
+
+const entry = (path: string, priority: number, changeFrequency: Freq, lastModified: Date = new Date()): Entry => ({
+  url: `${BASE}${path}`,
+  lastModified,
+  priority,
+  changeFrequency,
+})
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
-  const staticRoutes: Array<{ path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }> = [
-    { path: '', priority: 1, changeFrequency: 'daily' },
-    { path: '/about', priority: 0.8, changeFrequency: 'monthly' },
-    { path: '/packages/hajj', priority: 0.9, changeFrequency: 'weekly' },
-    { path: '/packages/umrah', priority: 0.9, changeFrequency: 'weekly' },
-    { path: '/flights', priority: 0.8, changeFrequency: 'weekly' },
-    { path: '/hotels', priority: 0.8, changeFrequency: 'weekly' },
-    { path: '/transportation', priority: 0.7, changeFrequency: 'monthly' },
-    { path: '/reviews', priority: 0.7, changeFrequency: 'weekly' },
-    { path: '/blog', priority: 0.7, changeFrequency: 'weekly' },
-    { path: '/faq', priority: 0.6, changeFrequency: 'monthly' },
-    { path: '/contact', priority: 0.6, changeFrequency: 'yearly' },
-    { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' },
-    { path: '/terms', priority: 0.3, changeFrequency: 'yearly' },
-    { path: '/refund', priority: 0.3, changeFrequency: 'yearly' },
+  const staticRoutes: Entry[] = [
+    entry('/', 1, 'daily'),
+    entry('/about', 0.8, 'monthly'),
+    entry('/contact', 0.7, 'yearly'),
+    entry('/faq', 0.8, 'monthly'),
+    entry('/reviews', 0.7, 'weekly'),
+    entry('/blog', 0.8, 'weekly'),
+    entry('/packages/hajj', 0.95, 'weekly'),
+    entry('/packages/umrah', 0.95, 'weekly'),
+    entry('/hotels', 0.8, 'weekly'),
+    entry('/flights', 0.8, 'weekly'),
+    entry('/transportation', 0.7, 'weekly'),
+    entry('/privacy', 0.3, 'yearly'),
+    entry('/terms', 0.3, 'yearly'),
+    entry('/refund', 0.4, 'yearly'),
   ]
-  return [
-    ...staticRoutes.map(r => ({ url: `${BASE}${r.path}`, lastModified: now, priority: r.priority, changeFrequency: r.changeFrequency })),
-    ...packages.map(p => ({ url: `${BASE}/packages/${p.type}/${p.slug}`, lastModified: now, priority: 0.9, changeFrequency: 'weekly' as const })),
-    ...blogs.map(b => ({ url: `${BASE}/blog/${b.slug}`, lastModified: new Date(b.publishedDate), priority: 0.6, changeFrequency: 'monthly' as const })),
-  ]
+
+  const packageRoutes: Entry[] = packages
+    .filter(p => p.status === 'published')
+    .map(p => entry(`/packages/${p.type}/${p.slug}`, 0.9, 'weekly'))
+
+  const hotelRoutes: Entry[] = hotels
+    .filter(h => h.status === 'active')
+    .map(h => entry(`/hotels/${h.slug}`, 0.7, 'monthly'))
+
+  const transportRoutes: Entry[] = transports
+    .filter(t => t.status === 'active')
+    .map(t => entry(`/transportation/${t.slug}`, 0.6, 'monthly'))
+
+  const blogRoutes: Entry[] = blogs.map(b => entry(`/blog/${b.slug}`, 0.7, 'monthly', new Date(b.publishedDate || Date.now())))
+
+  return [...staticRoutes, ...packageRoutes, ...hotelRoutes, ...transportRoutes, ...blogRoutes]
 }

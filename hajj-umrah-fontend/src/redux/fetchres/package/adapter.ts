@@ -1,5 +1,6 @@
 import type { Package } from '@/data/packages'
 import type { PackageDto } from './packageApi'
+import { safeImage } from '@/lib/safe-image'
 
 export const adaptPackage = (dto: PackageDto): Package =>
   ({
@@ -26,13 +27,13 @@ export const adaptPackage = (dto: PackageDto): Package =>
       name: dto.hotelMakkahName,
       stars: dto.hotelMakkahStars,
       distance: dto.hotelMakkahDistance,
-      image: dto.hotelMakkahImage,
+      image: safeImage(dto.hotelMakkahImage, `${dto.id}-makkah`),
     },
     hotelMadinah: {
       name: dto.hotelMadinahName,
       stars: dto.hotelMadinahStars,
       distance: dto.hotelMadinahDistance,
-      image: dto.hotelMadinahImage,
+      image: safeImage(dto.hotelMadinahImage, `${dto.id}-madinah`),
     },
     flight: {
       airline: dto.flightAirline,
@@ -52,8 +53,8 @@ export const adaptPackage = (dto: PackageDto): Package =>
       description: d.description,
       activities: d.activities,
     })),
-    gallery: dto.gallery,
-    cover: dto.cover,
+    gallery: (dto.gallery ?? []).map((g, i) => safeImage(g, `${dto.id}-g${i}`)),
+    cover: safeImage(dto.cover, dto.id),
     faqs: (dto.faqs ?? []).map(f => ({ q: f.question, a: f.answer })),
     highlights: dto.highlights,
     groupSize: dto.groupSize,

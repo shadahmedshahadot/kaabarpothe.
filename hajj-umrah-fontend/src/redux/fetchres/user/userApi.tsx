@@ -73,18 +73,18 @@ export const userApi = baseApi.injectEndpoints({
           : [{ type: 'user' as const, id: 'LIST' }],
     }),
     getUser: builder.query<UserItemResponse, string>({
-      query: id => ({ url: `/user/${id}`, method: 'GET' }),
+      query: id => ({ url: `/user/${encodeURIComponent(id)}`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'user', id }],
     }),
     updateUser: builder.mutation<UserItemResponse, { id: string; body: FormData }>({
-      query: ({ id, body }) => ({ url: `/user/${id}`, method: 'PATCH', body }),
+      query: ({ id, body }) => ({ url: `/user/${encodeURIComponent(id)}`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'user', id },
         { type: 'user', id: 'LIST' },
       ],
     }),
     deleteUser: builder.mutation<void, string>({
-      query: id => ({ url: `/user/${id}`, method: 'DELETE' }),
+      query: id => ({ url: `/user/${encodeURIComponent(id)}`, method: 'DELETE' }),
       invalidatesTags: [{ type: 'user', id: 'LIST' }],
     }),
   }),

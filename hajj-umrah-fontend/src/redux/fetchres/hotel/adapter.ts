@@ -1,5 +1,6 @@
 import type { Hotel, RoomBoard, HotelCategory } from '@/data/hotels'
 import type { HotelDto, HotelRoomTypeDto } from './hotelApi'
+import { safeImage } from '@/lib/safe-image'
 
 const boardMap: Record<HotelRoomTypeDto['board'], RoomBoard> = {
   ROOM_ONLY: 'room-only',
@@ -18,8 +19,8 @@ export const adaptHotel = (dto: HotelDto): Hotel =>
     country: 'Saudi Arabia',
     address: dto.address,
     distanceFromHaram: dto.distanceFromHaram,
-    images: dto.images,
-    cover: dto.cover,
+    images: (dto.images ?? []).map((src, i) => safeImage(src, `${dto.id}-${i}`)),
+    cover: safeImage(dto.cover, dto.id),
     description: dto.description,
     facilities: dto.facilities,
     meals: dto.meals,

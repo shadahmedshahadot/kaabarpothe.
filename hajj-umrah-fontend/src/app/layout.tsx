@@ -13,9 +13,16 @@ export const viewport = rootViewport
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="bn" className={`${geistSans.variable} ${geistMono.variable} bg-background scroll-smooth`}>
+    <html lang="bn-BD" dir="ltr" className={`${geistSans.variable} ${geistMono.variable} bg-background scroll-smooth`}>
       <body className="font-sans antialiased text-foreground overflow-x-hidden">
-         <GlobalProvider>{children}</GlobalProvider>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-foreground focus:text-background focus:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          মূল কন্টেন্টে যান
+        </a>
+        <GlobalProvider>{children}</GlobalProvider>
+        <Analytics />
       </body>
     </html>
   )

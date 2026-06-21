@@ -15,8 +15,8 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: 'portrait-primary',
     categories: ['travel', 'lifestyle', 'religion'],
     icons: [
+      { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
       { src: '/icon-light-32x32.png', sizes: '32x32', type: 'image/png' },
-      { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
       { src: '/apple-icon.png', sizes: '180x180', type: 'image/png', purpose: 'maskable' },
     ],
   }

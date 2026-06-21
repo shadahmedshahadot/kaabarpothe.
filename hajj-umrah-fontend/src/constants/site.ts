@@ -28,7 +28,7 @@ export const SITE = {
     'Hajj package Bangladesh',
     'Umrah package Dhaka',
   ],
-  ogImage: '/og-image.jpg',
+  ogImage: '/logo.jpeg',
   ogImageAlt: 'কাবার পথে — হজ্জ ও উমরাহ প্ল্যাটফর্ম',
   twitterHandle: '@kaabarpothe',
   contact: {

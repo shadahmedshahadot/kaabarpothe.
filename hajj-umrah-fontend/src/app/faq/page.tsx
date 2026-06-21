@@ -7,6 +7,7 @@ import { PageShell, PageHero } from '@/components/layouts/page-shell'
 import { Accordion, AccordionItem } from '@/components/ui/accordion'
 import { Input } from '@/components/ui/input'
 import { faqs, faqCategories } from '@/data/faqs'
+import { SITE } from '@/constants/site'
 
 export default function FAQPage() {
   const [search, setSearch] = useState('')
@@ -79,8 +80,8 @@ export default function FAQPage() {
               <a href="/contact" className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-xl font-semibold hover:bg-primary transition-colors">
                 যোগাযোগ করুন
               </a>
-              <a href="tel:+18005551234" className="inline-flex items-center gap-2 border border-border bg-card text-foreground px-6 py-3 rounded-xl font-semibold hover:bg-muted transition-colors">
-                কল করুন +৮৮০ ১৭০০-০০০০০০
+              <a href={`tel:${SITE.contact.phoneHref}`} className="inline-flex items-center gap-2 border border-border bg-card text-foreground px-6 py-3 rounded-xl font-semibold hover:bg-muted transition-colors">
+                কল করুন {SITE.contact.phone}
               </a>
             </div>
           </div>

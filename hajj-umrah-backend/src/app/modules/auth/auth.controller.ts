@@ -3,18 +3,21 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import AuthService from './auth.services';
 
+const isProd = process.env.NODE_ENV === 'production';
+
+const refreshCookieOptions = {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? ('none' as const) : ('lax' as const),
+  expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+};
+
 const Login = catchAsync(async (req, res) => {
   const result = await AuthService.Login(req.body);
 
   const { access_token, refresh_token } = result;
 
-  res.cookie('REFRESH_TOKEN', refresh_token, {
-  httpOnly: true,       
-  secure: true,          
-  sameSite: 'strict',    
-  expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // ✅ 7 days
-});
-
+  res.cookie('REFRESH_TOKEN', refresh_token, refreshCookieOptions);
 
   sendResponse(res, {
     success: true,
@@ -31,9 +34,7 @@ const Register = catchAsync(async (req, res) => {
 
   const { access_token, refresh_token } = result;
 
-  res.cookie('REFRESH_TOKEN', refresh_token, {
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-  });
+  res.cookie('REFRESH_TOKEN', refresh_token, refreshCookieOptions);
 
   sendResponse(res, {
     success: true,

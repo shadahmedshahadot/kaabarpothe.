@@ -212,7 +212,7 @@ export const bookingApi = baseApi.injectEndpoints({
           : [{ type: 'booking' as const, id: 'LIST' }],
     }),
     getBooking: builder.query<BookingItemResponse, string>({
-      query: idOrCode => ({ url: `/bookings/${idOrCode}`, method: 'GET' }),
+      query: idOrCode => ({ url: `/bookings/${encodeURIComponent(idOrCode)}`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'booking', id }],
     }),
     createBooking: builder.mutation<BookingItemResponse, Record<string, unknown>>({
@@ -220,19 +220,19 @@ export const bookingApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'booking', id: 'LIST' }, { type: 'notification', id: 'LIST' }],
     }),
     updateBooking: builder.mutation<BookingItemResponse, { id: string; body: Record<string, unknown> }>({
-      query: ({ id, body }) => ({ url: `/bookings/${id}`, method: 'PATCH', body }),
+      query: ({ id, body }) => ({ url: `/bookings/${encodeURIComponent(id)}`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'booking', id },
         { type: 'booking', id: 'LIST' },
       ],
     }),
     deleteBooking: builder.mutation<void, string>({
-      query: id => ({ url: `/bookings/${id}`, method: 'DELETE' }),
+      query: id => ({ url: `/bookings/${encodeURIComponent(id)}`, method: 'DELETE' }),
       invalidatesTags: [{ type: 'booking', id: 'LIST' }],
     }),
 
     updateBookingStatus: builder.mutation<BookingItemResponse, { id: string; status: BookingStatus; note?: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/status`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/status`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'booking', id },
         { type: 'booking', id: 'LIST' },
@@ -241,7 +241,7 @@ export const bookingApi = baseApi.injectEndpoints({
       ],
     }),
     assignConsultant: builder.mutation<BookingItemResponse, { id: string; staffId: string; role?: 'CONSULTANT' | 'STAFF'; note?: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/assign-consultant`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/assign-consultant`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'booking', id },
         { type: 'bookingTimeline', id },
@@ -252,7 +252,7 @@ export const bookingApi = baseApi.injectEndpoints({
       ApiResp<BookingDocumentDto[]>,
       { id: string; documents: Array<{ type: string; name?: string; description?: string }> }
     >({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/documents/request`, method: 'POST', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/documents/request`, method: 'POST', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'booking', id },
         { type: 'bookingDocument', id },
@@ -263,7 +263,7 @@ export const bookingApi = baseApi.injectEndpoints({
       ApiResp<BookingDocumentDto>,
       { id: string; documentId?: string; type?: string; name?: string; fileUrl: string; fileName?: string }
     >({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/documents/upload`, method: 'POST', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/documents/upload`, method: 'POST', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'booking', id },
         { type: 'bookingDocument', id },
@@ -274,7 +274,7 @@ export const bookingApi = baseApi.injectEndpoints({
       ApiResp<BookingDocumentDto>,
       { id: string; documentId: string; status: 'VERIFIED' | 'REJECTED'; reason?: string }
     >({
-      query: ({ id, documentId, ...body }) => ({ url: `/bookings/${id}/documents/${documentId}/verify`, method: 'PATCH', body }),
+      query: ({ id, documentId, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/documents/${encodeURIComponent(documentId)}/verify`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'booking', id },
         { type: 'bookingDocument', id },
@@ -282,51 +282,51 @@ export const bookingApi = baseApi.injectEndpoints({
       ],
     }),
     updateBookingNotes: builder.mutation<BookingItemResponse, { id: string; adminNotes?: string; notes?: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/notes`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/notes`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [{ type: 'booking', id }],
     }),
     assignFlight: builder.mutation<BookingItemResponse, { id: string; flightId: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/assign-flight`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/assign-flight`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [{ type: 'booking', id }, { type: 'bookingTimeline', id }],
     }),
     assignHotel: builder.mutation<BookingItemResponse, { id: string; hotelId: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/assign-hotel`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/assign-hotel`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [{ type: 'booking', id }, { type: 'bookingTimeline', id }],
     }),
     assignTransport: builder.mutation<BookingItemResponse, { id: string; transportId: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/assign-transport`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/assign-transport`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [{ type: 'booking', id }, { type: 'bookingTimeline', id }],
     }),
     updateBookingPayment: builder.mutation<BookingItemResponse, { id: string; paidAmount?: number; paymentStatus?: PaymentStatusBooking; note?: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/payment`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/payment`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [{ type: 'booking', id }, { type: 'bookingTimeline', id }, { type: 'bookingActivity', id }],
     }),
     updateBookingVisa: builder.mutation<BookingItemResponse, { id: string; visaStatus: VisaStatus; note?: string }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/visa`, method: 'PATCH', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/visa`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [{ type: 'booking', id }, { type: 'bookingTimeline', id }],
     }),
     getBookingMessages: builder.query<ApiResp<BookingMessageDto[]>, string>({
-      query: id => ({ url: `/bookings/${id}/messages`, method: 'GET' }),
+      query: id => ({ url: `/bookings/${encodeURIComponent(id)}/messages`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'bookingMessage', id }],
     }),
     sendBookingMessage: builder.mutation<ApiResp<BookingMessageDto>, { id: string; content: string; attachments?: string[] }>({
-      query: ({ id, ...body }) => ({ url: `/bookings/${id}/messages`, method: 'POST', body }),
+      query: ({ id, ...body }) => ({ url: `/bookings/${encodeURIComponent(id)}/messages`, method: 'POST', body }),
       invalidatesTags: (_r, _e, { id }) => [{ type: 'bookingMessage', id }],
     }),
     getBookingTimeline: builder.query<ApiResp<BookingTimelineEventDto[]>, string>({
-      query: id => ({ url: `/bookings/${id}/timeline`, method: 'GET' }),
+      query: id => ({ url: `/bookings/${encodeURIComponent(id)}/timeline`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'bookingTimeline', id }],
     }),
     getBookingDocuments: builder.query<ApiResp<BookingDocumentDto[]>, string>({
-      query: id => ({ url: `/bookings/${id}/documents`, method: 'GET' }),
+      query: id => ({ url: `/bookings/${encodeURIComponent(id)}/documents`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'bookingDocument', id }],
     }),
     getBookingActivityLog: builder.query<ApiResp<AdminActivityLogDto[]>, string>({
-      query: id => ({ url: `/bookings/${id}/activity-log`, method: 'GET' }),
+      query: id => ({ url: `/bookings/${encodeURIComponent(id)}/activity-log`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'bookingActivity', id }],
     }),
     getBookingStatusHistory: builder.query<ApiResp<BookingStatusHistoryDto[]>, string>({
-      query: id => ({ url: `/bookings/${id}/status-history`, method: 'GET' }),
+      query: id => ({ url: `/bookings/${encodeURIComponent(id)}/status-history`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'bookingTimeline', id: `${id}-history` }],
     }),
   }),

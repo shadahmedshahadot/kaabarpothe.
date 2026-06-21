@@ -1,51 +1,62 @@
-'use client'
-
-import { use, useMemo } from 'react'
 import { notFound } from 'next/navigation'
-import { Loader2 } from 'lucide-react'
 
 import { PageShell } from '@/components/layouts/page-shell'
+import { BreadcrumbJsonLd } from '@/components/common'
 import { FlightDetail } from '@/features/flights/components/flight-detail'
-import { useGetFlightQuery } from '@/redux/fetchres/flight/flightApi'
 import { adaptFlight } from '@/redux/fetchres/flight/adapter'
+import { fetchFlight } from '@/lib/seo-fetch'
 
-export default function FlightDetailPage({
+export default async function FlightDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = use(params)
-  const { data, isLoading, isError, error } = useGetFlightQuery(slug)
+  const { slug } = await params
+  const dto = await fetchFlight(slug)
+  if (!dto) notFound()
 
-  const flight = useMemo(() => (data?.data ? adaptFlight(data.data) : null), [data])
+  const flight = adaptFlight(dto)
 
-  if (isLoading) {
-    return (
-      <PageShell>
-        <div className="flex justify-center py-40">
-          <Loader2 className="w-10 h-10 animate-spin text-primary" />
-        </div>
-      </PageShell>
-    )
+  const flightLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Flight',
+    flightNumber: flight.flightNumber,
+    airline: { '@type': 'Airline', name: flight.airlineName, iataCode: flight.airlineName },
+    departureAirport: {
+      '@type': 'Airport',
+      name: flight.departureAirport,
+      iataCode: flight.departureAirport,
+      address: { '@type': 'PostalAddress', addressLocality: flight.departureCity },
+    },
+    arrivalAirport: {
+      '@type': 'Airport',
+      name: flight.arrivalAirport,
+      iataCode: flight.arrivalAirport,
+      address: { '@type': 'PostalAddress', addressLocality: flight.arrivalCity },
+    },
+    departureTime: `${flight.departureDate}T${flight.departureTime}`,
+    arrivalTime: `${flight.arrivalDate}T${flight.arrivalTime}`,
+    estimatedFlightDuration: flight.totalDuration,
+    offers: {
+      '@type': 'Offer',
+      price: flight.price,
+      priceCurrency: 'USD',
+      availability:
+        flight.bookingStatus === 'soldout'
+          ? 'https://schema.org/SoldOut'
+          : 'https://schema.org/InStock',
+    },
   }
-
-  const status = (error as { status?: number })?.status
-  if (isError && status === 404) notFound()
-
-  if (isError) {
-    return (
-      <PageShell>
-        <div className="text-center py-40 text-rose-500">
-          ফ্লাইট লোড করতে ব্যর্থ হয়েছে। সার্ভার চালু আছে কি?
-        </div>
-      </PageShell>
-    )
-  }
-
-  if (!flight) notFound()
 
   return (
     <PageShell>
+      <BreadcrumbJsonLd
+        items={[
+          { label: 'ফ্লাইট', href: '/flights' },
+          { label: `${flight.airlineName} ${flight.flightNumber}` },
+        ]}
+      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(flightLd) }} />
       <FlightDetail flight={flight} />
     </PageShell>
   )

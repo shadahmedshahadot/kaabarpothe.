@@ -9,6 +9,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
     <div className="bg-page-canvas min-h-screen">
       <Header />
       <motion.main
+        id="main-content"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

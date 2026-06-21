@@ -1,3 +1,5 @@
 export { Logo } from './logo'
 export { CoverUpload } from './cover-upload'
 export { GalleryUpload } from './gallery-upload'
+export { Breadcrumbs, BreadcrumbJsonLd } from './breadcrumbs'
+export type { Crumb } from './breadcrumbs'

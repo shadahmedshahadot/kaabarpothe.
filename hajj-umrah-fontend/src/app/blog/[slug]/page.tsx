@@ -5,6 +5,8 @@ import Image from 'next/image'
 import { Clock, ArrowLeft, ArrowRight, Calendar, Eye } from 'lucide-react'
 import { PageShell } from '@/components/layouts/page-shell'
 import { Badge } from '@/components/ui/badge'
+import { BreadcrumbJsonLd } from '@/components/common'
+import { SITE } from '@/constants/site'
 import { formatDate, formatNumber } from '@/utils/format'
 import { blogs, getBlog } from '@/data/blogs'
 import { IMG, KAABA_IMAGES, MADINAH_IMAGES } from '@/data/images'
@@ -54,8 +56,37 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   if (!post) notFound()
   const related = blogs.filter(b => b.id !== post.id && b.category === post.category).slice(0, 3)
 
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    articleBody: post.content,
+    image: [`${SITE.url}${pickImage(post.slug)}`],
+    datePublished: post.publishedDate,
+    dateModified: post.publishedDate,
+    author: { '@type': 'Person', name: post.author, jobTitle: post.authorRole },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.name,
+      logo: { '@type': 'ImageObject', url: `${SITE.url}/logo.jpeg` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE.url}/blog/${post.slug}` },
+    keywords: post.tags.join(', '),
+    articleSection: post.category,
+    inLanguage: 'bn-BD',
+    wordCount: post.content.split(/\s+/).length,
+  }
+
   return (
     <PageShell>
+      <BreadcrumbJsonLd
+        items={[
+          { label: 'ব্লগ', href: '/blog' },
+          { label: post.title },
+        ]}
+      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <article className="px-4 sm:px-6 lg:px-8 pb-24">
         <div className="max-w-3xl mx-auto">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">

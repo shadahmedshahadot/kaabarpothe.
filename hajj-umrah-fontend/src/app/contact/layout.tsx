@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { SITE } from '@/constants/site'
+import { BreadcrumbJsonLd } from '@/components/common'
 
 export const metadata: Metadata = {
   title: 'যোগাযোগ করুন',
@@ -12,6 +14,50 @@ export const metadata: Metadata = {
   },
 }
 
+const contactLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  url: `${SITE.url}/contact`,
+  name: 'যোগাযোগ — কাবার পথে',
+  mainEntity: {
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    email: SITE.contact.email,
+    telephone: SITE.contact.phoneHref,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE.contact.address.street,
+      addressLocality: SITE.contact.address.city,
+      addressRegion: SITE.contact.address.region,
+      postalCode: SITE.contact.address.postalCode,
+      addressCountry: SITE.contact.address.country,
+    },
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        telephone: SITE.contact.phoneHref,
+        email: SITE.contact.email,
+        availableLanguage: ['Bengali', 'English'],
+        areaServed: 'BD',
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        telephone: SITE.contact.whatsapp,
+        availableLanguage: ['Bengali', 'English'],
+      },
+    ],
+  },
+}
+
 export default function ContactLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      <BreadcrumbJsonLd items={[{ label: 'যোগাযোগ' }]} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactLd) }} />
+      {children}
+    </>
+  )
 }

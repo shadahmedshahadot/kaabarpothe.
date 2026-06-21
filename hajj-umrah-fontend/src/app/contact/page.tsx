@@ -2,12 +2,70 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Clock, Send, MessagesSquare, Building } from 'lucide-react'
+import { Mail, Phone, MapPin, Clock, Send, MessagesSquare, Building, Loader2 } from 'lucide-react'
+import { toast } from 'sonner'
 import { PageShell, PageHero } from '@/components/layouts/page-shell'
 import { Input, Textarea, Select, Label } from '@/components/ui/input'
+import { SITE } from '@/constants/site'
+import {
+  useCreateInquiryMutation,
+  type InquiryType,
+  type CreateInquiryBody,
+} from '@/redux/fetchres/inquiry/inquiryApi'
+
+const SUBJECT_MAP: Record<string, InquiryType> = {
+  package: 'PACKAGE',
+  consultation: 'CONSULTATION',
+  booking: 'GENERAL',
+  group: 'GENERAL',
+  other: 'GENERAL',
+}
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false)
+  const [createInquiry, { isLoading }] = useCreateInquiryMutation()
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formEl = e.currentTarget
+    const fd = new FormData(formEl)
+
+    const first = String(fd.get('firstName') || '').trim()
+    const last = String(fd.get('lastName') || '').trim()
+    const email = String(fd.get('email') || '').trim()
+    const phone = String(fd.get('phone') || '').trim()
+    const subjectType = String(fd.get('subjectType') || '')
+    const subject = String(fd.get('subject') || '').trim()
+    const message = String(fd.get('message') || '').trim()
+
+    if (!first || !last || !email || !subjectType || !subject || !message) {
+      toast.error('সমস্ত বাধ্যতামূলক ফিল্ড পূরণ করুন')
+      return
+    }
+
+    const body: CreateInquiryBody = {
+      name: `${first} ${last}`,
+      email,
+      phone: phone || SITE.contact.phoneHref,
+      type: SUBJECT_MAP[subjectType] ?? 'GENERAL',
+      subject,
+      message,
+      priority: 'MEDIUM',
+    }
+
+    try {
+      await createInquiry(body).unwrap()
+      setSent(true)
+      formEl.reset()
+      toast.success('বার্তা পাঠানো হয়েছে')
+    } catch (err: unknown) {
+      const msg =
+        (err as { data?: { message?: string } })?.data?.message ||
+        (err as { message?: string })?.message ||
+        'বার্তা পাঠাতে ব্যর্থ হয়েছে'
+      toast.error(msg)
+    }
+  }
 
   return (
     <PageShell>
@@ -21,10 +79,10 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
           {/* Contact info */}
           <div className="space-y-4">
-            <ContactCard Icon={Phone} title="কল করুন" lines={['+৮৮০ ১৭০০-০০০০০০', '২৪/৭ হাজী সহায়তা লাইন']} />
-            <ContactCard Icon={Mail} title="ইমেইল" lines={['hello@sakinah.travel', 'support@sakinah.travel']} />
+            <ContactCard Icon={Phone} title="কল করুন" lines={[SITE.contact.phone, '২৪/৭ হাজী সহায়তা লাইন']} />
+            <ContactCard Icon={Mail} title="ইমেইল" lines={[SITE.contact.email, 'admin@kaabarpothe.com']} />
             <ContactCard Icon={MessagesSquare} title="লাইভ চ্যাট" lines={['সকাল ৭টা - রাত ১১টা পর্যন্ত উপলব্ধ', 'গড় উত্তর < ৫ মিনিট']} />
-            <ContactCard Icon={Building} title="অফিস" lines={['বাড়ি ৫০০, রোড ৪২', 'গুলশান, ঢাকা ১২১২, বাংলাদেশ']} />
+            <ContactCard Icon={Building} title="অফিস" lines={[SITE.contact.address.line1, SITE.contact.address.line2]} />
             <ContactCard Icon={Clock} title="সময়সূচি" lines={['সোম-শুক্র: সকাল ৭টা - রাত ১১টা', 'শনি-রবি: সকাল ৯টা - রাত ৮টা']} />
           </div>
 
@@ -41,35 +99,35 @@ export default function ContactPage() {
                   <button onClick={() => setSent(false)} className="mt-6 inline-flex items-center gap-2 bg-foreground text-background px-5 py-2.5 rounded-xl font-semibold">আরেকটি পাঠান</button>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setSent(true) }} className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <h2 className="text-2xl font-bold text-foreground mb-1">আমাদের একটি বার্তা পাঠান</h2>
                   <p className="text-sm text-muted-foreground mb-6">ফর্মটি পূরণ করুন এবং আমাদের টিম আপনার সাথে যোগাযোগ করবে।</p>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <Label>প্রথম নাম</Label>
-                      <Input required placeholder="আহমাদ" />
+                      <Input name="firstName" required placeholder="আহমাদ" />
                     </div>
                     <div>
                       <Label>শেষ নাম</Label>
-                      <Input required placeholder="হাসান" />
+                      <Input name="lastName" required placeholder="হাসান" />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <Label>ইমেইল</Label>
-                      <Input type="email" required placeholder="you@email.com" />
+                      <Input name="email" type="email" required placeholder="you@email.com" />
                     </div>
                     <div>
                       <Label>ফোন</Label>
-                      <Input type="tel" placeholder="+৮৮০ ১৭০০-০০০০০০" />
+                      <Input name="phone" type="tel" placeholder={SITE.contact.phone} />
                     </div>
                   </div>
 
                   <div>
                     <Label>কী বিষয়ে জানতে চান?</Label>
-                    <Select required defaultValue="">
+                    <Select name="subjectType" required defaultValue="">
                       <option value="" disabled>জিজ্ঞাসার ধরন নির্বাচন করুন</option>
                       <option value="package">প্যাকেজ সংক্রান্ত প্রশ্ন</option>
                       <option value="consultation">বিনামূল্যে ১৫ মিনিটের পরামর্শ</option>
@@ -81,16 +139,28 @@ export default function ContactPage() {
 
                   <div>
                     <Label>বিষয়</Label>
-                    <Input required placeholder="প্রিমিয়াম হজ্জ ২০২৬ — ৫ জনের গ্রুপ" />
+                    <Input name="subject" required placeholder="প্রিমিয়াম হজ্জ ২০২৬ — ৫ জনের গ্রুপ" />
                   </div>
 
                   <div>
                     <Label>আপনার বার্তা</Label>
-                    <Textarea rows={5} required placeholder="আপনার যাত্রা সম্পর্কে আমাদের জানান..." />
+                    <Textarea name="message" rows={5} required placeholder="আপনার যাত্রা সম্পর্কে আমাদের জানান..." />
                   </div>
 
-                  <button type="submit" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-amber-600 text-primary-foreground px-6 py-3.5 rounded-xl font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all">
-                    বার্তা পাঠান <Send className="w-4 h-4" />
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-amber-600 text-primary-foreground px-6 py-3.5 rounded-xl font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" /> পাঠানো হচ্ছে…
+                      </>
+                    ) : (
+                      <>
+                        বার্তা পাঠান <Send className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
                   <p className="text-xs text-muted-foreground">জমা দেওয়ার মাধ্যমে আপনি আমাদের গোপনীয়তা নীতি ও শর্তাবলী মেনে নিচ্ছেন।</p>
                 </form>

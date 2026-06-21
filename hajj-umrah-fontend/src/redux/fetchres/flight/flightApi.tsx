@@ -84,7 +84,7 @@ export const flightApi = baseApi.injectEndpoints({
           : [{ type: 'flight' as const, id: 'LIST' }],
     }),
     getFlight: builder.query<FlightItemResponse, string>({
-      query: idOrSlug => ({ url: `/flights/${idOrSlug}`, method: 'GET' }),
+      query: idOrSlug => ({ url: `/flights/${encodeURIComponent(idOrSlug)}`, method: 'GET' }),
       providesTags: (_r, _e, idOrSlug) => [{ type: 'flight', id: idOrSlug }],
     }),
     createFlight: builder.mutation<FlightItemResponse, FormData>({
@@ -92,14 +92,14 @@ export const flightApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'flight', id: 'LIST' }],
     }),
     updateFlight: builder.mutation<FlightItemResponse, { id: string; body: FormData }>({
-      query: ({ id, body }) => ({ url: `/flights/${id}`, method: 'PATCH', body }),
+      query: ({ id, body }) => ({ url: `/flights/${encodeURIComponent(id)}`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'flight', id },
         { type: 'flight', id: 'LIST' },
       ],
     }),
     deleteFlight: builder.mutation<void, string>({
-      query: id => ({ url: `/flights/${id}`, method: 'DELETE' }),
+      query: id => ({ url: `/flights/${encodeURIComponent(id)}`, method: 'DELETE' }),
       invalidatesTags: [{ type: 'flight', id: 'LIST' }],
     }),
   }),

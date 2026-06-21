@@ -75,7 +75,7 @@ export const hotelApi = baseApi.injectEndpoints({
           : [{ type: 'hotel' as const, id: 'LIST' }],
     }),
     getHotel: builder.query<HotelItemResponse, string>({
-      query: idOrSlug => ({ url: `/hotels/${idOrSlug}`, method: 'GET' }),
+      query: idOrSlug => ({ url: `/hotels/${encodeURIComponent(idOrSlug)}`, method: 'GET' }),
       providesTags: (_r, _e, id) => [{ type: 'hotel', id }],
     }),
     createHotel: builder.mutation<HotelItemResponse, FormData>({
@@ -83,14 +83,14 @@ export const hotelApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'hotel', id: 'LIST' }],
     }),
     updateHotel: builder.mutation<HotelItemResponse, { id: string; body: FormData }>({
-      query: ({ id, body }) => ({ url: `/hotels/${id}`, method: 'PATCH', body }),
+      query: ({ id, body }) => ({ url: `/hotels/${encodeURIComponent(id)}`, method: 'PATCH', body }),
       invalidatesTags: (_r, _e, { id }) => [
         { type: 'hotel', id },
         { type: 'hotel', id: 'LIST' },
       ],
     }),
     deleteHotel: builder.mutation<void, string>({
-      query: id => ({ url: `/hotels/${id}`, method: 'DELETE' }),
+      query: id => ({ url: `/hotels/${encodeURIComponent(id)}`, method: 'DELETE' }),
       invalidatesTags: [{ type: 'hotel', id: 'LIST' }],
     }),
   }),

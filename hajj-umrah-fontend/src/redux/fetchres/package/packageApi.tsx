@@ -105,7 +105,7 @@ export const packageApi = baseApi.injectEndpoints({
     }),
     getPackage: builder.query<PackageItemResponse, string>({
       query: idOrSlug => ({
-        url: `/packages/${idOrSlug}`,
+        url: `/packages/${encodeURIComponent(idOrSlug)}`,
         method: 'GET',
       }),
       providesTags: (_r, _e, idOrSlug) => [{ type: 'package', id: idOrSlug }],
@@ -120,7 +120,7 @@ export const packageApi = baseApi.injectEndpoints({
     }),
     updatePackage: builder.mutation<PackageItemResponse, { id: string; body: FormData }>({
       query: ({ id, body }) => ({
-        url: `/packages/${id}`,
+        url: `/packages/${encodeURIComponent(id)}`,
         method: 'PATCH',
         body,
       }),
@@ -131,7 +131,7 @@ export const packageApi = baseApi.injectEndpoints({
     }),
     deletePackage: builder.mutation<void, string>({
       query: id => ({
-        url: `/packages/${id}`,
+        url: `/packages/${encodeURIComponent(id)}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'package', id: 'LIST' }],

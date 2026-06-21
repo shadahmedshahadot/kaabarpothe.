@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Image placeholder">
+  <rect width="1200" height="800" fill="#1a1a1a"/>
+  <g fill="none" stroke="#444" stroke-width="2">
+    <rect x="2" y="2" width="1196" height="796"/>
+    <line x1="2" y1="2" x2="1198" y2="798"/>
+    <line x1="1198" y1="2" x2="2" y2="798"/>
+  </g>
+  <text x="600" y="420" font-family="system-ui,-apple-system,sans-serif" font-size="28" fill="#888" text-anchor="middle">কাবার পথে</text>
+</svg>

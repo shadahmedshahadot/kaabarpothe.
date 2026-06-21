@@ -10,7 +10,6 @@ import { cn } from '@/lib/utils'
 import { PRIMARY_NAV, ROUTES, SITE } from '@/constants'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { logout as logoutAction } from '@/redux/fetchres/auth/authSlice'
-import { useLogoutFromDbMutation } from '@/redux/fetchres/auth/authApi'
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
@@ -22,14 +21,9 @@ export function SiteHeader() {
   const user = useAppSelector(state => state.auth.user)
   const token = useAppSelector(state => state.auth.token)
   const isAuthed = Boolean(user && token)
-  const [logoutFromDb, { isLoading: loggingOut }] = useLogoutFromDbMutation()
+  const loggingOut = false
 
   const handleLogout = async () => {
-    try {
-      await logoutFromDb({}).unwrap()
-    } catch {
-      // ignore — clear client state regardless
-    }
     dispatch(logoutAction())
     toast.success('লগআউট সম্পন্ন')
     router.push(ROUTES.home)

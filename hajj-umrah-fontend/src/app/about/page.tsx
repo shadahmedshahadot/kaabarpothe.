@@ -7,6 +7,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { AnimatedCounter } from '@/components/ui/animated-counter'
 import { StaggerContainer, StaggerItem } from '@/components/ui/scroll-reveal'
 import { IMG } from '@/data/images'
+import { BreadcrumbJsonLd } from '@/components/common'
+import { SITE } from '@/constants/site'
 
 export const metadata: Metadata = {
   title: 'আমাদের সম্পর্কে',
@@ -42,13 +44,39 @@ const team = [
   { name: 'শায়খ তারিক মাহমুদ', role: 'আলেম বোর্ড প্রধান', bio: 'মদিনা বিশ্ববিদ্যালয়। ১৮ বছরের হজ্জ আলেম।', avatar: 'from-blue-400 to-indigo-500' },
 ]
 
+const aboutLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  url: `${SITE.url}/about`,
+  name: 'আমাদের সম্পর্কে — কাবার পথে',
+  description:
+    'কাবার পথে — আলেম পরিচালিত হজ্জ ও উমরাহ এজেন্সি। প্রতিষ্ঠা ২০১৫। ৫০,০০০+ হাজীকে সেবা।',
+  about: {
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: SITE.name,
+    legalName: SITE.legalName,
+    foundingDate: '2015',
+    foundingLocation: { '@type': 'Place', name: 'Dhaka, Bangladesh' },
+    founder: [
+      { '@type': 'Person', name: 'Imam Yusuf Khalil', jobTitle: 'Founder & Scholar' },
+      { '@type': 'Person', name: 'Amina Khalil', jobTitle: 'Co-Founder & Operations' },
+      { '@type': 'Person', name: 'Hamza Khalil', jobTitle: 'Co-Founder & Tech' },
+    ],
+    award: ['Saudi Ministry-Licensed Hajj Operator', '50,000+ Pilgrims Served'],
+    knowsAbout: ['Hajj', 'Umrah', 'Islamic Travel', 'Pilgrimage Operations'],
+  },
+}
+
 export default function AboutPage() {
   return (
     <PageShell>
+      <BreadcrumbJsonLd items={[{ label: 'আমাদের সম্পর্কে' }]} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutLd) }} />
       <PageHero
         eyebrow="আমাদের গল্প"
         title="হাজীদের দ্বারা, হাজীদের জন্য নির্মিত প্ল্যাটফর্ম।"
-        description="আমরা সাকিনাহ শুরু করেছিলাম কারণ নিজেদের হজ্জ যাত্রায় অতিরিক্ত মূল্যের প্যাকেজ, গোপন ফি ও নৈর্ব্যক্তিক সেবায় ক্লান্ত ছিলাম। এগারো বছর পরে, আমরা বিশ্বব্যাপী ৫০,০০০+ হাজীকে সেবা দিচ্ছি।"
+        description="আমরা কাবার পথে শুরু করেছিলাম কারণ নিজেদের হজ্জ যাত্রায় অতিরিক্ত মূল্যের প্যাকেজ, গোপন ফি ও নৈর্ব্যক্তিক সেবায় ক্লান্ত ছিলাম। এগারো বছর পরে, আমরা বিশ্বব্যাপী ৫০,০০০+ হাজীকে সেবা দিচ্ছি।"
       />
 
       <section className="px-4 sm:px-6 lg:px-8">

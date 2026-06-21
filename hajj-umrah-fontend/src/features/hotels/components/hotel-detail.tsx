@@ -67,13 +67,15 @@ export function HotelDetail({ hotel }: { hotel: Hotel }) {
                 </div>
               </div>
               <div className="grid grid-cols-4 gap-3">
-                {hotel.images.map(img => (
+                {hotel.images.map((img, i) => (
                   <button
                     key={img}
                     onClick={() => setActiveImg(img)}
+                    aria-label={`${hotel.name} — ছবি ${i + 1}`}
+                    aria-pressed={img === activeImg}
                     className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-colors ${img === activeImg ? 'border-primary' : 'border-transparent hover:border-border'}`}
                   >
-                    <Image src={img} alt="" fill sizes="120px" className="object-cover" />
+                    <Image src={img} alt={`${hotel.name} thumbnail ${i + 1}`} fill sizes="120px" className="object-cover" />
                   </button>
                 ))}
               </div>

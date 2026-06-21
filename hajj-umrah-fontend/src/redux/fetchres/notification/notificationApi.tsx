@@ -61,7 +61,7 @@ export const notificationApi = baseApi.injectEndpoints({
       providesTags: [{ type: 'notification', id: 'UNREAD' }],
     }),
     markNotificationRead: builder.mutation<{ data: NotificationDto }, string>({
-      query: id => ({ url: `/notifications/${id}/read`, method: 'PATCH' }),
+      query: id => ({ url: `/notifications/${encodeURIComponent(id)}/read`, method: 'PATCH' }),
       invalidatesTags: [{ type: 'notification', id: 'LIST' }, { type: 'notification', id: 'UNREAD' }],
     }),
     markAllNotificationsRead: builder.mutation<{ data: { ok: boolean } }, void>({
@@ -69,7 +69,7 @@ export const notificationApi = baseApi.injectEndpoints({
       invalidatesTags: [{ type: 'notification', id: 'LIST' }, { type: 'notification', id: 'UNREAD' }],
     }),
     deleteNotification: builder.mutation<void, string>({
-      query: id => ({ url: `/notifications/${id}`, method: 'DELETE' }),
+      query: id => ({ url: `/notifications/${encodeURIComponent(id)}`, method: 'DELETE' }),
       invalidatesTags: [{ type: 'notification', id: 'LIST' }, { type: 'notification', id: 'UNREAD' }],
     }),
   }),
