@@ -24,8 +24,7 @@ export const PRIMARY_NAV: NavItem[] = [
   { label: 'পরিবহন', href: ROUTES.transportation.root },
   { label: 'রিভিউ', href: ROUTES.reviews },
   { label: 'প্রশ্নোত্তর', href: ROUTES.faq },
-  { label: 'আমাদের সম্পর্কে', href: ROUTES.about },
-  { label: 'যোগাযোগ', href: ROUTES.contact },
+
 ]
 
 export const FOOTER_SECTIONS = [
@@ -54,8 +53,9 @@ export const FOOTER_SECTIONS = [
       { label: 'যোগাযোগ করুন', href: ROUTES.contact },
       { label: 'প্রশ্নোত্তর', href: ROUTES.faq },
       { label: 'হেল্প সেন্টার', href: ROUTES.contact },
-      { label: 'হাজী পোর্টাল', href: ROUTES.pilgrim.root },
       { label: 'সাইন ইন', href: ROUTES.login },
+        { label: 'আমাদের সম্পর্কে', href: ROUTES.about },
+  { label: 'যোগাযোগ', href: ROUTES.contact },
     ],
   },
   {
