@@ -2,12 +2,12 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Mail, Phone, MapPin, Share2, Heart, Send, Play, Users, Shield, Award, Clock } from 'lucide-react'
+import { Mail, Phone, MapPin, Share2, Camera, Send, Play, Users, Shield, Award, Clock } from 'lucide-react'
 import { FOOTER_SECTIONS, LOGO_ALT, LOGO_SRC, SITE } from '@/constants'
 
 const socials = [
   { Icon: Share2, href: '#', label: 'Facebook' },
-  { Icon: Heart, href: '#', label: 'Instagram' },
+  { Icon: Camera, href: '#', label: 'Camera' },
   { Icon: Send, href: '#', label: 'Twitter / X' },
   { Icon: Play, href: '#', label: 'YouTube' },
   { Icon: Users, href: '#', label: 'LinkedIn' },

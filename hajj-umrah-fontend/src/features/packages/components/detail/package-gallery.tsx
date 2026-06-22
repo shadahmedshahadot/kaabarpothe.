@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Heart, Share2 } from 'lucide-react'
+import { Share2 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import type { Package } from '@/data/packages'
 
@@ -32,9 +32,6 @@ export function PackageGallery({ pkg }: { pkg: Package }) {
           <Badge variant={pkg.type === 'hajj' ? 'accent' : 'secondary'}>{pkg.type.toUpperCase()}</Badge>
         </div>
         <div className="absolute bottom-5 right-5 flex gap-2 z-10">
-          <button className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur text-white hover:bg-white/30 transition-colors flex items-center justify-center">
-            <Heart className="w-4 h-4" />
-          </button>
           <button className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur text-white hover:bg-white/30 transition-colors flex items-center justify-center">
             <Share2 className="w-4 h-4" />
           </button>

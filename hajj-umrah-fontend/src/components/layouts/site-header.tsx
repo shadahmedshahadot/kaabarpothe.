@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Menu, X, ChevronDown, Phone, Mail, MapPin, LogOut } from 'lucide-react'
+import { Menu, X, ChevronDown, Phone, Mail, MapPin, LogOut, LayoutDashboard } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -21,6 +21,7 @@ export function SiteHeader() {
   const user = useAppSelector(state => state.auth.user)
   const token = useAppSelector(state => state.auth.token)
   const isAuthed = Boolean(user && token)
+  const dashboardHref = user?.role === 'ADMIN' ? ROUTES.admin.root : ROUTES.pilgrim.root
   const loggingOut = false
 
   const handleLogout = async () => {
@@ -61,6 +62,7 @@ export function SiteHeader() {
           open={open}
           onToggle={() => setOpen(o => !o)}
           isAuthed={isAuthed}
+          dashboardHref={dashboardHref}
           onLogout={handleLogout}
           loggingOut={loggingOut}
         />
@@ -70,6 +72,7 @@ export function SiteHeader() {
         open={open}
         onClose={() => setOpen(false)}
         isAuthed={isAuthed}
+        dashboardHref={dashboardHref}
         onLogout={handleLogout}
         loggingOut={loggingOut}
       />
@@ -236,27 +239,40 @@ function HeaderActions({
   open,
   onToggle,
   isAuthed,
+  dashboardHref,
   onLogout,
   loggingOut,
 }: {
   open: boolean
   onToggle: () => void
   isAuthed: boolean
+  dashboardHref: string
   onLogout: () => void
   loggingOut: boolean
 }) {
   return (
     <div className="flex items-center gap-2 sm:gap-3">
       {isAuthed ? (
-        <button
-          type="button"
-          onClick={onLogout}
-          disabled={loggingOut}
-          className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full transition-colors text-white/85 hover:text-white hover:bg-white/10 disabled:opacity-60"
-        >
-          <LogOut className="w-4 h-4" />
-          {loggingOut ? 'লগআউট হচ্ছে…' : 'লগআউট'}
-        </button>
+        <>
+          <button
+            type="button"
+            onClick={onLogout}
+            disabled={loggingOut}
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full transition-colors text-white/85 hover:text-white hover:bg-white/10 disabled:opacity-60"
+          >
+            <LogOut className="w-4 h-4" />
+            {loggingOut ? 'লগআউট হচ্ছে…' : 'লগআউট'}
+          </button>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+            <Link
+              href={dashboardHref}
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-br from-primary via-amber-500 to-orange-500 text-primary-foreground rounded-full text-sm font-semibold shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40 transition-all"
+            >
+              <LayoutDashboard className="w-4 h-4" />
+              ড্যাশবোর্ড
+            </Link>
+          </motion.div>
+        </>
       ) : (
         <Link
           href={ROUTES.login}
@@ -265,14 +281,6 @@ function HeaderActions({
           সাইন ইন
         </Link>
       )}
-      <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-        <Link
-          href={ROUTES.packages.hajj}
-          className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-br from-primary via-amber-500 to-orange-500 text-primary-foreground rounded-full text-sm font-semibold shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40 transition-all"
-        >
-          এখনই বুক করুন
-        </Link>
-      </motion.div>
       <button
         aria-label="Toggle menu"
         className="lg:hidden p-2 rounded-xl transition-colors text-white hover:bg-white/10"
@@ -295,12 +303,14 @@ function MobileMenu({
   open,
   onClose,
   isAuthed,
+  dashboardHref,
   onLogout,
   loggingOut,
 }: {
   open: boolean
   onClose: () => void
   isAuthed: boolean
+  dashboardHref: string
   onLogout: () => void
   loggingOut: boolean
 }) {
@@ -336,18 +346,28 @@ function MobileMenu({
             ))}
             <div className="border-t border-white/10 my-2 pt-3">
               {isAuthed ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    onClose()
-                    onLogout()
-                  }}
-                  disabled={loggingOut}
-                  className="w-full inline-flex items-center justify-center gap-2 text-sm px-3 py-2.5 rounded-xl border border-white/15 text-white hover:bg-white/5 font-medium disabled:opacity-60"
-                >
-                  <LogOut className="w-4 h-4" />
-                  {loggingOut ? 'লগআউট হচ্ছে…' : 'লগআউট'}
-                </button>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href={dashboardHref}
+                    onClick={onClose}
+                    className="inline-flex items-center justify-center gap-2 text-sm px-3 py-2.5 rounded-xl bg-gradient-to-br from-primary to-amber-600 text-primary-foreground font-semibold shadow-md shadow-amber-500/30"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    ড্যাশবোর্ড
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose()
+                      onLogout()
+                    }}
+                    disabled={loggingOut}
+                    className="inline-flex items-center justify-center gap-2 text-sm px-3 py-2.5 rounded-xl border border-white/15 text-white hover:bg-white/5 font-medium disabled:opacity-60"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    {loggingOut ? 'লগআউট হচ্ছে…' : 'লগআউট'}
+                  </button>
+                </div>
               ) : (
                 <div className="grid grid-cols-2 gap-2">
                   <Link
