@@ -28,10 +28,9 @@ export default function AdminContentPage() {
       </div>
 
       <div className="mt-8 bg-card border border-border rounded-2xl p-8 text-center">
-        <h3 className="font-bold text-foreground mb-2">ব্লগ বা প্রশ্নোত্তর খুঁজছেন?</h3>
-        <p className="text-muted-foreground mb-5">ব্লগ নিবন্ধ এবং প্রশ্নোত্তর এন্ট্রির জন্য আলাদা সিএমএস সেকশন রয়েছে।</p>
+        <h3 className="font-bold text-foreground mb-2">প্রশ্নোত্তর খুঁজছেন?</h3>
+        <p className="text-muted-foreground mb-5">প্রশ্নোত্তর এন্ট্রির জন্য আলাদা সিএমএস সেকশন রয়েছে।</p>
         <div className="flex gap-3 justify-center">
-          <Link href="/admin/content/blogs" className="bg-foreground text-background px-4 py-2 rounded-xl text-sm font-semibold hover:bg-primary">ব্লগ ব্যবস্থাপনা</Link>
           <Link href="/admin/content/faqs" className="border border-border text-foreground px-4 py-2 rounded-xl text-sm font-semibold hover:bg-muted">প্রশ্নোত্তর ব্যবস্থাপনা</Link>
         </div>
       </div>

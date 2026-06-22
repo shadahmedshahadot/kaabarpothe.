@@ -23,13 +23,7 @@ export const PRIMARY_NAV: NavItem[] = [
   { label: 'হোটেল', href: ROUTES.hotels.root },
   { label: 'পরিবহন', href: ROUTES.transportation.root },
   { label: 'রিভিউ', href: ROUTES.reviews },
-  {
-    label: 'শিক্ষা',
-    children: [
-      { label: 'ব্লগ', href: ROUTES.blog, desc: 'নিবন্ধ, গাইড, পরামর্শ' },
-      { label: 'প্রশ্নোত্তর', href: ROUTES.faq, desc: 'সাধারণ প্রশ্নের উত্তর' },
-    ],
-  },
+  { label: 'প্রশ্নোত্তর', href: ROUTES.faq },
   { label: 'আমাদের সম্পর্কে', href: ROUTES.about },
   { label: 'যোগাযোগ', href: ROUTES.contact },
 ]
@@ -51,8 +45,6 @@ export const FOOTER_SECTIONS = [
     links: [
       { label: 'আমাদের সম্পর্কে', href: ROUTES.about },
       { label: 'রিভিউ', href: ROUTES.reviews },
-      { label: 'ব্লগ', href: ROUTES.blog },
-      { label: 'শিক্ষা কেন্দ্র', href: ROUTES.blog },
       { label: 'ক্যারিয়ার', href: '/about#careers' },
     ],
   },
@@ -71,8 +63,6 @@ export const FOOTER_SECTIONS = [
     links: [
       { label: 'গোপনীয়তা নীতি', href: ROUTES.privacy },
       { label: 'শর্তাবলী', href: ROUTES.terms },
-      { label: 'ফেরত নীতি', href: ROUTES.refund },
-      { label: 'কুকি নীতি', href: '/privacy#cookies' },
     ],
   },
 ] as const

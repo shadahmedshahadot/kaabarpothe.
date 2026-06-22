@@ -18,6 +18,11 @@ async function safeFetch<T>(path: string): Promise<T | null> {
 export const fetchPackage = (slug: string) =>
   safeFetch<PackageDto>(`/packages/${encodeURIComponent(slug)}`)
 
+export const fetchPackagesByType = async (type: 'HAJJ' | 'UMRAH'): Promise<PackageDto[]> => {
+  const result = await safeFetch<PackageDto[]>(`/packages?type=${type}&status=PUBLISHED&limit=100`)
+  return result ?? []
+}
+
 export const fetchHotel = (slug: string) =>
   safeFetch<HotelDto>(`/hotels/${encodeURIComponent(slug)}`)
 

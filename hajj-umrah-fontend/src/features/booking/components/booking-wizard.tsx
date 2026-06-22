@@ -523,8 +523,7 @@ function StepPayment({
           <input type="checkbox" defaultChecked className="rounded border-border mt-0.5" />
           <span>
             আমি নিশ্চিত করছি সব তথ্য সঠিক এবং আমি{' '}
-            <Link href={ROUTES.terms} className="text-primary hover:underline">শর্তাবলি</Link> ও{' '}
-            <Link href={ROUTES.refund} className="text-primary hover:underline">রিফান্ড নীতি</Link> মেনে নিচ্ছি।
+            <Link href={ROUTES.terms} className="text-primary hover:underline">শর্তাবলি</Link> মেনে নিচ্ছি।
           </span>
         </label>
       </Card>

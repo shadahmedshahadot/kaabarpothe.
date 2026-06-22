@@ -7,7 +7,6 @@ import { FeaturedHotels } from '@/features/public/components/sections/featured-h
 import { ProcessSection } from '@/features/public/components/sections/process-section'
 import { DestinationsSection } from '@/features/public/components/sections/destinations-section'
 import { Testimonials } from '@/features/public/components/sections/testimonials-section'
-import { BlogPreview } from '@/features/public/components/sections/blog-preview'
 import { CTASection } from '@/features/public/components/sections/cta-section'
 import { Footer } from '@/components/layouts/site-footer'
 import { SITE } from '@/constants/site'
@@ -200,7 +199,6 @@ export default function Home() {
           <ProcessSection />
           <DestinationsSection />
           <Testimonials />
-          <BlogPreview />
           <CTASection />
         </main>
         <Footer />

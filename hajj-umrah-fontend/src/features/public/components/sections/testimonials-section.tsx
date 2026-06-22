@@ -14,6 +14,8 @@ export function Testimonials() {
   const prev = () => setIdx(i => (i - 1 + items.length) % items.length)
   const t = items[idx]
 
+  if (!t) return null
+
   return (
     <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="absolute inset-0 -z-10">

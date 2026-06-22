@@ -3,7 +3,6 @@ import { SITE } from '@/constants/site'
 import { packages } from '@/data/packages'
 import { hotels } from '@/data/hotels'
 import { transports } from '@/data/transports'
-import { blogs } from '@/data/blogs'
 
 const BASE = SITE.url.replace(/\/$/, '')
 
@@ -24,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/contact', 0.7, 'yearly'),
     entry('/faq', 0.8, 'monthly'),
     entry('/reviews', 0.7, 'weekly'),
-    entry('/blog', 0.8, 'weekly'),
     entry('/packages/hajj', 0.95, 'weekly'),
     entry('/packages/umrah', 0.95, 'weekly'),
     entry('/hotels', 0.8, 'weekly'),
@@ -32,7 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/transportation', 0.7, 'weekly'),
     entry('/privacy', 0.3, 'yearly'),
     entry('/terms', 0.3, 'yearly'),
-    entry('/refund', 0.4, 'yearly'),
   ]
 
   const packageRoutes: Entry[] = packages
@@ -47,7 +44,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(t => t.status === 'active')
     .map(t => entry(`/transportation/${t.slug}`, 0.6, 'monthly'))
 
-  const blogRoutes: Entry[] = blogs.map(b => entry(`/blog/${b.slug}`, 0.7, 'monthly', new Date(b.publishedDate || Date.now())))
-
-  return [...staticRoutes, ...packageRoutes, ...hotelRoutes, ...transportRoutes, ...blogRoutes]
+  return [...staticRoutes, ...packageRoutes, ...hotelRoutes, ...transportRoutes]
 }

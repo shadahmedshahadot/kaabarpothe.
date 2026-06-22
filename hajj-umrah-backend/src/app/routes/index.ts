@@ -7,6 +7,7 @@ import { FlightRoutes } from '../modules/flight/flight.routes';
 import { TransportRoutes } from '../modules/transport/transport.routes';
 import { BookingRoutes } from '../modules/booking/booking.routes';
 import { PaymentRoutes } from '../modules/payment/payment.routes';
+import { InvoiceRoutes } from '../modules/invoice/invoice.routes';
 import { InquiryRoutes } from '../modules/inquiry/inquiry.routes';
 import { BlogRoutes } from '../modules/blog/blog.routes';
 import { FaqRoutes } from '../modules/faq/faq.routes';
@@ -32,6 +33,7 @@ const routes: Route[] = [
   { path: '/transports', route: TransportRoutes },
   { path: '/bookings', route: BookingRoutes },
   { path: '/payments', route: PaymentRoutes },
+  { path: '/invoices', route: InvoiceRoutes },
   { path: '/inquiries', route: InquiryRoutes },
   { path: '/blogs', route: BlogRoutes },
   { path: '/faqs', route: FaqRoutes },

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { PageShell, PageHero } from '@/components/layouts/page-shell'
 import { PackageListing } from '@/features/packages/components/package-listing'
-import { getPackagesByType } from '@/data/packages'
+import { fetchPackagesByType } from '@/lib/seo-fetch'
+import { adaptPackage } from '@/redux/fetchres/package/adapter'
 import { BreadcrumbJsonLd } from '@/components/common'
 import { SITE } from '@/constants/site'
 
@@ -63,8 +64,9 @@ const hajjServiceLd = {
   audience: { '@type': 'PeopleAudience', name: 'Muslim Pilgrims' },
 }
 
-export default function HajjPackagesPage() {
-  const packages = getPackagesByType('hajj')
+export default async function HajjPackagesPage() {
+  const dtos = await fetchPackagesByType('HAJJ')
+  const packages = dtos.map(adaptPackage)
   return (
     <PageShell>
       <BreadcrumbJsonLd items={[{ label: 'হজ্জ প্যাকেজ' }]} />

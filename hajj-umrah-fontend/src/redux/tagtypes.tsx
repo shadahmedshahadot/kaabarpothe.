@@ -7,6 +7,7 @@ export const tagTypesList = [
   'transport',
   'booking',
   'payment',
+  'invoice',
   'inquiry',
   'blog',
   'faq',
