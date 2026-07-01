@@ -24,7 +24,9 @@ export function FlightBooking({ flight }: { flight: Flight }) {
       meta: {
         cabinClass: flight.cabinClass,
         baggage: flight.baggageAllowance,
+        departureDate: flight.departureDate,
         departureTime: flight.departureTime,
+        arrivalDate: flight.arrivalDate,
         arrivalTime: flight.arrivalTime,
         totalDuration: flight.totalDuration,
       },
