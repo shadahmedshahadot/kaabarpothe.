@@ -33,7 +33,7 @@ const BookingStatusEnum = z.enum([
 const CreateBookingSchema = z.object({
   body: z.object({
     bookingCode: z.string().optional(),
-    packageId: z.string().min(1),
+    packageId: z.string().optional().nullable(),
     flightId: z.string().optional().nullable(),
     hotelId: z.string().optional().nullable(),
     transportId: z.string().optional().nullable(),
@@ -60,6 +60,9 @@ const CreateBookingSchema = z.object({
         ]),
       )
       .optional(),
+  }).refine(v => Boolean(v.packageId) || Boolean(v.flightId), {
+    message: 'Either packageId or flightId is required',
+    path: ['packageId'],
   }),
 });
 

@@ -31,8 +31,10 @@ const sanitizeTravelers = (travelers: any[]) =>
     passportExpiry: new Date(t.passportExpiry),
   }));
 
-const generateBookingCode = (type: string) =>
-  `${type === 'HAJJ' ? 'HJ' : 'UM'}-${new Date().getFullYear()}-${Math.floor(Math.random() * 9000 + 1000)}`;
+const generateBookingCode = (type: string | null | undefined) => {
+  const prefix = type === 'HAJJ' ? 'HJ' : type === 'UMRAH' ? 'UM' : 'FL';
+  return `${prefix}-${new Date().getFullYear()}-${Math.floor(Math.random() * 9000 + 1000)}`;
+};
 
 const statusToNotificationType: Record<string, NotificationType> = {
   PENDING_REVIEW: NotificationType.BOOKING_RECEIVED,
@@ -135,12 +137,22 @@ const notifyTx = async (
 };
 
 const CreateBooking = async (payload: any, user?: JwtPayload) => {
-  const pkg = await prisma.package.findFirst({ where: { id: payload.packageId, isDeleted: false } });
-  if (!pkg) throw new AppError(httpStatus.NOT_FOUND, 'Package not found');
+  if (!payload.packageId && !payload.flightId) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'Either packageId or flightId is required');
+  }
 
+  let pkg: { id: string; name: string; type: any } | null = null;
+  if (payload.packageId) {
+    const found = await prisma.package.findFirst({ where: { id: payload.packageId, isDeleted: false } });
+    if (!found) throw new AppError(httpStatus.NOT_FOUND, 'Package not found');
+    pkg = found;
+  }
+
+  let flight: { id: string; airlineName: string; flightNumber: string; departureDate: Date } | null = null;
   if (payload.flightId) {
-    const flight = await prisma.flight.findFirst({ where: { id: payload.flightId, isDeleted: false } });
-    if (!flight) throw new AppError(httpStatus.NOT_FOUND, 'Flight not found');
+    const found = await prisma.flight.findFirst({ where: { id: payload.flightId, isDeleted: false } });
+    if (!found) throw new AppError(httpStatus.NOT_FOUND, 'Flight not found');
+    flight = found;
   }
   if (payload.hotelId) {
     const hotel = await prisma.hotel.findFirst({ where: { id: payload.hotelId, isDeleted: false } });
@@ -152,15 +164,15 @@ const CreateBooking = async (payload: any, user?: JwtPayload) => {
   }
 
   const { travelers, requestedDocuments, ...rest } = sanitizeDates(payload);
-  const bookingCode = rest.bookingCode || generateBookingCode(pkg.type);
+  const bookingCode = rest.bookingCode || generateBookingCode(pkg?.type);
 
   return prisma.$transaction(async tx => {
     const booking = await tx.booking.create({
       data: {
         ...rest,
         bookingCode,
-        packageName: pkg.name,
-        packageType: pkg.type,
+        packageName: pkg?.name ?? (flight ? `${flight.airlineName} ${flight.flightNumber}` : null),
+        packageType: pkg?.type ?? null,
         userId: user?.id ?? null,
         status: BookingStatus.PENDING_REVIEW,
         travelers: travelers ? { create: sanitizeTravelers(travelers) } : undefined,

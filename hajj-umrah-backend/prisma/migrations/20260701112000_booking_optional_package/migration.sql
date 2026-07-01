@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "bookings" ALTER COLUMN "packageId" DROP NOT NULL,
+ALTER COLUMN "packageName" DROP NOT NULL,
+ALTER COLUMN "packageType" DROP NOT NULL;

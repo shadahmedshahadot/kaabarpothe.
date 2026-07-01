@@ -528,9 +528,9 @@ model Transport {
 model Booking {
   id                   String                @id @default(uuid())
   bookingCode          String                @unique
-  packageId            String
-  packageName          String
-  packageType          PackageType
+  packageId            String?
+  packageName          String?
+  packageType          PackageType?
   userId               String?
   pilgrimName          String
   pilgrimEmail         String
@@ -561,7 +561,7 @@ model Booking {
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
 
-  package             Package                 @relation(fields: [packageId], references: [id], onDelete: Restrict)
+  package             Package?                @relation(fields: [packageId], references: [id], onDelete: Restrict)
   user                User?                   @relation(fields: [userId], references: [id], onDelete: Restrict)
   assignedConsultant  User?                   @relation("BookingConsultant", fields: [assignedConsultantId], references: [id], onDelete: SetNull)
   travelers           BookingTraveler[]
